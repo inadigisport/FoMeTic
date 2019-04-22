@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">FoMeTic</string>
+
+    <string-array name="formation">
+        <item>4-4-2</item>
+        <item>4-3-3</item>
+        <item>3-5-2</item>
+    </string-array>
+
+
+    <string-array name="position">
+        <item>Goalkeeper</item>
+        <item>Defender</item>
+        <item>Midfileder</item>
+        <item>Striker</item>
+    </string-array>
+
+    <string-array name="team">
+        <item>Team A</item>
+        <item>Team B</item>
+    </string-array>
+
+    <string-array name="shootingpopup">
+        <item>Goal</item>
+        <item>Shoot On Target</item>
+        <item>Shoot Off Target</item>
+    </string-array>
+
+</resources>

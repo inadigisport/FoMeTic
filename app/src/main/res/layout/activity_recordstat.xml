@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".recordstat">
+
+    <Button
+        android:id="@+id/buttonstop"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:background="@color/colorPrimary"
+        android:onClick="stopChronometer"
+        android:text="STOP"
+        app:layout_constraintEnd_toEndOf="@+id/buttonstart"
+        app:layout_constraintStart_toStartOf="@+id/buttonstart"
+        app:layout_constraintTop_toBottomOf="@+id/buttonstart" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:background="@color/colorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttontacklingteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="79dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Tackling"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteamb"
+        app:layout_constraintStart_toStartOf="@+id/textViewteamb"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteamb" />
+
+    <Button
+        android:id="@+id/buttonpassingteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Passing"
+        app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteamb"
+        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteamb"
+        app:layout_constraintTop_toTopOf="@+id/buttontacklingteamb" />
+
+    <Button
+        android:id="@+id/buttonshootingteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Shooting"
+        android:onClick="showpopupshootingb"
+        app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteamb"
+        app:layout_constraintStart_toEndOf="@+id/buttontacklingteamb"
+        app:layout_constraintTop_toTopOf="@+id/buttontacklingteamb" />
+
+    <Button
+        android:id="@+id/buttoninterceptteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Intercept"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonpassingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
+
+    <Button
+        android:id="@+id/buttonsavesteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Saves"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
+
+    <Button
+        android:id="@+id/buttonsavesteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="37dp"
+        android:background="@color/colorAccent"
+        android:text="Saves"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteama" />
+
+    <Button
+        android:id="@+id/buttoninterceptteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorAccent"
+        android:text="Intercept"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonpassingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonpassingteama" />
+
+    <Button
+        android:id="@+id/buttonshootingteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@color/colorAccent"
+        android:text="Shooting"
+        android:onClick="showpopupshootinga"
+        app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteama"
+        app:layout_constraintStart_toEndOf="@+id/buttontacklingteama"
+        app:layout_constraintTop_toTopOf="@+id/buttontacklingteama" />
+
+    <Button
+        android:id="@+id/buttontacklingteama"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="79dp"
+        android:background="@color/colorAccent"
+        android:text="Tackling"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama" />
+
+    <Button
+        android:id="@+id/buttonpassingteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/colorAccent"
+        android:text="Passing"
+        app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteama"
+        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteama"
+        app:layout_constraintTop_toTopOf="@+id/buttontacklingteama" />
+
+    <Button
+        android:id="@+id/buttoncornerkickteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/colorAccent"
+        android:text="Corner Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteama" />
+
+    <Button
+        android:id="@+id/buttonthrowinteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:background="@color/colorAccent"
+        android:text="Throw In"
+        app:layout_constraintEnd_toEndOf="@+id/buttonpassingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonpassingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonpassingteama" />
+
+    <Button
+        android:id="@+id/buttonfreekickteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:background="@color/colorAccent"
+        android:text="Free Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteama" />
+
+    <Button
+        android:id="@+id/buttongoalkickteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/colorAccent"
+        android:text="Goal Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonfreekickteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonfreekickteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonfreekickteama" />
+
+    <Button
+        android:id="@+id/buttonpinaltyteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:background="@color/colorAccent"
+        android:text="Pinalty"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttontacklingteama" />
+
+    <Button
+        android:id="@+id/buttonpinaltyteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Pinalty"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteamb"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
+
+    <Button
+        android:id="@+id/buttonthrowinteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Throw In"
+        app:layout_constraintEnd_toEndOf="@+id/buttonpassingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonpassingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonpassingteamb" />
+
+    <Button
+        android:id="@+id/buttoncornerkickteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Corner Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteamb" />
+
+    <Button
+        android:id="@+id/buttonfreekickteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Free Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteamb" />
+
+    <Button
+        android:id="@+id/buttongoalkickteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Goal Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonfreekickteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonfreekickteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonfreekickteamb" />
+
+    <TextView
+        android:id="@+id/textViewteama"
+        android:layout_width="129dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginLeft="102dp"
+        android:background="@color/colorAccent"
+        android:text="Team A"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer"
+        app:layout_constraintStart_toEndOf="@+id/chronometer"
+        app:layout_constraintTop_toTopOf="@+id/chronometer" />
+
+    <TextView
+        android:id="@+id/textViewteamb"
+        android:layout_width="131dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="368dp"
+        android:layout_marginLeft="368dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:text="Team B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama" />
+
+    <Button
+        android:id="@+id/buttonyellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="244dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="YELLOW"
+        app:layout_constraintStart_toEndOf="@+id/buttonsavesteama"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="RED"
+        app:layout_constraintEnd_toEndOf="@+id/buttonyellow"
+        app:layout_constraintStart_toStartOf="@+id/buttonyellow"
+        app:layout_constraintTop_toBottomOf="@+id/buttonyellow" />
+
+    <Button
+        android:id="@+id/buttonstart"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:background="@color/colorPrimary"
+        android:onClick="startChronometer"
+        android:text="START"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteamb"
+        app:layout_constraintStart_toEndOf="@+id/textViewteamb"
+        app:layout_constraintTop_toTopOf="@+id/textViewteamb" />
+
+</android.support.constraint.ConstraintLayout>

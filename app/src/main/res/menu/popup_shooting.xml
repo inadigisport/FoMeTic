@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/goal"
+        android:title="Goal"/>
+
+    <item android:id="@+id/shootontarget"
+        android:title="Shoot On Target"/>
+
+    <item android:id="@+id/shootofftarget"
+        android:title="Shoot Off Target"/>
+</menu>
