@@ -50,7 +50,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     @Override
 
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam="CREATE TABLE "+TABLE_TEAM+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM+ " TEXT)";
+        String createTableTeam="CREATE TABLE "+TABLE_TEAM+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM+ " TEXT, "+COLUMN_FORMASI_TEAM+" TEXT, "+JUMLAH_PASSING_TEAM+" INT, "+JUMLAH_TACKLING_TEAM+" INT, "+JUMLAH_SHOOT_GOAL_TEAM+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM+" INT, "+JUMLAH_INTERCEPT_TEAM+" INT, "+JUMLAH_SAVES_TEAM+" INT,"+JUMLAH_THROWIN_TEAM+" INT, "+JUMLAH_FREEKICK_TEAM+" INT, "+JUMLAH_PINALTY_TEAM+" INT, "+JUMLAH_GOALKICK_TEAM+" INT, "+JUMLAH_CORNERKICK_TEAM+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM+" INT, "+JUMLAH_RED_CARD_TEAM+" INT, "+JUMLAH_YELLOW_CARD_TEAM+" INT, "+STATUS_TEAM+" INT)";
         db.execSQL(createTableTeam);
     }
 
@@ -108,6 +108,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_JUMLAH_ANGGOTA_TEAM, teamBola.getJumlahAnggotaTeam());
         values.put(JUMLAH_YELLOW_CARD_TEAM, teamBola.getYellowcardTeam());
         values.put(JUMLAH_RED_CARD_TEAM, teamBola.getRedcardTeam());
+        values.put(STATUS_TEAM, teamBola.getStatusTeam());
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_TEAM, null, values);
