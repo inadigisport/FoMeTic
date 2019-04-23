@@ -15,8 +15,12 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
 
     private Button button;
     EditText editText;
-    //String teamname;
+    EditText textjumlahsquad;
+    String teamname;
+    int jumlahSquad;
     public static final String kata_kunci = "inadigisport";
+    MyDBHandler db=new MyDBHandler(this);
+    TeamBola teambola = new TeamBola();
 
 
 
@@ -28,13 +32,19 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
         setContentView(R.layout.activity_inputteam);
 
         button = (Button) findViewById(R.id.button6);
-        //editText = (EditText) findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.namaTeam);
+        textjumlahsquad= (EditText) findViewById(R.id.jumlahSquad);
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //teamname = editText.getText().toString();
+                teamname = editText.getText().toString();
+                jumlahSquad = Integer.valueOf(textjumlahsquad.getText().toString());
+                teambola.setNamaTeam(teamname);
+                teambola.setJumlahTeam(jumlahSquad);
+                db.addHandler(teambola);
+
                 //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
                 //intent2.putExtra(kata_kunci,teamname);
                 //startActivity(intent2);
@@ -69,5 +79,15 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void inputTeam(String name, String formation, int jumlahTeam, String statusTeam){
+        MyDBHandler databaseTeam = new MyDBHandler(this);
+        TeamBola teamBola= new TeamBola();
+        teamBola.setNamaTeam(name);
+        teamBola.setFormasiTeam(formation);
+        teamBola.setJumlahAnggotaTeam(jumlahTeam);
+        teamBola.setStatusTeam(statusTeam);
+        databaseTeam.addHandler(teamBola);
     }
 }
