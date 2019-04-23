@@ -12,10 +12,13 @@ import android.widget.Toast;
 
 public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Chronometer chronometer;
+    private Chronometer chronometerteam;
     private boolean running;
-    Button buttonshootingteama;
-    Button buttonshootingteamb;
-
+    //Button buttonshootingteama;
+    //Button buttonshootingteamb;
+    //Button buttonpassingteama;
+    //Button buttonpassingteamb;
+    //Button buttontacklingteama;
 
 
 
@@ -26,6 +29,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         setContentView(R.layout.activity_recordstat);
 
         chronometer = findViewById(R.id.chronometer);
+        chronometerteam = findViewById(R.id.chronometerteam);
 
 
     }
@@ -34,6 +38,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
             running = true;
 
         }
@@ -42,11 +48,135 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public void stopChronometer(View v) {
         if (running) {
             chronometer.stop();
+            chronometerteam.stop();
             running = false;
 
         }
 
     }
+
+    public void passingteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void passingteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void tacklingteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void tacklingteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void interceptteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void interceptteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void savesteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void savesteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.start();
+
+
+    }
+
+    public void throwinteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
+    public void throwinteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
+    public void cornerkickteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+    public void cornerkickteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+    public void pinaltyteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+    public void pinaltyteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
+    public void freekickteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
+    public void freekickteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
+    public void goalkickteama(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+    public void goalkickteamb(View v) {
+        chronometerteam.setBase(SystemClock.elapsedRealtime());
+        chronometerteam.stop();
+
+
+    }
+
 
     public void showpopupshootinga(View v) {
 
@@ -63,25 +193,77 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.inflate(R.menu.popup_shootingb);
         popup.show();
     }
+
+    public void yellowcard(View v) {
+
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_yellow);
+        popup.show();
+    }
+
+    public void redcard(View v) {
+
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_red);
+        popup.show();
+    }
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
                 Toast.makeText(this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
                 return true;
             case R.id.shootontarget:
                 Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
                 return true;
             case R.id.shootofftarget:
                 Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
                 return true;
             case R.id.goalb:
                 Toast.makeText(this, "Goal Team B", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
                 return true;
             case R.id.shootontargetb:
                 Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
                 return true;
             case R.id.shootofftargetb:
                 Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.start();
+                return true;
+
+            case R.id.yellowhome:
+                Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.stop();
+                return true;
+
+            case R.id.yellowaway:
+                Toast.makeText(this, "Yellow Card Team Away", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.stop();
+                return true;
+
+            case R.id.redhome:
+                Toast.makeText(this, "Red Card Team Home", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.stop();
+                return true;
+
+            case R.id.redaway:
+                Toast.makeText(this, "Red Card Team Away", Toast.LENGTH_SHORT).show();
+                chronometerteam.setBase(SystemClock.elapsedRealtime());
+                chronometerteam.stop();
                 return true;
 
             default:
