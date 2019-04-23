@@ -41,7 +41,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             chronometerteam.setBase(SystemClock.elapsedRealtime());
             chronometerteam.start();
             running = true;
-
         }
     }
 
