@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openrecordstat();
+                openchooseteam();
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void opengeneratereport() {
         Intent intent = new Intent(this, generatereport.class);
+        startActivity(intent);
+
+    }
+
+    public void openchooseteam() {
+        Intent intent = new Intent(this, chooseteam.class);
         startActivity(intent);
 
     }

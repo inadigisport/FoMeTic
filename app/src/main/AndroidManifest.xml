@@ -15,7 +15,9 @@
         <activity android:name=".inputgame" />
         <activity android:name=".inputsquad" />
         <activity android:name=".inputteam" />
+        <activity android:name=".chooseteam"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

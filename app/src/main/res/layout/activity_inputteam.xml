@@ -15,7 +15,8 @@
         android:layout_marginLeft="57dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        android:entries="@array/team"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -134,7 +135,8 @@
         android:layout_marginRight="346dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        android:entries="@array/formation"/>
 
 
 </android.support.constraint.ConstraintLayout>

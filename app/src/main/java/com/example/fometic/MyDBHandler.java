@@ -50,7 +50,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     @Override
 
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam="CREATE TABLE "+TABLE_TEAM+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM+ " TEXT, "+COLUMN_FORMASI_TEAM+" TEXT, "+JUMLAH_PASSING_TEAM+" INT, "+JUMLAH_TACKLING_TEAM+" INT, "+JUMLAH_SHOOT_GOAL_TEAM+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM+" INT, "+JUMLAH_INTERCEPT_TEAM+" INT, "+JUMLAH_SAVES_TEAM+" INT,"+JUMLAH_THROWIN_TEAM+" INT, "+JUMLAH_FREEKICK_TEAM+" INT, "+JUMLAH_PINALTY_TEAM+" INT, "+JUMLAH_GOALKICK_TEAM+" INT, "+JUMLAH_CORNERKICK_TEAM+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM+" INT, "+JUMLAH_RED_CARD_TEAM+" INT, "+JUMLAH_YELLOW_CARD_TEAM+" INT, "+STATUS_TEAM+" INT)";
+        String createTableTeam="CREATE TABLE "+TABLE_TEAM+" (" +COLUMN_ID_TEAM+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM+ " TEXT, "+COLUMN_FORMASI_TEAM+" STRING, "+JUMLAH_PASSING_TEAM+" INT, "+JUMLAH_TACKLING_TEAM+" INT, "+JUMLAH_SHOOT_GOAL_TEAM+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM+" INT, "+JUMLAH_INTERCEPT_TEAM+" INT, "+JUMLAH_SAVES_TEAM+" INT,"+JUMLAH_THROWIN_TEAM+" INT, "+JUMLAH_FREEKICK_TEAM+" INT, "+JUMLAH_PINALTY_TEAM+" INT, "+JUMLAH_GOALKICK_TEAM+" INT, "+JUMLAH_CORNERKICK_TEAM+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM+" INT, "+JUMLAH_RED_CARD_TEAM+" INT, "+JUMLAH_YELLOW_CARD_TEAM+" INT, "+STATUS_TEAM+" STRING)";
         db.execSQL(createTableTeam);
     }
 
@@ -70,11 +70,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
 
-            int result_0 = cursor.getInt(0);
+            int id_team = cursor.getInt(0);
 
-            String result_1 = cursor.getString(1);
+            String nama_team = cursor.getString(1);
 
-            result += String.valueOf(result_0) + " " + result_1 +
+            String formasi = cursor.getString(2);
+
+            String status_team = cursor.getString(18);
+
+            result += String.valueOf(id_team) + " " + nama_team + " "+ formasi+" "+status_team+
 
                     System.getProperty("line.separator");
 
@@ -84,13 +88,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         db.close();
 
+        Log.d("Isi Database", result);
+
         return result;
 
     }
 
+
+    public void loadTeam(String namateam){
+        String query = "Select * FROM " + TABLE_TEAM;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+    }
+
     public void addHandler(TeamBola teamBola) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID_TEAM, teamBola.getIdTeam());
         values.put(COLUMN_NAMA_TEAM, teamBola.getNamaTeam());
         values.put(COLUMN_FORMASI_TEAM, teamBola.getFormasiTeam());
         values.put(JUMLAH_PASSING_TEAM, teamBola.getPassingTeam());
@@ -112,8 +126,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_TEAM, null, values);
-        Log.d("Data nama team", teamBola.getNamaTeam());
+        Log.d("Data nama team :", teamBola.getNamaTeam());
         db.close();
+        loadHandler();
     }
 
 

@@ -3,6 +3,7 @@ package com.example.fometic;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,30 +40,31 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Spinner spinner = findViewById(R.id.spinner);
+                String formation = spinner.getSelectedItem().toString();
+
+                Spinner spinner2 = findViewById(R.id.spinner5);
+                String statusteam=spinner2.getSelectedItem().toString();
+
                 teamname = editText.getText().toString();
                 jumlahSquad = Integer.valueOf(textjumlahsquad.getText().toString());
                 teambola.setNamaTeam(teamname);
                 teambola.setJumlahTeam(jumlahSquad);
+                teambola.setFormasiTeam(formation);
+                teambola.setStatusTeam(statusteam);
                 db.addHandler(teambola);
 
                 //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
                 //intent2.putExtra(kata_kunci,teamname);
                 //startActivity(intent2);
                 openMainActivity();
+                Log.d("Data formasi : ", formation);
+                Log.d("Data Status : ",statusteam);
             }
         });
 
-        Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.formation, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
 
-        Spinner spinner2 = findViewById(R.id.spinner5);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.team, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);
+
     }
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
