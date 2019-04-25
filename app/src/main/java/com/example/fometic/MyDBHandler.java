@@ -39,7 +39,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String STATUS_TEAM =  "statusTeam";
     public static final String TABLE_PERTANDINGAN = "tablePertandingan";
     public static final String ID_PERTANDINGAN = "idPertandingan";
-    
+
     public static final String TEAM_A = "teamA";
     public static final String COLUMN_ID_TEAM_A = "IDTeamA";
     public static final String COLUMN_NAMA_TEAM_A = "namaTeamA";
