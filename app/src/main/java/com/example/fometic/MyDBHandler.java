@@ -37,6 +37,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String JUMLAH_YELLOW_CARD_TEAM = "yellowCardTeam";
     public static final String JUMLAH_RED_CARD_TEAM =  "redCardTeam";
     public static final String STATUS_TEAM =  "statusTeam";
+    public static final String TABLE_PERTANDINGAN = "tablePertandingan";
+    public static final String ID_PERTANDINGAN = "idPertandingan";
+    
+    public static final String TEAM_A = "teamA";
+    public static final String COLUMN_ID_TEAM_A = "IDTeamA";
+    public static final String COLUMN_NAMA_TEAM_A = "namaTeamA";
+    public static final String COLUMN_FORMASI_TEAM_A = "formasiTeamA";
+    public static final String JUMLAH_PASSING_TEAM_A = "passingTeamA";
+    public static final String JUMLAH_TACKLING_TEAM_A = "tacklingTeamA";
+    public static final String JUMLAH_SHOOT_GOAL_TEAM_A = "goalTeamA";
+    public static final String JUMLAH_SHOOT_ON_TARGET_TEAM_A = "shootOnTargetTeamA";
+    public static final String JUMLAH_SHOOT_OFF_TARGET_TEAM_A = "shootOffTargetTeamA";
+    public static final String JUMLAH_INTERCEPT_TEAM_A = "interceptTeamA";
+    public static final String JUMLAH_SAVES_TEAM_A = "savesTeamA";
+    public static final String JUMLAH_THROWIN_TEAM_A = "throwinTeamA";
+    public static final String JUMLAH_FREEKICK_TEAM_A = "freekickTeamA";
+    public static final String JUMLAH_PINALTY_TEAM_A = "pinaltyTeamA";
+    public static final String JUMLAH_GOALKICK_TEAM_A = "goalkickTeamA";
+    public static final String JUMLAH_CORNERKICK_TEAM_A = "cornerkickTeamA";
+    public static final String COLUMN_JUMLAH_ANGGOTA_TEAM_A = "jumlahAnggotaTeamA";
+    public static final String JUMLAH_YELLOW_CARD_TEAM_A = "yellowCardTeamA";
+    public static final String JUMLAH_RED_CARD_TEAM_A =  "redCardTeamA";
+    public static final String STATUS_TEAM_A =  "statusTeamA";
+
 
 
     //initialize the database
@@ -58,7 +82,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
-    public String loadHandler() {
+    public Cursor loadHandler() {
 
         String result = "";
 
@@ -84,13 +108,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         }
 
-        cursor.close();
-
-        db.close();
-
         Log.d("Isi Database", result);
 
-        return result;
+        return cursor;
 
     }
 
