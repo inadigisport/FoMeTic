@@ -9,3 +9,7 @@ public class JavaTesKraken extends AppCompatActivity {
 
 
 }
+
+public void TesGetkraken {
+
+        };
