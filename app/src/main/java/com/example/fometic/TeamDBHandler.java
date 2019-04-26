@@ -65,7 +65,7 @@ public class TeamDBHandler extends SQLiteOpenHelper {
 
         String result = "";
 
-        String query = "Select "+COLUMN_NAMA_TEAM+" FROM " + TABLE_TEAM;
+        String query = "Select * FROM " + TABLE_TEAM;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -94,13 +94,6 @@ public class TeamDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void loadTeam(String namateam){
-        String query = "Select * FROM " + TABLE_TEAM;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-    }
 
     public void addHandler(TeamBola teamBola) {
         ContentValues values = new ContentValues();
