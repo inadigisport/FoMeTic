@@ -18,10 +18,14 @@ import android.widget.Chronometer;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+=======
+public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+>>>>>>> master
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;
