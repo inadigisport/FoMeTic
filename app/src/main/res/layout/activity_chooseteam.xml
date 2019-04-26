@@ -24,11 +24,11 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginBottom="60dp"
-        android:text="Input Team A"
+        android:text="Input Team Home"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/spinnerteamA"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerteamA"
         app:layout_constraintStart_toStartOf="@+id/spinnerteamA" />
 
     <TextView
@@ -37,23 +37,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="71dp"
         android:layout_marginLeft="71dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="71dp"
         android:layout_marginRight="71dp"
         android:text="VS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         app:layout_constraintEnd_toStartOf="@+id/spinnerteamB"
         app:layout_constraintStart_toEndOf="@+id/spinnerteamA"
-        app:layout_constraintTop_toTopOf="@+id/spinnerteamB" />
+        app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
     <TextView
         android:id="@+id/textView52"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="60dp"
-        android:text="Input Team B"
+        android:text="Input Team Away"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/spinnerteamB"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerteamB" />
+        app:layout_constraintEnd_toEndOf="@+id/spinnerteamB"
+        app:layout_constraintStart_toStartOf="@+id/spinnerteamB" />
 
     <Spinner
         android:id="@+id/spinnerteamB"
@@ -72,10 +74,11 @@
         android:id="@+id/buttonstart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginBottom="80dp"
         android:text="Start Game"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerteamB" />
+        app:layout_constraintEnd_toEndOf="@+id/textView51"
+        app:layout_constraintStart_toStartOf="@+id/textView51"
+        app:layout_constraintTop_toBottomOf="@+id/textView51" />
 </android.support.constraint.ConstraintLayout>

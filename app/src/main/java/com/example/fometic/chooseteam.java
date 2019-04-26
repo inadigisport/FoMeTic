@@ -57,7 +57,9 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

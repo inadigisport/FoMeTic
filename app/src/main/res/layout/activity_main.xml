@@ -87,4 +87,15 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:srcCompat="@drawable/logo_fometic" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="326dp"
+        android:layout_height="157dp"
+        android:layout_marginStart="373dp"
+        android:layout_marginLeft="373dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:srcCompat="@drawable/new_logo_fometic_v1" />
+
 </android.support.constraint.ConstraintLayout>

@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".shootingpopup"></activity>
         <activity android:name=".generatereport" />
+        <activity android:name=".recordstatsecond" />
         <activity android:name=".recordstat" />
         <activity android:name=".inputgame" />
         <activity android:name=".inputsquad" />

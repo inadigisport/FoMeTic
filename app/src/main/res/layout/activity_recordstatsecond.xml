@@ -7,12 +7,12 @@
     tools:context=".recordstat">
 
     <Button
-        android:id="@+id/buttonhalftime"
+        android:id="@+id/buttonstop2ndhalf"
         android:layout_width="99dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:background="@color/colorPrimary"
-        android:text="HALF TIME"
+        android:text="FULL TIME"
         app:layout_constraintEnd_toEndOf="@+id/buttonstart"
         app:layout_constraintStart_toStartOf="@+id/buttonstart"
         app:layout_constraintTop_toBottomOf="@+id/buttonstart" />
@@ -54,26 +54,26 @@
         android:id="@+id/buttonpassingteamb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:background="@color/design_default_color_primary_dark"
         android:onClick="passingteamb"
         android:text="Passing"
         app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteamb"
-        app:layout_constraintStart_toEndOf="@+id/buttontacklingteamb"
+        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteamb"
         app:layout_constraintTop_toTopOf="@+id/buttontacklingteamb" />
 
     <Button
         android:id="@+id/buttonshootingteamb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:background="@color/design_default_color_primary_dark"
         android:onClick="showpopupshootingb"
         android:text="Shooting"
         app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteamb"
-        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteamb"
+        app:layout_constraintStart_toEndOf="@+id/buttontacklingteamb"
         app:layout_constraintTop_toTopOf="@+id/buttontacklingteamb" />
 
     <Button
@@ -88,8 +88,8 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="interceptteamb"
         android:text="Intercept"
-        app:layout_constraintEnd_toEndOf="@+id/buttonpassingteamb"
-        app:layout_constraintStart_toStartOf="@+id/buttontacklingteamb"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonpassingteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
 
     <Button
@@ -104,8 +104,8 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="savesteamb"
         android:text="Saves"
-        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteamb"
-        app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
 
     <Button
@@ -115,38 +115,42 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="37dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@color/colorAccent"
-        android:text="Saves"
         android:onClick="savesteama"
-        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
-        app:layout_constraintStart_toStartOf="@+id/buttontacklingteama"
+        android:text="Saves"
+        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
         app:layout_constraintTop_toBottomOf="@+id/buttonshootingteama" />
 
     <Button
         android:id="@+id/buttoninterceptteama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/colorAccent"
-        android:text="Intercept"
         android:onClick="interceptteama"
-        app:layout_constraintEnd_toEndOf="@+id/buttontacklingteama"
-        app:layout_constraintStart_toStartOf="@+id/buttonpassingteama"
+        android:text="Intercept"
+        app:layout_constraintEnd_toEndOf="@+id/buttonpassingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttontacklingteama"
         app:layout_constraintTop_toBottomOf="@+id/buttonpassingteama" />
 
     <Button
         android:id="@+id/buttonshootingteama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:background="@color/colorAccent"
-        android:text="Shooting"
         android:onClick="showpopupshootinga"
+        android:text="Shooting"
         app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteama"
-        app:layout_constraintStart_toEndOf="@+id/buttontacklingteama"
+        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteama"
         app:layout_constraintTop_toTopOf="@+id/buttontacklingteama" />
 
     <Button
@@ -165,13 +169,13 @@
         android:id="@+id/buttonpassingteama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:background="@color/colorAccent"
-        android:text="Passing"
         android:onClick="passingteama"
+        android:text="Passing"
         app:layout_constraintBottom_toBottomOf="@+id/buttontacklingteama"
-        app:layout_constraintEnd_toStartOf="@+id/buttontacklingteama"
+        app:layout_constraintStart_toEndOf="@+id/buttontacklingteama"
         app:layout_constraintTop_toTopOf="@+id/buttontacklingteama" />
 
     <Button
@@ -299,14 +303,14 @@
         android:id="@+id/textViewteama"
         android:layout_width="129dp"
         android:layout_height="51dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginLeft="102dp"
+        android:layout_marginStart="368dp"
+        android:layout_marginLeft="368dp"
         android:background="@color/colorAccent"
         android:text="Team A"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="@+id/chronometer"
-        app:layout_constraintStart_toEndOf="@+id/chronometer"
-        app:layout_constraintTop_toTopOf="@+id/chronometer" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteamb"
+        app:layout_constraintStart_toEndOf="@+id/textViewteamb"
+        app:layout_constraintTop_toTopOf="@+id/textViewteamb" />
 
     <TextView
         android:id="@+id/textViewteama2"
@@ -314,28 +318,28 @@
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="#4CAF50"
-        android:text="1st HALF"
+        android:text="2st HALF"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toStartOf="@+id/textViewteamb"
-        app:layout_constraintStart_toEndOf="@+id/textViewteama"
+        app:layout_constraintEnd_toStartOf="@+id/textViewteama"
+        app:layout_constraintStart_toEndOf="@+id/textViewteamb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewteamb"
         android:layout_width="131dp"
         android:layout_height="51dp"
-        android:layout_marginStart="368dp"
-        android:layout_marginLeft="368dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginLeft="102dp"
         android:background="@color/design_default_color_primary_dark"
         android:text="Team B"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewteama"
-        app:layout_constraintStart_toEndOf="@+id/textViewteama"
-        app:layout_constraintTop_toTopOf="@+id/textViewteama" />
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer"
+        app:layout_constraintStart_toEndOf="@+id/chronometer"
+        app:layout_constraintTop_toTopOf="@+id/chronometer" />
 
     <Button
         android:id="@+id/buttonyellow"
@@ -345,9 +349,9 @@
         android:layout_marginLeft="92dp"
         android:layout_marginTop="244dp"
         android:background="@android:color/holo_orange_light"
-        android:text="YELLOW"
         android:onClick="yellowcard"
-        app:layout_constraintStart_toEndOf="@+id/buttonsavesteama"
+        android:text="YELLOW"
+        app:layout_constraintStart_toEndOf="@+id/buttonsavesteamb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -369,10 +373,10 @@
         android:layout_marginStart="55dp"
         android:layout_marginLeft="55dp"
         android:background="@color/colorPrimary"
-        android:onClick="start1sthalf"
+        android:onClick="startChronometer"
         android:text="START"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewteamb"
-        app:layout_constraintStart_toEndOf="@+id/textViewteamb"
-        app:layout_constraintTop_toTopOf="@+id/textViewteamb" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama" />
 
 </android.support.constraint.ConstraintLayout>

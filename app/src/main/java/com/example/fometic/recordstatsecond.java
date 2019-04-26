@@ -1,27 +1,19 @@
 package com.example.fometic;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;
@@ -37,26 +29,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recordstat);
+        setContentView(R.layout.activity_recordstatsecond);
 
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
 
-        Button button=findViewById(R.id.buttonhalftime);
+        Button button=findViewById(R.id.buttonstop2ndhalf);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stop1sthalf();
+                stop2ndhalf();
             }
         });
 
 
-
-
-
     }
 
-    public void start1sthalf(View v) {
+    public void startChronometer(View v) {
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
@@ -66,20 +55,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
     }
 
-    public void stop1sthalf() {
-       AlertDialog.Builder builder = new AlertDialog.Builder(this);
-       builder.setTitle("End of 1st Half")
-               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       chronometer.stop();
-                       chronometerteam.stop();
-                       start2ndhalf();
+    public void stop2ndhalf() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("End of Full Time")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        chronometer.stop();
+                        chronometerteam.stop();
+                        backtomenu();
 
-                   }
+                    }
 
-               })
-               .setNegativeButton("CANCEL", null).show();
+                })
+                .setNegativeButton("CANCEL", null).show();
 
 
 
@@ -87,8 +76,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     }
 
-    public void start2ndhalf () {
-        Intent intent = new Intent(this, recordstatsecond.class);
+    public void backtomenu () {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -246,47 +235,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.inflate(R.menu.popup_red);
         popup.show();
     }
-
-
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
-                MyDBHandler db = new MyDBHandler(this);
-                Cursor loadDataTeam=db.loadHandler();
-                List<String> spinnerArray=new ArrayList<String>();
-                loadDataTeam.moveToFirst();
-                while (!loadDataTeam.isAfterLast()) {
-                    spinnerArray.add(loadDataTeam.getString(1));
-                    Log.d("Data spinner ",loadDataTeam.getString(1));
-                    loadDataTeam.moveToNext();
-                }
-                AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArray );
-                mSpinner.setAdapter(arrayAdapter);
-
-                builder.setTitle("Pick Player");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    }
-
-                });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.setView(mView);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                Toast.makeText(this, "Goal Team A", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-
                 return true;
             case R.id.shootontarget:
                 Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
@@ -299,40 +253,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 chronometerteam.stop();
                 return true;
             case R.id.goalb:
-                MyDBHandler dbgoalb = new MyDBHandler(this);
-                Cursor loadDataTeamgoalb=dbgoalb.loadHandler();
-                List<String> spinnerArraygoalb=new ArrayList<String>();
-                loadDataTeamgoalb.moveToFirst();
-                while (!loadDataTeamgoalb.isAfterLast()) {
-                    spinnerArraygoalb.add(loadDataTeamgoalb.getString(1));
-                    Log.d("Data spinner ",loadDataTeamgoalb.getString(1));
-                    loadDataTeamgoalb.moveToNext();
-                }
-                AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
-                View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArraygoalb );
-                mSpinnergoalb.setAdapter(arrayAdaptergoalb);
-
-                buildergoalb.setTitle("Pick Player");
-                buildergoalb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-
-                });
-                buildergoalb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                buildergoalb.setView(mViewgoalb);
-                AlertDialog dialoggoalb = buildergoalb.create();
-                dialoggoalb.show();
-                //Toast.makeText(this, "Goal Team B", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Goal Team B", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 return true;
