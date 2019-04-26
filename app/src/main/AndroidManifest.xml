@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".shootingpopup"></activity>
-        <activity android:name=".generatereport" />
-        <activity android:name=".recordstat" />
-        <activity android:name=".inputgame" />
-        <activity android:name=".inputsquad" />
-        <activity android:name=".inputteam" />
-        <activity android:name=".chooseteam"/>
+        <activity android:name=".ShootingPopup"></activity>
+        <activity android:name=".GenerateReport" />
+        <activity android:name=".RecordStat" />
+        <activity android:name=".InputGame" />
+        <activity android:name=".InputSquad" />
+        <activity android:name=".InputTeam" />
+        <activity android:name=".ChooseTeam"/>
         <activity android:name=".MainActivity">
 
             <intent-filter>

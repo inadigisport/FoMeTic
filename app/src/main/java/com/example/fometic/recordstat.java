@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Toast;
 
-public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;

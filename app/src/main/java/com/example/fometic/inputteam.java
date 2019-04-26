@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-public class inputteam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class InputTeam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button button;
     EditText editText;
@@ -20,7 +18,7 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     String teamname;
     int jumlahSquad;
     public static final String kata_kunci = "inadigisport";
-    MyDBHandler db=new MyDBHandler(this);
+    TeamDBHandler db=new TeamDBHandler(this);
     TeamBola teambola = new TeamBola();
 
 
@@ -54,7 +52,7 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
                 teambola.setStatusTeam(statusteam);
                 db.addHandler(teambola);
 
-                //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
+                //Intent intent2 = new Intent(InputTeam.this, InputSquad.class);
                 //intent2.putExtra(kata_kunci,teamname);
                 //startActivity(intent2);
                 openMainActivity();
@@ -84,7 +82,7 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     public void inputTeam(String name, String formation, int jumlahTeam, String statusTeam){
-        MyDBHandler databaseTeam = new MyDBHandler(this);
+        TeamDBHandler databaseTeam = new TeamDBHandler(this);
         TeamBola teamBola= new TeamBola();
         teamBola.setNamaTeam(name);
         teamBola.setFormasiTeam(formation);

@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class inputsquad extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class InputSquad extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView textView11;
     public static final String kata_kunci = "inadigisport";

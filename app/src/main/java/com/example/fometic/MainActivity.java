@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,37 +64,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openinputteam() {
-            Intent intent = new Intent(this, inputteam.class);
+            Intent intent = new Intent(this, InputTeam.class);
             startActivity(intent);
 
         }
 
     public void openinputsquad() {
-        Intent intent = new Intent(this, inputsquad.class);
+        Intent intent = new Intent(this, InputSquad.class);
         startActivity(intent);
 
     }
 
     public void openinputgame() {
-        Intent intent = new Intent(this, inputgame.class);
+        Intent intent = new Intent(this, InputGame.class);
         startActivity(intent);
 
     }
 
     public void openrecordstat() {
-        Intent intent = new Intent(this, recordstat.class);
+        Intent intent = new Intent(this, RecordStat.class);
         startActivity(intent);
 
     }
 
     public void opengeneratereport() {
-        Intent intent = new Intent(this, generatereport.class);
+        Intent intent = new Intent(this, GenerateReport.class);
         startActivity(intent);
 
     }
 
     public void openchooseteam() {
-        Intent intent = new Intent(this, chooseteam.class);
+        Intent intent = new Intent(this, ChooseTeam.class);
         startActivity(intent);
 
     }

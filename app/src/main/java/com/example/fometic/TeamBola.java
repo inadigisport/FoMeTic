@@ -1,6 +1,6 @@
 package com.example.fometic;
 
-public class TeamBola{
+public class TeamBola {
     private int idTeam;
     private String namaTeam;
     private String formasiTeam;
@@ -23,7 +23,7 @@ public class TeamBola{
 
     public TeamBola(){}
 
-    public TeamBola (int idTeam, String namaTeam, String formasiTeam, int jumlahTeam,int passingTeam,int tacklingTeam,int goalTeam,int shootOnTargetTeam,int shootOffTargetTeam,int interceptTeam,int savesTeam,int throwinTeam,int freekickTeam,int pinaltyTeam,int goalkickTeam,int cornerkickTeam, int yellowcardTeam, int redcardTeam, String statusTeam){
+    public TeamBola(int idTeam, String namaTeam, String formasiTeam, int jumlahTeam, int passingTeam, int tacklingTeam, int goalTeam, int shootOnTargetTeam, int shootOffTargetTeam, int interceptTeam, int savesTeam, int throwinTeam, int freekickTeam, int pinaltyTeam, int goalkickTeam, int cornerkickTeam, int yellowcardTeam, int redcardTeam, String statusTeam){
         this.idTeam=idTeam;
         this.namaTeam=namaTeam;
         this.formasiTeam=formasiTeam;
