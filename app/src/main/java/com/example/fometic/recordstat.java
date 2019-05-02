@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     private Chronometer chronometerteam;
     private boolean running;
     Pertandingan tanding = new Pertandingan();
+
+
+
     //Button buttonshootingteama;
     //Button buttonshootingteamb;
     //Button buttonpassingteama;
@@ -243,7 +247,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.show();
     }
 
+    public void inputname () {
+        Intent intent = new Intent(this, InputName.class);
+        startActivity(intent);
 
+    }
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
@@ -275,6 +283,13 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                    }
+                });
+                builder.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+
                     }
                 });
                 builder.setView(mView);
@@ -325,6 +340,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         dialog.dismiss();
                     }
                 });
+
+                buildergoalb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+                    }
+                });
+
+
                 buildergoalb.setView(mViewgoalb);
                 AlertDialog dialoggoalb = buildergoalb.create();
                 dialoggoalb.show();
