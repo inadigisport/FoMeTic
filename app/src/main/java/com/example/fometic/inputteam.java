@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class InputTeam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class inputteam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button button;
     EditText editText;
@@ -52,7 +52,7 @@ public class InputTeam extends AppCompatActivity implements AdapterView.OnItemSe
                 teambola.setStatusTeam(statusteam);
                 db.addHandler(teambola);
 
-                //Intent intent2 = new Intent(InputTeam.this, InputSquad.class);
+                //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
                 //intent2.putExtra(kata_kunci,teamname);
                 //startActivity(intent2);
                 openMainActivity();

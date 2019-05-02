@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateReport extends AppCompatActivity {
+public class generatereport extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

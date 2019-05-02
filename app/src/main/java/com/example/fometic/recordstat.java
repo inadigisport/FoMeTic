@@ -18,17 +18,17 @@ import android.widget.Chronometer;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
-=======
-public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
->>>>>>> master
+
+
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;
+    Pertandingan tanding = new Pertandingan();
     //Button buttonshootingteama;
     //Button buttonshootingteamb;
     //Button buttonpassingteama;
@@ -99,123 +99,115 @@ public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public void passingteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setPassingTeamA(tanding.getPassingTeamA()+1);
 
     }
 
     public void passingteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setPassingTeamB(tanding.getPassingTeamB()+1);
 
     }
 
     public void tacklingteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setTacklingTeamA(tanding.getTacklingTeamA()+1);
 
     }
 
     public void tacklingteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setTacklingTeamB(tanding.getTacklingTeamB()+1);
 
     }
 
     public void interceptteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setInterceptTeamA(tanding.getInterceptTeamA()+1);
 
     }
 
     public void interceptteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setInterceptTeamB(tanding.getInterceptTeamB()+1);
 
     }
 
     public void savesteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setSavesTeamA(tanding.getSavesTeamA()+1);
 
     }
 
     public void savesteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
-
+        tanding.setSavesTeamB(tanding.getSavesTeamB()+1);
 
     }
 
     public void throwinteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
+        tanding.setThrowinTeamA(tanding.getThrowinTeamA()+1);
 
     }
 
     public void throwinteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setThrowinTeamB(tanding.getThrowinTeamB()+1);
     }
 
     public void cornerkickteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setCornerkickTeamA(tanding.getCornerkickTeamA()+1);
     }
     public void cornerkickteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
+        tanding.setCornerkickTeamB(tanding.getCornerkickTeamB()+1);
 
     }
     public void pinaltyteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setPinaltyTeamA(tanding.getPassingTeamA()+1);
     }
     public void pinaltyteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setPinaltyTeamB(tanding.getPassingTeamB()+1);
     }
 
     public void freekickteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setFreekickTeamA(tanding.getFreekickTeamA()+1);
     }
 
     public void freekickteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setFreekickTeamB(tanding.getFreekickTeamB()+1);
     }
 
     public void goalkickteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setGoalkickTeamA(tanding.getGoalkickTeamA()+1);
     }
     public void goalkickteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
-
-
+        tanding.setGoalkickTeamB(tanding.getGoalkickTeamB()+1);
     }
 
 
@@ -255,7 +247,7 @@ public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
-                MyDBHandler db = new MyDBHandler(this);
+                TeamDBHandler db = new TeamDBHandler(this);
                 Cursor loadDataTeam=db.loadHandler();
                 List<String> spinnerArray=new ArrayList<String>();
                 loadDataTeam.moveToFirst();
@@ -303,7 +295,7 @@ public class RecordStat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 chronometerteam.stop();
                 return true;
             case R.id.goalb:
-                MyDBHandler dbgoalb = new MyDBHandler(this);
+                TeamDBHandler dbgoalb = new TeamDBHandler(this);
                 Cursor loadDataTeamgoalb=dbgoalb.loadHandler();
                 List<String> spinnerArraygoalb=new ArrayList<String>();
                 loadDataTeamgoalb.moveToFirst();

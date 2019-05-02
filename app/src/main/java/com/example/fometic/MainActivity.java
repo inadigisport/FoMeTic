@@ -64,37 +64,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openinputteam() {
-            Intent intent = new Intent(this, InputTeam.class);
+            Intent intent = new Intent(this, inputteam.class);
             startActivity(intent);
 
         }
 
     public void openinputsquad() {
-        Intent intent = new Intent(this, InputSquad.class);
+        Intent intent = new Intent(this, inputsquad.class);
         startActivity(intent);
 
     }
 
     public void openinputgame() {
-        Intent intent = new Intent(this, InputGame.class);
+        Intent intent = new Intent(this, inputgame.class);
         startActivity(intent);
 
     }
 
     public void openrecordstat() {
-        Intent intent = new Intent(this, RecordStat.class);
+        Intent intent = new Intent(this, recordstat.class);
         startActivity(intent);
 
     }
 
     public void opengeneratereport() {
-        Intent intent = new Intent(this, GenerateReport.class);
+        Intent intent = new Intent(this, generatereport.class);
         startActivity(intent);
 
     }
 
     public void openchooseteam() {
-        Intent intent = new Intent(this, ChooseTeam.class);
+        Intent intent = new Intent(this, chooseteam.class);
         startActivity(intent);
 
     }

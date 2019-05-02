@@ -3,7 +3,7 @@ package com.example.fometic;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ShootingPopup extends AppCompatActivity {
+public class shootingpopup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

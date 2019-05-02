@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseTeam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class chooseteam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,7 +51,7 @@ public class ChooseTeam extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     public void openrecordstat() {
-        Intent intent = new Intent(this, RecordStat.class);
+        Intent intent = new Intent(this, recordstat.class);
         startActivity(intent);
 
     }
