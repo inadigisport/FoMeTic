@@ -1,27 +1,25 @@
 package com.example.fometic;
 
 public class PemainBola {
-    private int idPemain;
     private String namaPemain;
     private int nomorPunggung;
-    private String idTeamPemain;
+    private String posisi;
+    private String team;
+    private int goal;
+    private int yellowcard;
+    private int redcard;
 
     public PemainBola(){}
-    public PemainBola (int idPemain, String namaPemain, int nomorPunggung, String idTeamPemain){
-        this.setIdPemain(idPemain);
-        this.setNamaPemain(namaPemain);
-        this.setNomorPunggung(nomorPunggung);
-        this.setIdTeamPemain(idTeamPemain);
+    public PemainBola (String namaPemain, int nomorPunggung, String posisi, String team, int goal, int yellowcard, int redcard){
+        this.namaPemain=namaPemain;
+        this.nomorPunggung=nomorPunggung;
+        this.posisi=posisi;
+        this.team=team;
+        this.goal=goal;
+        this.yellowcard=yellowcard;
+        this.redcard=redcard;
     }
 
-
-    public int getIdPemain() {
-        return idPemain;
-    }
-
-    public void setIdPemain(int idPemain) {
-        this.idPemain = idPemain;
-    }
 
     public String getNamaPemain() {
         return namaPemain;
@@ -39,11 +37,43 @@ public class PemainBola {
         this.nomorPunggung = nomorPunggung;
     }
 
-    public String getIdTeamPemain() {
-        return idTeamPemain;
+    public String getPosisi() {
+        return posisi;
     }
 
-    public void setIdTeamPemain(String idTeamPemain) {
-        this.idTeamPemain = idTeamPemain;
+    public void setPosisi(String posisi) {
+        this.posisi = posisi;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
+    }
+
+    public int getYellowcard() {
+        return yellowcard;
+    }
+
+    public void setYellowcard(int yellowcard) {
+        this.yellowcard = yellowcard;
+    }
+
+    public int getRedcard() {
+        return redcard;
+    }
+
+    public void setRedcard(int redcard) {
+        this.redcard = redcard;
     }
 }

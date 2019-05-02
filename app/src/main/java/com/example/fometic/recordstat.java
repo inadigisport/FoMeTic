@@ -221,6 +221,13 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_shooting);
         popup.show();
+        if (popup.getMenu().toString()=="Goal"){
+            tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
+        } else if (popup.getMenu().toString()=="Shoot On Target"){
+            tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
+        } else {
+            tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
+        }
     }
 
     public void showpopupshootingb(View v) {
@@ -229,6 +236,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_shootingb);
         popup.show();
+        if (popup.getMenu().toString()=="Goal"){
+            tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
+            Log.d("Goal",""+tanding.getGoalTeamB());
+        } else if (popup.getMenu().toString()=="Shoot On Target"){
+            tanding.setShootOnTargetTeamB(tanding.getShootOffTargetTeamB()+1);
+        } else {
+            tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
+        }
     }
 
     public void yellowcard(View v) {
