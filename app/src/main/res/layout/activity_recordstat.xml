@@ -178,13 +178,13 @@
         android:id="@+id/buttoncornerkickteama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="128dp"
         android:background="@color/colorAccent"
-        android:text="Corner Kick"
         android:onClick="cornerkickteama"
-        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteama"
-        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteama"
-        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteama" />
+        android:text="Corner Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteama" />
 
     <Button
         android:id="@+id/buttonthrowinteama"
@@ -202,13 +202,13 @@
         android:id="@+id/buttonfreekickteama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="36dp"
         android:background="@color/colorAccent"
-        android:text="Free Kick"
         android:onClick="freekickteama"
-        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
-        app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
-        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteama" />
+        android:text="Free Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteama"
+        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteama" />
 
     <Button
         android:id="@+id/buttongoalkickteama"
@@ -216,11 +216,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:background="@color/colorAccent"
-        android:text="Goal Kick"
         android:onClick="goalkickteama"
-        app:layout_constraintEnd_toEndOf="@+id/buttonfreekickteama"
-        app:layout_constraintStart_toStartOf="@+id/buttonfreekickteama"
-        app:layout_constraintTop_toBottomOf="@+id/buttonfreekickteama" />
+        android:text="Goal Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttoncornerkickteama"
+        app:layout_constraintStart_toStartOf="@+id/buttoncornerkickteama"
+        app:layout_constraintTop_toBottomOf="@+id/buttoncornerkickteama" />
 
     <Button
         android:id="@+id/buttonpinaltyteama"
@@ -263,25 +263,25 @@
         android:id="@+id/buttoncornerkickteamb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="128dp"
         android:background="@color/design_default_color_primary_dark"
-        android:text="Corner Kick"
         android:onClick="cornerkickteamb"
-        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteamb"
-        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteamb"
-        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteamb" />
+        android:text="Corner Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteamb" />
 
     <Button
         android:id="@+id/buttonfreekickteamb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="36dp"
         android:background="@color/design_default_color_primary_dark"
         android:onClick="freekickteamb"
         android:text="Free Kick"
-        app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
-        app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
-        app:layout_constraintTop_toBottomOf="@+id/buttonshootingteamb" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttonthrowinteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteamb" />
 
     <Button
         android:id="@+id/buttongoalkickteamb"
@@ -289,11 +289,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:background="@color/design_default_color_primary_dark"
-        android:text="Goal Kick"
         android:onClick="goalkickteamb"
-        app:layout_constraintEnd_toEndOf="@+id/buttonfreekickteamb"
-        app:layout_constraintStart_toStartOf="@+id/buttonfreekickteamb"
-        app:layout_constraintTop_toBottomOf="@+id/buttonfreekickteamb" />
+        android:text="Goal Kick"
+        app:layout_constraintEnd_toEndOf="@+id/buttoncornerkickteamb"
+        app:layout_constraintStart_toStartOf="@+id/buttoncornerkickteamb"
+        app:layout_constraintTop_toBottomOf="@+id/buttoncornerkickteamb" />
 
     <TextView
         android:id="@+id/textViewteama"
