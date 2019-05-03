@@ -1,6 +1,5 @@
 package com.example.fometic;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,8 +14,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -29,6 +28,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;
+    double possesionteama;
+    double possesionteamb;
+    double ballpossesionteama;
+    double ballpossesionteamb;
+
     Pertandingan tanding = new Pertandingan();
 
 
@@ -49,6 +53,17 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
+        //TextView textViewpossesionteama = findViewById(R.id.textViewposseionteama);
+        //TextView textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
+        //if (possesionteama != 0 && possesionteamb != 0) {
+         //   long ballpossesionteama = ((possesionteama / (possesionteama + possesionteamb)) * 100);
+          //  long ballpossesionteamb = ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+          //  textViewpossesionteama.setText(Long.toString(ballpossesionteama));
+          //  textViewpossesionteamb.setText(Long.toString(ballpossesionteamb));
+        //}
+
+
+
 
         Button button=findViewById(R.id.buttonhalftime);
         button.setOnClickListener(new View.OnClickListener() {
@@ -101,16 +116,54 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void passingteama(View v) {
+        long elapsedchronometerteam = chronometerteam.getBase();
+        Toast.makeText(recordstat.this, "elapsed " + elapsedchronometerteam, Toast.LENGTH_SHORT).show();
+        double elapsedchronometerteamint = (double) (elapsedchronometerteam / 100000000 );
+
+        possesionteama = possesionteama + elapsedchronometerteamint;
+        Log.d("elapsed time a", Double.toString(possesionteama));
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setPassingTeamA(tanding.getPassingTeamA()+1);
+        TextView textViewpossesionteama = findViewById(R.id.textViewpossesionteama);
+        TextView textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
+
+        //if (possesionteama != 0 && possesionteamb != 0) {
+            ballpossesionteama = ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            Log.d("Cek possesion", Double.toString(ballpossesionteama));
+            textViewpossesionteama.setText(Double.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Double.toString(ballpossesionteamb));
+
+
+        // }
+
 
     }
 
     public void passingteamb(View v) {
+        long elapsedchronometerteamb = chronometerteam.getBase();
+        Toast.makeText(recordstat.this, "elapsed " + elapsedchronometerteamb, Toast.LENGTH_SHORT).show();
+        double elapsedchronometerteambint = (double) (elapsedchronometerteamb / 100000000);
+
+
+        possesionteamb = possesionteamb + elapsedchronometerteambint;
+        Log.d("elapsed team b", Double.toString(possesionteamb));
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setPassingTeamB(tanding.getPassingTeamB()+1);
+
+        TextView textViewpossesionteama = findViewById(R.id.textViewpossesionteama);
+        TextView textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
+        //if (possesionteama != 0 && possesionteamb != 0) {
+
+            ballpossesionteamb = ((possesionteamb / (possesionteama + possesionteamb))*100) ;
+            ballpossesionteama = ((possesionteama / (possesionteama + possesionteamb))*100) ;
+
+        Log.d("Cek possesion", Double.toString(ballpossesionteamb));
+            textViewpossesionteama.setText(Double.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Double.toString(ballpossesionteamb));
+        //}
 
     }
 

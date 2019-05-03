@@ -375,4 +375,24 @@
         app:layout_constraintStart_toEndOf="@+id/textViewteamb"
         app:layout_constraintTop_toTopOf="@+id/textViewteamb" />
 
+    <TextView
+        android:id="@+id/textViewpossesionteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama" />
+
+    <TextView
+        android:id="@+id/textViewpossesionteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteamb"
+        app:layout_constraintStart_toStartOf="@+id/textViewteamb"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteamb" />
+
 </android.support.constraint.ConstraintLayout>
