@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class chooseteam extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    Spinner teamA;
+    Spinner teamB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,15 +47,19 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
             loadDataTeam.moveToNext();
         }
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray);
-        Spinner teamA= findViewById(R.id.spinnerteamA);
+        teamA= findViewById(R.id.spinnerteamA);
         teamA.setAdapter(arrayAdapter);
 
-        Spinner teamB= findViewById(R.id.spinnerteamB);
+        teamB= findViewById(R.id.spinnerteamB);
         teamB.setAdapter(arrayAdapter);
     }
 
     public void openrecordstat() {
         Intent intent = new Intent(this, recordstat.class);
+        intent.putExtra("teama",teamA.getSelectedItem().toString());
+        Log.d("team A choosen",teamA.getSelectedItem().toString());
+        intent.putExtra("teamb",teamB.getSelectedItem().toString());
+        Log.d("team B choosen",teamB.getSelectedItem().toString());
         startActivity(intent);
 
     }

@@ -2,6 +2,7 @@ package com.example.fometic;
 
 public class PemainBola {
     private String namaPemain;
+    private int idPertandingan;
     private int nomorPunggung;
     private String posisi;
     private String team;
@@ -10,7 +11,7 @@ public class PemainBola {
     private int redcard;
 
     public PemainBola(){}
-    public PemainBola (String namaPemain, int nomorPunggung, String posisi, String team, int goal, int yellowcard, int redcard){
+    public PemainBola (String namaPemain, int nomorPunggung, String posisi, String team, int goal, int yellowcard, int redcard, int idpertandingan){
         this.namaPemain=namaPemain;
         this.nomorPunggung=nomorPunggung;
         this.posisi=posisi;
@@ -18,6 +19,7 @@ public class PemainBola {
         this.goal=goal;
         this.yellowcard=yellowcard;
         this.redcard=redcard;
+        this.setIdPertandingan(idpertandingan);
     }
 
 
@@ -75,5 +77,13 @@ public class PemainBola {
 
     public void setRedcard(int redcard) {
         this.redcard = redcard;
+    }
+
+    public int getIdPertandingan() {
+        return idPertandingan;
+    }
+
+    public void setIdPertandingan(int idPertandingan) {
+        this.idPertandingan = idPertandingan;
     }
 }

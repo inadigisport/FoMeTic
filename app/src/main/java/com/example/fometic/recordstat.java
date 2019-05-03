@@ -32,8 +32,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     double possesionteamb;
     double ballpossesionteama;
     double ballpossesionteamb;
-
+    TextView textviewteama;
+    TextView textviewteamb;
+    String teamA;
+    String teamB;
     Pertandingan tanding = new Pertandingan();
+    PemainBola pemain = new PemainBola();
 
 
 
@@ -50,9 +54,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordstat);
-
+        Bundle bundle = getIntent().getExtras();
+        teamA=bundle.getString("teama");
+        teamB=bundle.getString("teamb");
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
+        textviewteama=findViewById(R.id.textViewteama);
+        textviewteama.setText(teamA);
+        textviewteamb=findViewById(R.id.textViewteamb);
+        textviewteamb.setText(teamB);
         //TextView textViewpossesionteama = findViewById(R.id.textViewposseionteama);
         //TextView textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
         //if (possesionteama != 0 && possesionteamb != 0) {
@@ -274,13 +284,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_shooting);
         popup.show();
-        if (popup.getMenu().toString()=="Goal"){
-            tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
-        } else if (popup.getMenu().toString()=="Shoot On Target"){
-            tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
-        } else {
-            tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
-        }
     }
 
     public void showpopupshootingb(View v) {
@@ -289,14 +292,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_shootingb);
         popup.show();
-        if (popup.getMenu().toString()=="Goal"){
-            tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
-            Log.d("Goal",""+tanding.getGoalTeamB());
-        } else if (popup.getMenu().toString()=="Shoot On Target"){
-            tanding.setShootOnTargetTeamB(tanding.getShootOffTargetTeamB()+1);
-        } else {
-            tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
-        }
     }
 
     public void yellowcard(View v) {
@@ -337,6 +332,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArray );
                 mSpinner.setAdapter(arrayAdapter);
+                tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
 
                 builder.setTitle("Pick Player");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -371,11 +367,13 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.start();
+                tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
                 return true;
             case R.id.shootofftarget:
                 Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
                 return true;
             case R.id.goalb:
                 TeamDBHandler dbgoalb = new TeamDBHandler(this);
@@ -392,6 +390,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArraygoalb );
                 mSpinnergoalb.setAdapter(arrayAdaptergoalb);
+                tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
 
                 buildergoalb.setTitle("Pick Player");
                 buildergoalb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -428,11 +427,13 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.start();
+                tanding.setShootOnTargetTeamB(tanding.getShootOffTargetTeamB()+1);
                 return true;
             case R.id.shootofftargetb:
                 Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
                 return true;
 
             case R.id.yellowhome:
