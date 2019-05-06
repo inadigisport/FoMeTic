@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,10 +46,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
-
-
     Pertandingan tanding = new Pertandingan();
-    PemainBola pemain = new PemainBola();
+    PemainDBHandler dbpemain = new PemainDBHandler(this);
 
 
 
@@ -69,6 +68,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         textviewteama.setText(teamA);
         textviewteamb=findViewById(R.id.textViewteamb);
         textviewteamb.setText(teamB);
+        tanding.setBabak(1);
 
 
 
@@ -315,15 +315,18 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_yellow);
+        popup.getMenu().add(1, R.id.yellowhome, 1, teamA);
+        popup.getMenu().add(1, R.id.yellowaway,2, teamB);
         popup.show();
+
     }
 
     public void redcard(View v) {
 
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_red);
+        popup.getMenu().add(teamA);
+        popup.getMenu().add(teamB);
         popup.show();
     }
 
@@ -460,6 +463,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                Cursor data=dbpemain.loadHandler(teamA);
+                List<String> listpemain=new ArrayList<String>();
+                data.moveToFirst();
+                while (!data.isAfterLast()) {
+                    listpemain.add(data.getString(0));
+                    Log.d("Data spinner ",data.getString(0));
+                    data.moveToNext();
+                }
+                final ArrayAdapter<String> adp = new ArrayAdapter<String>(recordstat.this,
+                        android.R.layout.simple_spinner_item, listpemain);
+
+                final Spinner sp = new Spinner(recordstat.this);
+                sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                sp.setAdapter(adp);
+                AlertDialog.Builder builderpemain = new AlertDialog.Builder(recordstat.this);
+                builderpemain.setView(sp);
+                builderpemain.create().show();
                 return true;
 
             case R.id.yellowaway:

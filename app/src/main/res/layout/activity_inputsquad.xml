@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/TextNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinnerposisi"
         android:layout_width="225dp"
         android:layout_height="50dp"
         android:layout_marginStart="51dp"
@@ -68,31 +68,31 @@
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/buttonSubmit"
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_marginStart="53dp"
         android:layout_marginLeft="53dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/button8"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toTopOf="@+id/button8" />
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAdd"
+        app:layout_constraintStart_toEndOf="@+id/buttonAdd"
+        app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/buttonAdd"
         android:layout_width="135dp"
         android:layout_height="63dp"
         android:layout_marginStart="660dp"
         android:layout_marginLeft="660dp"
         android:layout_marginTop="501dp"
         android:layout_marginBottom="36dp"
-        android:text="Button"
+        android:text="Add more"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/TextNomorPunggung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/spinnerTeam"
         android:layout_width="217dp"
         android:layout_height="36dp"
         android:layout_marginStart="59dp"
@@ -136,5 +136,5 @@
         android:layout_marginLeft="295dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTeam" />
 </android.support.constraint.ConstraintLayout>

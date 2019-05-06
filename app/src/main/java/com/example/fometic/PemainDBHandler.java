@@ -26,7 +26,7 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     @Override
 
     public void onCreate(SQLiteDatabase db) {
-        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+NOMOR_PUNGGUNG_PEMAIN+" STRING, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING, "+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+ID_PERTANDINGAN+" INT)";
+        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING, "+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+ID_PERTANDINGAN+" INT)";
         db.execSQL(createTablePemain);
     }
 
@@ -50,14 +50,14 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void loadHandler(String nama, String team){
+    public Cursor loadHandler(String team){
         String result="";
-        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"="+team+" AND "+NAMA_PEMAIN+"="+nama;
+        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"='"+team+"'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             String nama_pemain=cursor.getString(0);
-            String nomor_punggung=cursor.getString(1);
+            int nomor_punggung=cursor.getInt(1);
             String posisi_pemain=cursor.getColumnName(2);
             String team_pemain=cursor.getString(3);
             int jumlah_gol=cursor.getInt(4);
@@ -65,5 +65,7 @@ public class PemainDBHandler extends SQLiteOpenHelper {
             int jumlah_redcard=cursor.getInt(6);
             int idpertandingan=cursor.getInt(7);
         }
+        return cursor;
     }
+
 }
