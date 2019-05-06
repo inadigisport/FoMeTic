@@ -72,6 +72,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
+
         textViewpossesionteama = findViewById(R.id.textViewpossesionteama);
         textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
 
@@ -126,8 +127,19 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void passingteama(View v) {
-        elapsedchronometerteam = chronometerteam.getBase();
-        elapsedchronometerteamint = (double) (elapsedchronometerteam / 100000000 );
+
+        String chronotext = chronometerteam.getText().toString();
+        String array[] = chronotext.split(":");
+        if (array.length == 2) {
+            elapsedchronometerteamint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+        }
+        else if (array.length == 3) {
+            elapsedchronometerteamint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        }
+
+
+
+        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
 
         possesionteama = possesionteama + elapsedchronometerteamint;
         chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -145,11 +157,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void passingteamb(View v) {
-        elapsedchronometerteamb = chronometerteam.getBase();
-        //Toast.makeText(recordstat.this, "elapsed " + elapsedchronometerteamb, Toast.LENGTH_SHORT).show();
-        elapsedchronometerteambint = (double) (elapsedchronometerteamb / 100000000);
 
-
+        String chronotext = chronometerteam.getText().toString();
+        String array[] = chronotext.split(":");
+        if (array.length == 2) {
+            elapsedchronometerteambint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+        }
+        else if (array.length == 3) {
+            elapsedchronometerteambint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        }
+        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteambint));
         possesionteamb = possesionteamb + elapsedchronometerteambint;
         //Log.d("elapsed team b", Double.toString(possesionteamb));
         chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -269,9 +286,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void showpopupshootinga(View v) {
 
-        elapsedchronometerteam = chronometerteam.getBase();
-        elapsedchronometerteamint = (double) (elapsedchronometerteam / 100000000 );
 
+        String chronotext = chronometerteam.getText().toString();
+        String array[] = chronotext.split(":");
+        if (array.length == 2) {
+            elapsedchronometerteamint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+        }
+        else if (array.length == 3) {
+            elapsedchronometerteamint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        }
+        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
         possesionteama = possesionteama + elapsedchronometerteamint;
 
         ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb)) * 100);
@@ -292,9 +316,17 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void showpopupshootingb(View v) {
 
-        elapsedchronometerteamb = chronometerteam.getBase();
-        elapsedchronometerteambint = (double) (elapsedchronometerteamb / 100000000 );
 
+
+        String chronotext = chronometerteam.getText().toString();
+        String array[] = chronotext.split(":");
+        if (array.length == 2) {
+            elapsedchronometerteambint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+        }
+        else if (array.length == 3) {
+            elapsedchronometerteambint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        }
+        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
         possesionteamb = possesionteamb + elapsedchronometerteambint;
 
         ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb)) * 100);

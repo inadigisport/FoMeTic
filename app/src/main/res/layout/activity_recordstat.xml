@@ -31,7 +31,7 @@
         android:id="@+id/chronometerteam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="96dp"
         android:background="@android:color/holo_orange_dark"
         android:textSize="30sp"
         android:visibility="visible"
