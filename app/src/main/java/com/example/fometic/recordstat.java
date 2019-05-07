@@ -357,8 +357,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.getMenu().add(teamA);
-        popup.getMenu().add(teamB);
+        popup.getMenu().add(1, R.id.redhome, 1, teamA);
+        popup.getMenu().add(1, R.id.redaway, 2,teamB);
         popup.show();
     }
 
@@ -370,21 +370,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
-                TeamDBHandler db = new TeamDBHandler(this);
-                Cursor loadDataTeam=db.loadHandler();
-                List<String> spinnerArray=new ArrayList<String>();
-                loadDataTeam.moveToFirst();
-                while (!loadDataTeam.isAfterLast()) {
-                    spinnerArray.add(loadDataTeam.getString(1));
-                    Log.d("Data spinner ",loadDataTeam.getString(1));
-                    loadDataTeam.moveToNext();
+                Cursor datagoalteama=dbpemain.loadHandler(teamA);
+                List<String> listpemaingoalteama=new ArrayList<String>();
+                datagoalteama.moveToFirst();
+                while (!datagoalteama.isAfterLast()) {
+                    listpemaingoalteama.add(datagoalteama.getString(0));
+                    Log.d("Data spinner ",datagoalteama.getString(0));
+                    datagoalteama.moveToNext();
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArray );
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama );
                 mSpinner.setAdapter(arrayAdapter);
-                tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
+
 
 
 
@@ -413,17 +412,98 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builder.setView(mView);
                 AlertDialog dialog = builder.create();
                 dialog.show();
-
+                tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
 
                 return true;
             case R.id.shootontarget:
-                Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
+                Cursor datashootontargeta=dbpemain.loadHandler(teamA);
+                List<String> listpemainshootontargeta=new ArrayList<String>();
+                datashootontargeta.moveToFirst();
+                while (!datashootontargeta.isAfterLast()) {
+                    listpemainshootontargeta.add(datashootontargeta.getString(0));
+                    Log.d("Data spinner ",datashootontargeta.getString(0));
+                    datashootontargeta.moveToNext();
+                }
+                AlertDialog.Builder buildershootontargeta = new AlertDialog.Builder(recordstat.this);
+                View mViewshootontargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnershootontargeta = (Spinner) mViewshootontargeta.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdaptershootontargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargeta );
+                mSpinnershootontargeta.setAdapter(arrayAdaptershootontargeta);
+
+
+                buildershootontargeta.setTitle("Pick Player");
+                buildershootontargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                });
+                buildershootontargeta.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                buildershootontargeta.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+
+                    }
+                });
+                buildershootontargeta.setView(mViewshootontargeta);
+                AlertDialog dialogshootontargeta = buildershootontargeta.create();
+                dialogshootontargeta.show();
+
 
                 chronometerteam.start();
                 tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
                 return true;
             case R.id.shootofftarget:
-                Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
+                Cursor datashootofftargeta=dbpemain.loadHandler(teamA);
+                List<String> listpemainshootofftargeta=new ArrayList<String>();
+                datashootofftargeta.moveToFirst();
+                while (!datashootofftargeta.isAfterLast()) {
+                    listpemainshootofftargeta.add(datashootofftargeta.getString(0));
+                    Log.d("Data spinner ",datashootofftargeta.getString(0));
+                    datashootofftargeta.moveToNext();
+                }
+                AlertDialog.Builder buildershootofftargeta = new AlertDialog.Builder(recordstat.this);
+                View mViewshootofftargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnershootofftargeta = (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdaptershootofftargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargeta );
+                mSpinnershootofftargeta.setAdapter(arrayAdaptershootofftargeta);
+
+
+                buildershootofftargeta.setTitle("Pick Player");
+                buildershootofftargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                });
+                buildershootofftargeta.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                buildershootofftargeta.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+
+                    }
+                });
+                buildershootofftargeta.setView(mViewshootofftargeta);
+                AlertDialog dialogshootofftargeta = buildershootofftargeta.create();
+                dialogshootofftargeta.show();
 
                 tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
 
@@ -438,10 +518,18 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ",loadDataTeamgoalb.getString(1));
                     loadDataTeamgoalb.moveToNext();
                 }
+                Cursor datagoalteamb=dbpemain.loadHandler(teamB);
+                List<String> listpemaingoalteamb=new ArrayList<String>();
+                datagoalteamb.moveToFirst();
+                while (!datagoalteamb.isAfterLast()) {
+                    listpemaingoalteamb.add(datagoalteamb.getString(0));
+                    Log.d("Data spinner ",datagoalteamb.getString(0));
+                    datagoalteamb.moveToNext();
+                }
                 AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
                 View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, spinnerArraygoalb );
+                ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb );
                 mSpinnergoalb.setAdapter(arrayAdaptergoalb);
 
                 tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
@@ -478,14 +566,93 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 return true;
             case R.id.shootontargetb:
-                Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
+                Cursor datashootontargetb=dbpemain.loadHandler(teamB);
+                List<String> listpemainshootontargetb=new ArrayList<String>();
+                datashootontargetb.moveToFirst();
+                while (!datashootontargetb.isAfterLast()) {
+                    listpemainshootontargetb.add(datashootontargetb.getString(0));
+                    Log.d("Data spinner ",datashootontargetb.getString(0));
+                    datashootontargetb.moveToNext();
+                }
+                AlertDialog.Builder buildershootontargetb = new AlertDialog.Builder(recordstat.this);
+                View mViewshootontargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnershootontargetb = (Spinner) mViewshootontargetb.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdaptershootontargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargetb );
+                mSpinnershootontargetb.setAdapter(arrayAdaptershootontargetb);
+
+
+                buildershootontargetb.setTitle("Pick Player");
+                buildershootontargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                });
+                buildershootontargetb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                buildershootontargetb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+
+                    }
+                });
+                buildershootontargetb.setView(mViewshootontargetb);
+                AlertDialog dialogshootontargetb = buildershootontargetb.create();
+                dialogshootontargetb.show();
 
                 chronometerteam.start();
                 tanding.setShootOnTargetTeamB(tanding.getShootOffTargetTeamB()+1);
                 return true;
             case R.id.shootofftargetb:
-                Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
+                Cursor datashootofftargetb=dbpemain.loadHandler(teamB);
+                List<String> listpemainshootofftargetb=new ArrayList<String>();
+                datashootofftargetb.moveToFirst();
+                while (!datashootofftargetb.isAfterLast()) {
+                    listpemainshootofftargetb.add(datashootofftargetb.getString(0));
+                    Log.d("Data spinner ",datashootofftargetb.getString(0));
+                    datashootofftargetb.moveToNext();
+                }
+                AlertDialog.Builder buildershootofftargetb = new AlertDialog.Builder(recordstat.this);
+                View mViewshootofftargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnershootofftargetb = (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdaptershootofftargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargetb );
+                mSpinnershootofftargetb.setAdapter(arrayAdaptershootofftargetb);
 
+
+                buildershootofftargetb.setTitle("Pick Player");
+                buildershootofftargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                });
+                buildershootofftargetb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                buildershootofftargetb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputname();
+
+                    }
+                });
+                buildershootofftargetb.setView(mViewshootofftargetb);
+                AlertDialog dialogshootofftargetb = buildershootofftargetb.create();
+                dialogshootofftargetb.show();
                 tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
 
 
@@ -495,41 +662,160 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-                Cursor data=dbpemain.loadHandler(teamA);
-                List<String> listpemain=new ArrayList<String>();
-                data.moveToFirst();
-                while (!data.isAfterLast()) {
-                    listpemain.add(data.getString(0));
-                    Log.d("Data spinner ",data.getString(0));
-                    data.moveToNext();
+                Cursor datayellowhome=dbpemain.loadHandler(teamA);
+                List<String> listpemainyellowhome=new ArrayList<String>();
+                datayellowhome.moveToFirst();
+                while (!datayellowhome.isAfterLast()) {
+                    listpemainyellowhome.add(datayellowhome.getString(0));
+                    Log.d("Data spinner ",datayellowhome.getString(0));
+                    datayellowhome.moveToNext();
                 }
-                final ArrayAdapter<String> adp = new ArrayAdapter<String>(recordstat.this,
-                        android.R.layout.simple_spinner_item, listpemain);
 
-                final Spinner sp = new Spinner(recordstat.this);
-                sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                sp.setAdapter(adp);
-                AlertDialog.Builder builderpemain = new AlertDialog.Builder(recordstat.this);
-                builderpemain.setView(sp);
-                builderpemain.create().show();
+                AlertDialog.Builder builderyellowhome = new AlertDialog.Builder(recordstat.this);
+                View mViewyellowhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinneryellowhome = (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapteryellowhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowhome );
+                mSpinneryellowhome.setAdapter(arrayAdapteryellowhome);
+
+                builderyellowhome.setTitle("Pick Player");
+                builderyellowhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+                builderyellowhome.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+                builderyellowhome.setView(mViewyellowhome);
+                AlertDialog dialogyellowhome = builderyellowhome.create();
+                dialogyellowhome.show();
                 return true;
 
             case R.id.yellowaway:
                 Toast.makeText(this, "Yellow Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                Cursor datayellowaway=dbpemain.loadHandler(teamB);
+                List<String> listpemainyellowaway=new ArrayList<String>();
+                datayellowaway.moveToFirst();
+                while (!datayellowaway.isAfterLast()) {
+                    listpemainyellowaway.add(datayellowaway.getString(0));
+                    Log.d("Data spinner ",datayellowaway.getString(0));
+                    datayellowaway.moveToNext();
+                }
+
+                AlertDialog.Builder builderyellowaway = new AlertDialog.Builder(recordstat.this);
+                View mViewyellowaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinneryellowaway = (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapteryellowaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowaway );
+                mSpinneryellowaway.setAdapter(arrayAdapteryellowaway);
+
+                builderyellowaway.setTitle("Pick Player");
+                builderyellowaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+                builderyellowaway.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+                builderyellowaway.setView(mViewyellowaway);
+                AlertDialog dialogyellowaway = builderyellowaway.create();
+                dialogyellowaway.show();
                 return true;
 
             case R.id.redhome:
                 Toast.makeText(this, "Red Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                Cursor dataredhome=dbpemain.loadHandler(teamA);
+                List<String> listpemainredhome=new ArrayList<String>();
+                dataredhome.moveToFirst();
+                while (!dataredhome.isAfterLast()) {
+                    listpemainredhome.add(dataredhome.getString(0));
+                    Log.d("Data spinner ",dataredhome.getString(0));
+                    dataredhome.moveToNext();
+                }
+
+                AlertDialog.Builder builderredhome = new AlertDialog.Builder(recordstat.this);
+                View mViewredhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnerredhome = (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapterredhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredhome );
+                mSpinnerredhome.setAdapter(arrayAdapterredhome);
+
+                builderredhome.setTitle("Pick Player");
+                builderredhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+                builderredhome.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+                builderredhome.setView(mViewredhome);
+                AlertDialog dialogredhome = builderredhome.create();
+                dialogredhome.show();
                 return true;
 
             case R.id.redaway:
                 Toast.makeText(this, "Red Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
+                Cursor dataredaway=dbpemain.loadHandler(teamB);
+                List<String> listpemainredaway=new ArrayList<String>();
+                dataredaway.moveToFirst();
+                while (!dataredaway.isAfterLast()) {
+                    listpemainredaway.add(dataredaway.getString(0));
+                    Log.d("Data spinner ",dataredaway.getString(0));
+                    dataredaway.moveToNext();
+                }
+
+                AlertDialog.Builder builderredaway = new AlertDialog.Builder(recordstat.this);
+                View mViewredaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                Spinner mSpinnerredaway = (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapterredaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredaway );
+                mSpinnerredaway.setAdapter(arrayAdapterredaway);
+
+                builderredaway.setTitle("Pick Player");
+                builderredaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+                builderredaway.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+                builderredaway.setView(mViewredaway);
+                AlertDialog dialogredaway = builderredaway.create();
+                dialogredaway.show();
                 return true;
 
             default:
