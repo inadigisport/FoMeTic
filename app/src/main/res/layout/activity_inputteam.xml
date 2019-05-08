@@ -50,7 +50,7 @@
         android:background="@color/colorAccent"
         android:text="Squad Member"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -107,6 +107,7 @@
         android:ems="10"
         android:hint="Amount Person of Your Squad"
         android:inputType="number"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView3"
