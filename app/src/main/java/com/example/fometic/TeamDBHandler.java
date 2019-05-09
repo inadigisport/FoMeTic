@@ -41,11 +41,11 @@ public class TeamDBHandler extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
-    public Cursor loadHandler(String nama) {
+    public Cursor loadHandler() {
 
         String result = "";
 
-        String query = "Select * FROM " + TABLE_TEAM+ "WHERE "+COLUMN_NAMA_TEAM+"='"+nama+"'";
+        String query = "Select * FROM " + TABLE_TEAM;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,9 +59,7 @@ public class TeamDBHandler extends SQLiteOpenHelper {
 
             String formasi = cursor.getString(2);
 
-            String status_team = cursor.getString(18);
-
-            result += String.valueOf(id_team) + " " + nama_team + " "+ formasi+" "+status_team+
+            result += String.valueOf(id_team) + " " + nama_team + " "+ formasi+
 
                     System.getProperty("line.separator");
 

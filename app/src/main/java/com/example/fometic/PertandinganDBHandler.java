@@ -10,7 +10,7 @@ import android.util.Log;
 public class PertandinganDBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "footballDB.db";
+    private static final String DATABASE_NAME = "pertandingandb";
     public static final String TABLE_PERTANDINGAN = "tablePertandingan";
     public static final String ID_PERTANDINGAN = "idPertandingan";
     private static final String ID_TEAMA ="idteama";

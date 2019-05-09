@@ -400,6 +400,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        
                     }
 
                 });
@@ -517,7 +518,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.goalb:
                 TeamDBHandler dbgoalb = new TeamDBHandler(this);
-                Cursor loadDataTeamgoalb=dbgoalb.loadHandler(teamB);
+                Cursor loadDataTeamgoalb=dbgoalb.loadHandler();
                 List<String> spinnerArraygoalb=new ArrayList<String>();
                 loadDataTeamgoalb.moveToFirst();
                 while (!loadDataTeamgoalb.isAfterLast()) {

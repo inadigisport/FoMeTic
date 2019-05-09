@@ -5,9 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class PemainDBHandler extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="footballDB.db";
+    public static final String DATABASE_NAME="dbpemain";
     public static final int DATABASE_VERSION=1;
     public static final String ID_PERTANDINGAN="idPertandingan";
     public static final String TABLE_PEMAIN="tablePemain";
@@ -28,6 +29,7 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING, "+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+ID_PERTANDINGAN+" INT)";
         db.execSQL(createTablePemain);
+        Log.d("status create data", createTablePemain);
     }
 
     @Override
@@ -61,7 +63,6 @@ public class PemainDBHandler extends SQLiteOpenHelper {
 
 
     public Cursor loadHandler(String query){
-        String result="";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {

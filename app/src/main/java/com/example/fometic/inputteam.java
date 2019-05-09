@@ -16,7 +16,6 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     EditText editText;
     EditText textjumlahsquad;
     String teamname;
-    int jumlahSquad;
     public static final String kata_kunci = "inadigisport";
     TeamDBHandler db=new TeamDBHandler(this);
     TeamBola teambola = new TeamBola();
@@ -45,19 +44,14 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
                 String statusteam=spinner2.getSelectedItem().toString();
 
                 teamname = editText.getText().toString();
-                jumlahSquad = Integer.valueOf(textjumlahsquad.getText().toString());
                 teambola.setNamaTeam(teamname);
-                teambola.setJumlahTeam(jumlahSquad);
                 teambola.setFormasiTeam(formation);
-                teambola.setStatusTeam(statusteam);
                 db.addHandler(teambola);
 
                 //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
                 //intent2.putExtra(kata_kunci,teamname);
                 //startActivity(intent2);
                 openMainActivity();
-                Log.d("Data formasi : ", formation);
-                Log.d("Data Status : ",statusteam);
             }
         });
 
@@ -81,13 +75,11 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
 
     }
 
-    public void inputTeam(String name, String formation, int jumlahTeam, String statusTeam){
+    public void inputTeam(String name, String formation){
         TeamDBHandler databaseTeam = new TeamDBHandler(this);
         TeamBola teamBola= new TeamBola();
         teamBola.setNamaTeam(name);
         teamBola.setFormasiTeam(formation);
-        teamBola.setJumlahAnggotaTeam(jumlahTeam);
-        teamBola.setStatusTeam(statusTeam);
         databaseTeam.addHandler(teamBola);
     }
 }
