@@ -13,6 +13,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "footballDB.db";
     public static final String TABLE_PERTANDINGAN = "tablePertandingan";
     public static final String ID_PERTANDINGAN = "idPertandingan";
+    private static final String ID_TEAMA ="idteama";
+    private static final String ID_TEAMB ="idteamb";
     public static final String COLUMN_NAMA_TEAM_A = "namaTeamA";
     public static final String COLUMN_FORMASI_TEAM_A = "formasiTeamA";
     public static final String JUMLAH_PASSING_TEAM_A = "passingTeamA";
@@ -57,7 +59,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN+" ("+ID_PERTANDINGAN+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM_A+" STRING, "+COLUMN_FORMASI_TEAM_A+" STRING, "+JUMLAH_PASSING_TEAM_A+" INT, "+JUMLAH_TACKLING_TEAM_A+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_A+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_A+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_A+" INT, "+JUMLAH_INTERCEPT_TEAM_A+" INT, "+JUMLAH_SAVES_TEAM_A+" INT,"+JUMLAH_THROWIN_TEAM_A+" INT, "+JUMLAH_FREEKICK_TEAM_A+" INT, "+JUMLAH_PINALTY_TEAM_A+" INT, "+JUMLAH_GOALKICK_TEAM_A+" INT, "+JUMLAH_CORNERKICK_TEAM_A+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_A+" INT, "+JUMLAH_RED_CARD_TEAM_A+" INT, "+JUMLAH_YELLOW_CARD_TEAM_A+" INT, "+STATUS_TEAM_A+" STRING, "+COLUMN_NAMA_TEAM_B+" STRING, "+COLUMN_FORMASI_TEAM_B+" STRING, "+JUMLAH_PASSING_TEAM_B+" INT, "+JUMLAH_TACKLING_TEAM_B+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_B+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_B+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_B+" INT, "+JUMLAH_INTERCEPT_TEAM_B+" INT, "+JUMLAH_SAVES_TEAM_B+" INT,"+JUMLAH_THROWIN_TEAM_B+" INT, "+JUMLAH_FREEKICK_TEAM_B+" INT, "+JUMLAH_PINALTY_TEAM_B+" INT, "+JUMLAH_GOALKICK_TEAM_B+" INT, "+JUMLAH_CORNERKICK_TEAM_B+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_B+" INT, "+JUMLAH_RED_CARD_TEAM_B+" INT, "+JUMLAH_YELLOW_CARD_TEAM_B+" INT, "+STATUS_TEAM_B+" STRING, "+BABAK+" INT)";;
+        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN+" ("+ID_PERTANDINGAN+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM_A+" STRING, "+COLUMN_FORMASI_TEAM_A+" STRING, "+JUMLAH_PASSING_TEAM_A+" INT, "+JUMLAH_TACKLING_TEAM_A+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_A+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_A+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_A+" INT, "+JUMLAH_INTERCEPT_TEAM_A+" INT, "+JUMLAH_SAVES_TEAM_A+" INT,"+JUMLAH_THROWIN_TEAM_A+" INT, "+JUMLAH_FREEKICK_TEAM_A+" INT, "+JUMLAH_PINALTY_TEAM_A+" INT, "+JUMLAH_GOALKICK_TEAM_A+" INT, "+JUMLAH_CORNERKICK_TEAM_A+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_A+" INT, "+JUMLAH_RED_CARD_TEAM_A+" INT, "+JUMLAH_YELLOW_CARD_TEAM_A+" INT, "+STATUS_TEAM_A+" STRING, "+COLUMN_NAMA_TEAM_B+" STRING, "+COLUMN_FORMASI_TEAM_B+" STRING, "+JUMLAH_PASSING_TEAM_B+" INT, "+JUMLAH_TACKLING_TEAM_B+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_B+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_B+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_B+" INT, "+JUMLAH_INTERCEPT_TEAM_B+" INT, "+JUMLAH_SAVES_TEAM_B+" INT,"+JUMLAH_THROWIN_TEAM_B+" INT, "+JUMLAH_FREEKICK_TEAM_B+" INT, "+JUMLAH_PINALTY_TEAM_B+" INT, "+JUMLAH_GOALKICK_TEAM_B+" INT, "+JUMLAH_CORNERKICK_TEAM_B+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_B+" INT, "+JUMLAH_RED_CARD_TEAM_B+" INT, "+JUMLAH_YELLOW_CARD_TEAM_B+" INT, "+STATUS_TEAM_B+" STRING, "+BABAK+" INT, "+ID_TEAMA+" INT, "+ID_TEAMB+" INT)";;
         db.execSQL(createTableTeam);
     }
 
@@ -152,6 +154,10 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
             int babak= cursor.getInt(37);
 
+            int idteama= cursor.getInt(38);
+
+            int idteamb= cursor.getInt(39);
+
             result += String.valueOf(id_pertandingan) + " " + nama_team_a + " "+ goal_team_a+" - "+goal_team_b+ " "+nama_team_b+
 
                     System.getProperty("line.separator");
@@ -204,6 +210,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         values.put(JUMLAH_RED_CARD_TEAM_B, pertandingan.getRedcardTeamB());
         values.put(STATUS_TEAM_B, pertandingan.getStatusTeamB());
         values.put(BABAK, pertandingan.getBabak());
+        values.put(ID_TEAMA,pertandingan.getIdTeamA());
+        values.put(ID_TEAMB,pertandingan.getIdTeamB());
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_PERTANDINGAN, null, values);

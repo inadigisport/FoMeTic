@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class PemainDBHandler extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="pemainDB";
+    public static final String DATABASE_NAME="footballDB.db";
     public static final int DATABASE_VERSION=1;
     public static final String ID_PERTANDINGAN="idPertandingan";
     public static final String TABLE_PEMAIN="tablePemain";
@@ -49,10 +49,19 @@ public class PemainDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-
-    public Cursor loadHandler(String team){
-        String result="";
+    public Cursor loaddatateam(String team){
         String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"='"+team+"'";
+        return (loadHandler(query));
+    }
+
+    public Cursor loaddataposisi(String posisi, String team){
+        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"='"+team+"' AND "+POSISI_PEMAIN+"='"+posisi+"'";
+        return (loadHandler(query));
+    }
+
+
+    public Cursor loadHandler(String query){
+        String result="";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {

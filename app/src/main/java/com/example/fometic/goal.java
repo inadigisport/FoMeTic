@@ -1,16 +1,28 @@
 package com.example.fometic;
 
+import android.widget.Chronometer;
+
 public class goal {
     private int idpertandingan;
+    private int idteam;
+    private int idpemain;
     private String namateam;
     private String namapemain;
     private int nomorpunggung;
-    private int menit;
+    private Double menit;
+    double elapsedchronometerteamint;
+    double elapsedchronometerteambint;
 
     public goal(){}
 
-    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, int menit){
-
+    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, Double menit, int idteam, int idpemain){
+        this.idpertandingan=idpertandingan;
+        this.namapemain=namapemain;
+        this.namateam=namateam;
+        this.nomorpunggung=nomorpunggung;
+        this.menit=menit;
+        this.setIdteam(idteam);
+        this.setIdpemain(idpemain);
     }
 
 
@@ -46,11 +58,28 @@ public class goal {
         this.nomorpunggung = nomorpunggung;
     }
 
-    public int getMenit() {
+    public Double getMenit() {
         return menit;
     }
 
-    public void setMenit(int menit) {
+    public void setMenit(Double menit) {
         this.menit = menit;
     }
+
+    public int getIdteam() {
+        return idteam;
+    }
+
+    public void setIdteam(int idteam) {
+        this.idteam = idteam;
+    }
+
+    public int getIdpemain() {
+        return idpemain;
+    }
+
+    public void setIdpemain(int idpemain) {
+        this.idpemain = idpemain;
+    }
+
 }

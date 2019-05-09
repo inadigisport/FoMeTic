@@ -377,7 +377,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
-                Cursor datagoalteama=dbpemain.loadHandler(teamA);
+                Cursor datagoalteama=dbpemain.loaddatateam(teamA);
                 List<String> listpemaingoalteama=new ArrayList<String>();
                 datagoalteama.moveToFirst();
                 while (!datagoalteama.isAfterLast()) {
@@ -424,7 +424,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.shootontarget:
                 //Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
-                Cursor datashootontargeta=dbpemain.loadHandler(teamA);
+                Cursor datashootontargeta=dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootontargeta=new ArrayList<String>();
                 datashootontargeta.moveToFirst();
                 while (!datashootontargeta.isAfterLast()) {
@@ -471,7 +471,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.shootofftarget:
                 //Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
-                Cursor datashootofftargeta=dbpemain.loadHandler(teamA);
+                Cursor datashootofftargeta=dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootofftargeta=new ArrayList<String>();
                 datashootofftargeta.moveToFirst();
                 while (!datashootofftargeta.isAfterLast()) {
@@ -517,7 +517,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.goalb:
                 TeamDBHandler dbgoalb = new TeamDBHandler(this);
-                Cursor loadDataTeamgoalb=dbgoalb.loadHandler();
+                Cursor loadDataTeamgoalb=dbgoalb.loadHandler(teamB);
                 List<String> spinnerArraygoalb=new ArrayList<String>();
                 loadDataTeamgoalb.moveToFirst();
                 while (!loadDataTeamgoalb.isAfterLast()) {
@@ -525,7 +525,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ",loadDataTeamgoalb.getString(1));
                     loadDataTeamgoalb.moveToNext();
                 }
-                Cursor datagoalteamb=dbpemain.loadHandler(teamB);
+                Cursor datagoalteamb=dbpemain.loaddatateam(teamB);
                 List<String> listpemaingoalteamb=new ArrayList<String>();
                 datagoalteamb.moveToFirst();
                 while (!datagoalteamb.isAfterLast()) {
@@ -574,7 +574,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.shootontargetb:
                 //Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
-                Cursor datashootontargetb=dbpemain.loadHandler(teamB);
+                Cursor datashootontargetb=dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootontargetb=new ArrayList<String>();
                 datashootontargetb.moveToFirst();
                 while (!datashootontargetb.isAfterLast()) {
@@ -620,7 +620,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.shootofftargetb:
                 //Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
-                Cursor datashootofftargetb=dbpemain.loadHandler(teamB);
+                Cursor datashootofftargetb=dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootofftargetb=new ArrayList<String>();
                 datashootofftargetb.moveToFirst();
                 while (!datashootofftargetb.isAfterLast()) {
@@ -669,7 +669,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-                Cursor datayellowhome=dbpemain.loadHandler(teamA);
+                Cursor datayellowhome=dbpemain.loaddatateam(teamA);
                 List<String> listpemainyellowhome=new ArrayList<String>();
                 datayellowhome.moveToFirst();
                 while (!datayellowhome.isAfterLast()) {
@@ -709,7 +709,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Yellow Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-                Cursor datayellowaway=dbpemain.loadHandler(teamB);
+                Cursor datayellowaway=dbpemain.loaddatateam(teamB);
                 List<String> listpemainyellowaway=new ArrayList<String>();
                 datayellowaway.moveToFirst();
                 while (!datayellowaway.isAfterLast()) {
@@ -749,7 +749,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Red Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-                Cursor dataredhome=dbpemain.loadHandler(teamA);
+                Cursor dataredhome=dbpemain.loaddatateam(teamA);
                 List<String> listpemainredhome=new ArrayList<String>();
                 dataredhome.moveToFirst();
                 while (!dataredhome.isAfterLast()) {
@@ -789,7 +789,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(this, "Red Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
-                Cursor dataredaway=dbpemain.loadHandler(teamB);
+                Cursor dataredaway=dbpemain.loaddatateam(teamB);
                 List<String> listpemainredaway=new ArrayList<String>();
                 dataredaway.moveToFirst();
                 while (!dataredaway.isAfterLast()) {

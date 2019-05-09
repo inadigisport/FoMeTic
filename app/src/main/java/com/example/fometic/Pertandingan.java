@@ -1,5 +1,7 @@
 package com.example.fometic;
 
+import java.util.Date;
+
 public class Pertandingan {
     private int idTeamA;
     private String namaTeamA;
@@ -40,11 +42,14 @@ public class Pertandingan {
     private int yellowcardTeamB;
     private int redcardTeamB;
     private String statusTeamB;
+    private Double posessionTeamA;
+    private Double posessionTeamB;
+    private Date tanggalpertandingan;
 
     public Pertandingan() {
     }
 
-    public Pertandingan(int idTeamA, String namaTeamA, String formasiTeamA, int jumlahTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, String statusTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int jumlahTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, String statusTeamB) {
+    public Pertandingan(int idTeamA, String namaTeamA, String formasiTeamA, int jumlahTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, String statusTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int jumlahTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, String statusTeamB, Double posessionTeamA, Double posessionTeamB, Date tanggalpertandingan) {
         this.setIdTeamA(idTeamA);
         this.setNamaTeamA(namaTeamA);
         this.setFormasiTeamA(formasiTeamA);
@@ -83,6 +88,9 @@ public class Pertandingan {
         this.setYellowcardTeamB(yellowcardTeamB);
         this.setRedcardTeamB(redcardTeamB);
         this.setStatusTeamB(statusTeamB);
+        this.setPosessionTeamA(posessionTeamA);
+        this.setPosessionTeamB(posessionTeamB);
+        this.setTanggalpertandingan(tanggalpertandingan);
     }
 
     public int getIdTeamA() {
@@ -395,5 +403,29 @@ public class Pertandingan {
 
     public void setStatusTeamB(String statusTeamB) {
         this.statusTeamB = statusTeamB;
+    }
+
+    public Double getPosessionTeamA() {
+        return posessionTeamA;
+    }
+
+    public void setPosessionTeamA(Double posessionTeamA) {
+        this.posessionTeamA = posessionTeamA;
+    }
+
+    public Double getPosessionTeamB() {
+        return posessionTeamB;
+    }
+
+    public void setPosessionTeamB(Double posessionTeamB) {
+        this.posessionTeamB = posessionTeamB;
+    }
+
+    public Date getTanggalpertandingan() {
+        return tanggalpertandingan;
+    }
+
+    public void setTanggalpertandingan(Date tanggalpertandingan) {
+        this.tanggalpertandingan = tanggalpertandingan;
     }
 }
