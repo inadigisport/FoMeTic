@@ -1,12 +1,15 @@
 package com.example.fometic;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "pertandinganpemaindb";
+    private static final String TABLE_PERTANDINGAN_PEMAIN="tablepertandinganpemain";
     private static final String ID_PERTANDINGAN= "idpertandinga";
     private static final String ID_PEMAIN="idpemain";
     private static final String JUMLAH_GOAL="jumlahgoal";
@@ -21,11 +24,37 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN_PEMAIN+" ("+ID_PERTANDINGAN+" INT, "+ID_PEMAIN+" INT,"+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+JUMLAH_SHOTONTARGET+" INT, "+JUMLAH_SHOTOFFTARGET+" INT)";
+        db.execSQL(createTableTeam);
+    }
 
+    public void addHandler(PertandinganPemain pertandingan){
+        ContentValues values = new ContentValues();
+        values.put(ID_PERTANDINGAN,pertandingan.getIdpertandingan());
+        values.put(ID_PEMAIN,pertandingan.getIdpemain());
+        values.put(JUMLAH_GOAL,pertandingan.getJumlahgoal());
+        values.put(JUMLAH_YELLOWCARD,pertandingan.getJumlahyellowcard());
+        values.put(JUMLAH_REDCARD,pertandingan.getJumlahredcard());
+        values.put(JUMLAH_SHOTONTARGET,pertandingan.getJumlahshotontarget());
+        values.put(JUMLAH_SHOTOFFTARGET,pertandingan.getJumlahshotofftarget());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_PERTANDINGAN_PEMAIN, null, values);
+        db.close();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public boolean updateHandler(int ID, int IDPemain) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues update = new ContentValues();
+
+        //update.put(JUMLAH_GOAL, );
+
+
+        return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +"AND "+ID_PEMAIN+"="+IDPemain, null) > 0;
     }
 }

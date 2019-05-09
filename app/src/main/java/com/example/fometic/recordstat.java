@@ -387,7 +387,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama );
                 mSpinner.setAdapter(arrayAdapter);
 
@@ -400,7 +400,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        
+                        String pemain=mSpinner.getSelectedItem().toString();
                     }
 
                 });

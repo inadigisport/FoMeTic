@@ -16,6 +16,8 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     EditText editText;
     EditText textjumlahsquad;
     String teamname;
+    String formation;
+    Spinner spinner;
     public static final String kata_kunci = "inadigisport";
     TeamDBHandler db=new TeamDBHandler(this);
     TeamBola teambola = new TeamBola();
@@ -32,17 +34,17 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
         button = (Button) findViewById(R.id.button6);
         editText = (EditText) findViewById(R.id.namaTeam);
         textjumlahsquad= (EditText) findViewById(R.id.jumlahSquad);
+        spinner = findViewById(R.id.spinner);
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Spinner spinner = findViewById(R.id.spinner);
-                String formation = spinner.getSelectedItem().toString();
+
 
                 Spinner spinner2 = findViewById(R.id.spinner5);
                 String statusteam=spinner2.getSelectedItem().toString();
-
+                formation = spinner.getSelectedItem().toString();
                 teamname = editText.getText().toString();
                 teambola.setNamaTeam(teamname);
                 teambola.setFormasiTeam(formation);
