@@ -7,21 +7,25 @@ import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Chronometer chronometer;
     private Chronometer chronometerteam;
     private boolean running;
-    //Button buttonshootingteama;
-    //Button buttonshootingteamb;
-    //Button buttonpassingteama;
-    //Button buttonpassingteamb;
-    //Button buttontacklingteama;
+    String teamA;
+    String teamB;
+    TextView textviewteama;
+    TextView textviewteamb;
+
+
+
 
 
 
@@ -30,7 +34,14 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordstatsecond);
-
+        teamA= getIntent().getStringExtra("teama");
+        teamB= getIntent().getStringExtra("teamb");
+        Log.d("home",teamA);
+        Log.d("away",teamB);
+        textviewteama=findViewById(R.id.textViewteama);
+        textviewteama.setText(teamA);
+        textviewteamb=findViewById(R.id.textViewteamb);
+        textviewteamb.setText(teamB);
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
 
@@ -63,7 +74,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                     public void onClick(DialogInterface dialog, int which) {
                         chronometer.stop();
                         chronometerteam.stop();
-                        backtomenu();
+                        viewgeneratereport();
 
                     }
 
@@ -76,8 +87,12 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     }
 
-    public void backtomenu () {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void viewgeneratereport () {
+        Intent intent = new Intent(this, generatereport.class);
+        intent.putExtra("teama",teamA);
+        Log.d("Home",teamA);
+        intent.putExtra("teamb",teamB);
+        Log.d("Away",teamB);
         startActivity(intent);
     }
 

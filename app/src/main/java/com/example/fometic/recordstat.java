@@ -123,7 +123,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void start2ndhalf () {
         Intent intent = new Intent(this, recordstatsecond.class);
+        intent.putExtra("teama",teamA);
+        Log.d("team A choosen",teamA);
+        intent.putExtra("teamb",teamB);
+        Log.d("team B choosen",teamB);
         startActivity(intent);
+
+        //Intent intent = new Intent(this, recordstatsecond.class);
+        //startActivity(intent);
     }
 
     public void passingteama(View v) {
