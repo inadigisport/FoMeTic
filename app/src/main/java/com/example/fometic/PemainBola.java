@@ -2,24 +2,20 @@ package com.example.fometic;
 
 public class PemainBola {
     private String namaPemain;
-    private int idPertandingan;
+    private int idPemain;
     private int nomorPunggung;
     private String posisi;
+    private String idteam;
     private String team;
-    private int goal;
-    private int yellowcard;
-    private int redcard;
 
     public PemainBola(){}
-    public PemainBola (String namaPemain, int nomorPunggung, String posisi, String team, int goal, int yellowcard, int redcard, int idpertandingan){
+    public PemainBola (String namaPemain, int nomorPunggung, String posisi, String idteam, int idpemain, String team){
         this.namaPemain=namaPemain;
         this.nomorPunggung=nomorPunggung;
         this.posisi=posisi;
-        this.team=team;
-        this.goal=goal;
-        this.yellowcard=yellowcard;
-        this.redcard=redcard;
-        this.setIdPertandingan(idpertandingan);
+        this.setIdteam(idteam);
+        this.setIdPemain(idpemain);
+        this.setTeam(team);
     }
 
 
@@ -47,43 +43,29 @@ public class PemainBola {
         this.posisi = posisi;
     }
 
+
+    public int getIdPemain() {
+        return idPemain;
+    }
+
+    public void setIdPemain(int idPemain) {
+        this.idPemain = idPemain;
+    }
+
+    public String getIdteam() {
+        return idteam;
+    }
+
+    public void setIdteam(String idteam) {
+        this.idteam = idteam;
+    }
+
+
     public String getTeam() {
         return team;
     }
 
     public void setTeam(String team) {
         this.team = team;
-    }
-
-    public int getGoal() {
-        return goal;
-    }
-
-    public void setGoal(int goal) {
-        this.goal = goal;
-    }
-
-    public int getYellowcard() {
-        return yellowcard;
-    }
-
-    public void setYellowcard(int yellowcard) {
-        this.yellowcard = yellowcard;
-    }
-
-    public int getRedcard() {
-        return redcard;
-    }
-
-    public void setRedcard(int redcard) {
-        this.redcard = redcard;
-    }
-
-    public int getIdPertandingan() {
-        return idPertandingan;
-    }
-
-    public void setIdPertandingan(int idPertandingan) {
-        this.idPertandingan = idPertandingan;
     }
 }

@@ -10,15 +10,13 @@ import android.util.Log;
 public class PemainDBHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="dbpemain";
     public static final int DATABASE_VERSION=1;
-    public static final String ID_PERTANDINGAN="idPertandingan";
+    public static final String ID_PEMAIN="idPemain";
     public static final String TABLE_PEMAIN="tablePemain";
     public static final String NAMA_PEMAIN="nama";
     public static final String POSISI_PEMAIN="posisi";
     public static final String NOMOR_PUNGGUNG_PEMAIN="nomor";
-    public static final String NAMA_TEAM="team";
-    public static final String JUMLAH_GOAL="goal";
-    public static final String JUMLAH_YELLOWCARD="yellowcard";
-    public static final String JUMLAH_REDCARD="redcard";
+    public static final String ID_TEAM="idteam";
+    public static final String NAMA_TEAM="namateam";
 
     public PemainDBHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,7 +25,7 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     @Override
 
     public void onCreate(SQLiteDatabase db) {
-        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING, "+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+ID_PERTANDINGAN+" INT)";
+        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+ID_PEMAIN+" INT,"+ID_TEAM+" INT, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING)";
         db.execSQL(createTablePemain);
         Log.d("status create data", createTablePemain);
     }
@@ -38,17 +36,20 @@ public class PemainDBHandler extends SQLiteOpenHelper {
 
     public void addHandler(PemainBola pemainbola) {
         ContentValues values = new ContentValues();
-        values.put(ID_PERTANDINGAN,pemainbola.getIdPertandingan());
+        values.put(ID_PEMAIN,pemainbola.getIdPemain());
+        values.put(ID_TEAM, pemainbola.getIdteam());
         values.put(NAMA_PEMAIN,pemainbola.getNamaPemain());
         values.put(NOMOR_PUNGGUNG_PEMAIN,pemainbola.getNomorPunggung());
-        values.put(NAMA_TEAM, pemainbola.getTeam());
         values.put(POSISI_PEMAIN, pemainbola.getPosisi());
-        values.put(JUMLAH_GOAL, pemainbola.getGoal());
-        values.put(JUMLAH_YELLOWCARD,pemainbola.getYellowcard());
-        values.put(JUMLAH_REDCARD,pemainbola.getRedcard());
+        values.put(NAMA_TEAM, pemainbola.getTeam());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_PEMAIN, null,values);
         db.close();
+    }
+
+    public Cursor loaddataidpemain(String nama, String namateam){
+        String query="SELECT "+ID_PEMAIN+" FROM "+TABLE_PEMAIN+" WHERE "+ID_PEMAIN+"='"+nama+"' AND "+NAMA_TEAM+"='"+namateam+"'";
+        return (loadHandler(query));
     }
 
     public Cursor loaddatateam(String team){

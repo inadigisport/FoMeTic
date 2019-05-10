@@ -2,6 +2,7 @@ package com.example.fometic;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -40,6 +41,27 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_PERTANDINGAN_PEMAIN, null, values);
         db.close();
+    }
+
+    public Cursor loadHandler(){
+        String result = "";
+
+        String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            int id_pertandingan = cursor.getInt(0);
+            int id_pemain = cursor.getInt(1);
+            int jumlah_goal = cursor.getInt(2);
+            int jumlah_yellowcard = cursor.getInt(3);
+            int jumlah_redcard = cursor.getInt(4);
+            int jumlah_shotontarget = cursor.getInt(5);
+            int jumlah_shotofftarget = cursor.getInt(6);
+        }
+        return cursor;
     }
 
     @Override

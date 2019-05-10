@@ -48,11 +48,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     Pertandingan tanding = new Pertandingan();
     PemainDBHandler dbpemain = new PemainDBHandler(this);
-
-
-
-
-
+    PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
+    PertandinganPemainDBHandler dbpertandinganpemain = new PertandinganPemainDBHandler(this);
 
 
     @Override
@@ -401,6 +398,19 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         String pemain=mSpinner.getSelectedItem().toString();
+                        Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                        List<String> listpemaingoalteama=new ArrayList<String>();
+                        int i=0;
+                        if (datagoalteama.moveToFirst()){
+                            while (!datagoalteama.isAfterLast()) {
+                                listpemaingoalteama.add(datagoalteama.getString(0));
+                                Log.d("Data spinner ",datagoalteama.getString(0));
+                                datagoalteama.moveToNext();
+                                i=i+1;
+                            }
+                        }else{
+                            Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                 });
