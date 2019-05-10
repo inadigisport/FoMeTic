@@ -38,7 +38,7 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
 
     public void getTeamData(){
         TeamDBHandler db = new TeamDBHandler(this);
-        Cursor loadDataTeam=db.loadHandler();
+        Cursor loadDataTeam=db.loaddatateam();
         List<String> spinnerArray=new ArrayList<String>();
         loadDataTeam.moveToFirst();
         while (!loadDataTeam.isAfterLast()) {

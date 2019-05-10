@@ -41,11 +41,18 @@ public class TeamDBHandler extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
-    public Cursor loadHandler() {
-
-        String result = "";
-
+    public Cursor loaddatateam(){
         String query = "Select * FROM " + TABLE_TEAM;
+        return loadHandler(query);
+    }
+
+    public Cursor loaddatareport(String team){
+        String query = "Select * FROM " + TABLE_TEAM+ " WHERE "+COLUMN_NAMA_TEAM+"='"+team+"'";
+        return loadHandler(query);
+    }
+
+    public Cursor loadHandler(String query) {
+        String result="";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -76,11 +83,13 @@ public class TeamDBHandler extends SQLiteOpenHelper {
     public void addHandler(TeamBola teamBola) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAMA_TEAM, teamBola.getNamaTeam());
+        values.put(COLUMN_FORMASI_TEAM, teamBola.getFormasiTeam());
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_TEAM, null, values);
         Log.d("Data nama team :", teamBola.getNamaTeam());
         db.close();
+        loaddatateam();
     }
 
 

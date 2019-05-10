@@ -528,7 +528,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
             case R.id.goalb:
                 TeamDBHandler dbgoalb = new TeamDBHandler(this);
-                Cursor loadDataTeamgoalb=dbgoalb.loadHandler();
+                Cursor loadDataTeamgoalb=dbgoalb.loaddatateam();
                 List<String> spinnerArraygoalb=new ArrayList<String>();
                 loadDataTeamgoalb.moveToFirst();
                 while (!loadDataTeamgoalb.isAfterLast()) {

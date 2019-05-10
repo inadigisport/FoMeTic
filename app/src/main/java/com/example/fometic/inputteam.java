@@ -21,6 +21,8 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
     public static final String kata_kunci = "inadigisport";
     TeamDBHandler db=new TeamDBHandler(this);
     TeamBola teambola = new TeamBola();
+    Spinner spinner;
+    String formation;
 
 
 
@@ -40,14 +42,20 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< Updated upstream
 
 
                 Spinner spinner2 = findViewById(R.id.spinner5);
                 String statusteam=spinner2.getSelectedItem().toString();
                 formation = spinner.getSelectedItem().toString();
+=======
+                formation = spinner.getSelectedItem().toString();
+                Log.d("isi formasi ", formation);
+>>>>>>> Stashed changes
                 teamname = editText.getText().toString();
                 teambola.setNamaTeam(teamname);
                 teambola.setFormasiTeam(formation);
+
                 db.addHandler(teambola);
 
                 //Intent intent2 = new Intent(inputteam.this, inputsquad.class);
