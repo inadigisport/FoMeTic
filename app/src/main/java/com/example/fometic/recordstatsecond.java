@@ -23,6 +23,36 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
     String teamB;
     TextView textviewteama;
     TextView textviewteamb;
+    int ballpossesionteama;
+    int ballpossesionteamb;
+    int passingteama;
+    int passingteamb;
+    int tacklingteama;
+    int tacklingteamb;
+    int interceptteama;
+    int interceptteamb;
+    int savesteama;
+    int savesteamb;
+    int throwinteama;
+    int throwinteamb;
+    int cornerkickteama;
+    int cornerkickteamb;
+    int foulteama;
+    int foulteamb;
+    int offsideteama;
+    int offsideteamb;
+    int goalteama;
+    int goalteamb;
+    int shootontargetteama;
+    int shootontargetteamb;
+    int shootofftargetteama;
+    int shootofftargetteamb;
+    int yellowcardteama;
+    int yellowcardteamb;
+    int redcardteama;
+    int redcardteamb;
+
+
 
 
 
@@ -38,6 +68,63 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         teamB= getIntent().getStringExtra("teamb");
         Log.d("home",teamA);
         Log.d("away",teamB);
+        ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
+        Log.d("ballpossesionteama", Integer.toString(ballpossesionteama));
+        ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
+        Log.d("ballpossesionteamb", Integer.toString(ballpossesionteamb));
+        passingteama= getIntent().getIntExtra("passingteama",passingteama);
+        passingteamb= getIntent().getIntExtra("passingteamb",passingteamb);
+        Log.d("passing team a", Integer.toString(passingteama));
+        Log.d("passing team b", Integer.toString(passingteamb));
+        tacklingteama= getIntent().getIntExtra("tacklingteama",tacklingteama);
+        tacklingteamb= getIntent().getIntExtra("tacklingteamb",tacklingteamb);
+        Log.d("tackling team a", Integer.toString(tacklingteama));
+        Log.d("tackling team b", Integer.toString(tacklingteamb));
+        interceptteama= getIntent().getIntExtra("interceptteama",interceptteama);
+        interceptteamb= getIntent().getIntExtra("interceptteamb",interceptteamb);
+        Log.d("intercept team a", Integer.toString(interceptteama));
+        Log.d("intercept team b", Integer.toString(interceptteamb));
+        savesteama= getIntent().getIntExtra("savesteama",savesteama);
+        savesteamb= getIntent().getIntExtra("savesteamb",savesteamb);
+        Log.d("saves team a", Integer.toString(savesteama));
+        Log.d("saves team b", Integer.toString(savesteamb));
+        throwinteama= getIntent().getIntExtra("throwinteama",throwinteama);
+        throwinteamb= getIntent().getIntExtra("throwinteamb",throwinteamb);
+        Log.d("throw in team a", Integer.toString(throwinteama));
+        Log.d("throw in team b", Integer.toString(throwinteamb));
+        cornerkickteama= getIntent().getIntExtra("cornerkickteama",cornerkickteama);
+        cornerkickteamb= getIntent().getIntExtra("cornerkickteamb",cornerkickteamb);
+        Log.d("corner kick team a", Integer.toString(cornerkickteama));
+        Log.d("corner kick team b", Integer.toString(cornerkickteamb));
+        foulteama= getIntent().getIntExtra("foulteama",foulteama);
+        foulteamb= getIntent().getIntExtra("foulteamb",foulteamb);
+        Log.d("foul team a", Integer.toString(foulteama));
+        Log.d("foul team b", Integer.toString(foulteamb));
+        offsideteama= getIntent().getIntExtra("offsideteama",offsideteama);
+        offsideteamb= getIntent().getIntExtra("offsideteamb",offsideteamb);
+        Log.d("offside team a", Integer.toString(offsideteama));
+        Log.d("offside team b", Integer.toString(offsideteamb));
+        goalteama= getIntent().getIntExtra("goalteama",goalteama);
+        goalteamb= getIntent().getIntExtra("goalteamb",goalteamb);
+        Log.d("goal team a", Integer.toString(goalteama));
+        Log.d("goal team b", Integer.toString(goalteamb));
+        shootontargetteama= getIntent().getIntExtra("shootontargetteama",shootontargetteama);
+        shootontargetteamb= getIntent().getIntExtra("shootontargetteamb",shootontargetteamb);
+        Log.d("shoot on target team a", Integer.toString(shootontargetteama));
+        Log.d("shoot on target team b", Integer.toString(shootontargetteamb));
+        shootofftargetteama= getIntent().getIntExtra("shootofftargetteama",shootofftargetteama);
+        shootofftargetteamb= getIntent().getIntExtra("shootofftargetteamb",shootofftargetteamb);
+        Log.d("shoot off target team a", Integer.toString(shootofftargetteama));
+        Log.d("shoot off target team b", Integer.toString(shootofftargetteamb));
+        yellowcardteama= getIntent().getIntExtra("yellowcardteama",yellowcardteama);
+        yellowcardteamb= getIntent().getIntExtra("yellowcardteamb",yellowcardteamb);
+        Log.d("yellow card team a", Integer.toString(yellowcardteama));
+        Log.d("yellow card team b", Integer.toString(yellowcardteamb));
+        redcardteama= getIntent().getIntExtra("redcardteama",redcardteama);
+        redcardteamb= getIntent().getIntExtra("redcardteamb",redcardteamb);
+        Log.d("red card team a", Integer.toString(redcardteama));
+        Log.d("red card team b", Integer.toString(redcardteamb));
+
         textviewteama=findViewById(R.id.textViewteama);
         textviewteama.setText(teamA);
         textviewteamb=findViewById(R.id.textViewteamb);
@@ -93,6 +180,36 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Home",teamA);
         intent.putExtra("teamb",teamB);
         Log.d("Away",teamB);
+        intent.putExtra("passingteama",passingteama);
+        intent.putExtra("passingteamb",passingteamb);
+        intent.putExtra("tacklingteama",tacklingteama);
+        intent.putExtra("tacklingteamb",tacklingteamb);
+        intent.putExtra("interceptteama",interceptteama);
+        intent.putExtra("interceptteamb",interceptteamb);
+        intent.putExtra("savesteama",savesteama);
+        intent.putExtra("savesteamb",savesteamb);
+        intent.putExtra("throwinteama",throwinteama);
+        intent.putExtra("throwinteamb",throwinteamb);
+        intent.putExtra("cornerkickteama",cornerkickteama);
+        intent.putExtra("cornerkickteamb",cornerkickteamb);
+        intent.putExtra("ballpossesionteama",ballpossesionteama);
+        intent.putExtra("ballpossesionteamb",ballpossesionteamb);
+        intent.putExtra("foulteama",foulteama);
+        intent.putExtra("foulteamb",foulteamb);
+        intent.putExtra("offsideteama",offsideteama);
+        intent.putExtra("offsideteamb",offsideteamb);
+        intent.putExtra("goalteama",goalteama);
+        intent.putExtra("goalteamb",goalteamb);
+        intent.putExtra("shootontargetteama",shootontargetteama);
+        intent.putExtra("shootontargetteamb",shootontargetteamb);
+        intent.putExtra("shootofftargetteama",shootofftargetteama);
+        intent.putExtra("shootofftargetteamb",shootofftargetteamb);
+        intent.putExtra("yellowcardteama",yellowcardteama);
+        intent.putExtra("yellowcardteamb",yellowcardteamb);
+        intent.putExtra("redcardteama",redcardteama);
+        intent.putExtra("redcardteamb",redcardteamb);
+
+
         startActivity(intent);
     }
 

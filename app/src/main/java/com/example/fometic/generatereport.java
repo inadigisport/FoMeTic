@@ -4,12 +4,7 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class generatereport extends AppCompatActivity {
 
@@ -17,8 +12,75 @@ public class generatereport extends AppCompatActivity {
     String teamB;
     TextView textviewteama;
     TextView textviewteamb;
+    TextView textviewformationa;
+    TextView textviewformationb;
+    TextView textViewballpossesionteama;
+    TextView textViewballpossesionteamb;
+    TextView textViewpassingteama;
+    TextView textViewpassingteamb;
+    TextView textViewtacklingteama;
+    TextView textViewtacklingteamb;
+    TextView textViewinterceptteama;
+    TextView textViewinterceptteamb;
+    TextView textViewsavesteama;
+    TextView textViewsavesteamb;
+    TextView textViewthrowinteama;
+    TextView textViewthrowinteamb;
+    TextView textViewcornerkickteama;
+    TextView textViewcornerkickteamb;
+    TextView textViewfoulteama;
+    TextView textViewfoulteamb;
+    TextView textViewoffsideteama;
+    TextView textViewoffsideteamb;
+    TextView textViewgoalteama;
+    TextView textViewgoalteamb;
+    TextView textViewshootontargetteama;
+    TextView textViewshootontargetteamb;
+    TextView textViewshootofftargetteama;
+    TextView textViewshootofftargetteamb;
+    TextView textViewyellowcardteama;
+    TextView textViewyellowcardteamb;
+    TextView textViewredcardteama;
+    TextView textViewredcardteamb;
+
+
+
+
+
+
     String formationA;
     String formationB;
+    int ballpossesionteama;
+    int ballpossesionteamb;
+    int passingteama;
+    int passingteamb;
+    int tacklingteama;
+    int tacklingteamb;
+    int interceptteama;
+    int interceptteamb;
+    int savesteama;
+    int savesteamb;
+    int throwinteama;
+    int throwinteamb;
+    int cornerkickteama;
+    int cornerkickteamb;
+    int foulteama;
+    int foulteamb;
+    int offsideteama;
+    int offsideteamb;
+    int goalteama;
+    int goalteamb;
+    int shootontargetteama;
+    int shootontargetteamb;
+    int shootofftargetteama;
+    int shootofftargetteamb;
+    int yellowcardteama;
+    int yellowcardteamb;
+    int redcardteama;
+    int redcardteamb;
+
+
+
 
 
 
@@ -32,28 +94,143 @@ public class generatereport extends AppCompatActivity {
         textviewteama.setText(teamA);
         textviewteamb=findViewById(R.id.textViewteamb);
         textviewteamb.setText(teamB);
+        getFormationData();
+        textviewformationa=findViewById(R.id.textViewformationA);
+        textviewformationb=findViewById(R.id.textViewformationB);
+        textviewformationa.setText(formationA);
+        textviewformationb.setText(formationB);
+        ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
+        Log.d("ballpossesionteama", Integer.toString(ballpossesionteama));
+        ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
+        Log.d("ballpossesionteamb", Integer.toString(ballpossesionteamb));
+        passingteama= getIntent().getIntExtra("passingteama",passingteama);
+        passingteamb= getIntent().getIntExtra("passingteamb",passingteamb);
+        Log.d("passing team a", Integer.toString(passingteama));
+        Log.d("passing team b", Integer.toString(passingteamb));
+        tacklingteama= getIntent().getIntExtra("tacklingteama",tacklingteama);
+        tacklingteamb= getIntent().getIntExtra("tacklingteamb",tacklingteamb);
+        Log.d("tackling team a", Integer.toString(tacklingteama));
+        Log.d("tackling team b", Integer.toString(tacklingteamb));
+        interceptteama= getIntent().getIntExtra("interceptteama",interceptteama);
+        interceptteamb= getIntent().getIntExtra("interceptteamb",interceptteamb);
+        Log.d("intercept team a", Integer.toString(interceptteama));
+        Log.d("intercept team b", Integer.toString(interceptteamb));
+        savesteama= getIntent().getIntExtra("savesteama",savesteama);
+        savesteamb= getIntent().getIntExtra("savesteamb",savesteamb);
+        Log.d("saves team a", Integer.toString(savesteama));
+        Log.d("saves team b", Integer.toString(savesteamb));
+        throwinteama= getIntent().getIntExtra("throwinteama",throwinteama);
+        throwinteamb= getIntent().getIntExtra("throwinteamb",throwinteamb);
+        Log.d("throw in team a", Integer.toString(throwinteama));
+        Log.d("throw in team b", Integer.toString(throwinteamb));
+        cornerkickteama= getIntent().getIntExtra("cornerkickteama",cornerkickteama);
+        cornerkickteamb= getIntent().getIntExtra("cornerkickteamb",cornerkickteamb);
+        Log.d("corner kick team a", Integer.toString(cornerkickteama));
+        Log.d("corner kick team b", Integer.toString(cornerkickteamb));
+        foulteama= getIntent().getIntExtra("foulteama",foulteama);
+        foulteamb= getIntent().getIntExtra("foulteamb",foulteamb);
+        Log.d("foul team a", Integer.toString(foulteama));
+        Log.d("foul team b", Integer.toString(foulteamb));
+        offsideteama= getIntent().getIntExtra("offsideteama",offsideteama);
+        offsideteamb= getIntent().getIntExtra("offsideteamb",offsideteamb);
+        Log.d("offside team a", Integer.toString(offsideteama));
+        Log.d("offside team b", Integer.toString(offsideteamb));
+        goalteama= getIntent().getIntExtra("goalteama",goalteama);
+        goalteamb= getIntent().getIntExtra("goalteamb",goalteamb);
+        Log.d("goal team a", Integer.toString(goalteama));
+        Log.d("goal team b", Integer.toString(goalteamb));
+        shootontargetteama= getIntent().getIntExtra("shootontargetteama",shootontargetteama);
+        shootontargetteamb= getIntent().getIntExtra("shootontargetteamb",shootontargetteamb);
+        Log.d("shoot on target team a", Integer.toString(shootontargetteama));
+        Log.d("shoot on target team b", Integer.toString(shootontargetteamb));
+        shootofftargetteama= getIntent().getIntExtra("shootofftargetteama",shootofftargetteama);
+        shootofftargetteamb= getIntent().getIntExtra("shootofftargetteamb",shootofftargetteamb);
+        Log.d("shoot off target team a", Integer.toString(shootofftargetteama));
+        Log.d("shoot off target team b", Integer.toString(shootofftargetteamb));
+        yellowcardteama= getIntent().getIntExtra("yellowcardteama",yellowcardteama);
+        yellowcardteamb= getIntent().getIntExtra("yellowcardteamb",yellowcardteamb);
+        Log.d("yellow card team a", Integer.toString(yellowcardteama));
+        Log.d("yellow card team b", Integer.toString(yellowcardteamb));
+        redcardteama= getIntent().getIntExtra("redcardteama",redcardteama);
+        redcardteamb= getIntent().getIntExtra("redcardteamb",redcardteamb);
+        Log.d("red card team a", Integer.toString(redcardteama));
+        Log.d("red card team b", Integer.toString(redcardteamb));
 
-        getTeamData();
+        textViewballpossesionteama=findViewById(R.id.textViewballpossesionteama);
+        textViewballpossesionteamb=findViewById(R.id.textViewballpossesionteamb);
+        textViewballpossesionteama.setText(Integer.toString(ballpossesionteama));
+        textViewballpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+        textViewpassingteama=findViewById(R.id.textViewpassingteama);
+        textViewpassingteamb=findViewById(R.id.textViewpassingteamb);
+        textViewpassingteama.setText(Integer.toString(passingteama));
+        textViewpassingteamb.setText(Integer.toString(passingteamb));
+        textViewtacklingteama=findViewById(R.id.textViewtacklingteama);
+        textViewtacklingteamb=findViewById(R.id.textViewtacklingteamb);
+        textViewtacklingteama.setText(Integer.toString(tacklingteama));
+        textViewtacklingteamb.setText(Integer.toString(tacklingteamb));
+        textViewinterceptteama=findViewById(R.id.textViewinterceptteama);
+        textViewinterceptteamb=findViewById(R.id.textViewinterceptteamb);
+        textViewinterceptteama.setText(Integer.toString(interceptteama));
+        textViewinterceptteamb.setText(Integer.toString(interceptteamb));
+        textViewsavesteama=findViewById(R.id.textViewsavesteama);
+        textViewsavesteamb=findViewById(R.id.textViewsavesteamb);
+        textViewsavesteama.setText(Integer.toString(savesteama));
+        textViewsavesteamb.setText(Integer.toString(savesteamb));
+        textViewcornerkickteama=findViewById(R.id.textViewcornerkickteama);
+        textViewcornerkickteamb=findViewById(R.id.textViewcornerkickteamb);
+        textViewcornerkickteama.setText(Integer.toString(cornerkickteama));
+        textViewcornerkickteamb.setText(Integer.toString(cornerkickteamb));
+        textViewfoulteama=findViewById(R.id.textViewfoulteama);
+        textViewfoulteamb=findViewById(R.id.textViewfoulteamb);
+        textViewfoulteama.setText(Integer.toString(foulteama));
+        textViewfoulteamb.setText(Integer.toString(foulteamb));
+        textViewoffsideteama=findViewById(R.id.textViewoffsideteama);
+        textViewoffsideteamb=findViewById(R.id.textViewoffsideteamb);
+        textViewoffsideteama.setText(Integer.toString(offsideteama));
+        textViewoffsideteamb.setText(Integer.toString(offsideteamb));
+        textViewgoalteama=findViewById(R.id.textViewgoalteama);
+        textViewgoalteamb=findViewById(R.id.textViewgoalteamb);
+        textViewgoalteama.setText(Integer.toString(goalteama));
+        textViewgoalteamb.setText(Integer.toString(goalteamb));
+        textViewshootontargetteama=findViewById(R.id.textViewshootontargetteama);
+        textViewshootontargetteamb=findViewById(R.id.textViewshootontargetteamb);
+        textViewshootontargetteama.setText(Integer.toString(shootontargetteama));
+        textViewshootontargetteamb.setText(Integer.toString(shootontargetteamb));
+        textViewshootofftargetteama=findViewById(R.id.textViewshootofftargetteama);
+        textViewshootofftargetteamb=findViewById(R.id.textViewshootofftargetteamb);
+        textViewshootofftargetteama.setText(Integer.toString(shootofftargetteama));
+        textViewshootofftargetteamb.setText(Integer.toString(shootofftargetteamb));
+        textViewyellowcardteama=findViewById(R.id.textViewyellowcardteama);
+        textViewyellowcardteamb=findViewById(R.id.textViewyellowcardteamb);
+        textViewyellowcardteama.setText(Integer.toString(yellowcardteama));
+        textViewyellowcardteamb.setText(Integer.toString(yellowcardteamb));
+        textViewredcardteama=findViewById(R.id.textViewredcardteama);
+        textViewredcardteamb=findViewById(R.id.textViewredcardteamb);
+        textViewredcardteama.setText(Integer.toString(redcardteama));
+        textViewredcardteamb.setText(Integer.toString(redcardteamb));
+
 
     }
 
-    public void getTeamData(){
+    public void getFormationData(){
         TeamDBHandler db = new TeamDBHandler(this);
         Cursor loadDataTeam=db.loaddatareport(teamA);
-        //List<String> spinnerArray=new ArrayList<String>();
         loadDataTeam.moveToFirst();
         while (!loadDataTeam.isAfterLast()) {
         formationA = loadDataTeam.getString(2);
-        //spinnerArray.add(loadDataTeam.getString(2));
         Log.d("formasi team A ",formationA);
-            loadDataTeam.moveToNext();
+        loadDataTeam.moveToNext();
         }
-        //ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray);
-       // teamA= findViewById(R.id.spinnerteamA);
-        //teamA.setAdapter(arrayAdapter);
+        Cursor loadDataTeamb=db.loaddatareport(teamB);
+        loadDataTeamb.moveToFirst();
+        while (!loadDataTeamb.isAfterLast()) {
+            formationB = loadDataTeamb.getString(2);
+            Log.d("formasi team A ",formationB);
+            loadDataTeamb.moveToNext();
+        }
 
-        //teamB= findViewById(R.id.spinnerteamB);
-        //teamB.setAdapter(arrayAdapter);
+
+
     }
 
 

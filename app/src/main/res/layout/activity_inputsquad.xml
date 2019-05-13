@@ -137,4 +137,14 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTeam" />
+
+    <ListView
+        android:id="@+id/listViewPlayer"
+        android:layout_width="272dp"
+        android:layout_height="341dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="82dp"
+        app:layout_constraintStart_toEndOf="@+id/spinnerposisi"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

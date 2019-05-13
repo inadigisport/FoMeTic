@@ -73,8 +73,8 @@ public class PemainDBHandler extends SQLiteOpenHelper {
             String team_pemain=cursor.getString(3);
             int jumlah_gol=cursor.getInt(4);
             int jumlah_yellowcard=cursor.getInt(5);
-            int jumlah_redcard=cursor.getInt(6);
-            int idpertandingan=cursor.getInt(7);
+           // int jumlah_redcard=cursor.getInt(6);
+            //int idpertandingan=cursor.getInt(7);
         }
         return cursor;
     }
