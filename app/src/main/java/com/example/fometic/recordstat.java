@@ -40,6 +40,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     TextView textviewteamb;
     String teamA;
     String teamB;
+    int listpemainint;
 
 
     int ballpossesionteama;
@@ -490,6 +491,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 mSpinner.setAdapter(arrayAdapter);
 
 
+
+
                 builder.setTitle("Pick Player");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -499,25 +502,38 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         String pemain=mSpinner.getSelectedItem().toString();
                         List<String> cetakgoalteama = new ArrayList<>();
                         cetakgoalteama.add(pemain);
-
-
                         Log.d("Pemain Goal Team A", pemain);
                         Log.d("data array", cetakgoalteama.get(0));
-                        Log.d("data array", cetakgoalteama.get(1));
-
+                        //Log.d("data array", cetakgoalteama.get(1));
                         Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
                         List<String> listpemaingoalteama=new ArrayList<String>();
                         int i=0;
-                        if (datagoalteama.moveToFirst()){
-                            while (!datagoalteama.isAfterLast()) {
-                                listpemaingoalteama.add(datagoalteama.getString(0));
-                                Log.d("Data spinner ",datagoalteama.getString(0));
-                                datagoalteama.moveToNext();
-                                i=i+1;
-                            }
-                        }else{
-                            Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
+                        if(datapertandingan.moveToFirst()){
+                        while (!datapertandingan.isAfterLast()) {
+                            datapertandingan.moveToNext();
+                            i=i+1;
                         }
+                        }else{
+                            PertandinganPemain tandingpemain = new PertandinganPemain();
+                            Cursor cursorpemain=dbpemain.loaddataidpemain(pemain,teamA);
+                            List<Integer> listpemain = new ArrayList<>();
+
+                            cursorpemain.moveToFirst();
+                                while (!cursorpemain.isAfterLast()) {
+                                    cursorpemain.moveToNext();
+                                    listpemain.add(cursorpemain.getInt(1));
+                                    listpemainint=cursorpemain.getInt(1);
+                                }
+
+                            tandingpemain.setIdpemain(listpemainint);
+                            tandingpemain.setIdpertandingan(i);
+                            tandingpemain.setIdpertandingan(tandingpemain.getJumlahgoal()+1);
+                            Log.d("id pemain", Integer.toString(listpemainint));
+                            Log.d("id pertangingan",Integer.toString(i));
+                            dbpertandinganpemain.addHandler(tandingpemain);
+                        }
+
                     }
 
                 });

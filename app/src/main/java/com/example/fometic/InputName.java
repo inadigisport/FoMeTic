@@ -21,6 +21,8 @@ public class InputName extends AppCompatActivity {
     Spinner team;
     PemainBola datapemain= new PemainBola();
     PemainDBHandler dbpemain=new PemainDBHandler(this);
+    int teamid;
+    TeamDBHandler dbteam= new TeamDBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,18 @@ public class InputName extends AppCompatActivity {
         datapemain.setPosisi(spinnerposisi.getSelectedItem().toString());
         datapemain.setNomorPunggung(Integer.parseInt(textnomorpunggung.getText().toString()));
         datapemain.setTeam(team.getSelectedItem().toString());
-        dbpemain.addHandler(datapemain);
+        dbpemain.addHandler(datapemain, getidteam(team.getSelectedItem().toString()));
+    }
+
+    public int getidteam(String namateam){
+        Cursor idteam=dbteam.loaddataidteam(namateam);
+        idteam.moveToFirst();
+        while (!idteam.isAfterLast()) {
+            teamid=idteam.getInt(0);
+            Log.d("Data spinner ",idteam.getString(0));
+            idteam.moveToNext();
+        }
+        return teamid;
     }
 
     public void getTeamData(){

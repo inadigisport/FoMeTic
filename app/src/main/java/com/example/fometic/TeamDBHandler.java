@@ -46,6 +46,11 @@ public class TeamDBHandler extends SQLiteOpenHelper {
         return loadHandler(query);
     }
 
+    public Cursor loaddataidteam(String nama){
+        String query = "Select * FROM " + TABLE_TEAM+" WHERE "+COLUMN_NAMA_TEAM+"='"+nama+"'";
+        return loadHandler(query);
+    }
+
     public Cursor loaddatareport(String team){
         String query = "Select * FROM " + TABLE_TEAM+ " WHERE "+COLUMN_NAMA_TEAM+"='"+team+"'";
         return loadHandler(query);

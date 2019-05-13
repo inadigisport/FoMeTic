@@ -25,7 +25,7 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     @Override
 
     public void onCreate(SQLiteDatabase db) {
-        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+NAMA_PEMAIN+" STRING, "+ID_PEMAIN+" INT,"+ID_TEAM+" INT, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING)";
+        String createTablePemain="CREATE TABLE "+TABLE_PEMAIN+" ("+ID_PEMAIN+" INTEGER PRIMARY KEY AUTOINCREMENT, "+NAMA_PEMAIN+" STRING, "+ID_TEAM+" INT, "+NOMOR_PUNGGUNG_PEMAIN+" INT, "+POSISI_PEMAIN+" STRING, "+NAMA_TEAM+" STRING)";
         db.execSQL(createTablePemain);
         Log.d("status create data", createTablePemain);
     }
@@ -34,10 +34,9 @@ public class PemainDBHandler extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int i, int i1){}
 
-    public void addHandler(PemainBola pemainbola) {
+    public void addHandler(PemainBola pemainbola, int idteam) {
         ContentValues values = new ContentValues();
-        values.put(ID_PEMAIN,pemainbola.getIdPemain());
-        values.put(ID_TEAM, pemainbola.getIdteam());
+        values.put(ID_TEAM, idteam);
         values.put(NAMA_PEMAIN,pemainbola.getNamaPemain());
         values.put(NOMOR_PUNGGUNG_PEMAIN,pemainbola.getNomorPunggung());
         values.put(POSISI_PEMAIN, pemainbola.getPosisi());
@@ -48,7 +47,8 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     }
 
     public Cursor loaddataidpemain(String nama, String namateam){
-        String query="SELECT "+ID_PEMAIN+" FROM "+TABLE_PEMAIN+" WHERE "+ID_PEMAIN+"='"+nama+"' AND "+NAMA_TEAM+"='"+namateam+"'";
+        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+ID_PEMAIN+"='"+nama+"' AND "+NAMA_TEAM+"='"+namateam+"'";
+        Log.d(nama, namateam);
         return (loadHandler(query));
     }
 
@@ -66,16 +66,20 @@ public class PemainDBHandler extends SQLiteOpenHelper {
     public Cursor loadHandler(String query){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        String result="";
         while (cursor.moveToNext()) {
             String nama_pemain=cursor.getString(0);
-            int nomor_punggung=cursor.getInt(1);
-            String posisi_pemain=cursor.getColumnName(2);
-            String team_pemain=cursor.getString(3);
-            int jumlah_gol=cursor.getInt(4);
-            int jumlah_yellowcard=cursor.getInt(5);
-           // int jumlah_redcard=cursor.getInt(6);
-            //int idpertandingan=cursor.getInt(7);
+            int idpemain=cursor.getInt(1);
+            int idteam=cursor.getInt(2);
+            int nomorpunggung=cursor.getInt(3);
+            String posisi_pemain=cursor.getString(4);
+            String namateam=cursor.getString(5);
+
+            result += String.valueOf(idpemain) + " " + nama_pemain + " "+ nomorpunggung+
+
+                    System.getProperty("line.separator");
         }
+        Log.d("Isi Database pemain", result);
         return cursor;
     }
 

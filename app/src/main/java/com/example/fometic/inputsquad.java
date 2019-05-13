@@ -30,8 +30,10 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
     String namapemain;
     String posision;
     int nomorpunggung;
+    int teamid;
     PemainBola datapemain= new PemainBola();
     PemainDBHandler dbpemain=new PemainDBHandler(this);
+    TeamDBHandler dbteam = new TeamDBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,17 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         team.setAdapter(arrayAdapter);
     }
 
+    public int getidteam(String namateam){
+        Cursor idteam=dbteam.loaddataidteam(namateam);
+        idteam.moveToFirst();
+        while (!idteam.isAfterLast()) {
+            teamid=idteam.getInt(0);
+            Log.d("Data spinner ",idteam.getString(0));
+            idteam.moveToNext();
+        }
+        return teamid;
+    }
+
     public void setDataPemain(){
         textnamapemain=findViewById(R.id.TextNama);
         spinnerposisi=findViewById(R.id.spinnerposisi);
@@ -114,7 +127,7 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         datapemain.setPosisi(spinnerposisi.getSelectedItem().toString());
         datapemain.setNomorPunggung(Integer.parseInt(textnomorpunggung.getText().toString()));
         datapemain.setTeam(team.getSelectedItem().toString());
-        dbpemain.addHandler(datapemain);
+        dbpemain.addHandler(datapemain, getidteam(team.getSelectedItem().toString()));
     }
 }
 

@@ -71,11 +71,11 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-    public Cursor loadHandler(String teamA, String teamB) {
+    public Cursor loadHandler() {
 
         String result = "";
 
-        String query = "Select * FROM " + TABLE_PERTANDINGAN +" WHERE "+COLUMN_NAMA_TEAM_A+ "="+teamA+ " AND "+COLUMN_NAMA_TEAM_B+"="+teamB;
+        String query = "Select * FROM " + TABLE_PERTANDINGAN ;
 
         SQLiteDatabase db = this.getWritableDatabase();
 

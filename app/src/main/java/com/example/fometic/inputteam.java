@@ -33,8 +33,6 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,21 +51,12 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                formation = spinner.getSelectedItem().toString();
-
                 formation = spinner.getSelectedItem().toString();
                 Log.d("isi formasi ", formation);
-
                 teamname = editText.getText().toString();
                 teambola.setNamaTeam(teamname);
                 teambola.setFormasiTeam(formation);
-
                 db.addHandler(teambola);
-
-
                 finish();
             }
         });
