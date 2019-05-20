@@ -2,26 +2,26 @@ package com.example.fometic;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.android.gms.common.server.converter.StringToIntConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +33,30 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     private Chronometer chronometerteam;
     private TextView textViewpossesionteama;
     private TextView textViewpossesionteamb;
-    private boolean running;
+    private long pauseOffset;
+    private long pauseOffsetteam;
+
     double possesionteama;
     double possesionteamb;
     TextView textviewteama;
     TextView textviewteamb;
+    ListView listViewcetakgoalteama;
+
+
     String teamA;
     String teamB;
+    String pemain;
+    String pemainb;
+    String goalnotea;
+    String goalnoteb;
+    String passingstatusteama = "no";
+    String passingstatusteamb = "no";
+
+    ArrayList<String > cetakgoalteama = new ArrayList<>();
+    ArrayAdapter<String > arrayAdaptercetakgoalteama;
+    ArrayList<String > cetakgoalteamb = new ArrayList<>();
+    ArrayAdapter<String > arrayAdaptercetakgoalteamb;
+
 
 
     int ballpossesionteama;
@@ -74,6 +91,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     int shootontargetteamb;
     int shootofftargetteama;
     int shootofftargetteamb;
+    int running;
+
+
 
 
 
@@ -90,7 +110,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_recordstat);
+        running =1;
         Bundle bundle = getIntent().getExtras();
         teamA=bundle.getString("teama");
         teamB=bundle.getString("teamb");
@@ -104,11 +126,10 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
-
         textViewpossesionteama = findViewById(R.id.textViewpossesionteama);
         textViewpossesionteamb = findViewById(R.id.textViewpossesionteamb);
 
-        Button button=findViewById(R.id.buttonhalftime);
+        Button button=findViewById(R.id.buttonstop2ndhalf);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,17 +139,46 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
-
-
     }
 
     public void start1sthalf(View v) {
-        if (!running) {
-            chronometer.setBase(SystemClock.elapsedRealtime());
+        if(running == 1) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
-            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
-            running = true;
+            Button button= findViewById(R.id.buttonstart);
+
+            button.setText("Pause");
+
+            running = 2;
+        }
+
+        else {
+
+            chronometer.stop();
+            chronometerteam.stop();
+            pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+            pauseOffsetteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("GAME PAUSED")
+                    .setNeutralButton("RESUME", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                            chronometer.start();
+                            chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
+                            chronometerteam.start();
+
+                        }
+                    }).show();
+
+
+
+
+
+
         }
     }
 
@@ -138,8 +188,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
-                       chronometer.stop();
-                       chronometerteam.stop();
+
                        start2ndhalf();
 
                    }
@@ -154,6 +203,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void start2ndhalf () {
+        chronometer.stop();
+        chronometerteam.stop();
+
         Intent intent = new Intent(this, recordstatsecond.class);
         intent.putExtra("teama",teamA);
         Log.d("team A choosen",teamA);
@@ -187,10 +239,17 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         intent.putExtra("yellowcardteamb",yellowcardteamb);
         intent.putExtra("redcardteama",redcardteama);
         intent.putExtra("redcardteamb",redcardteamb);
-        //intent.putExtra("cetakgoalteama",cetakgoalteama);
+        intent.putExtra("possesionteama",possesionteama);
+        intent.putExtra("possesionteamb",possesionteamb);
+        intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
+        intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
+
+
+
 
 
         startActivity(intent);
+        finish();
 
         //Intent intent = new Intent(this, recordstatsecond.class);
         //startActivity(intent);
@@ -198,64 +257,131 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void passingteama(View v) {
 
-        passingteama = passingteama + 1;
-        Log.d("passing team a", Integer.toString((passingteama)));
+        if (passingstatusteama == "yes") {
+            passingteama = passingteama + 1;
+            Log.d("passing team a", Integer.toString((passingteama)));
 
-        String chronotext = chronometerteam.getText().toString();
-        String array[] = chronotext.split(":");
-        if (array.length == 2) {
-            elapsedchronometerteamint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+            elapsedchronometerteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+
+
+            Log.d("mili chronometer a", Long.toString(elapsedchronometerteam));
+
+            possesionteama = possesionteama + elapsedchronometerteam;
+
+            Log.d("mili possesion a", Double.toString(possesionteama));
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            tanding.setPassingTeamA(tanding.getPassingTeamA() + 1);
+
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+            Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
         }
-        else if (array.length == 3) {
-            elapsedchronometerteamint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        else {
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            passingstatusteama = "yes";
+            passingstatusteamb = "no";
         }
-
-
-
-        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
-
-        possesionteama = possesionteama + elapsedchronometerteamint;
-        chronometerteam.setBase(SystemClock.elapsedRealtime());
-        chronometerteam.start();
-        tanding.setPassingTeamA(tanding.getPassingTeamA()+1);
-
-        ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb)) * 100);
-        ballpossesionteamb = (int)((possesionteamb / (possesionteama + possesionteamb)) * 100);
-        textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
-        textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
 
 
 
 
     }
 
+    public void keepingballteama(View v) {
+
+        if (passingstatusteama == "yes") {
+
+            elapsedchronometerteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+            Log.d("mili chronometer", Long.toString(elapsedchronometerteam));
+
+            possesionteama = possesionteama + elapsedchronometerteam;
+
+            Log.d("mili possesion a", Double.toString(possesionteama));
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            tanding.setPassingTeamA(tanding.getPassingTeamA() + 1);
+
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+            Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
+        }
+        else {
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            passingstatusteama = "yes";
+            passingstatusteamb = "no";
+        }
+
+
+
+
+    }
+
+
+
     public void passingteamb(View v) {
+        if (passingstatusteamb == "yes") {
+            passingteamb = passingteamb + 1;
+            Log.d("passing team b", Integer.toString((passingteamb)));
 
-        passingteamb = passingteamb +1;
-        Log.d("passing team b", Integer.toString((passingteamb)));
-        String chronotext = chronometerteam.getText().toString();
-        String array[] = chronotext.split(":");
-        if (array.length == 2) {
-            elapsedchronometerteambint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+            elapsedchronometerteamb = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+            Log.d("mili chronometer b", Long.toString(elapsedchronometerteamb));
+
+            possesionteamb = possesionteamb + elapsedchronometerteamb;
+            Log.d("mili possesion b", Double.toString(possesionteamb));
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            tanding.setPassingTeamB(tanding.getPassingTeamB() + 1);
+
+
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+
+            Log.d("Cek possesion", Double.toString(ballpossesionteamb));
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
         }
-        else if (array.length == 3) {
-            elapsedchronometerteambint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        else {
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            passingstatusteamb = "yes";
+            passingstatusteama = "no";
+
         }
-        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteambint));
-        possesionteamb = possesionteamb + elapsedchronometerteambint;
-        //Log.d("elapsed team b", Double.toString(possesionteamb));
-        chronometerteam.setBase(SystemClock.elapsedRealtime());
-        chronometerteam.start();
-        tanding.setPassingTeamB(tanding.getPassingTeamB()+1);
+    }
+
+    public void keepingballteamb(View v) {
+        if (passingstatusteamb == "yes") {
+            elapsedchronometerteamb = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+            Log.d("mili chronometer b", Long.toString(elapsedchronometerteamb));
+
+            possesionteamb = possesionteamb + elapsedchronometerteamb;
+            Log.d("mili possesion b", Double.toString(possesionteamb));
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            tanding.setPassingTeamB(tanding.getPassingTeamB() + 1);
 
 
-        ballpossesionteamb = (int)((possesionteamb / (possesionteama + possesionteamb))*100) ;
-        ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb))*100) ;
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
 
-        //Log.d("Cek possesion", Double.toString(ballpossesionteamb));
-        textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
-        textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+            Log.d("Cek possesion", Double.toString(ballpossesionteamb));
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+        }
+        else {
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+            chronometerteam.start();
+            passingstatusteamb = "yes";
+            passingstatusteama = "no";
 
+        }
     }
 
     public void tacklingteama(View v) {
@@ -265,6 +391,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setTacklingTeamA(tanding.getTacklingTeamA()+1);
+        passingstatusteama = "yes";
+        passingstatusteamb = "no";
 
     }
 
@@ -275,6 +403,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setTacklingTeamB(tanding.getTacklingTeamB()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "yes";
 
     }
 
@@ -286,6 +416,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setInterceptTeamA(tanding.getInterceptTeamA()+1);
+        passingstatusteama = "yes";
+        passingstatusteamb = "no";
 
     }
 
@@ -297,7 +429,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.start();
         tanding.setInterceptTeamB(tanding.getInterceptTeamB()+1);
-
+        passingstatusteama = "no";
+        passingstatusteamb = "yes";
     }
 
 
@@ -308,6 +441,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         tanding.setThrowinTeamA(tanding.getThrowinTeamA()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
 
     }
 
@@ -318,6 +453,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         tanding.setThrowinTeamB(tanding.getThrowinTeamB()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
 
     public void cornerkickteama(View v) {
@@ -329,6 +466,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         tanding.setCornerkickTeamA(tanding.getCornerkickTeamA()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
     public void cornerkickteamb(View v) {
        cornerkickteamb = cornerkickteamb + 1;
@@ -337,32 +476,284 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         tanding.setCornerkickTeamB(tanding.getCornerkickTeamB()+1);
-
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
     public void pinaltyteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+
+        Cursor datagoalteama=dbpemain.loaddatateam(teamA);
+        List<String> listpemaingoalteama=new ArrayList<String>();
+        datagoalteama.moveToFirst();
+        while (!datagoalteama.isAfterLast()) {
+            listpemaingoalteama.add(datagoalteama.getString(0));
+            Log.d("list pemain goal team a",datagoalteama.getString(0));
+            datagoalteama.moveToNext();
+        }
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+        final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
+        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama );
+        mSpinner.setAdapter(arrayAdapter);
+
+
+        builder.setTitle("Pick Player");
+        builder.setPositiveButton("GOAL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                goalteama = goalteama + 1;
+                shootontargetteama=shootontargetteama+1;
+                String chronotext = chronometer.getText().toString();
+                String array[] = chronotext.split(":");
+
+                Log.d("time goal", array[0]);
+
+                if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+                    pemain=mSpinner.getSelectedItem().toString();
+                }
+                else {
+                    pemain = editTextinputplayer.getText().toString();
+
+                }
+
+                goalnotea = pemain + " (P)'" + array[0];
+
+                cetakgoalteama.add(goalnotea);
+                arrayAdaptercetakgoalteama=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteama);
+
+
+
+
+                Log.d("Pemain Goal Team A", pemain);
+                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+
+                Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                List<String> listpemaingoalteama=new ArrayList<String>();
+                int i=0;
+                if (datagoalteama.moveToFirst()){
+                    while (!datagoalteama.isAfterLast()) {
+                        listpemaingoalteama.add(datagoalteama.getString(0));
+                        Log.d("Data spinner ",datagoalteama.getString(0));
+                        datagoalteama.moveToNext();
+                        i=i+1;
+                    }
+                }else{
+                    Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+
+        });
+        builder.setNegativeButton("MISSED", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                shootontargetteama=shootontargetteama+1;
+                savesteamb=savesteamb+1;
+                String chronotext = chronometer.getText().toString();
+                String array[] = chronotext.split(":");
+
+                Log.d("time goal", array[0]);
+                if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+
+                    pemain=mSpinner.getSelectedItem().toString();
+                }
+                else {
+                    pemain = editTextinputplayer.getText().toString();
+
+                }
+
+                goalnotea = pemain + " (Missed)'" + array[0];
+
+                cetakgoalteama.add(goalnotea);
+                arrayAdaptercetakgoalteama=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteama);
+
+
+
+
+                Log.d("Pemain Missed Team A", pemain);
+                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+
+                Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                List<String> listpemaingoalteama=new ArrayList<String>();
+                int i=0;
+                if (datagoalteama.moveToFirst()){
+                    while (!datagoalteama.isAfterLast()) {
+                        listpemaingoalteama.add(datagoalteama.getString(0));
+                        Log.d("Data spinner ",datagoalteama.getString(0));
+                        datagoalteama.moveToNext();
+                        i=i+1;
+                    }
+                }else{
+                    Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
+                }
+
+                dialog.dismiss();
+            }
+        });
+        builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+        });
+        builder.setView(mView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
+
+
+
+
         tanding.setPinaltyTeamA(tanding.getPassingTeamA()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
     public void pinaltyteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+
+        TeamDBHandler dbgoalb = new TeamDBHandler(this);
+        Cursor loadDataTeamgoalb=dbgoalb.loaddatateam();
+        List<String> spinnerArraygoalb=new ArrayList<String>();
+        loadDataTeamgoalb.moveToFirst();
+        while (!loadDataTeamgoalb.isAfterLast()) {
+            spinnerArraygoalb.add(loadDataTeamgoalb.getString(1));
+            Log.d("Data spinner ",loadDataTeamgoalb.getString(1));
+            loadDataTeamgoalb.moveToNext();
+        }
+        Cursor datagoalteamb=dbpemain.loaddatateam(teamB);
+        List<String> listpemaingoalteamb=new ArrayList<String>();
+        datagoalteamb.moveToFirst();
+        while (!datagoalteamb.isAfterLast()) {
+            listpemaingoalteamb.add(datagoalteamb.getString(0));
+            Log.d("Data spinner ",datagoalteamb.getString(0));
+            datagoalteamb.moveToNext();
+        }
+        AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
+        View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+        final Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
+        final EditText editTextinputplayerb = (EditText) mViewgoalb.findViewById(R.id.editTextinputplayer);
+        ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb );
+        mSpinnergoalb.setAdapter(arrayAdaptergoalb);
+
+        tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
+
+
+        buildergoalb.setTitle("Pick Player");
+        buildergoalb.setPositiveButton("GOAL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
+                goalteamb = goalteamb + 1;
+                shootontargetteamb=shootontargetteamb+1;
+
+                String chronotext = chronometer.getText().toString();
+                String array[] = chronotext.split(":");
+
+                Log.d("time goal", array[0]);
+                if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
+
+                    pemainb=mSpinnergoalb.getSelectedItem().toString();
+                }
+                else {
+                    pemainb = editTextinputplayerb.getText().toString();
+
+                }
+                goalnoteb = pemainb + " (P)'" + array[0];
+
+                Log.d("pemain team b", goalnoteb);
+
+
+
+                cetakgoalteamb.add(goalnoteb);
+                arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
+
+
+
+                dialog.dismiss();
+            }
+
+        });
+        buildergoalb.setNegativeButton("MISSED", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                shootontargetteamb=shootontargetteamb+1;
+                savesteama=savesteama+1;
+
+                String chronotext = chronometer.getText().toString();
+                String array[] = chronotext.split(":");
+
+                Log.d("time goal", array[0]);
+
+                if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
+
+                    pemainb=mSpinnergoalb.getSelectedItem().toString();
+                }
+                else {
+                    pemainb = editTextinputplayerb.getText().toString();
+
+                }
+
+                goalnoteb = pemainb + " (Missed)'" + array[0];
+
+                Log.d("pemain missed team b", goalnoteb);
+
+
+
+                cetakgoalteamb.add(goalnoteb);
+                arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
+
+
+
+
+                dialog.dismiss();
+            }
+        });
+
+        buildergoalb.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        buildergoalb.setView(mViewgoalb);
+        AlertDialog dialoggoalb = buildergoalb.create();
+        dialoggoalb.show();
         tanding.setPinaltyTeamB(tanding.getPassingTeamB()+1);
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
 
     public void freekickteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
         tanding.setFreekickTeamA(tanding.getFreekickTeamA()+1);
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_freekick);
         popup.show();
+
     }
 
     public void freekickteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
         tanding.setFreekickTeamB(tanding.getFreekickTeamB()+1);
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -373,72 +764,90 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public void goalkickteama(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
         tanding.setGoalkickTeamA(tanding.getGoalkickTeamA()+1);
     }
     public void goalkickteamb(View v) {
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
         tanding.setGoalkickTeamB(tanding.getGoalkickTeamB()+1);
     }
 
 
     public void showpopupshootinga(View v) {
+        if (passingstatusteama == "yes") {
+            elapsedchronometerteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+            Log.d("mili chronometer a", Long.toString(elapsedchronometerteam));
+            possesionteama = possesionteama + elapsedchronometerteam;
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+
+            chronometerteam.stop();
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
 
 
-        String chronotext = chronometerteam.getText().toString();
-        String array[] = chronotext.split(":");
-        if (array.length == 2) {
-            elapsedchronometerteamint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.setOnMenuItemClickListener(this);
+            popup.inflate(R.menu.popup_shooting);
+            popup.show();
+            passingstatusteama = "no";
+            passingstatusteamb = "no";
         }
-        else if (array.length == 3) {
-            elapsedchronometerteamint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        else {
+            chronometerteam.stop();
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+
+
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.setOnMenuItemClickListener(this);
+            popup.inflate(R.menu.popup_shooting);
+            popup.show();
+            passingstatusteama = "no";
+            passingstatusteamb = "no";
+
         }
-        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
-        possesionteama = possesionteama + elapsedchronometerteamint;
-
-        ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb)) * 100);
-        ballpossesionteamb = (int)((possesionteamb / (possesionteama + possesionteamb)) * 100);
-        textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
-        textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
-
-        chronometerteam.stop();
-        chronometerteam.setBase(SystemClock.elapsedRealtime());
-
-
-
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_shooting);
-        popup.show();
     }
 
     public void showpopupshootingb(View v) {
+        if (passingstatusteamb == "yes") {
+            elapsedchronometerteamb = SystemClock.elapsedRealtime() - chronometerteam.getBase();
+            Log.d("mili chronometer b", Long.toString(elapsedchronometerteamb));
+
+            possesionteamb = possesionteamb + elapsedchronometerteamb;
+            Log.d("mili possesion b", Double.toString(possesionteamb));
 
 
+            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
+            textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
 
-        String chronotext = chronometerteam.getText().toString();
-        String array[] = chronotext.split(":");
-        if (array.length == 2) {
-            elapsedchronometerteambint = Integer.parseInt(array[0])*60 + Integer.parseInt(array[1]);
+            chronometerteam.stop();
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.setOnMenuItemClickListener(this);
+            popup.inflate(R.menu.popup_shootingb);
+            popup.show();
+            passingstatusteama = "no";
+            passingstatusteamb = "no";
         }
-        else if (array.length == 3) {
-            elapsedchronometerteambint = Integer.parseInt(array[0])*60*60 + Integer.parseInt(array[1])*60 + Integer.parseInt(array[2]);
+        else {
+            chronometerteam.stop();
+            chronometerteam.setBase(SystemClock.elapsedRealtime());
+
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.setOnMenuItemClickListener(this);
+            popup.inflate(R.menu.popup_shootingb);
+            popup.show();
+            passingstatusteama = "no";
+            passingstatusteamb = "no";
         }
-        Log.d("milisecond chronometer", Double.toString(elapsedchronometerteamint));
-        possesionteamb = possesionteamb + elapsedchronometerteambint;
-
-        ballpossesionteama = (int)((possesionteama / (possesionteama + possesionteamb)) * 100);
-        ballpossesionteamb = (int)((possesionteamb / (possesionteama + possesionteamb)) * 100);
-        textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
-        textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
-
-        chronometerteam.stop();
-        chronometerteam.setBase(SystemClock.elapsedRealtime());
-
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_shootingb);
-        popup.show();
     }
 
     public void yellowcard(View v) {
@@ -449,6 +858,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.getMenu().add(1, R.id.yellowhome, 1, teamA);
         popup.getMenu().add(1, R.id.yellowaway,2, teamB);
         popup.show();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
 
     }
 
@@ -459,6 +870,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         popup.getMenu().add(1, R.id.redhome, 1, teamA);
         popup.getMenu().add(1, R.id.redaway, 2,teamB);
         popup.show();
+        passingstatusteama = "no";
+        passingstatusteamb = "no";
     }
 
     public void inputname () {
@@ -469,9 +882,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
-                goalteama = goalteama + 1;
 
-                shootontargetteama=shootontargetteama+1;
+
                 Cursor datagoalteama=dbpemain.loaddatateam(teamA);
                 List<String> listpemaingoalteama=new ArrayList<String>();
                 datagoalteama.moveToFirst();
@@ -482,11 +894,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 }
 
 
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama );
+                final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama );
                 mSpinner.setAdapter(arrayAdapter);
 
 
@@ -495,15 +907,33 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        String pemain=mSpinner.getSelectedItem().toString();
-                        List<String> cetakgoalteama = new ArrayList<>();
-                        cetakgoalteama.add(pemain);
+                        goalteama = goalteama + 1;
+                        shootontargetteama=shootontargetteama+1;
+
+                        String chronotext = chronometer.getText().toString();
+                        String array[] = chronotext.split(":");
+
+                        Log.d("time goal", array[0]);
+
+                        if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+
+                            pemain=mSpinner.getSelectedItem().toString();
+                        }
+                        else {
+                            pemain = editTextinputplayer.getText().toString();
+
+                        }
+                        goalnotea = pemain + " '" + array[0];
+
+                        cetakgoalteama.add(goalnotea);
+                        arrayAdaptercetakgoalteama=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteama);
+
+
 
 
                         Log.d("Pemain Goal Team A", pemain);
-                        Log.d("data array", cetakgoalteama.get(0));
-                        Log.d("data array", cetakgoalteama.get(1));
+                        //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                        //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
 
                         Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                         List<String> listpemaingoalteama=new ArrayList<String>();
@@ -518,6 +948,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         }else{
                             Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
                         }
+                        dialog.dismiss();
                     }
 
                 });
@@ -527,13 +958,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         dialog.dismiss();
                     }
                 });
-                builder.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
 
-                    }
-                });
                 builder.setView(mView);
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -563,7 +988,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootontargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot On Goal Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -574,19 +999,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         dialog.dismiss();
                     }
                 });
-                buildershootontargeta.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
 
-                    }
-                });
                 buildershootontargeta.setView(mViewshootontargeta);
                 AlertDialog dialogshootontargeta = buildershootontargeta.create();
                 dialogshootontargeta.show();
 
-
-                chronometerteam.start();
                 tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
                 return true;
             case R.id.shootofftarget:
@@ -611,7 +1028,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootofftargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot Off Goal Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -622,13 +1039,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         dialog.dismiss();
                     }
                 });
-                buildershootofftargeta.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
 
-                    }
-                });
                 buildershootofftargeta.setView(mViewshootofftargeta);
                 AlertDialog dialogshootofftargeta = buildershootofftargeta.create();
                 dialogshootofftargeta.show();
@@ -637,8 +1048,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 return true;
             case R.id.goalb:
-                goalteamb=goalteamb+1;
-                shootontargetteamb=shootontargetteamb+1;
+
                 TeamDBHandler dbgoalb = new TeamDBHandler(this);
                 Cursor loadDataTeamgoalb=dbgoalb.loaddatateam();
                 List<String> spinnerArraygoalb=new ArrayList<String>();
@@ -658,7 +1068,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 }
                 AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
                 View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerb = (EditText) mViewgoalb.findViewById(R.id.editTextinputplayer);
                 ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb );
                 mSpinnergoalb.setAdapter(arrayAdaptergoalb);
 
@@ -670,6 +1081,33 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
+                        goalteamb = goalteamb + 1;
+                        shootontargetteamb=shootontargetteamb+1;
+
+                        String chronotext = chronometer.getText().toString();
+                        String array[] = chronotext.split(":");
+
+                        Log.d("time goal", array[0]);
+                        if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
+
+                            pemainb=mSpinnergoalb.getSelectedItem().toString();
+                        }
+                        else {
+                            pemainb = editTextinputplayerb.getText().toString();
+
+                        }
+
+                        goalnoteb = pemainb + " '" + array[0];
+
+                        Log.d("pemain team b", goalnoteb);
+
+
+
+                        cetakgoalteamb.add(goalnoteb);
+                        arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
+
+
+
                         dialog.dismiss();
                     }
 
@@ -681,12 +1119,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     }
                 });
 
-                buildergoalb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
-                    }
-                });
 
 
                 buildergoalb.setView(mViewgoalb);
@@ -729,13 +1161,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         dialog.dismiss();
                     }
                 });
-                buildershootontargetb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
 
-                    }
-                });
                 buildershootontargetb.setView(mViewshootontargetb);
                 AlertDialog dialogshootontargetb = buildershootontargetb.create();
                 dialogshootontargetb.show();

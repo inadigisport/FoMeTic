@@ -535,6 +535,8 @@
         app:layout_constraintTop_toTopOf="@+id/textViewballpossesionteama3" />
 
 
+
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="300dp"
@@ -583,7 +585,18 @@
             app:layout_constraintStart_toStartOf="@+id/textViewformationA"
             app:layout_constraintTop_toBottomOf="@+id/textViewformationA" />
 
-
+        <TextView
+            android:id="@+id/textViewlistpemaingoalteama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="142dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#DD2C00"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintEnd_toEndOf="@+id/textViewformationA"
+            app:layout_constraintStart_toStartOf="@+id/textViewformationA"
+            app:layout_constraintTop_toBottomOf="@+id/textViewformationA" />
 
 
     </android.support.constraint.ConstraintLayout>
@@ -636,6 +649,19 @@
             app:layout_constraintEnd_toEndOf="@+id/textViewformationB"
             app:layout_constraintStart_toStartOf="@+id/textViewformationB"
             app:layout_constraintTop_toBottomOf="@+id/textViewformationB" />
+
+        <TextView
+            android:id="@+id/textViewlistpemaingoalteamb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="142dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#0000FE"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintEnd_toEndOf="@+id/textViewformationB"
+            app:layout_constraintStart_toStartOf="@+id/textViewformationB"
+            app:layout_constraintTop_toTopOf="@+id/textViewgoalteamb" />
 
 
     </android.support.constraint.ConstraintLayout>

@@ -1,10 +1,19 @@
 package com.example.fometic;
 
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class generatereport extends AppCompatActivity {
 
@@ -42,10 +51,10 @@ public class generatereport extends AppCompatActivity {
     TextView textViewyellowcardteamb;
     TextView textViewredcardteama;
     TextView textViewredcardteamb;
-
-
-
-
+    TextView textViewlistpemaingoalteama;
+    TextView textViewlistpemaingoalteamb;
+    ArrayList<String > cetakgoalteama = new ArrayList<>();
+    ArrayList<String > cetakgoalteamb = new ArrayList<>();
 
 
     String formationA;
@@ -87,6 +96,7 @@ public class generatereport extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_generatereport);
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
@@ -155,6 +165,8 @@ public class generatereport extends AppCompatActivity {
         redcardteamb= getIntent().getIntExtra("redcardteamb",redcardteamb);
         Log.d("red card team a", Integer.toString(redcardteama));
         Log.d("red card team b", Integer.toString(redcardteamb));
+        cetakgoalteama= getIntent().getExtras().getStringArrayList("cetakgoalteama");
+        cetakgoalteamb= getIntent().getExtras().getStringArrayList("cetakgoalteamb");
 
         textViewballpossesionteama=findViewById(R.id.textViewballpossesionteama);
         textViewballpossesionteamb=findViewById(R.id.textViewballpossesionteamb);
@@ -208,6 +220,34 @@ public class generatereport extends AppCompatActivity {
         textViewredcardteamb=findViewById(R.id.textViewredcardteamb);
         textViewredcardteama.setText(Integer.toString(redcardteama));
         textViewredcardteamb.setText(Integer.toString(redcardteamb));
+
+        textViewlistpemaingoalteama=findViewById(R.id.textViewlistpemaingoalteama);
+        textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder builder=new StringBuilder();
+        for (String detail  : cetakgoalteama){
+            builder.append(detail + "\n" );
+
+        }
+        textViewlistpemaingoalteama.setText(builder.toString());
+
+        textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
+        textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder builderteamb=new StringBuilder();
+        for (String detail  : cetakgoalteamb){
+            builderteamb.append(detail + "\n" );
+
+        }
+        textViewlistpemaingoalteamb.setText(builderteamb.toString());
+
+
+
+
+
+
+
+
+
+
 
 
     }

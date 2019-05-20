@@ -11,7 +11,7 @@ public class TeamDBHandler extends SQLiteOpenHelper {
     //information of database
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "footballDB.db";
+    private static final String DATABASE_NAME = "footballDB";
     public static final String TABLE_NAME = "Pemain";
     public static final String TABLE_TEAM = "Team";
     public static final String COLUMN_ID_TEAM = "teamID";
