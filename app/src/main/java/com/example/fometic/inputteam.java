@@ -1,6 +1,7 @@
 package com.example.fometic;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class inputteam extends AppCompatActivity implements AdapterView.OnItemSe
 
 
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_inputteam);
         getTeamData();
         button = (Button) findViewById(R.id.button6);

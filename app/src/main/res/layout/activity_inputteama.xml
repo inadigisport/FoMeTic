@@ -7,7 +7,7 @@
     tools:context=".inputteamA">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewinputplayer"
         android:layout_width="185dp"
         android:layout_height="62dp"
         android:text="TextView"
