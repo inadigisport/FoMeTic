@@ -7,9 +7,9 @@
     tools:context=".recordstat">
 
     <Button
-        android:id="@+id/buttongoalkickteama2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/keepingballteama"
+        android:layout_width="99dp"
+        android:layout_height="72dp"
         android:layout_marginTop="80dp"
         android:background="@color/colorAccent"
         android:onClick="keepingballteama"
@@ -121,8 +121,8 @@
         android:onClick="interceptteama"
         android:text="Intercept"
         app:layout_constraintEnd_toEndOf="@+id/buttonpassingteama"
-        app:layout_constraintStart_toStartOf="@+id/buttongoalkickteama2"
-        app:layout_constraintTop_toBottomOf="@+id/buttongoalkickteama2" />
+        app:layout_constraintStart_toStartOf="@+id/keepingballteama"
+        app:layout_constraintTop_toBottomOf="@+id/keepingballteama" />
 
     <Button
         android:id="@+id/buttonshootingteama"
@@ -133,9 +133,9 @@
         android:background="@color/colorAccent"
         android:onClick="showpopupshootinga"
         android:text="Shooting"
-        app:layout_constraintBottom_toBottomOf="@+id/buttongoalkickteama2"
-        app:layout_constraintEnd_toStartOf="@+id/buttongoalkickteama2"
-        app:layout_constraintTop_toTopOf="@+id/buttongoalkickteama2" />
+        app:layout_constraintBottom_toBottomOf="@+id/keepingballteama"
+        app:layout_constraintEnd_toStartOf="@+id/keepingballteama"
+        app:layout_constraintTop_toTopOf="@+id/keepingballteama" />
 
     <Button
         android:id="@+id/buttontacklingteama"
@@ -149,9 +149,9 @@
         android:background="@color/colorAccent"
         android:onClick="tacklingteama"
         android:text="Tackling"
-        app:layout_constraintEnd_toEndOf="@+id/buttongoalkickteama2"
+        app:layout_constraintEnd_toEndOf="@+id/keepingballteama"
         app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
-        app:layout_constraintTop_toBottomOf="@+id/buttongoalkickteama2" />
+        app:layout_constraintTop_toBottomOf="@+id/keepingballteama" />
 
     <Button
         android:id="@+id/buttonpassingteama"
@@ -162,9 +162,9 @@
         android:background="@color/colorAccent"
         android:onClick="passingteama"
         android:text="Passing"
-        app:layout_constraintBottom_toBottomOf="@+id/buttongoalkickteama2"
-        app:layout_constraintStart_toEndOf="@+id/buttongoalkickteama2"
-        app:layout_constraintTop_toTopOf="@+id/buttongoalkickteama2" />
+        app:layout_constraintBottom_toBottomOf="@+id/keepingballteama"
+        app:layout_constraintStart_toEndOf="@+id/keepingballteama"
+        app:layout_constraintTop_toTopOf="@+id/keepingballteama" />
 
     <Button
         android:id="@+id/buttoncornerkickteama"
@@ -222,10 +222,10 @@
         android:background="@color/colorAccent"
         android:onClick="pinaltyteama"
         android:text="Pinalty"
-        app:layout_constraintEnd_toEndOf="@+id/buttongoalkickteama2"
+        app:layout_constraintEnd_toEndOf="@+id/keepingballteama"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/buttongoalkickteama2"
-        app:layout_constraintTop_toBottomOf="@+id/buttongoalkickteama2" />
+        app:layout_constraintStart_toStartOf="@+id/keepingballteama"
+        app:layout_constraintTop_toBottomOf="@+id/keepingballteama" />
 
     <Button
         android:id="@+id/buttonpinaltyteamb"
@@ -277,8 +277,8 @@
 
     <Button
         android:id="@+id/keepingballteamb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="72dp"
         android:layout_marginTop="80dp"
         android:background="@color/design_default_color_primary_dark"
         android:onClick="keepingballteamb"

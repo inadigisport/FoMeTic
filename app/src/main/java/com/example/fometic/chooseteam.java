@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -19,6 +20,14 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
 
     Spinner teamA;
     Spinner teamB;
+    Spinner formationteama;
+    Spinner formationteamb;
+    EditText editTextvenue;
+    EditText editTextevent;
+    EditText editTexttimematch;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,15 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_chooseteam);
         getTeamData();
+
+        formationteama=findViewById(R.id.spinnerformationteama);
+        formationteamb=findViewById(R.id.spinnerformationteamb);
+        editTextvenue=findViewById(R.id.editTextvenue);
+        editTextevent=findViewById(R.id.editTextevent);
+        editTexttimematch=findViewById(R.id.editTexttimematch);
+
+
+
 
         Button button=findViewById(R.id.buttonstart);
         button.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +80,21 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         Log.d("team A choosen",teamA.getSelectedItem().toString());
         intent.putExtra("teamb",teamB.getSelectedItem().toString());
         Log.d("team B choosen",teamB.getSelectedItem().toString());
+        intent.putExtra("formationteama",formationteama.getSelectedItem().toString());
+        Log.d("formation team A",formationteama.getSelectedItem().toString());
+        intent.putExtra("formationteamb",formationteamb.getSelectedItem().toString());
+        Log.d("formation team B",formationteamb.getSelectedItem().toString());
+        intent.putExtra("venue",editTextvenue.getText().toString());
+        Log.d("venue ",editTextvenue.getText().toString());
+        intent.putExtra("event",editTextevent.getText().toString());
+        Log.d("venue ",editTextevent.getText().toString());
+        intent.putExtra("timematch",editTexttimematch.getText().toString());
+        Log.d("timematch ",editTexttimematch.getText().toString());
+
+
+
+
+
         startActivity(intent);
 
     }

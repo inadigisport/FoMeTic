@@ -8,22 +8,35 @@
     android:padding="20dp">
 
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+    </LinearLayout>
+
+
+
+
     <Spinner
         android:id="@+id/spinnerplayer"
         android:layout_width="585dp"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="31dp" />
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintTop_toBottomOf="@+id/editTextinputplayer"
+        tools:layout_editor_absoluteX="28dp" />
 
     <EditText
         android:id="@+id/editTextinputplayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
         android:ems="10"
         android:hint="Input Name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerplayer"
-        tools:layout_editor_absoluteX="288dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="26dp" />
 
 </android.support.constraint.ConstraintLayout>

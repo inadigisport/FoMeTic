@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class generatereport extends AppCompatActivity {
 
@@ -53,12 +55,20 @@ public class generatereport extends AppCompatActivity {
     TextView textViewredcardteamb;
     TextView textViewlistpemaingoalteama;
     TextView textViewlistpemaingoalteamb;
+    TextView textViewvenue;
+    TextView textViewevent;
+    TextView textViewtanggal;
     ArrayList<String > cetakgoalteama = new ArrayList<>();
     ArrayList<String > cetakgoalteamb = new ArrayList<>();
 
 
     String formationA;
     String formationB;
+    String formationteama;
+    String formationteamb;
+    String venue;
+    String event;
+
     int ballpossesionteama;
     int ballpossesionteamb;
     int passingteama;
@@ -87,6 +97,7 @@ public class generatereport extends AppCompatActivity {
     int yellowcardteamb;
     int redcardteama;
     int redcardteamb;
+    int timematch;
 
 
 
@@ -100,15 +111,33 @@ public class generatereport extends AppCompatActivity {
         setContentView(R.layout.activity_generatereport);
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
+        formationteama= getIntent().getStringExtra("formationteama");
+        formationteamb= getIntent().getStringExtra("formationteamb");
+        venue= getIntent().getStringExtra("venue");
+        event= getIntent().getStringExtra("event");
+        Log.d("venue", venue);
         textviewteama=findViewById(R.id.textViewteama);
         textviewteama.setText(teamA);
         textviewteamb=findViewById(R.id.textViewteamb);
         textviewteamb.setText(teamB);
-        getFormationData();
+        textViewvenue=findViewById(R.id.textViewvenue);
+        textViewvenue.setText(venue);
+        textViewevent=findViewById(R.id.textViewevent);
+        textViewevent.setText(event);
+        //getFormationData();
         textviewformationa=findViewById(R.id.textViewformationA);
         textviewformationb=findViewById(R.id.textViewformationB);
-        textviewformationa.setText(formationA);
-        textviewformationb.setText(formationB);
+        textviewformationa.setText(formationteama);
+        textviewformationb.setText(formationteamb);
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        textViewtanggal = findViewById(R.id.textViewtanggal);
+        textViewtanggal.setText(thisDate);
+
+
+
         ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
         Log.d("ballpossesionteama", Integer.toString(ballpossesionteama));
         ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);

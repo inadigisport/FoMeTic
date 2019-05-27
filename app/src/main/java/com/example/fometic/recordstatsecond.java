@@ -48,6 +48,11 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
     String goalnoteb;
     String passingstatusteama = "no";
     String passingstatusteamb = "no";
+    String formationteama;
+    String formationteamb;
+    String venue;
+    String event;
+    String timematch;
 
     ArrayList<String > cetakgoalteama = new ArrayList<>();
     ArrayAdapter<String > arrayAdaptercetakgoalteama;
@@ -89,6 +94,8 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
     int shootofftargetteama;
     int shootofftargetteamb;
     int running;
+    int timematchint;
+
 
 
 
@@ -115,8 +122,14 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         running = 1;
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
+        formationteama= getIntent().getStringExtra("formationteama");
+        formationteamb= getIntent().getStringExtra("formationteamb");
+        venue= getIntent().getStringExtra("venue");
+        event= getIntent().getStringExtra("event");
         Log.d("home",teamA);
         Log.d("away",teamB);
+        timematch=getIntent().getStringExtra("timematch");
+        timematchint= Integer.parseInt(timematch);
         ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
         Log.d("ballpossesionteama", Integer.toString(ballpossesionteama));
         ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
@@ -203,8 +216,9 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
     }
 
     public void start2ndhalf(View v) {
+
         if(running == 1) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -271,6 +285,10 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Home",teamA);
         intent.putExtra("teamb",teamB);
         Log.d("Away",teamB);
+        intent.putExtra("formationteama",formationteama);
+        intent.putExtra("formationteamb",formationteamb);
+        intent.putExtra("venue",venue);
+        intent.putExtra("event",event);
         intent.putExtra("passingteama",passingteama);
         intent.putExtra("passingteamb",passingteamb);
         intent.putExtra("tacklingteama",tacklingteama);
@@ -1041,7 +1059,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 buildershootontargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstatsecond.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstatsecond.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1081,7 +1099,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 buildershootofftargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstatsecond.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstatsecond.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1203,7 +1221,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 buildershootontargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstatsecond.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstatsecond.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1244,7 +1262,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 buildershootofftargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstatsecond.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstatsecond.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1272,7 +1290,6 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
             case R.id.yellowhome:
                 yellowcardteama = yellowcardteama + 1;
-                Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowhome=dbpemain.loaddatateam(teamA);
@@ -1294,6 +1311,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 builderyellowhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstatsecond.this, "Yellow Card Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1313,7 +1331,6 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
             case R.id.yellowaway:
                 yellowcardteamb = yellowcardteamb + 1;
-                Toast.makeText(this, "Yellow Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowaway=dbpemain.loaddatateam(teamB);
@@ -1335,6 +1352,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 builderyellowaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstatsecond.this, "Yellow Card Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1354,7 +1372,6 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
             case R.id.redhome:
                 redcardteama = redcardteama + 1;
-                Toast.makeText(this, "Red Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredhome=dbpemain.loaddatateam(teamA);
@@ -1376,6 +1393,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 builderredhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstatsecond.this, "Red Card Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1395,7 +1413,6 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
             case R.id.redaway:
                 redcardteamb = redcardteamb + 1;
-                Toast.makeText(this, "Red Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredaway=dbpemain.loaddatateam(teamB);
@@ -1417,6 +1434,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                 builderredaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstatsecond.this, "Red Card Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1437,20 +1455,24 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
             case R.id.foulhome:
                 foulteamb = foulteamb + 1;
                 Log.d ("hitung foul team a",Integer.toString(foulteama));
+                Toast.makeText(this, "Foul Team B", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.offsidehome:
                 offsideteamb = offsideteamb + 1;
                 Log.d ("hitung offside team a",Integer.toString(offsideteama));
+                Toast.makeText(this, "Offside Team B", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.foulaway:
                 foulteama = foulteama + 1;
                 Log.d ("hitung foul team b",Integer.toString(foulteamb));
+                Toast.makeText(this, "Foul Team A", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.offsideaway:
                 offsideteama = offsideteama + 1;
                 Log.d ("hitung offside team b",Integer.toString(offsideteamb));
+                Toast.makeText(this, "Offside Team A", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:

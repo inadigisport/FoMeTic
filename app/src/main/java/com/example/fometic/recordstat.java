@@ -51,6 +51,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     String goalnoteb;
     String passingstatusteama = "no";
     String passingstatusteamb = "no";
+    String formationteama;
+    String formationteamb;
+    String venue;
+    String event;
+    String timematch;
+
 
     ArrayList<String > cetakgoalteama = new ArrayList<>();
     ArrayAdapter<String > arrayAdaptercetakgoalteama;
@@ -101,6 +107,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
+
+
     Pertandingan tanding = new Pertandingan();
     PemainDBHandler dbpemain = new PemainDBHandler(this);
     PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
@@ -116,6 +124,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Bundle bundle = getIntent().getExtras();
         teamA=bundle.getString("teama");
         teamB=bundle.getString("teamb");
+        formationteama=bundle.getString("formationteama");
+        formationteamb=bundle.getString("formationteamb");
+        venue=bundle.getString("venue");
+        event=bundle.getString("event");
+        timematch=bundle.getString("timematch");
+
+
+
+
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
         textviewteama=findViewById(R.id.textViewteama);
@@ -211,6 +228,10 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("team A choosen",teamA);
         intent.putExtra("teamb",teamB);
         Log.d("team B choosen",teamB);
+        intent.putExtra("formationteama",formationteama);
+        intent.putExtra("formationteamb",formationteamb);
+        intent.putExtra("venue",venue);
+        intent.putExtra("event",event);
         intent.putExtra("passingteama",passingteama);
         intent.putExtra("passingteamb",passingteamb);
         intent.putExtra("tacklingteama",tacklingteama);
@@ -241,6 +262,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         intent.putExtra("redcardteamb",redcardteamb);
         intent.putExtra("possesionteama",possesionteama);
         intent.putExtra("possesionteamb",possesionteamb);
+        intent.putExtra("timematch",timematch);
         intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
         intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
 
@@ -923,7 +945,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             pemain = editTextinputplayer.getText().toString();
 
                         }
-                        goalnotea = pemain + " '" + array[0];
+                        goalnotea = pemain + " " + array[0] + "'";
 
                         cetakgoalteama.add(goalnotea);
                         arrayAdaptercetakgoalteama=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteama);
@@ -988,7 +1010,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootontargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot On Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1028,7 +1050,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootofftargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot Off Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1150,7 +1172,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootontargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1191,7 +1213,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootofftargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(recordstat.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1219,7 +1241,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
             case R.id.yellowhome:
                 yellowcardteama = yellowcardteama + 1;
-                Toast.makeText(this, "Yellow Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowhome=dbpemain.loaddatateam(teamA);
@@ -1241,6 +1262,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builderyellowhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1260,7 +1282,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
             case R.id.yellowaway:
                 yellowcardteamb = yellowcardteamb + 1;
-                Toast.makeText(this, "Yellow Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowaway=dbpemain.loaddatateam(teamB);
@@ -1282,6 +1303,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builderyellowaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "Yellow Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1301,7 +1323,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
             case R.id.redhome:
                 redcardteama = redcardteama + 1;
-                Toast.makeText(this, "Red Card Team Home", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredhome=dbpemain.loaddatateam(teamA);
@@ -1323,6 +1344,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builderredhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "RED CARD Team A", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1342,7 +1364,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
             case R.id.redaway:
                 redcardteamb = redcardteamb + 1;
-                Toast.makeText(this, "Red Card Team Away", Toast.LENGTH_SHORT).show();
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredaway=dbpemain.loaddatateam(teamB);
@@ -1364,6 +1385,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builderredaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(recordstat.this, "RED CARD Team B", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 
@@ -1384,20 +1406,24 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             case R.id.foulhome:
                 foulteamb = foulteamb + 1;
                 Log.d ("hitung foul team a",Integer.toString(foulteama));
+                Toast.makeText(recordstat.this, "Foul Team B", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.offsidehome:
                 offsideteamb = offsideteamb + 1;
                 Log.d ("hitung offside team a",Integer.toString(offsideteama));
+                Toast.makeText(recordstat.this, "Offside Team B", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.foulaway:
                 foulteama = foulteama + 1;
                 Log.d ("hitung foul team b",Integer.toString(foulteamb));
+                Toast.makeText(recordstat.this, "Foul Team A", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.offsideaway:
                 offsideteama = offsideteama + 1;
                 Log.d ("hitung offside team b",Integer.toString(offsideteamb));
+                Toast.makeText(recordstat.this, "Offside Team A", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:

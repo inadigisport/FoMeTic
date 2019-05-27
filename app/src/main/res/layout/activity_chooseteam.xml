@@ -7,6 +7,36 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextevent"
+        android:layout_width="274dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Event"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/textView14" />
+
+    <Spinner
+        android:id="@+id/spinnerformationteamb"
+        android:layout_width="218dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="32dp"
+        android:entries="@array/formation"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerteamB"
+        app:layout_constraintStart_toStartOf="@+id/spinnerteamB"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerteamB" />
+
     <Spinner
         android:id="@+id/spinnerteamA"
         android:layout_width="0dp"
@@ -81,4 +111,42 @@
         app:layout_constraintEnd_toEndOf="@+id/textView51"
         app:layout_constraintStart_toStartOf="@+id/textView51"
         app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <Spinner
+        android:id="@+id/spinnerformationteama"
+        android:layout_width="218dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="32dp"
+        android:entries="@array/formation"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerteamA"
+        app:layout_constraintStart_toStartOf="@+id/spinnerteamA"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerteamA" />
+
+    <EditText
+        android:id="@+id/editTextvenue"
+        android:layout_width="274dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Venue"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextevent"
+        app:layout_constraintStart_toEndOf="@+id/editTextevent"
+        app:layout_constraintTop_toTopOf="@+id/editTextevent" />
+
+    <EditText
+        android:id="@+id/editTexttimematch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:ems="10"
+        android:hint="time match"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextvenue"
+        app:layout_constraintStart_toEndOf="@+id/editTextvenue"
+        app:layout_constraintTop_toTopOf="@+id/editTextvenue" />
+
 </android.support.constraint.ConstraintLayout>
