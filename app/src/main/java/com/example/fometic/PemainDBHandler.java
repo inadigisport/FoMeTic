@@ -46,11 +46,23 @@ public class PemainDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Cursor loaddataidpemain(String nama, String namateam){
-        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+ID_PEMAIN+"='"+nama+"' AND "+NAMA_TEAM+"='"+namateam+"'";
-        Log.d(nama, namateam);
-        return (loadHandler(query));
+    public int loaddataidpemain(String nomor, String namateam){
+        Log.d("load data pemain",nomor+"&"+namateam);
+        int id=0;
+        String result="";
+        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NOMOR_PUNGGUNG_PEMAIN+"='"+nomor+"' AND "+NAMA_TEAM+"='"+namateam+"'";
+        Log.d(nomor, namateam);
+        Cursor idpemain=loadHandler(query);
+        idpemain.moveToFirst();
+        id=idpemain.getInt(0);
+        Log.d("id pemain",Integer.toString(id));
+        return id;
     }
+
+
+
+
+
 
     public Cursor loaddatateam(String team){
         String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"='"+team+"'";
@@ -68,14 +80,14 @@ public class PemainDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         String result="";
         while (cursor.moveToNext()) {
-            String nama_pemain=cursor.getString(0);
-            int idpemain=cursor.getInt(1);
+            int idpemain=cursor.getInt(0);
+            String nama_pemain=cursor.getString(1);
             int idteam=cursor.getInt(2);
             int nomorpunggung=cursor.getInt(3);
             String posisi_pemain=cursor.getString(4);
             String namateam=cursor.getString(5);
 
-            result += String.valueOf(idpemain) + " " + nama_pemain + " "+ nomorpunggung+
+            result += String.valueOf(idpemain) + " " + nama_pemain + " "+ nomorpunggung+" "+posisi_pemain+" "+namateam+" id team ="+idteam+
 
                     System.getProperty("line.separator");
         }

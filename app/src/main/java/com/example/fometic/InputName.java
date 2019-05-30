@@ -59,10 +59,10 @@ public class InputName extends AppCompatActivity {
         datapemain.setPosisi(spinnerposisi.getSelectedItem().toString());
         datapemain.setNomorPunggung(Integer.parseInt(textnomorpunggung.getText().toString()));
         datapemain.setTeam(team.getSelectedItem().toString());
-        dbpemain.addHandler(datapemain, getidteam(team.getSelectedItem().toString()));
+        dbpemain.addHandler(datapemain, dbteam.loaddataidteam(team.getSelectedItem().toString()));
     }
 
-    public int getidteam(String namateam){
+    /**public int getidteam(String namateam){
         Cursor idteam=dbteam.loaddataidteam(namateam);
         idteam.moveToFirst();
         while (!idteam.isAfterLast()) {
@@ -71,7 +71,7 @@ public class InputName extends AppCompatActivity {
             idteam.moveToNext();
         }
         return teamid;
-    }
+    }**/
 
     public void getTeamData(){
         TeamDBHandler db = new TeamDBHandler(this);

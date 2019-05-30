@@ -1,12 +1,13 @@
 package com.example.fometic;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Pertandingan {
+    private int idPertandingan;
     private int idTeamA;
     private String namaTeamA;
     private String formasiTeamA;
-    private int jumlahAnggotaTeamA;
     private int passingTeamA;
     private int tacklingTeamA;
     private int goalTeamA;
@@ -21,12 +22,10 @@ public class Pertandingan {
     private int cornerkickTeamA;
     private int yellowcardTeamA;
     private int redcardTeamA;
-    private String statusTeamA;
     private int babak;
     private int idTeamB;
     private String namaTeamB;
     private String formasiTeamB;
-    private int jumlahAnggotaTeamB;
     private int passingTeamB;
     private int tacklingTeamB;
     private int goalTeamB;
@@ -41,19 +40,24 @@ public class Pertandingan {
     private int cornerkickTeamB;
     private int yellowcardTeamB;
     private int redcardTeamB;
-    private String statusTeamB;
-    private Double posessionTeamA;
-    private Double posessionTeamB;
-    private Date tanggalpertandingan;
+    private int posessionTeamA;
+    private int posessionTeamB;
+    private Date waktupertandingan;
+    private String event;
+    private String venue;
+    private int offsideTeamA;
+    private int offsideTeamB;
+    private int foulTeamA;
+    private int foulTeamB;
 
     public Pertandingan() {
     }
 
-    public Pertandingan(int idTeamA, String namaTeamA, String formasiTeamA, int jumlahTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, String statusTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int jumlahTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, String statusTeamB, Double posessionTeamA, Double posessionTeamB, Date tanggalpertandingan) {
+    public Pertandingan(int idPertandingan, int idTeamA, String namaTeamA, String formasiTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, int posessionTeamA, int posessionTeamB, Time waktupertandingan, String venue, String event, int offsideTeamA, int offsideTeamB, int foulTeamA, int foulTeamB) {
+        this.setIdPertandingan(idPertandingan);
         this.setIdTeamA(idTeamA);
         this.setNamaTeamA(namaTeamA);
         this.setFormasiTeamA(formasiTeamA);
-        this.setJumlahAnggotaTeamA(jumlahTeamA);
         this.setPassingTeamA(passingTeamA);
         this.setTacklingTeamA(tacklingTeamA);
         this.setGoalTeamA(goalTeamA);
@@ -68,11 +72,9 @@ public class Pertandingan {
         this.setCornerkickTeamA(cornerkickTeamA);
         this.setYellowcardTeamA(yellowcardTeamA);
         this.setRedcardTeamA(redcardTeamA);
-        this.setStatusTeamA(statusTeamA);
         this.setIdTeamB(idTeamB);
         this.setNamaTeamB(namaTeamB);
         this.setFormasiTeamB(formasiTeamB);
-        this.setJumlahAnggotaTeamB(jumlahTeamB);
         this.setPassingTeamB(passingTeamB);
         this.setTacklingTeamB(tacklingTeamB);
         this.setGoalTeamB(goalTeamB);
@@ -87,10 +89,15 @@ public class Pertandingan {
         this.setCornerkickTeamB(cornerkickTeamB);
         this.setYellowcardTeamB(yellowcardTeamB);
         this.setRedcardTeamB(redcardTeamB);
-        this.setStatusTeamB(statusTeamB);
         this.setPosessionTeamA(posessionTeamA);
         this.setPosessionTeamB(posessionTeamB);
-        this.setTanggalpertandingan(tanggalpertandingan);
+        this.setWaktupertandingan(waktupertandingan);
+        this.setVenue(venue);
+        this.setEvent(event);
+        this.setFoulTeamA(foulTeamA);
+        this.setFoulTeamB(foulTeamB);
+        this.setOffsideTeamA(offsideTeamA);
+        this.setOffsideTeamB(offsideTeamB);
     }
 
     public int getIdTeamA() {
@@ -115,14 +122,6 @@ public class Pertandingan {
 
     public void setFormasiTeamA(String formasiTeamA) {
         this.formasiTeamA = formasiTeamA;
-    }
-
-    public int getJumlahAnggotaTeamA() {
-        return jumlahAnggotaTeamA;
-    }
-
-    public void setJumlahAnggotaTeamA(int jumlahAnggotaTeamA) {
-        this.jumlahAnggotaTeamA = jumlahAnggotaTeamA;
     }
 
     public int getPassingTeamA() {
@@ -237,14 +236,6 @@ public class Pertandingan {
         this.redcardTeamA = redcardTeamA;
     }
 
-    public String getStatusTeamA() {
-        return statusTeamA;
-    }
-
-    public void setStatusTeamA(String statusTeamA) {
-        this.statusTeamA = statusTeamA;
-    }
-
     public int getBabak() {
         return babak;
     }
@@ -275,14 +266,6 @@ public class Pertandingan {
 
     public void setFormasiTeamB(String formasiTeamB) {
         this.formasiTeamB = formasiTeamB;
-    }
-
-    public int getJumlahAnggotaTeamB() {
-        return jumlahAnggotaTeamB;
-    }
-
-    public void setJumlahAnggotaTeamB(int jumlahAnggotaTeamB) {
-        this.jumlahAnggotaTeamB = jumlahAnggotaTeamB;
     }
 
     public int getPassingTeamB() {
@@ -397,35 +380,84 @@ public class Pertandingan {
         this.redcardTeamB = redcardTeamB;
     }
 
-    public String getStatusTeamB() {
-        return statusTeamB;
-    }
-
-    public void setStatusTeamB(String statusTeamB) {
-        this.statusTeamB = statusTeamB;
-    }
-
-    public Double getPosessionTeamA() {
+    public int getPosessionTeamA() {
         return posessionTeamA;
     }
 
-    public void setPosessionTeamA(Double posessionTeamA) {
+    public void setPosessionTeamA(int posessionTeamA) {
         this.posessionTeamA = posessionTeamA;
     }
 
-    public Double getPosessionTeamB() {
+    public int getPosessionTeamB() {
         return posessionTeamB;
     }
 
-    public void setPosessionTeamB(Double posessionTeamB) {
+    public void setPosessionTeamB(int posessionTeamB) {
         this.posessionTeamB = posessionTeamB;
     }
 
-    public Date getTanggalpertandingan() {
-        return tanggalpertandingan;
+    public int getIdPertandingan() {
+        return idPertandingan;
     }
 
-    public void setTanggalpertandingan(Date tanggalpertandingan) {
-        this.tanggalpertandingan = tanggalpertandingan;
+    public void setIdPertandingan(int idPertandingan) {
+        this.idPertandingan = idPertandingan;
+    }
+
+
+    public Date getWaktupertandingan() {
+        return waktupertandingan;
+    }
+
+    public void setWaktupertandingan(Date waktupertandingan) {
+        this.waktupertandingan = waktupertandingan;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public int getOffsideTeamA() {
+        return offsideTeamA;
+    }
+
+    public void setOffsideTeamA(int offsideTeamA) {
+        this.offsideTeamA = offsideTeamA;
+    }
+
+    public int getOffsideTeamB() {
+        return offsideTeamB;
+    }
+
+    public void setOffsideTeamB(int offsideTeamB) {
+        this.offsideTeamB = offsideTeamB;
+    }
+
+    public int getFoulTeamA() {
+        return foulTeamA;
+    }
+
+    public void setFoulTeamA(int foulTeamA) {
+        this.foulTeamA = foulTeamA;
+    }
+
+    public int getFoulTeamB() {
+        return foulTeamB;
+    }
+
+    public void setFoulTeamB(int foulTeamB) {
+        this.foulTeamB = foulTeamB;
     }
 }

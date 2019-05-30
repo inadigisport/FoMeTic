@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class PertandinganDBHandler extends SQLiteOpenHelper {
@@ -31,10 +32,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     public static final String JUMLAH_PINALTY_TEAM_A = "pinaltyTeamA";
     public static final String JUMLAH_GOALKICK_TEAM_A = "goalkickTeamA";
     public static final String JUMLAH_CORNERKICK_TEAM_A = "cornerkickTeamA";
-    public static final String COLUMN_JUMLAH_ANGGOTA_TEAM_A = "jumlahAnggotaTeamA";
     public static final String JUMLAH_YELLOW_CARD_TEAM_A = "yellowCardTeamA";
     public static final String JUMLAH_RED_CARD_TEAM_A =  "redCardTeamA";
-    public static final String STATUS_TEAM_A =  "statusTeamA";
     public static final String COLUMN_NAMA_TEAM_B = "namaTeamB";
     public static final String COLUMN_FORMASI_TEAM_B = "formasiTeamB";
     public static final String JUMLAH_PASSING_TEAM_B = "passingTeamB";
@@ -49,14 +48,18 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     public static final String JUMLAH_PINALTY_TEAM_B = "pinaltyTeamB";
     public static final String JUMLAH_GOALKICK_TEAM_B = "goalkickTeamB";
     public static final String JUMLAH_CORNERKICK_TEAM_B = "cornerkickTeamB";
-    public static final String COLUMN_JUMLAH_ANGGOTA_TEAM_B = "jumlahAnggotaTeamB";
     public static final String JUMLAH_YELLOW_CARD_TEAM_B = "yellowCardTeamB";
     public static final String JUMLAH_RED_CARD_TEAM_B =  "redCardTeamB";
-    public static final String STATUS_TEAM_B =  "statusTeamB";
     public static final String BABAK =  "babak";
     public static final String POSESSION_TEAMA = "posessionteamA";
     public static final String POSESSION_TEAMB = "posessionteamB";
     public static final String TANGGAL_PERTANDINGAN = "tanggalpertandingan";
+    public static final String EVENT = "event";
+    public static final String VENUE = "venue";
+    public static final String OFFSIDE_TEAM_A ="offsideteamA";
+    public static final String OFFSIDE_TEAM_B ="offsideteamB";
+    public static final String FOUL_TEAM_A ="foulteamA";
+    public static final String FOUL_TEAM_B ="foulteamB";
 
     public PertandinganDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -64,7 +67,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN+" ("+ID_PERTANDINGAN+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAMA_TEAM_A+" STRING, "+COLUMN_FORMASI_TEAM_A+" STRING, "+JUMLAH_PASSING_TEAM_A+" INT, "+JUMLAH_TACKLING_TEAM_A+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_A+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_A+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_A+" INT, "+JUMLAH_INTERCEPT_TEAM_A+" INT, "+JUMLAH_SAVES_TEAM_A+" INT,"+JUMLAH_THROWIN_TEAM_A+" INT, "+JUMLAH_FREEKICK_TEAM_A+" INT, "+JUMLAH_PINALTY_TEAM_A+" INT, "+JUMLAH_GOALKICK_TEAM_A+" INT, "+JUMLAH_CORNERKICK_TEAM_A+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_A+" INT, "+JUMLAH_RED_CARD_TEAM_A+" INT, "+JUMLAH_YELLOW_CARD_TEAM_A+" INT, "+STATUS_TEAM_A+" STRING, "+COLUMN_NAMA_TEAM_B+" STRING, "+COLUMN_FORMASI_TEAM_B+" STRING, "+JUMLAH_PASSING_TEAM_B+" INT, "+JUMLAH_TACKLING_TEAM_B+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_B+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_B+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_B+" INT, "+JUMLAH_INTERCEPT_TEAM_B+" INT, "+JUMLAH_SAVES_TEAM_B+" INT,"+JUMLAH_THROWIN_TEAM_B+" INT, "+JUMLAH_FREEKICK_TEAM_B+" INT, "+JUMLAH_PINALTY_TEAM_B+" INT, "+JUMLAH_GOALKICK_TEAM_B+" INT, "+JUMLAH_CORNERKICK_TEAM_B+" INT, "+COLUMN_JUMLAH_ANGGOTA_TEAM_B+" INT, "+JUMLAH_RED_CARD_TEAM_B+" INT, "+JUMLAH_YELLOW_CARD_TEAM_B+" INT, "+STATUS_TEAM_B+" STRING, "+BABAK+" INT, "+ID_TEAMA+" INT, "+ID_TEAMB+" INT, "+POSESSION_TEAMA+" DOUBLE, "+POSESSION_TEAMB+ " DOUBLE, "+TANGGAL_PERTANDINGAN+ " DATE)";;
+        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN+" ("+ID_PERTANDINGAN+" INTEGER, "+COLUMN_NAMA_TEAM_A+" STRING, "+COLUMN_FORMASI_TEAM_A+" STRING, "+JUMLAH_PASSING_TEAM_A+" INT, "+JUMLAH_TACKLING_TEAM_A+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_A+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_A+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_A+" INT, "+JUMLAH_INTERCEPT_TEAM_A+" INT, "+JUMLAH_SAVES_TEAM_A+" INT,"+JUMLAH_THROWIN_TEAM_A+" INT, "+JUMLAH_FREEKICK_TEAM_A+" INT, "+JUMLAH_PINALTY_TEAM_A+" INT, "+JUMLAH_GOALKICK_TEAM_A+" INT, "+JUMLAH_CORNERKICK_TEAM_A+" INT, "+JUMLAH_RED_CARD_TEAM_A+" INT, "+JUMLAH_YELLOW_CARD_TEAM_A+" INT, "+COLUMN_NAMA_TEAM_B+" STRING, "+COLUMN_FORMASI_TEAM_B+" STRING, "+JUMLAH_PASSING_TEAM_B+" INT, "+JUMLAH_TACKLING_TEAM_B+" INT, "+JUMLAH_SHOOT_GOAL_TEAM_B+" INT, "+JUMLAH_SHOOT_ON_TARGET_TEAM_B+" INT, "+JUMLAH_SHOOT_OFF_TARGET_TEAM_B+" INT, "+JUMLAH_INTERCEPT_TEAM_B+" INT, "+JUMLAH_SAVES_TEAM_B+" INT,"+JUMLAH_THROWIN_TEAM_B+" INT, "+JUMLAH_FREEKICK_TEAM_B+" INT, "+JUMLAH_PINALTY_TEAM_B+" INT, "+JUMLAH_GOALKICK_TEAM_B+" INT, "+JUMLAH_CORNERKICK_TEAM_B+" INT, "+JUMLAH_RED_CARD_TEAM_B+" INT, "+JUMLAH_YELLOW_CARD_TEAM_B+" INT, "+BABAK+" INT, "+ID_TEAMA+" INT, "+ID_TEAMB+" INT, "+POSESSION_TEAMA+" DOUBLE, "+POSESSION_TEAMB+ " DOUBLE, "+TANGGAL_PERTANDINGAN+ " STRING, "+EVENT+" STRING, "+VENUE+" STRING, "+OFFSIDE_TEAM_A+" INT, "+OFFSIDE_TEAM_B+" INT, "+FOUL_TEAM_A+" INT, "+FOUL_TEAM_B+" INT)";
         db.execSQL(createTableTeam);
     }
 
@@ -113,61 +116,65 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
             int cornerkick_team_a = cursor.getInt(14);
 
-            int jumlah_squad_team_a = cursor.getInt(15);
+            int yellowcard_team_a = cursor.getInt(15);
 
-            int yellowcard_team_a = cursor.getInt(16);
+            int redcard_team_a = cursor.getInt(16);
 
-            int redcard_team_a = cursor.getInt(17);
+            String nama_team_b = cursor.getString(17);
 
-            String status_team_a = cursor.getString(18);
+            String formasi_team_b = cursor.getString(18);
 
-            String nama_team_b = cursor.getString(19);
+            int passing_team_b = cursor.getInt(19);
 
-            String formasi_team_b = cursor.getString(20);
+            int tackling_team_b = cursor.getInt(20);
 
-            int passing_team_b = cursor.getInt(21);
+            int goal_team_b = cursor.getInt(21);
 
-            int tackling_team_b = cursor.getInt(22);
+            int shoot_ongoal_team_b = cursor.getInt(22);
 
-            int goal_team_b = cursor.getInt(23);
+            int shoot_offgoal_team_b = cursor.getInt(23);
 
-            int shoot_ongoal_team_b = cursor.getInt(24);
+            int intercept_team_b = cursor.getInt(24);
 
-            int shoot_offgoal_team_b = cursor.getInt(25);
+            int saves_team_b = cursor.getInt(25);
 
-            int intercept_team_b = cursor.getInt(26);
+            int throwin_team_b = cursor.getInt(26);
 
-            int saves_team_b = cursor.getInt(27);
+            int freekick_team_b = cursor.getInt(27);
 
-            int throwin_team_b = cursor.getInt(28);
+            int pinalty_team_b = cursor.getInt(28);
 
-            int freekick_team_b = cursor.getInt(29);
+            int goalkick_team_b = cursor.getInt(29);
 
-            int pinalty_team_b = cursor.getInt(30);
+            int cornerkick_team_b = cursor.getInt(30);
 
-            int goalkick_team_b = cursor.getInt(31);
+            int yellowcard_team_b = cursor.getInt(31);
 
-            int cornerkick_team_b = cursor.getInt(32);
+            int redcard_team_b = cursor.getInt(32);
 
-            int jumlah_squad_team_b = cursor.getInt(33);
+            int babak= cursor.getInt(33);
 
-            int yellowcard_team_b = cursor.getInt(34);
+            int idteama= cursor.getInt(34);
 
-            int redcard_team_b = cursor.getInt(35);
+            int idteamb= cursor.getInt(35);
 
-            String status_team_b = cursor.getString(36);
+            Double posessionteama= cursor.getDouble(36);
 
-            int babak= cursor.getInt(37);
+            Double posessionteamb= cursor.getDouble(37);
 
-            int idteama= cursor.getInt(38);
+            String waktupertandingan = cursor.getString(38);
 
-            int idteamb= cursor.getInt(39);
+            String event = cursor.getString(39);
 
-            Double posessionteama= cursor.getDouble(40);
+            String venue = cursor.getString(40);
 
-            Double posessionteamb= cursor.getDouble(41);
+            int offsideteama= cursor.getInt(41);
 
-            String tanggal = cursor.getString(42);
+            int offsideteamb= cursor.getInt(42);
+
+            int foulteama= cursor.getInt(43);
+
+            int foulteamb= cursor.getInt(44);
 
             result += String.valueOf(id_pertandingan) + " " + nama_team_a + " "+ goal_team_a+" - "+goal_team_b+ " "+nama_team_b+
 
@@ -184,48 +191,51 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
     public void addHandler(Pertandingan pertandingan) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NAMA_TEAM_A, pertandingan.getNamaTeamA());
-        values.put(COLUMN_FORMASI_TEAM_A, pertandingan.getFormasiTeamA());
-        values.put(JUMLAH_PASSING_TEAM_A, pertandingan.getPassingTeamA());
-        values.put(JUMLAH_TACKLING_TEAM_A, pertandingan.getTacklingTeamA());
-        values.put(JUMLAH_SHOOT_GOAL_TEAM_A, pertandingan.getGoalTeamA());
-        values.put(JUMLAH_SHOOT_ON_TARGET_TEAM_A, pertandingan.getShootOnTargetTeamA());
-        values.put(JUMLAH_SHOOT_OFF_TARGET_TEAM_A, pertandingan.getShootOffTargetTeamA());
-        values.put(JUMLAH_INTERCEPT_TEAM_A, pertandingan.getInterceptTeamA());
-        values.put(JUMLAH_SAVES_TEAM_A, pertandingan.getSavesTeamA());
-        values.put(JUMLAH_THROWIN_TEAM_A, pertandingan.getThrowinTeamA());
-        values.put(JUMLAH_FREEKICK_TEAM_A, pertandingan.getFreekickTeamA());
-        values.put(JUMLAH_PINALTY_TEAM_A, pertandingan.getPinaltyTeamA());
-        values.put(JUMLAH_GOALKICK_TEAM_A, pertandingan.getGoalkickTeamA());
-        values.put(JUMLAH_CORNERKICK_TEAM_A, pertandingan.getCornerkickTeamA());
-        values.put(COLUMN_JUMLAH_ANGGOTA_TEAM_A, pertandingan.getJumlahAnggotaTeamA());
-        values.put(JUMLAH_YELLOW_CARD_TEAM_A, pertandingan.getYellowcardTeamA());
-        values.put(JUMLAH_RED_CARD_TEAM_A, pertandingan.getRedcardTeamA());
-        values.put(STATUS_TEAM_A, pertandingan.getStatusTeamA());
-        values.put(COLUMN_NAMA_TEAM_B, pertandingan.getNamaTeamB());
-        values.put(COLUMN_FORMASI_TEAM_B, pertandingan.getFormasiTeamB());
-        values.put(JUMLAH_PASSING_TEAM_B, pertandingan.getPassingTeamB());
-        values.put(JUMLAH_TACKLING_TEAM_B, pertandingan.getTacklingTeamB());
-        values.put(JUMLAH_SHOOT_GOAL_TEAM_B, pertandingan.getGoalTeamB());
-        values.put(JUMLAH_SHOOT_ON_TARGET_TEAM_B, pertandingan.getShootOnTargetTeamB());
-        values.put(JUMLAH_SHOOT_OFF_TARGET_TEAM_B, pertandingan.getShootOffTargetTeamB());
-        values.put(JUMLAH_INTERCEPT_TEAM_B, pertandingan.getInterceptTeamB());
-        values.put(JUMLAH_SAVES_TEAM_B, pertandingan.getSavesTeamB());
-        values.put(JUMLAH_THROWIN_TEAM_B, pertandingan.getThrowinTeamB());
-        values.put(JUMLAH_FREEKICK_TEAM_B, pertandingan.getFreekickTeamB());
-        values.put(JUMLAH_PINALTY_TEAM_B, pertandingan.getPinaltyTeamB());
-        values.put(JUMLAH_GOALKICK_TEAM_B, pertandingan.getGoalkickTeamB());
-        values.put(JUMLAH_CORNERKICK_TEAM_B, pertandingan.getCornerkickTeamB());
-        values.put(COLUMN_JUMLAH_ANGGOTA_TEAM_B, pertandingan.getJumlahAnggotaTeamB());
-        values.put(JUMLAH_YELLOW_CARD_TEAM_B, pertandingan.getYellowcardTeamB());
-        values.put(JUMLAH_RED_CARD_TEAM_B, pertandingan.getRedcardTeamB());
-        values.put(STATUS_TEAM_B, pertandingan.getStatusTeamB());
-        values.put(BABAK, pertandingan.getBabak());
-        values.put(ID_TEAMA,pertandingan.getIdTeamA());
-        values.put(ID_TEAMB,pertandingan.getIdTeamB());
+        values.put(ID_PERTANDINGAN, pertandingan.getIdPertandingan()); //done
+        values.put(COLUMN_NAMA_TEAM_A, pertandingan.getNamaTeamA()); //done
+        values.put(COLUMN_FORMASI_TEAM_A, pertandingan.getFormasiTeamA()); //done
+        values.put(JUMLAH_PASSING_TEAM_A, pertandingan.getPassingTeamA()); //done
+        values.put(JUMLAH_TACKLING_TEAM_A, pertandingan.getTacklingTeamA()); //done
+        values.put(JUMLAH_SHOOT_GOAL_TEAM_A, pertandingan.getGoalTeamA()); //done
+        values.put(JUMLAH_SHOOT_ON_TARGET_TEAM_A, pertandingan.getShootOnTargetTeamA()); //done
+        values.put(JUMLAH_SHOOT_OFF_TARGET_TEAM_A, pertandingan.getShootOffTargetTeamA()); //done
+        values.put(JUMLAH_INTERCEPT_TEAM_A, pertandingan.getInterceptTeamA()); //done
+        values.put(JUMLAH_SAVES_TEAM_A, pertandingan.getSavesTeamA());//done
+        values.put(JUMLAH_THROWIN_TEAM_A, pertandingan.getThrowinTeamA()); //done
+        values.put(JUMLAH_FREEKICK_TEAM_A, pertandingan.getFreekickTeamA()); //done
+        values.put(JUMLAH_PINALTY_TEAM_A, pertandingan.getPinaltyTeamA()); //done
+        values.put(JUMLAH_GOALKICK_TEAM_A, pertandingan.getGoalkickTeamA()); //done
+        values.put(JUMLAH_CORNERKICK_TEAM_A, pertandingan.getCornerkickTeamA()); //done
+        values.put(JUMLAH_YELLOW_CARD_TEAM_A, pertandingan.getYellowcardTeamA()); //done
+        values.put(JUMLAH_RED_CARD_TEAM_A, pertandingan.getRedcardTeamA());//done
+        values.put(COLUMN_NAMA_TEAM_B, pertandingan.getNamaTeamB());//done
+        values.put(COLUMN_FORMASI_TEAM_B, pertandingan.getFormasiTeamB()); //done
+        values.put(JUMLAH_PASSING_TEAM_B, pertandingan.getPassingTeamB()); //done
+        values.put(JUMLAH_TACKLING_TEAM_B, pertandingan.getTacklingTeamB()); //done
+        values.put(JUMLAH_SHOOT_GOAL_TEAM_B, pertandingan.getGoalTeamB()); //done
+        values.put(JUMLAH_SHOOT_ON_TARGET_TEAM_B, pertandingan.getShootOnTargetTeamB()); //done
+        values.put(JUMLAH_SHOOT_OFF_TARGET_TEAM_B, pertandingan.getShootOffTargetTeamB()); //done
+        values.put(JUMLAH_INTERCEPT_TEAM_B, pertandingan.getInterceptTeamB()); //done
+        values.put(JUMLAH_SAVES_TEAM_B, pertandingan.getSavesTeamB()); //done
+        values.put(JUMLAH_THROWIN_TEAM_B, pertandingan.getThrowinTeamB()); //done
+        values.put(JUMLAH_FREEKICK_TEAM_B, pertandingan.getFreekickTeamB()); //done
+        values.put(JUMLAH_PINALTY_TEAM_B, pertandingan.getPinaltyTeamB()); //done
+        values.put(JUMLAH_GOALKICK_TEAM_B, pertandingan.getGoalkickTeamB()); //done
+        values.put(JUMLAH_CORNERKICK_TEAM_B, pertandingan.getCornerkickTeamB()); //done
+        values.put(JUMLAH_YELLOW_CARD_TEAM_B, pertandingan.getYellowcardTeamB()); //done
+        values.put(JUMLAH_RED_CARD_TEAM_B, pertandingan.getRedcardTeamB()); //done
+        values.put(BABAK, pertandingan.getBabak()); //done
+        values.put(ID_TEAMA,pertandingan.getIdTeamA()); //done
+        values.put(ID_TEAMB,pertandingan.getIdTeamB()); //done
         values.put(POSESSION_TEAMA,pertandingan.getPosessionTeamA());
         values.put(POSESSION_TEAMB,pertandingan.getPosessionTeamB());
-        values.put(TANGGAL_PERTANDINGAN, pertandingan.getTanggalpertandingan().toString());
+        values.put(TANGGAL_PERTANDINGAN, pertandingan.getWaktupertandingan().toString());
+        values.put(EVENT, pertandingan.getEvent());
+        values.put(VENUE, pertandingan.getVenue());
+        values.put(OFFSIDE_TEAM_A,pertandingan.getOffsideTeamA());
+        values.put(OFFSIDE_TEAM_B,pertandingan.getOffsideTeamB());
+        values.put(FOUL_TEAM_A, pertandingan.getFoulTeamA());
+        values.put(FOUL_TEAM_B, pertandingan.getFoulTeamB());
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_PERTANDINGAN, null, values);

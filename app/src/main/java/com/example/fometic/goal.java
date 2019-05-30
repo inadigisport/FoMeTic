@@ -1,7 +1,5 @@
 package com.example.fometic;
 
-import android.widget.Chronometer;
-
 public class goal {
     private int idpertandingan;
     private int idteam;
@@ -9,13 +7,14 @@ public class goal {
     private String namateam;
     private String namapemain;
     private int nomorpunggung;
-    private Double menit;
-    double elapsedchronometerteamint;
-    double elapsedchronometerteambint;
+    private String menit;
+    private String statusgoal;
+    private double elapsedchronometerteamint;
+    private double elapsedchronometerteambint;
 
     public goal(){}
 
-    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, Double menit, int idteam, int idpemain){
+    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, String menit, int idteam, int idpemain, String statusgoal){
         this.idpertandingan=idpertandingan;
         this.namapemain=namapemain;
         this.namateam=namateam;
@@ -23,6 +22,7 @@ public class goal {
         this.menit=menit;
         this.setIdteam(idteam);
         this.setIdpemain(idpemain);
+        this.setStatusgoal(statusgoal);
     }
 
 
@@ -58,11 +58,11 @@ public class goal {
         this.nomorpunggung = nomorpunggung;
     }
 
-    public Double getMenit() {
+    public String getMenit() {
         return menit;
     }
 
-    public void setMenit(Double menit) {
+    public void setMenit(String menit) {
         this.menit = menit;
     }
 
@@ -82,4 +82,27 @@ public class goal {
         this.idpemain = idpemain;
     }
 
+    public String getStatusgoal() {
+        return statusgoal;
+    }
+
+    public void setStatusgoal(String statusgoal) {
+        this.statusgoal = statusgoal;
+    }
+
+    public double getElapsedchronometerteamint() {
+        return elapsedchronometerteamint;
+    }
+
+    public void setElapsedchronometerteamint(double elapsedchronometerteamint) {
+        this.elapsedchronometerteamint = elapsedchronometerteamint;
+    }
+
+    public double getElapsedchronometerteambint() {
+        return elapsedchronometerteambint;
+    }
+
+    public void setElapsedchronometerteambint(double elapsedchronometerteambint) {
+        this.elapsedchronometerteambint = elapsedchronometerteambint;
+    }
 }

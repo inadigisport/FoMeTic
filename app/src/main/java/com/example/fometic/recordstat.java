@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -61,8 +62,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     ArrayList<String > cetakgoalteamb = new ArrayList<>();
     ArrayAdapter<String > arrayAdaptercetakgoalteamb;
 
-
-
     int ballpossesionteama;
     int ballpossesionteamb;
     long elapsedchronometerteam;
@@ -96,21 +95,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     int shootofftargetteama;
     int shootofftargetteamb;
     int running;
-
-
-
-
-
-
-
-
-
-
+    String venue;
+    String event;
+    String timematch;
 
     Pertandingan tanding = new Pertandingan();
     PemainDBHandler dbpemain = new PemainDBHandler(this);
     PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
     PertandinganPemainDBHandler dbpertandinganpemain = new PertandinganPemainDBHandler(this);
+    goalDBHandler dbgoal = new goalDBHandler(this);
+    TeamDBHandler dbteam=new TeamDBHandler(this);
 
 
     @Override
@@ -127,6 +121,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         venue=bundle.getString("venue");
         event=bundle.getString("event");
         timematch=bundle.getString("timematch");
+        tanding.setWaktupertandingan(Calendar.getInstance().getTime());
 
 
 
@@ -197,15 +192,41 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
     }
 
+    public int getidpertandingan(){
+        Cursor datapertandingan=dbpertandingan.loadHandler();
+        int i=1;
+        if(datapertandingan.moveToFirst()) {
+            Log.d("Enter if ", "input goal");
+            while (datapertandingan.moveToNext()) {
+                Log.d("Enter while ", "input goal");
+                if (datapertandingan.getInt(33) == 1) {
+                    i = datapertandingan.getInt(0);
+                } else {
+                    i = i + 1;
+                }
+            }
+        }
+        return i;
+    }
+
     public void stop1sthalf() {
        AlertDialog.Builder builder = new AlertDialog.Builder(this);
        builder.setTitle("End of 1st Half")
                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
-
+                       tanding.setBabak(1);
+                       tanding.setIdPertandingan(getidpertandingan());
+                       tanding.setIdTeamA(dbteam.loaddataidteam(teamA));
+                       tanding.setIdTeamB(dbteam.loaddataidteam(teamB));
+                       tanding.setNamaTeamA(teamA);
+                       tanding.setNamaTeamB(teamB);
+                       tanding.setFormasiTeamA(formationteama);
+                       tanding.setFormasiTeamB(formationteamb);
+                       tanding.setVenue(venue);
+                       tanding.setEvent(event);
+                       dbpertandingan.addHandler(tanding);
                        start2ndhalf();
-
                    }
 
                })
@@ -298,6 +319,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
             Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
+            tanding.setPosessionTeamA(ballpossesionteama);
+            tanding.setPosessionTeamB(ballpossesionteamb);
         }
         else {
             chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -330,6 +353,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
             Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
+            tanding.setPosessionTeamA(ballpossesionteama);
+            tanding.setPosessionTeamB(ballpossesionteamb);
         }
         else {
             chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -366,6 +391,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("Cek possesion", Double.toString(ballpossesionteamb));
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+            tanding.setPosessionTeamA(ballpossesionteama);
+            tanding.setPosessionTeamB(ballpossesionteamb);
         }
         else {
             chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -394,6 +421,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("Cek possesion", Double.toString(ballpossesionteamb));
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
+            tanding.setPosessionTeamA(ballpossesionteama);
+            tanding.setPosessionTeamB(ballpossesionteamb);
         }
         else {
             chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -489,6 +518,214 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         passingstatusteama = "no";
         passingstatusteamb = "no";
     }
+
+    public void inputgoal(String nomor, String namateam, int i){
+        Log.d("Start ", "input goal");
+        PertandinganPemain tandingpemain = new PertandinganPemain();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        pertandinganpemain.moveToFirst();
+        Log.d("End of ", "input goal");
+        if(pertandinganpemain.moveToFirst()){
+            dbpertandinganpemain.updategoal(i,idpemain);
+            Log.d("id pertangingan exist",Integer.toString(i));
+            Log.d("jumlah goal",Integer.toString(jumlahgoalpemain(i,idpemain)));
+            //dbpertandinganpemain.loaddatapemain();
+        }
+        else{
+            Log.d("id pertangingan",Integer.toString(i));
+            Log.d("jumlah goal",Integer.toString(jumlahgoalpemain(i,idpemain)));
+            tandingpemain.setIdpemain(idpemain);
+            tandingpemain.setIdpertandingan(i);
+            tandingpemain.setJumlahgoal(tandingpemain.getJumlahgoal()+1);
+            //Log.d("id pemain", Integer.toString(listpemainint));
+            //Log.d("id pertangingan",Integer.toString(i));
+            dbpertandinganpemain.addHandler(tandingpemain);
+
+        }
+    }
+
+    public void inputyellow(String nomor, String namateam, int i){
+        Log.d("Start ", "input yellow");
+        PertandinganPemain tandingpemain = new PertandinganPemain();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        pertandinganpemain.moveToFirst();
+        //Log.d("End of ", "input yellow");
+        if(pertandinganpemain.moveToFirst()){
+            dbpertandinganpemain.updateyellow(i,idpemain);
+            Log.d("id pertangingan exist",Integer.toString(i));
+            Log.d("jumlah yellow",Integer.toString(jumlahyellowpemain(i,idpemain)));
+            //dbpertandinganpemain.loaddatapemain();
+        }
+        else{
+            Log.d("id pertangingan",Integer.toString(i));
+            Log.d("jumlah yellow",Integer.toString(jumlahyellowpemain(i,idpemain)));
+            tandingpemain.setIdpemain(idpemain);
+            tandingpemain.setIdpertandingan(i);
+            tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard()+1);
+            //Log.d("id pemain", Integer.toString(listpemainint));
+            //Log.d("id pertangingan",Integer.toString(i));
+            dbpertandinganpemain.addHandler(tandingpemain);
+
+        }
+    }
+
+    public void inputred(String nomor, String namateam, int i){
+        Log.d("Start ", "input red");
+        PertandinganPemain tandingpemain = new PertandinganPemain();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        pertandinganpemain.moveToFirst();
+        //Log.d("End of ", "input red");
+        if(pertandinganpemain.moveToFirst()){
+            dbpertandinganpemain.updatered(i,idpemain);
+            Log.d("id pertangingan exist",Integer.toString(i));
+            Log.d("jumlah red",Integer.toString(jumlahredpemain(i,idpemain)));
+            //dbpertandinganpemain.loaddatapemain();
+        }
+        else{
+            Log.d("id pertangingan",Integer.toString(i));
+            Log.d("jumlah red",Integer.toString(jumlahredpemain(i,idpemain)));
+            tandingpemain.setIdpemain(idpemain);
+            tandingpemain.setIdpertandingan(i);
+            tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard()+1);
+            //Log.d("id pemain", Integer.toString(listpemainint));
+            //Log.d("id pertangingan",Integer.toString(i));
+            dbpertandinganpemain.addHandler(tandingpemain);
+
+        }
+    }
+
+    public void inputshotongoal(String nomor, String namateam, int i){
+        Log.d("Start ", "on goal");
+        PertandinganPemain tandingpemain = new PertandinganPemain();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        pertandinganpemain.moveToFirst();
+        //Log.d("End of ", "input on goal");
+        if(pertandinganpemain.moveToFirst()){
+            dbpertandinganpemain.updateshotongoal(i,idpemain);
+            Log.d("id pertangingan exist",Integer.toString(i));
+            Log.d("jumlah on goal",Integer.toString(jumlahongoalpemain(i,idpemain)));
+            //dbpertandinganpemain.loaddatapemain();
+        }
+        else{
+            Log.d("id pertangingan",Integer.toString(i));
+            Log.d("jumlah on goal",Integer.toString(jumlahongoalpemain(i,idpemain)));
+            tandingpemain.setIdpemain(idpemain);
+            tandingpemain.setIdpertandingan(i);
+            tandingpemain.setJumlahshotontarget(tandingpemain.getJumlahshotontarget()+1);
+            //Log.d("id pemain", Integer.toString(listpemainint));
+            //Log.d("id pertangingan",Integer.toString(i));
+            dbpertandinganpemain.addHandler(tandingpemain);
+
+        }
+    }
+
+    public void inputshotoffgoal(String nomor, String namateam, int i){
+        Log.d("Start ", "off goal");
+        PertandinganPemain tandingpemain = new PertandinganPemain();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        pertandinganpemain.moveToFirst();
+        //Log.d("End of ", "input off goal");
+        if(pertandinganpemain.moveToFirst()){
+            dbpertandinganpemain.updateshotoffgoal(i,idpemain);
+            Log.d("id pertangingan exist",Integer.toString(i));
+            Log.d("jumlah off goal",Integer.toString(jumlahoffgoalpemain(i,idpemain)));
+            //dbpertandinganpemain.loaddatapemain();
+        }
+        else{
+            Log.d("id pertangingan",Integer.toString(i));
+            Log.d("jumlah off goal",Integer.toString(jumlahoffgoalpemain(i,idpemain)));
+            tandingpemain.setIdpemain(idpemain);
+            tandingpemain.setIdpertandingan(i);
+            tandingpemain.setJumlahshotofftarget(tandingpemain.getJumlahshotofftarget()+1);
+            //Log.d("id pemain", Integer.toString(listpemainint));
+            //Log.d("id pertangingan",Integer.toString(i));
+            dbpertandinganpemain.addHandler(tandingpemain);
+
+        }
+    }
+
+    public void inputdatagoal(String nomor, String namateam, int i, String waktu, String status){
+        Log.d("Start ", "off goal");
+        goal datagoal = new goal();
+        int idpemain=dbpemain.loaddataidpemain(nomor,namateam);
+        int idteam=dbteam.loaddataidteam(namateam);
+        //Log.d("End of ", "input off goal");
+        datagoal.setIdpertandingan(i);
+        datagoal.setIdpemain(idpemain);
+        datagoal.setIdteam(idteam);
+        datagoal.setMenit(waktu);
+        datagoal.setStatusgoal(status);
+        dbgoal.addHandler(datagoal);
+    }
+
+    public int jumlahgoalpemain(int idpertandingan, int idpemain){
+        int goal;
+        Cursor jumlahgoal=dbpertandinganpemain.loaddatagoal(idpemain,idpertandingan);
+        if(jumlahgoal.moveToFirst()){
+            jumlahgoal.moveToFirst();
+            goal=jumlahgoal.getInt(2);
+        }else {
+            goal=0;
+        }
+        return goal;
+    }
+
+
+    public int jumlahongoalpemain(int idpertandingan, int idpemain){
+        int goal;
+        Cursor jumlahgoal=dbpertandinganpemain.loaddatagoal(idpemain,idpertandingan);
+        if(jumlahgoal.moveToFirst()){
+            jumlahgoal.moveToFirst();
+            goal=jumlahgoal.getInt(5);
+        }else {
+            goal=0;
+        }
+        return goal;
+    }
+
+    public int jumlahoffgoalpemain(int idpertandingan, int idpemain){
+        int goal;
+        Cursor jumlahgoal=dbpertandinganpemain.loaddatagoal(idpemain,idpertandingan);
+        if(jumlahgoal.moveToFirst()){
+            jumlahgoal.moveToFirst();
+            goal=jumlahgoal.getInt(6);
+        }else {
+            goal=0;
+        }
+        return goal;
+    }
+
+
+    public int jumlahyellowpemain(int idpertandingan, int idpemain){
+        int yellow;
+        Cursor jumlahyellow=dbpertandinganpemain.loaddatagoal(idpemain,idpertandingan);
+        if(jumlahyellow.moveToFirst()){
+            jumlahyellow.moveToFirst();
+            yellow=jumlahyellow.getInt(3);
+        }else {
+            yellow=0;
+        }
+        return yellow;
+    }
+
+    public int jumlahredpemain(int idpertandingan, int idpemain){
+        int red;
+        Cursor jumlahred=dbpertandinganpemain.loaddatagoal(idpemain,idpertandingan);
+        if(jumlahred.moveToFirst()){
+            jumlahred.moveToFirst();
+            red=jumlahred.getInt(4);
+        }else {
+            red=0;
+        }
+        return red;
+    }
+
+
     public void cornerkickteamb(View v) {
        cornerkickteamb = cornerkickteamb + 1;
         Log.d("corner kick team b", Integer.toString((cornerkickteamb)));
@@ -507,8 +744,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         List<String> listpemaingoalteama=new ArrayList<String>();
         datagoalteama.moveToFirst();
         while (!datagoalteama.isAfterLast()) {
-            listpemaingoalteama.add(datagoalteama.getString(0));
-            Log.d("list pemain goal team a",datagoalteama.getString(0));
+            listpemaingoalteama.add(datagoalteama.getString(3));
+            Log.d("list pemain goal team a",datagoalteama.getString(3));
             datagoalteama.moveToNext();
         }
 
@@ -528,6 +765,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 goalteama = goalteama + 1;
                 shootontargetteama=shootontargetteama+1;
+                tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
+                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA()+1);
+                tanding.setPinaltyTeamA(tanding.getPinaltyTeamA()+1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
 
@@ -553,18 +793,28 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
 
-                Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                 List<String> listpemaingoalteama=new ArrayList<String>();
-                int i=0;
-                if (datagoalteama.moveToFirst()){
-                    while (!datagoalteama.isAfterLast()) {
-                        listpemaingoalteama.add(datagoalteama.getString(0));
-                        Log.d("Data spinner ",datagoalteama.getString(0));
-                        datagoalteama.moveToNext();
-                        i=i+1;
+                Cursor datapertandingan=dbpertandingan.loadHandler();
+                int i=1;
+                if(datapertandingan.moveToFirst()){
+                    Log.d("Enter if ", "input goal");
+                    while (datapertandingan.moveToNext()) {
+                        Log.d("Enter while ", "input goal");
+                        if (datapertandingan.getInt(33)==1){
+                            i=datapertandingan.getInt(0);
+                        }else {
+                            i=i+1;
+                        }
                     }
+                    inputgoal(pemain,teamA,i);
+                    inputshotongoal(pemain,teamA,i);
+                    inputdatagoal(pemain,teamA,i,array[0],"Pinalty");
                 }else{
-                    Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
+                    Log.d("belum ada ", "data pertadingan");
+                    inputgoal(pemain,teamA, i);
+                    inputshotongoal(pemain,teamA,i);
+                    inputdatagoal(pemain,teamA,i,array[0],"Pinalty");
                 }
                 dialog.dismiss();
             }
@@ -576,6 +826,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 shootontargetteama=shootontargetteama+1;
                 savesteamb=savesteamb+1;
+                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA()+1);
+                tanding.setSavesTeamB(tanding.getSavesTeamB()+1);
+                tanding.setPinaltyTeamA(tanding.getPinaltyTeamA()+1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
 
@@ -601,19 +854,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
 
-                Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                List<String> listpemaingoalteama=new ArrayList<String>();
-                int i=0;
-                if (datagoalteama.moveToFirst()){
-                    while (!datagoalteama.isAfterLast()) {
-                        listpemaingoalteama.add(datagoalteama.getString(0));
-                        Log.d("Data spinner ",datagoalteama.getString(0));
-                        datagoalteama.moveToNext();
-                        i=i+1;
-                    }
-                }else{
-                    Toast.makeText(recordstat.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
+                int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
 
                 dialog.dismiss();
             }
@@ -629,12 +870,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         builder.setView(mView);
         AlertDialog dialog = builder.create();
         dialog.show();
-        tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
-
-
-
-
-        tanding.setPinaltyTeamA(tanding.getPassingTeamA()+1);
         passingstatusteama = "no";
         passingstatusteamb = "no";
     }
@@ -643,20 +878,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.stop();
 
         TeamDBHandler dbgoalb = new TeamDBHandler(this);
-        Cursor loadDataTeamgoalb=dbgoalb.loaddatateam();
+        Cursor loadDataTeamgoalb=dbpemain.loaddatateam(teamB);
         List<String> spinnerArraygoalb=new ArrayList<String>();
         loadDataTeamgoalb.moveToFirst();
         while (!loadDataTeamgoalb.isAfterLast()) {
-            spinnerArraygoalb.add(loadDataTeamgoalb.getString(1));
-            Log.d("Data spinner ",loadDataTeamgoalb.getString(1));
+            spinnerArraygoalb.add(loadDataTeamgoalb.getString(3));
+            Log.d("Data spinner ",loadDataTeamgoalb.getString(3));
             loadDataTeamgoalb.moveToNext();
         }
         Cursor datagoalteamb=dbpemain.loaddatateam(teamB);
         List<String> listpemaingoalteamb=new ArrayList<String>();
         datagoalteamb.moveToFirst();
         while (!datagoalteamb.isAfterLast()) {
-            listpemaingoalteamb.add(datagoalteamb.getString(0));
-            Log.d("Data spinner ",datagoalteamb.getString(0));
+            listpemaingoalteamb.add(datagoalteamb.getString(3));
+            Log.d("Data spinner ",datagoalteamb.getString(3));
             datagoalteamb.moveToNext();
         }
         AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
@@ -666,8 +901,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb );
         mSpinnergoalb.setAdapter(arrayAdaptergoalb);
 
-        tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
-
 
         buildergoalb.setTitle("Pick Player");
         buildergoalb.setPositiveButton("GOAL", new DialogInterface.OnClickListener() {
@@ -676,7 +909,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
                 goalteamb = goalteamb + 1;
                 shootontargetteamb=shootontargetteamb+1;
-
+                tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
+                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB()+1);
+                tanding.setPinaltyTeamB(tanding.getPinaltyTeamB()+1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
 
@@ -697,7 +932,27 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 cetakgoalteamb.add(goalnoteb);
                 arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
-
+                Cursor datapertandingan=dbpertandingan.loadHandler();
+                int i=1;
+                if(datapertandingan.moveToFirst()){
+                    Log.d("Enter if ", "input goal");
+                    while (datapertandingan.moveToNext()) {
+                        Log.d("Enter while ", "input goal");
+                        if (datapertandingan.getInt(33)==1){
+                            i=datapertandingan.getInt(0);
+                        }else {
+                            i=i+1;
+                        }
+                    }
+                    inputgoal(pemainb,teamB,i);
+                    inputshotongoal(pemain,teamB,i);
+                    inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
+                }else{
+                    Log.d("belum ada ", "data pertadingan");
+                    inputgoal(pemainb,teamB, i);
+                    inputshotongoal(pemain,teamB,i);
+                    inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
+                }
 
 
                 dialog.dismiss();
@@ -709,7 +964,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             public void onClick(DialogInterface dialog, int which) {
                 shootontargetteamb=shootontargetteamb+1;
                 savesteama=savesteama+1;
-
+                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB()+1);
+                tanding.setSavesTeamA(tanding.getSavesTeamA()+1);
+                tanding.setPinaltyTeamB(tanding.getPinaltyTeamB()+1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
 
@@ -734,8 +991,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
 
 
-
-
                 dialog.dismiss();
             }
         });
@@ -751,7 +1006,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         buildergoalb.setView(mViewgoalb);
         AlertDialog dialoggoalb = buildergoalb.create();
         dialoggoalb.show();
-        tanding.setPinaltyTeamB(tanding.getPassingTeamB()+1);
         passingstatusteama = "no";
         passingstatusteamb = "no";
     }
@@ -899,6 +1153,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         startActivity(intent);
 
     }
+
+
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.goal:
@@ -908,8 +1164,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 List<String> listpemaingoalteama=new ArrayList<String>();
                 datagoalteama.moveToFirst();
                 while (!datagoalteama.isAfterLast()) {
-                    listpemaingoalteama.add(datagoalteama.getString(0));
-                    Log.d("list pemain goal team a",datagoalteama.getString(0));
+                    listpemaingoalteama.add(datagoalteama.getString(3));
+                    Log.d("list pemain goal team a",datagoalteama.getString(3));
                     datagoalteama.moveToNext();
                 }
 
@@ -935,6 +1191,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         cetakgoalteama.add(pemain);
                         goalteama = goalteama + 1;
                         shootontargetteama=shootontargetteama+1;
+                        tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
+                        tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA()+1);
                         String chronotext = chronometer.getText().toString();
 
                         String array[] = chronotext.split(":");
@@ -960,33 +1218,27 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Log.d("Pemain Goal Team A", pemain);
                         //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
                         //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                        Cursor datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                        //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                         Cursor datapertandingan=dbpertandingan.loadHandler();
-                        List<String> listpemaingoalteama=new ArrayList<String>();
-                        int i=0;
+                        int i=1;
                         if(datapertandingan.moveToFirst()){
-                        while (!datapertandingan.isAfterLast()) {
-                            datapertandingan.moveToNext();
-                            i=i+1;
-                        }
-                        }else{
-                            PertandinganPemain tandingpemain = new PertandinganPemain();
-                            Cursor cursorpemain=dbpemain.loaddataidpemain(pemain,teamA);
-                            List<Integer> listpemain = new ArrayList<>();
-
-                            cursorpemain.moveToFirst();
-                                while (!cursorpemain.isAfterLast()) {
-                                    cursorpemain.moveToNext();
-                                    listpemain.add(cursorpemain.getInt(1));
-                                    listpemainint=cursorpemain.getInt(1);
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
                                 }
-
-                            tandingpemain.setIdpemain(listpemainint);
-                            tandingpemain.setIdpertandingan(i);
-                            tandingpemain.setIdpertandingan(tandingpemain.getJumlahgoal()+1);
-                            Log.d("id pemain", Integer.toString(listpemainint));
-                            Log.d("id pertangingan",Integer.toString(i));
-                            dbpertandinganpemain.addHandler(tandingpemain);
+                            }
+                            inputgoal(pemain,teamA,i);
+                            inputshotongoal(pemain,teamA,i);
+                            inputdatagoal(pemain,teamA,i,array[0],"On Play");
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputgoal(pemain,teamA, i);
+                            inputshotongoal(pemain,teamA,i);
+                            inputdatagoal(pemain,teamA,i,array[0],"On Play");
                         }
                     }
 
@@ -1001,24 +1253,25 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builder.setView(mView);
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                tanding.setGoalTeamA(tanding.getGoalTeamA()+1);
 
                 return true;
             case R.id.shootontarget:
                 shootontargetteama = shootontargetteama+1;
                 savesteamb=savesteamb+1;
+                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA()+1);
+                tanding.setSavesTeamB(tanding.getSavesTeamB()+1);
                 //Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                 Cursor datashootontargeta=dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootontargeta=new ArrayList<String>();
                 datashootontargeta.moveToFirst();
                 while (!datashootontargeta.isAfterLast()) {
-                    listpemainshootontargeta.add(datashootontargeta.getString(0));
-                    Log.d("Data spinner ",datashootontargeta.getString(0));
+                    listpemainshootontargeta.add(datashootontargeta.getString(3));
+                    Log.d("Data spinner ",datashootontargeta.getString(3));
                     datashootontargeta.moveToNext();
                 }
                 AlertDialog.Builder buildershootontargeta = new AlertDialog.Builder(recordstat.this);
                 View mViewshootontargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnershootontargeta = (Spinner) mViewshootontargeta.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnershootontargeta = (Spinner) mViewshootontargeta.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdaptershootontargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargeta );
                 mSpinnershootontargeta.setAdapter(arrayAdaptershootontargeta);
 
@@ -1028,6 +1281,24 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
+                        pemain=mSpinnershootontargeta.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputshotongoal(pemain,teamA,i);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputshotongoal(pemain,teamA,i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1043,22 +1314,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 AlertDialog dialogshootontargeta = buildershootontargeta.create();
                 dialogshootontargeta.show();
 
-                tanding.setShootOnTargetTeamA(tanding.getShootOffTargetTeamA()+1);
+
                 return true;
             case R.id.shootofftarget:
                 shootofftargetteama=shootofftargetteama+1;
+                tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
                 //Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                 Cursor datashootofftargeta=dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootofftargeta=new ArrayList<String>();
                 datashootofftargeta.moveToFirst();
                 while (!datashootofftargeta.isAfterLast()) {
-                    listpemainshootofftargeta.add(datashootofftargeta.getString(0));
-                    Log.d("Data spinner ",datashootofftargeta.getString(0));
+                    listpemainshootofftargeta.add(datashootofftargeta.getString(3));
+                    Log.d("Data spinner ",datashootofftargeta.getString(3));
                     datashootofftargeta.moveToNext();
                 }
                 AlertDialog.Builder buildershootofftargeta = new AlertDialog.Builder(recordstat.this);
                 View mViewshootofftargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnershootofftargeta = (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnershootofftargeta = (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdaptershootofftargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargeta );
                 mSpinnershootofftargeta.setAdapter(arrayAdaptershootofftargeta);
 
@@ -1068,6 +1340,24 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
+                        pemain=mSpinnershootofftargeta.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputshotoffgoal(pemain,teamA,i);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputshotoffgoal(pemain,teamA,i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1083,7 +1373,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 AlertDialog dialogshootofftargeta = buildershootofftargeta.create();
                 dialogshootofftargeta.show();
 
-                tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA()+1);
+
 
                 return true;
             case R.id.goalb:
@@ -1101,8 +1391,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 List<String> listpemaingoalteamb=new ArrayList<String>();
                 datagoalteamb.moveToFirst();
                 while (!datagoalteamb.isAfterLast()) {
-                    listpemaingoalteamb.add(datagoalteamb.getString(0));
-                    Log.d("Data spinner ",datagoalteamb.getString(0));
+                    listpemaingoalteamb.add(datagoalteamb.getString(3));
+                    Log.d("Data spinner ",datagoalteamb.getString(3));
                     datagoalteamb.moveToNext();
                 }
                 AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
@@ -1112,8 +1402,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb );
                 mSpinnergoalb.setAdapter(arrayAdaptergoalb);
 
-                tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
-
 
                 buildergoalb.setTitle("Pick Player");
                 buildergoalb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1122,6 +1410,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
                         goalteamb = goalteamb + 1;
                         shootontargetteamb=shootontargetteamb+1;
+                        tanding.setGoalTeamB(tanding.getGoalTeamB()+1);
+                        tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB()+1);
 
                         String chronotext = chronometer.getText().toString();
                         String array[] = chronotext.split(":");
@@ -1145,7 +1435,26 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         cetakgoalteamb.add(goalnoteb);
                         arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
 
-
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputgoal(pemainb,teamB,i);
+                            inputshotongoal(pemainb,teamB,i);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputgoal(pemainb,teamB, i);
+                            inputshotongoal(pemainb,teamB,i);
+                            inputdatagoal(pemainb,teamB,i,array[0],"On Play");
+                        }
 
                         dialog.dismiss();
                     }
@@ -1169,18 +1478,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             case R.id.shootontargetb:
                 shootontargetteamb=shootontargetteamb+1;
                 savesteama=savesteama+1;
+                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB()+1);
+                tanding.setSavesTeamA(tanding.getSavesTeamA()+1);
                 //Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                 Cursor datashootontargetb=dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootontargetb=new ArrayList<String>();
                 datashootontargetb.moveToFirst();
                 while (!datashootontargetb.isAfterLast()) {
-                    listpemainshootontargetb.add(datashootontargetb.getString(0));
-                    Log.d("Data spinner ",datashootontargetb.getString(0));
+                    listpemainshootontargetb.add(datashootontargetb.getString(3));
+                    Log.d("Data spinner ",datashootontargetb.getString(3));
                     datashootontargetb.moveToNext();
                 }
                 AlertDialog.Builder buildershootontargetb = new AlertDialog.Builder(recordstat.this);
                 View mViewshootontargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnershootontargetb = (Spinner) mViewshootontargetb.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnershootontargetb = (Spinner) mViewshootontargetb.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdaptershootontargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargetb );
                 mSpinnershootontargetb.setAdapter(arrayAdaptershootontargetb);
 
@@ -1190,6 +1501,24 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
+                        pemain=mSpinnershootontargetb.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputshotongoal(pemain,teamB,i);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputshotongoal(pemain,teamB,i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1206,22 +1535,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 dialogshootontargetb.show();
 
                 chronometerteam.start();
-                tanding.setShootOnTargetTeamB(tanding.getShootOffTargetTeamB()+1);
+
                 return true;
             case R.id.shootofftargetb:
                 shootofftargetteamb=shootofftargetteamb+1;
+                tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
                 //Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                 Cursor datashootofftargetb=dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootofftargetb=new ArrayList<String>();
                 datashootofftargetb.moveToFirst();
                 while (!datashootofftargetb.isAfterLast()) {
-                    listpemainshootofftargetb.add(datashootofftargetb.getString(0));
-                    Log.d("Data spinner ",datashootofftargetb.getString(0));
+                    listpemainshootofftargetb.add(datashootofftargetb.getString(3));
+                    Log.d("Data spinner ",datashootofftargetb.getString(3));
                     datashootofftargetb.moveToNext();
                 }
                 AlertDialog.Builder buildershootofftargetb = new AlertDialog.Builder(recordstat.this);
                 View mViewshootofftargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnershootofftargetb = (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnershootofftargetb = (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdaptershootofftargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargetb );
                 mSpinnershootofftargetb.setAdapter(arrayAdaptershootofftargetb);
 
@@ -1231,6 +1561,24 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
+                        pemain=mSpinnershootofftargetb.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input goal");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input goal");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputshotoffgoal(pemain,teamB,i);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputshotoffgoal(pemain,teamB,i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1251,27 +1599,26 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 buildershootofftargetb.setView(mViewshootofftargetb);
                 AlertDialog dialogshootofftargetb = buildershootofftargetb.create();
                 dialogshootofftargetb.show();
-                tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB()+1);
+
 
 
                 return true;
 
             case R.id.yellowhome:
-                yellowcardteama = yellowcardteama + 1;
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowhome=dbpemain.loaddatateam(teamA);
                 List<String> listpemainyellowhome=new ArrayList<String>();
                 datayellowhome.moveToFirst();
                 while (!datayellowhome.isAfterLast()) {
-                    listpemainyellowhome.add(datayellowhome.getString(0));
-                    Log.d("Data spinner ",datayellowhome.getString(0));
+                    listpemainyellowhome.add(datayellowhome.getString(3));
+                    Log.d("Data spinner ",datayellowhome.getString(3));
                     datayellowhome.moveToNext();
                 }
 
                 AlertDialog.Builder builderyellowhome = new AlertDialog.Builder(recordstat.this);
                 View mViewyellowhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinneryellowhome = (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinneryellowhome = (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapteryellowhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowhome );
                 mSpinneryellowhome.setAdapter(arrayAdapteryellowhome);
 
@@ -1279,7 +1626,27 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 builderyellowhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        yellowcardteama = yellowcardteama + 1;
+                        tanding.setYellowcardTeamA(tanding.getYellowcardTeamA()+1);
                         Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
+                        String pemain=mSpinneryellowhome.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input yellow");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input yellow");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputyellow(pemain,teamA,i);;
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputyellow(pemain,teamA, i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1298,21 +1665,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
 
             case R.id.yellowaway:
-                yellowcardteamb = yellowcardteamb + 1;
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor datayellowaway=dbpemain.loaddatateam(teamB);
                 List<String> listpemainyellowaway=new ArrayList<String>();
                 datayellowaway.moveToFirst();
                 while (!datayellowaway.isAfterLast()) {
-                    listpemainyellowaway.add(datayellowaway.getString(0));
-                    Log.d("Data spinner ",datayellowaway.getString(0));
+                    listpemainyellowaway.add(datayellowaway.getString(3));
+                    Log.d("Data spinner ",datayellowaway.getString(3));
                     datayellowaway.moveToNext();
                 }
 
                 AlertDialog.Builder builderyellowaway = new AlertDialog.Builder(recordstat.this);
                 View mViewyellowaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinneryellowaway = (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinneryellowaway = (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapteryellowaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowaway );
                 mSpinneryellowaway.setAdapter(arrayAdapteryellowaway);
 
@@ -1321,6 +1687,26 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Yellow Team B", Toast.LENGTH_SHORT).show();
+                        yellowcardteamb = yellowcardteamb + 1;
+                        tanding.setYellowcardTeamB(tanding.getYellowcardTeamB()+1);
+                        String pemain=mSpinneryellowaway.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input yellow");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input yellow");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputyellow(pemain,teamB,i);;
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputyellow(pemain,teamB, i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1339,21 +1725,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
 
             case R.id.redhome:
-                redcardteama = redcardteama + 1;
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredhome=dbpemain.loaddatateam(teamA);
                 List<String> listpemainredhome=new ArrayList<String>();
                 dataredhome.moveToFirst();
                 while (!dataredhome.isAfterLast()) {
-                    listpemainredhome.add(dataredhome.getString(0));
-                    Log.d("Data spinner ",dataredhome.getString(0));
+                    listpemainredhome.add(dataredhome.getString(3));
+                    Log.d("Data spinner ",dataredhome.getString(3));
                     dataredhome.moveToNext();
                 }
 
                 AlertDialog.Builder builderredhome = new AlertDialog.Builder(recordstat.this);
                 View mViewredhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnerredhome = (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnerredhome = (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapterredhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredhome );
                 mSpinnerredhome.setAdapter(arrayAdapterredhome);
 
@@ -1362,6 +1747,26 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "RED CARD Team A", Toast.LENGTH_SHORT).show();
+                        redcardteama = redcardteama + 1;
+                        tanding.setRedcardTeamA(tanding.getRedcardTeamA()+1);
+                        String pemain=mSpinnerredhome.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input yellow");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input yellow");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputred(pemain,teamA,i);;
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputred(pemain,teamA, i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1380,21 +1785,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
 
             case R.id.redaway:
-                redcardteamb = redcardteamb + 1;
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
                 Cursor dataredaway=dbpemain.loaddatateam(teamB);
                 List<String> listpemainredaway=new ArrayList<String>();
                 dataredaway.moveToFirst();
                 while (!dataredaway.isAfterLast()) {
-                    listpemainredaway.add(dataredaway.getString(0));
-                    Log.d("Data spinner ",dataredaway.getString(0));
+                    listpemainredaway.add(dataredaway.getString(3));
+                    Log.d("Data spinner ",dataredaway.getString(3));
                     dataredaway.moveToNext();
                 }
 
                 AlertDialog.Builder builderredaway = new AlertDialog.Builder(recordstat.this);
                 View mViewredaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                Spinner mSpinnerredaway = (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
+                final Spinner mSpinnerredaway = (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
                 ArrayAdapter<String> arrayAdapterredaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredaway );
                 mSpinnerredaway.setAdapter(arrayAdapterredaway);
 
@@ -1403,6 +1807,26 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "RED CARD Team B", Toast.LENGTH_SHORT).show();
+                        redcardteamb = redcardteamb + 1;
+                        tanding.setRedcardTeamB(tanding.getRedcardTeamB()+1);
+                        String pemain=mSpinnerredaway.getSelectedItem().toString();
+                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        int i=1;
+                        if(datapertandingan.moveToFirst()){
+                            Log.d("Enter if ", "input yellow");
+                            while (datapertandingan.moveToNext()) {
+                                Log.d("Enter while ", "input yellow");
+                                if (datapertandingan.getInt(33)==1){
+                                    i=datapertandingan.getInt(0);
+                                }else {
+                                    i=i+1;
+                                }
+                            }
+                            inputred(pemain,teamB,i);;
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputred(pemain,teamB, i);
+                        }
                         dialog.dismiss();
                     }
 
@@ -1421,24 +1845,28 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 return true;
 
             case R.id.foulhome:
-                foulteamb = foulteamb + 1;
-                Log.d ("hitung foul team a",Integer.toString(foulteama));
-                Toast.makeText(recordstat.this, "Foul Team B", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.offsidehome:
-                offsideteamb = offsideteamb + 1;
-                Log.d ("hitung offside team a",Integer.toString(offsideteama));
-                Toast.makeText(recordstat.this, "Offside Team B", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.foulaway:
                 foulteama = foulteama + 1;
-                Log.d ("hitung foul team b",Integer.toString(foulteamb));
+                tanding.setFoulTeamA(tanding.getFoulTeamA()+1);
+                Log.d ("hitung foul team a",Integer.toString(foulteama));
                 Toast.makeText(recordstat.this, "Foul Team A", Toast.LENGTH_SHORT).show();
                 return true;
 
-            case R.id.offsideaway:
+            case R.id.offsidehome:
                 offsideteama = offsideteama + 1;
+                tanding.setOffsideTeamA(tanding.getOffsideTeamA()+1);
+                Log.d ("hitung offside team a",Integer.toString(offsideteama));
+                Toast.makeText(recordstat.this, "Offside Team A", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.foulaway:
+                foulteamb = foulteamb + 1;
+                tanding.setFoulTeamB(tanding.getFoulTeamB()+1);
+                Log.d ("hitung foul team b",Integer.toString(foulteamb));
+                Toast.makeText(recordstat.this, "Foul Team B", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.offsideaway:
+                offsideteamb = offsideteamb + 1;
+                tanding.setOffsideTeamB(tanding.getOffsideTeamB()+1);
                 Log.d ("hitung offside team b",Integer.toString(offsideteamb));
                 Toast.makeText(recordstat.this, "Offside Team A", Toast.LENGTH_SHORT).show();
                 return true;

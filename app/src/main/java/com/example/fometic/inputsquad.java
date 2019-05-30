@@ -63,7 +63,7 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         buttonadd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                setDataPemain();
+                setDataPemain(team.getSelectedItem().toString());
                 textnamapemain.setText("");
                 textnomorpunggung.setText("");
                 spinnerposisi.setSelection(0);
@@ -76,7 +76,7 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         buttonsubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                setDataPemain();
+                setDataPemain(team.getSelectedItem().toString());
                 Toast.makeText(inputsquad.this, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -109,18 +109,8 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         team.setAdapter(arrayAdapter);
     }
 
-    public int getidteam(String namateam){
-        Cursor idteam=dbteam.loaddataidteam(namateam);
-        idteam.moveToFirst();
-        while (!idteam.isAfterLast()) {
-            teamid=idteam.getInt(0);
-            Log.d("Data spinner ",idteam.getString(0));
-            idteam.moveToNext();
-        }
-        return teamid;
-    }
 
-    public void setDataPemain(){
+    public void setDataPemain(String namatim){
         textnamapemain=findViewById(R.id.TextNama);
         spinnerposisi=findViewById(R.id.spinnerposisi);
         textnomorpunggung=findViewById(R.id.TextNomorPunggung);
@@ -129,7 +119,8 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         datapemain.setPosisi(spinnerposisi.getSelectedItem().toString());
         datapemain.setNomorPunggung(Integer.parseInt(textnomorpunggung.getText().toString()));
         datapemain.setTeam(team.getSelectedItem().toString());
-        dbpemain.addHandler(datapemain, getidteam(team.getSelectedItem().toString()));
+        dbteam.loaddatateam();
+        dbpemain.addHandler(datapemain, dbteam.loaddataidteam(namatim));
     }
 }
 

@@ -268,17 +268,6 @@ public class generatereport extends AppCompatActivity {
         }
         textViewlistpemaingoalteamb.setText(builderteamb.toString());
 
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void getFormationData(){
