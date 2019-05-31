@@ -193,7 +193,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public int getidpertandingan(){
-        Cursor datapertandingan=dbpertandingan.loadHandler();
+        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
         int i=1;
         if(datapertandingan.moveToFirst()) {
             Log.d("Enter if ", "input goal");
@@ -795,7 +795,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                 List<String> listpemaingoalteama=new ArrayList<String>();
-                Cursor datapertandingan=dbpertandingan.loadHandler();
+                Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                 int i=1;
                 if(datapertandingan.moveToFirst()){
                     Log.d("Enter if ", "input goal");
@@ -932,7 +932,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 cetakgoalteamb.add(goalnoteb);
                 arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
-                Cursor datapertandingan=dbpertandingan.loadHandler();
+                Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                 int i=1;
                 if(datapertandingan.moveToFirst()){
                     Log.d("Enter if ", "input goal");
@@ -1219,7 +1219,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
                         //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                         //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1282,7 +1282,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootontargeta.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1341,7 +1341,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootofftargeta.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1435,7 +1435,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         cetakgoalteamb.add(goalnoteb);
                         arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
 
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1502,7 +1502,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootontargetb.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1562,7 +1562,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(recordstat.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootofftargetb.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
@@ -1630,7 +1630,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         tanding.setYellowcardTeamA(tanding.getYellowcardTeamA()+1);
                         Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
                         String pemain=mSpinneryellowhome.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
@@ -1690,7 +1690,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         yellowcardteamb = yellowcardteamb + 1;
                         tanding.setYellowcardTeamB(tanding.getYellowcardTeamB()+1);
                         String pemain=mSpinneryellowaway.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
@@ -1750,7 +1750,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         redcardteama = redcardteama + 1;
                         tanding.setRedcardTeamA(tanding.getRedcardTeamA()+1);
                         String pemain=mSpinnerredhome.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
@@ -1810,7 +1810,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         redcardteamb = redcardteamb + 1;
                         tanding.setRedcardTeamB(tanding.getRedcardTeamB()+1);
                         String pemain=mSpinnerredaway.getSelectedItem().toString();
-                        Cursor datapertandingan=dbpertandingan.loadHandler();
+                        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");

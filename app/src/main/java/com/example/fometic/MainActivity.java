@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void opengeneratereport() {
-        Intent intent = new Intent(this, generatereport.class);
+        Intent intent = new Intent(this, gerenatereportMenu.class);
         startActivity(intent);
 
     }
