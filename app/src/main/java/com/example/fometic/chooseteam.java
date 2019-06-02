@@ -27,8 +27,6 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     EditText editTexttimematch;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,16 +35,14 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         setContentView(R.layout.activity_chooseteam);
         getTeamData();
 
-        formationteama=findViewById(R.id.spinnerformationteama);
-        formationteamb=findViewById(R.id.spinnerformationteamb);
-        editTextvenue=findViewById(R.id.editTextvenue);
-        editTextevent=findViewById(R.id.editTextevent);
-        editTexttimematch=findViewById(R.id.editTexttimematch);
+        formationteama = findViewById(R.id.spinnerformationteama);
+        formationteamb = findViewById(R.id.spinnerformationteamb);
+        editTextvenue = findViewById(R.id.editTextvenue);
+        editTextevent = findViewById(R.id.editTextevent);
+        editTexttimematch = findViewById(R.id.editTexttimematch);
 
 
-
-
-        Button button=findViewById(R.id.buttonstart);
+        Button button = findViewById(R.id.buttonstart);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,43 +52,40 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
 
     }
 
-    public void getTeamData(){
+    public void getTeamData() {
         TeamDBHandler db = new TeamDBHandler(this);
-        Cursor loadDataTeam=db.loaddatateam();
-        List<String> spinnerArray=new ArrayList<String>();
+        Cursor loadDataTeam = db.loaddatateam();
+        List<String> spinnerArray = new ArrayList<String>();
         loadDataTeam.moveToFirst();
         while (!loadDataTeam.isAfterLast()) {
             spinnerArray.add(loadDataTeam.getString(1));
-            Log.d("Data spinner ",loadDataTeam.getString(1));
+            Log.d("Data spinner ", loadDataTeam.getString(1));
             loadDataTeam.moveToNext();
         }
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray);
-        teamA= findViewById(R.id.spinnerteamA);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray);
+        teamA = findViewById(R.id.spinnerteamA);
         teamA.setAdapter(arrayAdapter);
 
-        teamB= findViewById(R.id.spinnerteamB);
+        teamB = findViewById(R.id.spinnerteamB);
         teamB.setAdapter(arrayAdapter);
     }
 
     public void openrecordstat() {
         Intent intent = new Intent(this, recordstat.class);
-        intent.putExtra("teama",teamA.getSelectedItem().toString());
-        Log.d("team A choosen",teamA.getSelectedItem().toString());
-        intent.putExtra("teamb",teamB.getSelectedItem().toString());
-        Log.d("team B choosen",teamB.getSelectedItem().toString());
-        intent.putExtra("formationteama",formationteama.getSelectedItem().toString());
-        Log.d("formation team A",formationteama.getSelectedItem().toString());
-        intent.putExtra("formationteamb",formationteamb.getSelectedItem().toString());
-        Log.d("formation team B",formationteamb.getSelectedItem().toString());
-        intent.putExtra("venue",editTextvenue.getText().toString());
-        Log.d("venue ",editTextvenue.getText().toString());
-        intent.putExtra("event",editTextevent.getText().toString());
-        Log.d("venue ",editTextevent.getText().toString());
-        intent.putExtra("timematch",editTexttimematch.getText().toString());
-        Log.d("timematch ",editTexttimematch.getText().toString());
-
-
-
+        intent.putExtra("teama", teamA.getSelectedItem().toString());
+        Log.d("team A choosen", teamA.getSelectedItem().toString());
+        intent.putExtra("teamb", teamB.getSelectedItem().toString());
+        Log.d("team B choosen", teamB.getSelectedItem().toString());
+        intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
+        Log.d("formation team A", formationteama.getSelectedItem().toString());
+        intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
+        Log.d("formation team B", formationteamb.getSelectedItem().toString());
+        intent.putExtra("venue", editTextvenue.getText().toString());
+        Log.d("venue ", editTextvenue.getText().toString());
+        intent.putExtra("event", editTextevent.getText().toString());
+        Log.d("venue ", editTextevent.getText().toString());
+        intent.putExtra("timematch", editTexttimematch.getText().toString());
+        Log.d("timematch ", editTexttimematch.getText().toString());
 
 
         startActivity(intent);

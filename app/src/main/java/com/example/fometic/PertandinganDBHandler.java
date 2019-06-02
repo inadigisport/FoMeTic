@@ -86,6 +86,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         if (datateam.moveToFirst()) {
             while (!datateam.isAfterLast()) {
                 HashMap<String, String> user = new HashMap<>();
+                user.put("idpertandingan", datateam.getString(33)+datateam.getString(0));
                 user.put("timtandingskor", datateam.getString(1) + " " + datateam.getString(5) + " - " + datateam.getString(21) + " " + datateam.getString(17));
                 user.put("babak", "Babak " + datateam.getString(33));
                 user.put("tanggal", datateam.getString(38));
@@ -103,6 +104,12 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         String query = "Select * FROM " + TABLE_PERTANDINGAN;
         return loadHandler(query);
     }
+
+    public Cursor loaddatapertandinganshow(int id, int babak) {
+        String query = "Select * FROM " + TABLE_PERTANDINGAN+ " WHERE " + ID_PERTANDINGAN + "=" + id + " AND  " + BABAK + "=" + babak;
+        return loadHandler(query);
+    }
+
 
     public Cursor loadHandler(String query) {
 

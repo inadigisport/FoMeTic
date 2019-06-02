@@ -59,10 +59,15 @@ public class PemainDBHandler extends SQLiteOpenHelper {
         return id;
     }
 
-
-
-
-
+    public String loadnamapemain(int id){
+        String nama;
+        String result="";
+        String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+ID_PEMAIN+"='"+id+"'";
+        Cursor idpemain=loadHandler(query);
+        idpemain.moveToFirst();
+        nama=idpemain.getString(1);
+        return nama;
+    }
 
     public Cursor loaddatateam(String team){
         String query="SELECT * FROM "+TABLE_PEMAIN+" WHERE "+NAMA_TEAM+"='"+team+"'";

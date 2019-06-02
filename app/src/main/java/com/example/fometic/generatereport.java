@@ -270,7 +270,7 @@ public class generatereport extends AppCompatActivity {
 
     }
 
-    public void getFormationData(){
+    /**public void getFormationData(){
         TeamDBHandler db = new TeamDBHandler(this);
         Cursor loadDataTeam=db.loaddatareport(teamA);
         loadDataTeam.moveToFirst();
@@ -289,7 +289,7 @@ public class generatereport extends AppCompatActivity {
 
 
 
-    }
+    }**/
 
 
 }

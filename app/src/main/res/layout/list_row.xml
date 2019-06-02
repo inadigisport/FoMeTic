@@ -11,6 +11,11 @@
         android:textStyle="bold"
         android:textSize="17dp" />
     <TextView
+        android:id="@+id/babakid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="1dp" />
+    <TextView
         android:id="@+id/babak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
