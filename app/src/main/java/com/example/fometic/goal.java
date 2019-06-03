@@ -9,12 +9,13 @@ public class goal {
     private int nomorpunggung;
     private String menit;
     private String statusgoal;
+    private int babak;
     private double elapsedchronometerteamint;
     private double elapsedchronometerteambint;
 
     public goal(){}
 
-    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, String menit, int idteam, int idpemain, String statusgoal){
+    public goal(int idpertandingan, String namateam, String namapemain, int nomorpunggung, String menit, int idteam, int idpemain, String statusgoal, int babak){
         this.idpertandingan=idpertandingan;
         this.namapemain=namapemain;
         this.namateam=namateam;
@@ -23,6 +24,7 @@ public class goal {
         this.setIdteam(idteam);
         this.setIdpemain(idpemain);
         this.setStatusgoal(statusgoal);
+        this.setBabak(babak);
     }
 
 
@@ -104,5 +106,13 @@ public class goal {
 
     public void setElapsedchronometerteambint(double elapsedchronometerteambint) {
         this.elapsedchronometerteambint = elapsedchronometerteambint;
+    }
+
+    public int getBabak() {
+        return babak;
+    }
+
+    public void setBabak(int babak) {
+        this.babak = babak;
     }
 }

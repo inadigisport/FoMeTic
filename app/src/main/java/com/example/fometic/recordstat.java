@@ -226,6 +226,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                        tanding.setVenue(venue);
                        tanding.setEvent(event);
                        dbpertandingan.addHandler(tanding);
+                       Log.d("Posession Team A",String.valueOf(tanding.getPosessionTeamA()));
+                       Log.d("Posession Team B",String.valueOf(tanding.getPosessionTeamB()));
                        start2ndhalf();
                    }
 
@@ -660,6 +662,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         datagoal.setIdteam(idteam);
         datagoal.setMenit(waktu);
         datagoal.setStatusgoal(status);
+        datagoal.setBabak(1);
         dbgoal.addHandler(datagoal);
     }
 
@@ -945,12 +948,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         }
                     }
                     inputgoal(pemainb,teamB,i);
-                    inputshotongoal(pemain,teamB,i);
+                    inputshotongoal(pemainb,teamB,i);
                     inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
                 }else{
                     Log.d("belum ada ", "data pertadingan");
                     inputgoal(pemainb,teamB, i);
-                    inputshotongoal(pemain,teamB,i);
+                    inputshotongoal(pemainb,teamB,i);
                     inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
                 }
 
