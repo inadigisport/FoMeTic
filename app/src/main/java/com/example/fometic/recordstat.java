@@ -225,6 +225,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                        tanding.setFormasiTeamB(formationteamb);
                        tanding.setVenue(venue);
                        tanding.setEvent(event);
+                       tanding.setPosessionTeamA(ballpossesionteama);
+                       tanding.setPosessionTeamB(ballpossesionteamb);
                        dbpertandingan.addHandler(tanding);
                        Log.d("Posession Team A",String.valueOf(tanding.getPosessionTeamA()));
                        Log.d("Posession Team B",String.valueOf(tanding.getPosessionTeamB()));
@@ -321,6 +323,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
             Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
+            Log.d("ballpossesion team b", Integer.toString(ballpossesionteamb));
             tanding.setPosessionTeamA(ballpossesionteama);
             tanding.setPosessionTeamB(ballpossesionteamb);
         }

@@ -290,6 +290,8 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
                         tanding.setFormasiTeamB(formationteamb);
                         tanding.setVenue(venue);
                         tanding.setEvent(event);
+                        tanding.setPosessionTeamA(ballpossesionteama);
+                        tanding.setPosessionTeamB(ballpossesionteamb);
                         dbpertandingan.addHandler(tanding);
                         viewgeneratereport();
 

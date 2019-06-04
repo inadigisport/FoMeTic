@@ -151,9 +151,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
             int cornerkick_team_a = cursor.getInt(14);
 
-            int yellowcard_team_a = cursor.getInt(15);
+            int yellowcard_team_a = cursor.getInt(16);
 
-            int redcard_team_a = cursor.getInt(16);
+            int redcard_team_a = cursor.getInt(15);
 
             String nama_team_b = cursor.getString(17);
 
@@ -183,9 +183,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
             int cornerkick_team_b = cursor.getInt(30);
 
-            int yellowcard_team_b = cursor.getInt(31);
+            int yellowcard_team_b = cursor.getInt(32);
 
-            int redcard_team_b = cursor.getInt(32);
+            int redcard_team_b = cursor.getInt(31);
 
             int babak = cursor.getInt(33);
 

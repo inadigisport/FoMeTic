@@ -26,8 +26,8 @@ public class gerenatereportMenu extends AppCompatActivity {
     Spinner teamB;
     String formationteama;
     String formationteamb;
-    String ballpossesionteama;
-    String ballpossesionteamb;
+    int ballpossesionteama;
+    int ballpossesionteamb;
     String namateama;
     String namateamb;
     int passingteama;
@@ -132,8 +132,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 throwinteamb = datapertandingan.getInt(26);
                 cornerkickteama = datapertandingan.getInt(14);
                 cornerkickteamb = datapertandingan.getInt(30);
-                ballpossesionteama = datapertandingan.getString(36);
-                ballpossesionteamb = datapertandingan.getString(37);
+                ballpossesionteama = datapertandingan.getInt(36);
+                ballpossesionteamb = datapertandingan.getInt(37);
                 foulteama = datapertandingan.getInt(43);
                 foulteamb = datapertandingan.getInt(44);
                 offsideteama = datapertandingan.getInt(41);
@@ -144,12 +144,10 @@ public class gerenatereportMenu extends AppCompatActivity {
                 shootontargetteamb = datapertandingan.getInt(22);
                 shootofftargetteama = datapertandingan.getInt(7);
                 shootofftargetteamb = datapertandingan.getInt(23);
-                yellowcardteama = datapertandingan.getInt(15);
-                yellowcardteamb = datapertandingan.getInt(31);
-                redcardteama = datapertandingan.getInt(16);
-                redcardteamb = datapertandingan.getInt(32);
-                ballpossesionteama = datapertandingan.getString(36);
-                ballpossesionteamb = datapertandingan.getString(37);
+                yellowcardteama = datapertandingan.getInt(16);
+                yellowcardteamb = datapertandingan.getInt(32);
+                redcardteama = datapertandingan.getInt(15);
+                redcardteamb = datapertandingan.getInt(31);
                 if (babak == 1) {
                     Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))), babak);
                     goalpemainteama.moveToFirst();
