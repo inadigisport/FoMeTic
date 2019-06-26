@@ -111,7 +111,9 @@ public class gerenatereportMenu extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UserInfo = lv.getItemAtPosition(position).toString();
+                Log.d("User Info", UserInfo);
                 String userId = UserInfo.substring(UserInfo.indexOf("=") + 1, UserInfo.indexOf(","));
+                Log.d("User ID", userId);
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
