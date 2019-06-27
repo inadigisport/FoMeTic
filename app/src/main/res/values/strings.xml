@@ -31,4 +31,11 @@
         <item>Shoot Off Target</item>
     </string-array>
 
+    <string-array name="babak">
+        <item>1sthalf</item>
+        <item>2ndhalf</item>
+        <item>Ex1sthalf</item>
+        <item>Ex2ndhalf</item>
+    </string-array>
+
 </resources>

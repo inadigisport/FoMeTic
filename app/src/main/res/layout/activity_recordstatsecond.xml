@@ -307,12 +307,12 @@
         android:layout_marginLeft="86dp"
         android:background="@color/colorAccent"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewteama2"
-        app:layout_constraintStart_toEndOf="@+id/textViewteama2"
-        app:layout_constraintTop_toTopOf="@+id/textViewteama2" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewbabak"
+        app:layout_constraintStart_toEndOf="@+id/textViewbabak"
+        app:layout_constraintTop_toTopOf="@+id/textViewbabak" />
 
     <TextView
-        android:id="@+id/textViewteama2"
+        android:id="@+id/textViewbabak"
         android:layout_width="152dp"
         android:layout_height="51dp"
         android:layout_marginStart="86dp"
@@ -347,9 +347,9 @@
         android:background="@android:color/holo_orange_light"
         android:onClick="yellowcard"
         android:text="YELLOW"
-        app:layout_constraintEnd_toEndOf="@+id/textViewteama2"
-        app:layout_constraintStart_toStartOf="@+id/textViewteama2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewteama2" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewbabak"
+        app:layout_constraintStart_toStartOf="@+id/textViewbabak"
+        app:layout_constraintTop_toBottomOf="@+id/textViewbabak" />
 
     <Button
         android:id="@+id/buttonred"

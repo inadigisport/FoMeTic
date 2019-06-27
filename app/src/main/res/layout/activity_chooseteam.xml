@@ -149,4 +149,14 @@
         app:layout_constraintStart_toEndOf="@+id/editTextvenue"
         app:layout_constraintTop_toTopOf="@+id/editTextvenue" />
 
+    <Spinner
+        android:id="@+id/spinnerbabak"
+        android:layout_width="270dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="32dp"
+        android:entries="@array/babak"
+        app:layout_constraintBottom_toTopOf="@+id/editTextvenue"
+        app:layout_constraintEnd_toEndOf="@+id/editTextvenue"
+        app:layout_constraintStart_toStartOf="@+id/editTextvenue" />
+
 </android.support.constraint.ConstraintLayout>

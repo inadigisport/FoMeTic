@@ -22,6 +22,7 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     Spinner teamB;
     Spinner formationteama;
     Spinner formationteamb;
+    Spinner babak;
     EditText editTextvenue;
     EditText editTextevent;
     EditText editTexttimematch;
@@ -37,6 +38,7 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
 
         formationteama = findViewById(R.id.spinnerformationteama);
         formationteamb = findViewById(R.id.spinnerformationteamb);
+        babak = findViewById(R.id.spinnerbabak);
         editTextvenue = findViewById(R.id.editTextvenue);
         editTextevent = findViewById(R.id.editTextevent);
         editTexttimematch = findViewById(R.id.editTexttimematch);
@@ -86,6 +88,8 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         Log.d("venue ", editTextevent.getText().toString());
         intent.putExtra("timematch", editTexttimematch.getText().toString());
         Log.d("timematch ", editTexttimematch.getText().toString());
+        intent.putExtra("babak", babak.getSelectedItem().toString());
+        Log.d("timematch ", babak.getSelectedItem().toString());
 
 
         startActivity(intent);

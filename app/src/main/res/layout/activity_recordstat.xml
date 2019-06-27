@@ -14,6 +14,7 @@
         android:background="@color/colorAccent"
         android:onClick="keepingballteama"
         android:text="Keeping Ball"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/textViewteama"
         app:layout_constraintStart_toStartOf="@+id/textViewteama"
         app:layout_constraintTop_toBottomOf="@+id/textViewteama" />
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:background="@color/colorPrimary"
-        android:text="HALF TIME"
+        android:text="STOP"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonstart"
         app:layout_constraintStart_toStartOf="@+id/buttonstart"
         app:layout_constraintTop_toBottomOf="@+id/buttonstart" />
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
         android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:background="@android:color/holo_orange_dark"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +66,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="tacklingteamb"
         android:text="Tackling"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/keepingballteamb"
         app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
         app:layout_constraintTop_toBottomOf="@+id/keepingballteamb" />
@@ -75,6 +80,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="passingteamb"
         android:text="Passing"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/keepingballteamb"
         app:layout_constraintStart_toEndOf="@+id/keepingballteamb"
         app:layout_constraintTop_toTopOf="@+id/keepingballteamb" />
@@ -88,6 +94,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="showpopupshootingb"
         android:text="Shooting"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/keepingballteamb"
         app:layout_constraintEnd_toStartOf="@+id/keepingballteamb"
         app:layout_constraintTop_toTopOf="@+id/keepingballteamb" />
@@ -104,6 +111,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="interceptteamb"
         android:text="Intercept"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonpassingteamb"
         app:layout_constraintStart_toStartOf="@+id/keepingballteamb"
         app:layout_constraintTop_toBottomOf="@+id/keepingballteamb" />
@@ -120,6 +128,7 @@
         android:background="@color/colorAccent"
         android:onClick="interceptteama"
         android:text="Intercept"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/keepingballteama"
         app:layout_constraintStart_toStartOf="@+id/buttonpassingteama"
         app:layout_constraintTop_toBottomOf="@+id/keepingballteama" />
@@ -133,6 +142,7 @@
         android:background="@color/colorAccent"
         android:onClick="showpopupshootinga"
         android:text="Shooting"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/keepingballteama"
         app:layout_constraintStart_toEndOf="@+id/keepingballteama"
         app:layout_constraintTop_toTopOf="@+id/keepingballteama" />
@@ -149,6 +159,7 @@
         android:background="@color/colorAccent"
         android:onClick="tacklingteama"
         android:text="Tackling"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
         app:layout_constraintStart_toStartOf="@+id/keepingballteama"
         app:layout_constraintTop_toBottomOf="@+id/keepingballteama" />
@@ -162,6 +173,7 @@
         android:background="@color/colorAccent"
         android:onClick="passingteama"
         android:text="Passing"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/keepingballteama"
         app:layout_constraintEnd_toStartOf="@+id/keepingballteama"
         app:layout_constraintTop_toTopOf="@+id/keepingballteama" />
@@ -174,6 +186,7 @@
         android:background="@color/colorAccent"
         android:onClick="cornerkickteama"
         android:text="Corner Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonshootingteama"
         app:layout_constraintStart_toStartOf="@+id/buttonshootingteama"
         app:layout_constraintTop_toBottomOf="@+id/buttontacklingteama" />
@@ -186,6 +199,7 @@
         android:background="@color/colorAccent"
         android:onClick="throwinteama"
         android:text="Throw In"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonpassingteama"
         app:layout_constraintStart_toStartOf="@+id/buttonpassingteama"
         app:layout_constraintTop_toBottomOf="@+id/buttoninterceptteama" />
@@ -198,6 +212,7 @@
         android:background="@color/colorAccent"
         android:onClick="freekickteama"
         android:text="Free Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteama"
         app:layout_constraintStart_toStartOf="@+id/buttonthrowinteama"
         app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteama" />
@@ -210,6 +225,7 @@
         android:background="@color/colorAccent"
         android:onClick="goalkickteama"
         android:text="Goal Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttoncornerkickteama"
         app:layout_constraintStart_toStartOf="@+id/buttoncornerkickteama"
         app:layout_constraintTop_toBottomOf="@+id/buttoncornerkickteama" />
@@ -222,6 +238,7 @@
         android:background="@color/colorAccent"
         android:onClick="pinaltyteama"
         android:text="Pinalty"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/keepingballteama"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/keepingballteama"
@@ -235,6 +252,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="pinaltyteamb"
         android:text="Pinalty"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/keepingballteamb"
         app:layout_constraintStart_toStartOf="@+id/keepingballteamb"
         app:layout_constraintTop_toBottomOf="@+id/keepingballteamb" />
@@ -247,6 +265,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="throwinteamb"
         android:text="Throw In"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonpassingteamb"
         app:layout_constraintStart_toStartOf="@+id/buttonpassingteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttoninterceptteamb" />
@@ -259,6 +278,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="cornerkickteamb"
         android:text="Corner Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonshootingteamb"
         app:layout_constraintStart_toStartOf="@+id/buttonshootingteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttontacklingteamb" />
@@ -271,6 +291,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="freekickteamb"
         android:text="Free Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonthrowinteamb"
         app:layout_constraintStart_toStartOf="@+id/buttonthrowinteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttonthrowinteamb" />
@@ -283,6 +304,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="keepingballteamb"
         android:text="Keeping Ball"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/textViewteamb"
         app:layout_constraintStart_toStartOf="@+id/textViewteamb"
         app:layout_constraintTop_toBottomOf="@+id/textViewteamb" />
@@ -295,6 +317,7 @@
         android:background="@color/design_default_color_primary_dark"
         android:onClick="goalkickteamb"
         android:text="Goal Kick"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttoncornerkickteamb"
         app:layout_constraintStart_toStartOf="@+id/buttoncornerkickteamb"
         app:layout_constraintTop_toBottomOf="@+id/buttoncornerkickteamb" />
@@ -307,13 +330,14 @@
         android:layout_marginLeft="128dp"
         android:background="@color/colorAccent"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer"
         app:layout_constraintStart_toEndOf="@+id/chronometer"
         app:layout_constraintTop_toTopOf="@+id/chronometer"
         app:layout_constraintVertical_bias="0.6" />
 
     <TextView
-        android:id="@+id/textViewteama2"
+        android:id="@+id/textViewbabak"
         android:layout_width="152dp"
         android:layout_height="51dp"
         android:layout_marginStart="86dp"
@@ -322,8 +346,8 @@
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:background="#4CAF50"
-        android:text="1st HALF"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/textViewteamb"
         app:layout_constraintStart_toEndOf="@+id/textViewteama"
         app:layout_constraintTop_toTopOf="parent" />
@@ -336,9 +360,10 @@
         android:layout_marginLeft="86dp"
         android:background="@color/design_default_color_primary_dark"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewteama2"
-        app:layout_constraintStart_toEndOf="@+id/textViewteama2"
-        app:layout_constraintTop_toTopOf="@+id/textViewteama2" />
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewbabak"
+        app:layout_constraintStart_toEndOf="@+id/textViewbabak"
+        app:layout_constraintTop_toTopOf="@+id/textViewbabak" />
 
     <Button
         android:id="@+id/buttonyellow"
@@ -348,9 +373,10 @@
         android:background="@android:color/holo_orange_light"
         android:onClick="yellowcard"
         android:text="YELLOW"
-        app:layout_constraintEnd_toEndOf="@+id/textViewteama2"
-        app:layout_constraintStart_toStartOf="@+id/textViewteama2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewteama2" />
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/textViewbabak"
+        app:layout_constraintStart_toStartOf="@+id/textViewbabak"
+        app:layout_constraintTop_toBottomOf="@+id/textViewbabak" />
 
     <Button
         android:id="@+id/buttonred"
@@ -360,6 +386,7 @@
         android:background="@android:color/holo_red_dark"
         android:onClick="redcard"
         android:text="RED"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/buttonyellow"
         app:layout_constraintStart_toStartOf="@+id/buttonyellow"
         app:layout_constraintTop_toBottomOf="@+id/buttonyellow" />
@@ -373,6 +400,7 @@
         android:background="@color/colorPrimary"
         android:onClick="start1sthalf"
         android:text="START"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/textViewteamb"
         app:layout_constraintStart_toEndOf="@+id/textViewteamb"
         app:layout_constraintTop_toTopOf="@+id/textViewteamb" />

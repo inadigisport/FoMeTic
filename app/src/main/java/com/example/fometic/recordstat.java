@@ -41,6 +41,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     double possesionteamb;
     TextView textviewteama;
     TextView textviewteamb;
+    TextView textviewbabak;
     ListView listViewcetakgoalteama;
 
 
@@ -55,6 +56,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     String passingstatusteamb = "no";
     String formationteama;
     String formationteamb;
+    String babak;
 
 
     ArrayList<String > cetakgoalteama = new ArrayList<>();
@@ -95,6 +97,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     int shootofftargetteama;
     int shootofftargetteamb;
     int running;
+    int babakint;
     String venue;
     String event;
     String timematch;
@@ -121,6 +124,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         venue=bundle.getString("venue");
         event=bundle.getString("event");
         timematch=bundle.getString("timematch");
+        babak=bundle.getString("babak");
         tanding.setWaktupertandingan(Calendar.getInstance().getTime());
 
 
@@ -132,7 +136,22 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         textviewteama.setText(teamA);
         textviewteamb=findViewById(R.id.textViewteamb);
         textviewteamb.setText(teamB);
-        tanding.setBabak(1);
+        textviewbabak=findViewById(R.id.textViewbabak);
+        textviewbabak.setText(babak);
+
+        if (babak.equals("1sthalf")) {
+            babakint = 1;
+        }
+        else if (babak.equals("2ndhalf")) {
+            babakint = 2;
+        }
+        else if (babak.equals("Ex1sthalf")) {
+            babakint = 3;
+        }
+        else if (babak.equals("Ex2ndhalf")) {
+            babakint = 4;
+        }
+        tanding.setBabak(babakint);
 
 
 
@@ -211,11 +230,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void stop1sthalf() {
        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-       builder.setTitle("End of 1st Half")
+       builder.setTitle("End Record Stat")
                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
-                       tanding.setBabak(1);
+
+                       tanding.setBabak(babakint);
                        tanding.setIdPertandingan(getidpertandingan());
                        tanding.setIdTeamA(dbteam.loaddataidteam(teamA));
                        tanding.setIdTeamB(dbteam.loaddataidteam(teamB));
@@ -230,7 +250,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                        dbpertandingan.addHandler(tanding);
                        Log.d("Posession Team A",String.valueOf(tanding.getPosessionTeamA()));
                        Log.d("Posession Team B",String.valueOf(tanding.getPosessionTeamB()));
-                       start2ndhalf();
+                       backtomenu();
                    }
 
                })
@@ -238,6 +258,20 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
 
+
+
+    }
+
+    public void backtomenu () {
+        chronometer.stop();
+        chronometerteam.stop();
+
+        Intent intent = new Intent(this, MainActivity.class);
+
+
+
+        startActivity(intent);
+        finish();
 
 
     }
