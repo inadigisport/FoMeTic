@@ -646,7 +646,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         datagoal.setIdteam(idteam);
         datagoal.setMenit(waktu);
         datagoal.setStatusgoal(status);
-        datagoal.setBabak(1);
+        datagoal.setBabak(babakint);
         dbgoal.addHandler(datagoal);
     }
 

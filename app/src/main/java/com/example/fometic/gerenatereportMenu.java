@@ -114,9 +114,7 @@ public class gerenatereportMenu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
-
-                String UserInfo2 = UserInfo.substring(UserInfo.lastIndexOf("idpertandingan="));
-                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf("}"));
+                String userId = UserInfo.substring(UserInfo.indexOf("=") + 1, UserInfo.indexOf(","));
                 Log.d("User ID", userId);
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
@@ -154,7 +152,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 yellowcardteamb = datapertandingan.getInt(32);
                 redcardteama = datapertandingan.getInt(15);
                 redcardteamb = datapertandingan.getInt(31);
-                if (babak == 1) {
+                if (babak == 1 || babak == 2 || babak == 3 || babak == 4) {
                     Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))), babak);
                     goalpemainteama.moveToFirst();
                     while (!goalpemainteama.isAfterLast()) {
@@ -162,24 +160,24 @@ public class gerenatereportMenu extends AppCompatActivity {
                         cetakgoalteama.add(a);
                         goalpemainteama.moveToNext();
                     }
+
+                    Cursor goalpemainteamb = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))), babak);
+                    goalpemainteamb.moveToFirst();
+                    while (!goalpemainteamb.isAfterLast()) {
+                        String a = dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " (" + goalpemainteamb.getString(3) + ") " + goalpemainteamb.getString(4);
+                        cetakgoalteamb.add(a);
+                        goalpemainteamb.moveToNext();
+                    }
                 } else{
-                    Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
+                    Toast.makeText(gerenatereportMenu.this, "Babak tidak terdaftar", Toast.LENGTH_SHORT).show();
+                    /**Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
                     goalpemainteama.moveToFirst();
                     while (!goalpemainteama.isAfterLast()) {
                         String a = dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " (" + goalpemainteama.getString(3) + ") " + goalpemainteama.getString(4);
                         cetakgoalteama.add(a);
                         goalpemainteama.moveToNext();
-                    }
+                    }**/
                 }
-
-                Cursor goalpemainteamb = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))));
-                goalpemainteamb.moveToFirst();
-                while (!goalpemainteamb.isAfterLast()) {
-                    String a = dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " (" + goalpemainteamb.getString(3) + ") " + goalpemainteamb.getString(4);
-                    cetakgoalteamb.add(a);
-                    goalpemainteamb.moveToNext();
-                }
-
 
                 //Cursor datapertandinganpemain = dbpertandinganpemain.loadHandler(idpertandingan, babak);
                 //datapertandingan.moveToFirst();
