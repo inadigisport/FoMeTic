@@ -13,7 +13,6 @@
         <activity android:name=".InputName" />
         <activity android:name=".shootingpopup" />
         <activity android:name=".generatereport" />
-        <activity android:name=".recordstatsecond" />
         <activity android:name=".recordstat" />
         <activity android:name=".inputgame" />
         <activity android:name=".inputsquad" />

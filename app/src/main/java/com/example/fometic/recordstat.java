@@ -218,10 +218,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("Enter if ", "input goal");
             while (datapertandingan.moveToNext()) {
                 Log.d("Enter while ", "input goal");
-                if (datapertandingan.getInt(33) == 1) {
-                    i = datapertandingan.getInt(0);
-                } else {
-                    i = i + 1;
+                if (datapertandingan.getInt(33)==1 && babakint==2){
+                    i=datapertandingan.getInt(0);
+                }else if (datapertandingan.getInt(33)==2 && babakint==3){
+                    i=datapertandingan.getInt(0);
+                }else if (datapertandingan.getInt(33)==3 && babakint==4){
+                    i=datapertandingan.getInt(0);
+                }else{
+                    i=i+1;
                 }
             }
         }
@@ -274,64 +278,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         finish();
 
 
-    }
-
-    public void start2ndhalf () {
-        chronometer.stop();
-        chronometerteam.stop();
-
-        Intent intent = new Intent(this, recordstatsecond.class);
-        intent.putExtra("teama",teamA);
-        Log.d("team A choosen",teamA);
-        intent.putExtra("teamb",teamB);
-        Log.d("team B choosen",teamB);
-        intent.putExtra("formationteama",formationteama);
-        intent.putExtra("formationteamb",formationteamb);
-        intent.putExtra("venue",venue);
-        intent.putExtra("event",event);
-        intent.putExtra("passingteama",passingteama);
-        intent.putExtra("passingteamb",passingteamb);
-        intent.putExtra("tacklingteama",tacklingteama);
-        intent.putExtra("tacklingteamb",tacklingteamb);
-        intent.putExtra("interceptteama",interceptteama);
-        intent.putExtra("interceptteamb",interceptteamb);
-        intent.putExtra("savesteama",savesteama);
-        intent.putExtra("savesteamb",savesteamb);
-        intent.putExtra("throwinteama",throwinteama);
-        intent.putExtra("throwinteamb",throwinteamb);
-        intent.putExtra("cornerkickteama",cornerkickteama);
-        intent.putExtra("cornerkickteamb",cornerkickteamb);
-        intent.putExtra("ballpossesionteama",ballpossesionteama);
-        intent.putExtra("ballpossesionteamb",ballpossesionteamb);
-        intent.putExtra("foulteama",foulteama);
-        intent.putExtra("foulteamb",foulteamb);
-        intent.putExtra("offsideteama",offsideteama);
-        intent.putExtra("offsideteamb",offsideteamb);
-        intent.putExtra("goalteama",goalteama);
-        intent.putExtra("goalteamb",goalteamb);
-        intent.putExtra("shootontargetteama",shootontargetteama);
-        intent.putExtra("shootontargetteamb",shootontargetteamb);
-        intent.putExtra("shootofftargetteama",shootofftargetteama);
-        intent.putExtra("shootofftargetteamb",shootofftargetteamb);
-        intent.putExtra("yellowcardteama",yellowcardteama);
-        intent.putExtra("yellowcardteamb",yellowcardteamb);
-        intent.putExtra("redcardteama",redcardteama);
-        intent.putExtra("redcardteamb",redcardteamb);
-        intent.putExtra("possesionteama",possesionteama);
-        intent.putExtra("possesionteamb",possesionteamb);
-        intent.putExtra("timematch",timematch);
-        intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
-        intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
-
-
-
-
-
-        startActivity(intent);
-        finish();
-
-        //Intent intent = new Intent(this, recordstatsecond.class);
-        //startActivity(intent);
     }
 
     public void passingteama(View v) {
@@ -836,25 +782,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                 List<String> listpemaingoalteama=new ArrayList<String>();
                 Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                int i=1;
                 if(datapertandingan.moveToFirst()){
-                    Log.d("Enter if ", "input goal");
-                    while (datapertandingan.moveToNext()) {
-                        Log.d("Enter while ", "input goal");
-                        if (datapertandingan.getInt(33)==1){
-                            i=datapertandingan.getInt(0);
-                        }else {
-                            i=i+1;
-                        }
-                    }
-                    inputgoal(pemain,teamA,i);
-                    inputshotongoal(pemain,teamA,i);
-                    inputdatagoal(pemain,teamA,i,array[0],"Pinalty");
+                    inputgoal(pemain,teamA,getidpertandingan());
+                    inputshotongoal(pemain,teamA,getidpertandingan());
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty");
                 }else{
                     Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemain,teamA, i);
-                    inputshotongoal(pemain,teamA,i);
-                    inputdatagoal(pemain,teamA,i,array[0],"Pinalty");
+                    inputgoal(pemain,teamA, getidpertandingan());
+                    inputshotongoal(pemain,teamA,getidpertandingan());
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty");
                 }
                 dialog.dismiss();
             }
@@ -973,25 +909,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 cetakgoalteamb.add(goalnoteb);
                 arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
                 Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                int i=1;
                 if(datapertandingan.moveToFirst()){
                     Log.d("Enter if ", "input goal");
-                    while (datapertandingan.moveToNext()) {
-                        Log.d("Enter while ", "input goal");
-                        if (datapertandingan.getInt(33)==1){
-                            i=datapertandingan.getInt(0);
-                        }else {
-                            i=i+1;
-                        }
-                    }
-                    inputgoal(pemainb,teamB,i);
-                    inputshotongoal(pemainb,teamB,i);
-                    inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
+                    inputgoal(pemainb,teamB,getidpertandingan());
+                    inputshotongoal(pemainb,teamB,getidpertandingan());
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty");
                 }else{
                     Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemainb,teamB, i);
-                    inputshotongoal(pemainb,teamB,i);
-                    inputdatagoal(pemainb,teamB,i,array[0],"Pinalty");
+                    inputgoal(pemainb,teamB, getidpertandingan());
+                    inputshotongoal(pemainb,teamB,getidpertandingan());
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty");
                 }
 
 
@@ -1260,25 +1187,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                         //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputgoal(pemain,teamA,i);
-                            inputshotongoal(pemain,teamA,i);
-                            inputdatagoal(pemain,teamA,i,array[0],"On Play");
+                            inputgoal(pemain,teamA,getidpertandingan());
+                            inputshotongoal(pemain,teamA,getidpertandingan());
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"On Play");
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemain,teamA, i);
-                            inputshotongoal(pemain,teamA,i);
-                            inputdatagoal(pemain,teamA,i,array[0],"On Play");
+                            inputgoal(pemain,teamA, getidpertandingan());
+                            inputshotongoal(pemain,teamA,getidpertandingan());
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"On Play");
                         }
                     }
 
@@ -1323,21 +1241,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootontargeta.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputshotongoal(pemain,teamA,i);
+                            inputshotongoal(pemain,teamA,getidpertandingan());
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputshotongoal(pemain,teamA,i);
+                            inputshotongoal(pemain,teamA,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1382,21 +1291,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootofftargeta.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputshotoffgoal(pemain,teamA,i);
+                            inputshotoffgoal(pemain,teamA,getidpertandingan());
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputshotoffgoal(pemain,teamA,i);
+                            inputshotoffgoal(pemain,teamA,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1476,24 +1376,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         arrayAdaptercetakgoalteamb=new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item,cetakgoalteamb);
 
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputgoal(pemainb,teamB,i);
-                            inputshotongoal(pemainb,teamB,i);
+                            inputgoal(pemainb,teamB,getidpertandingan());
+                            inputshotongoal(pemainb,teamB,getidpertandingan());
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemainb,teamB, i);
-                            inputshotongoal(pemainb,teamB,i);
-                            inputdatagoal(pemainb,teamB,i,array[0],"On Play");
+                            inputgoal(pemainb,teamB, getidpertandingan());
+                            inputshotongoal(pemainb,teamB,getidpertandingan());
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"On Play");
                         }
 
                         dialog.dismiss();
@@ -1543,21 +1434,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootontargetb.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputshotongoal(pemain,teamB,i);
+                            inputshotongoal(pemain,teamB,getidpertandingan());
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputshotongoal(pemain,teamB,i);
+                            inputshotongoal(pemain,teamB,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1603,21 +1485,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
                         pemain=mSpinnershootofftargetb.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputshotoffgoal(pemain,teamB,i);
+                            inputshotoffgoal(pemain,teamB,getidpertandingan());
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputshotoffgoal(pemain,teamB,i);
+                            inputshotoffgoal(pemain,teamB,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1671,21 +1544,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
                         String pemain=mSpinneryellowhome.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input yellow");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputyellow(pemain,teamA,i);;
+                            inputyellow(pemain,teamA,getidpertandingan());;
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputyellow(pemain,teamA, i);
+                            inputyellow(pemain,teamA, getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1731,21 +1595,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         tanding.setYellowcardTeamB(tanding.getYellowcardTeamB()+1);
                         String pemain=mSpinneryellowaway.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input yellow");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputyellow(pemain,teamB,i);;
+                            inputyellow(pemain,teamB,getidpertandingan());;
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputyellow(pemain,teamB, i);
+                            inputyellow(pemain,teamB,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1791,21 +1646,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         tanding.setRedcardTeamA(tanding.getRedcardTeamA()+1);
                         String pemain=mSpinnerredhome.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input yellow");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputred(pemain,teamA,i);;
+                            inputred(pemain,teamA,getidpertandingan());;
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputred(pemain,teamA, i);
+                            inputred(pemain,teamA,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
@@ -1851,21 +1697,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         tanding.setRedcardTeamB(tanding.getRedcardTeamB()+1);
                         String pemain=mSpinnerredaway.getSelectedItem().toString();
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                        int i=1;
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input yellow");
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input yellow");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputred(pemain,teamB,i);;
+                            inputred(pemain,teamB,getidpertandingan());;
                         }else{
                             Log.d("belum ada ", "data pertadingan");
-                            inputred(pemain,teamB, i);
+                            inputred(pemain,teamB,getidpertandingan());
                         }
                         dialog.dismiss();
                     }
