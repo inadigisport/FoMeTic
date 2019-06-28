@@ -218,7 +218,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("Enter if ", "input goal");
             while (datapertandingan.moveToNext()) {
                 Log.d("Enter while ", "input goal");
-<<<<<<< Updated upstream
                 if (datapertandingan.getInt(33)==1 && babakint==2){
                     i=datapertandingan.getInt(0);
                 }else if (datapertandingan.getInt(33)==2 && babakint==3){
@@ -227,13 +226,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     i=datapertandingan.getInt(0);
                 }else{
                     i=i+1;
-=======
-                if (datapertandingan.getInt(33) == 1) {
-                    i = datapertandingan.getInt(0);
-                } else {
-                    i = i + 1;
-                    Log.d("Enter else ", "penambahan id pertandingan");
->>>>>>> Stashed changes
                 }
             }
         }
@@ -289,10 +281,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     public void passingteama(View v) {
 
         if (passingstatusteama == "yes") {
@@ -1391,22 +1379,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
                         if(datapertandingan.moveToFirst()){
                             Log.d("Enter if ", "input goal");
-<<<<<<< Updated upstream
                             inputgoal(pemainb,teamB,getidpertandingan());
                             inputshotongoal(pemainb,teamB,getidpertandingan());
-=======
-                            while (datapertandingan.moveToNext()) {
-                                Log.d("Enter while ", "input goal");
-                                if (datapertandingan.getInt(33)==1){
-                                    i=datapertandingan.getInt(0);
-                                }else {
-                                    i=i+1;
-                                }
-                            }
-                            inputgoal(pemainb,teamB,i);
-                            inputshotongoal(pemainb,teamB,i);
-                            inputdatagoal(pemainb,teamB,i,array[0],"On Play");
->>>>>>> Stashed changes
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"On Play");
                         }else{
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemainb,teamB, getidpertandingan());

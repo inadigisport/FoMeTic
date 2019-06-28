@@ -114,11 +114,9 @@ public class gerenatereportMenu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
-<<<<<<< Updated upstream
-                String userId = UserInfo.substring(UserInfo.indexOf("=") + 1, UserInfo.indexOf(","));
-=======
-                String userId = UserInfo.substring(UserInfo.lastIndexOf("idpertandingan="));
->>>>>>> Stashed changes
+
+                String UserInfo2 = UserInfo.substring(UserInfo.lastIndexOf("idpertandingan="));
+                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf("}"));
                 Log.d("User ID", userId);
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
