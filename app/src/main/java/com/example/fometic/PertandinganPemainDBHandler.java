@@ -11,7 +11,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "pertandinganpemaindb";
     private static final String TABLE_PERTANDINGAN_PEMAIN="tablepertandinganpemain";
-    private static final String ID_PERTANDINGAN= "idpertandinga";
+    private static final String ID_PERTANDINGAN= "idpertandingan";
     private static final String ID_PEMAIN="idpemain";
     private static final String JUMLAH_GOAL="jumlahgoal";
     private static final String JUMLAH_YELLOWCARD="jumlahyellowcard";

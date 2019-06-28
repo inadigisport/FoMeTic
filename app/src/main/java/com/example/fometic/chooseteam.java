@@ -47,7 +47,7 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         editTexttimematch = findViewById(R.id.editTexttimematch);
 
 
-        Button button = findViewById(R.id.buttonstart);
+        Button button = findViewById(R.id.buttonteam);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

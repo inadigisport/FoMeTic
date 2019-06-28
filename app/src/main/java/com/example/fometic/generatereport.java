@@ -259,6 +259,8 @@ public class generatereport extends AppCompatActivity {
         }
         textViewlistpemaingoalteama.setText(builder.toString());
 
+        cetakgoalteama.clear();
+
         textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
         textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         StringBuilder builderteamb=new StringBuilder();
@@ -267,6 +269,8 @@ public class generatereport extends AppCompatActivity {
 
         }
         textViewlistpemaingoalteamb.setText(builderteamb.toString());
+
+        cetakgoalteamb.clear();
 
     }
 

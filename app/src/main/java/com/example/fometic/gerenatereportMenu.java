@@ -67,6 +67,7 @@ public class gerenatereportMenu extends AppCompatActivity {
     goalDBHandler dbgoal = new goalDBHandler(this);
     PemainDBHandler dbpemain = new PemainDBHandler(this);
     TeamDBHandler dbteam = new TeamDBHandler(this);
+    PertandinganPemainDBHandler dbpertandinganpemain = new PertandinganPemainDBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 namateama = teamA.getSelectedItem().toString();
                 namateamb = teamB.getSelectedItem().toString();
                 getdatapertandingan(namateama, namateamb);
+
             }
         });
     }
@@ -112,7 +114,11 @@ public class gerenatereportMenu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
+<<<<<<< Updated upstream
                 String userId = UserInfo.substring(UserInfo.indexOf("=") + 1, UserInfo.indexOf(","));
+=======
+                String userId = UserInfo.substring(UserInfo.lastIndexOf("idpertandingan="));
+>>>>>>> Stashed changes
                 Log.d("User ID", userId);
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
@@ -176,7 +182,11 @@ public class gerenatereportMenu extends AppCompatActivity {
                     goalpemainteamb.moveToNext();
                 }
 
-                Intent intent = new Intent(gerenatereportMenu.this, generatereport.class);
+
+                //Cursor datapertandinganpemain = dbpertandinganpemain.loadHandler(idpertandingan, babak);
+                //datapertandingan.moveToFirst();
+
+                Intent intent = new Intent(gerenatereportMenu.this, choosegeneratereport.class);
                 intent.putExtra("teama", namateama);
                 intent.putExtra("teamb", namateamb);
                 intent.putExtra("formationteamb", formationteamb);
@@ -224,4 +234,6 @@ public class gerenatereportMenu extends AppCompatActivity {
             }
         });
     }
+
+
 }
