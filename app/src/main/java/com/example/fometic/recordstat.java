@@ -179,7 +179,10 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public void start1sthalf(View v) {
         if(running == 1) {
             chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -233,6 +236,10 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 }
                 datapertandingan.moveToNext();
             }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         return i;
     }
 
@@ -767,6 +774,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Log.d("Pemain Goal Team A", pemain);
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+<<<<<<< Updated upstream
                 int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
                 List<String> listpemaingoalteama = new ArrayList<String>();
                 Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
@@ -779,6 +787,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     inputgoal(pemain, teamA, getidpertandingan(), babakint);
                     inputshotongoal(pemain, teamA, getidpertandingan());
                     inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
+=======
+
+
+                int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                List<String> listpemaingoalteama=new ArrayList<String>();
+                Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
+                if(datapertandingan.moveToFirst()){
+                    inputgoal(pemain,teamA,getidpertandingan());
+                    inputshotongoal(pemain,teamA,getidpertandingan());
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" +statusgoal);
+                }else{
+                    Log.d("belum ada ", "data pertadingan");
+                    inputgoal(pemain,teamA, getidpertandingan());
+                    inputshotongoal(pemain,teamA,getidpertandingan());
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" + statusgoal);
+
+>>>>>>> Stashed changes
                 }
                 dialog.dismiss();
             }
@@ -895,6 +920,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                 if (datapertandingan.moveToFirst()) {
                     Log.d("Enter if ", "input goal");
+<<<<<<< Updated upstream
                     inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                     inputshotongoal(pemainb, teamB, getidpertandingan());
                     inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
@@ -903,6 +929,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                     inputshotongoal(pemainb, teamB, getidpertandingan());
                     inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
+=======
+                    inputgoal(pemainb,teamB,getidpertandingan());
+                    inputshotongoal(pemainb,teamB,getidpertandingan());
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
+                }else{
+                    Log.d("belum ada ", "data pertadingan");
+                    inputgoal(pemainb,teamB, getidpertandingan());
+                    inputshotongoal(pemainb,teamB,getidpertandingan());
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
+>>>>>>> Stashed changes
                 }
 
 
@@ -1165,6 +1201,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                         if (datapertandingan.moveToFirst()) {
                             Log.d("Enter if ", "input goal");
+<<<<<<< Updated upstream
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
                             inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
@@ -1173,6 +1210,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
                             inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
+=======
+                            inputgoal(pemain,teamA,getidpertandingan());
+                            inputshotongoal(pemain,teamA,getidpertandingan());
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputgoal(pemain,teamA, getidpertandingan());
+                            inputshotongoal(pemain,teamA,getidpertandingan());
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
+>>>>>>> Stashed changes
                         }
                     }
 
@@ -1351,6 +1398,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                         if (datapertandingan.moveToFirst()) {
                             Log.d("Enter if ", "input goal");
+<<<<<<< Updated upstream
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
                             inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
@@ -1359,6 +1407,16 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
                             inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
+=======
+                            inputgoal(pemainb,teamB,getidpertandingan());
+                            inputshotongoal(pemainb,teamB,getidpertandingan());
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
+                        }else{
+                            Log.d("belum ada ", "data pertadingan");
+                            inputgoal(pemainb,teamB, getidpertandingan());
+                            inputshotongoal(pemainb,teamB,getidpertandingan());
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
+>>>>>>> Stashed changes
                         }
 
                         dialog.dismiss();
