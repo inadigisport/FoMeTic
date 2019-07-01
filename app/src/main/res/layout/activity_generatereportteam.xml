@@ -34,27 +34,25 @@
             app:layout_constraintTop_toTopOf="@+id/textViewteama2" />
 
         <TextView
-            android:id="@+id/textViewteama3"
+            android:id="@+id/datapertandinganpemainteama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="TEAM A"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#DD2C00"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewteama2"
             app:layout_constraintStart_toStartOf="@+id/textViewteama2"
             app:layout_constraintTop_toBottomOf="@+id/textViewteama2" />
 
         <TextView
-            android:id="@+id/textViewteamb2"
+            android:id="@+id/datapertandinganpemainteamb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="TEAM B"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#0000FE"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewteamb3"
             app:layout_constraintStart_toStartOf="@+id/textViewteamb3"
             app:layout_constraintTop_toBottomOf="@+id/textViewteamb3" />

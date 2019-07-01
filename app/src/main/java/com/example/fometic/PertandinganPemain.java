@@ -8,10 +8,11 @@ public class PertandinganPemain {
     private int jumlahredcard;
     private int jumlahshotontarget;
     private int jumlahshotofftarget;
+    private int babak;
 
     public PertandinganPemain(){}
 
-    public PertandinganPemain(int idpemain, int idpertandingan, int jumlahgoal, int jumlahyellowcard, int jumlahredcard, int jumlahshotontarget, int jumlahshotofftarget){
+    public PertandinganPemain(int idpemain, int idpertandingan, int jumlahgoal, int jumlahyellowcard, int jumlahredcard, int jumlahshotontarget, int jumlahshotofftarget, int babak){
         this.idpemain=idpemain;
         this.idpertandingan=idpertandingan;
         this.jumlahgoal=jumlahgoal;
@@ -19,6 +20,7 @@ public class PertandinganPemain {
         this.jumlahredcard=jumlahredcard;
         this.jumlahshotontarget=jumlahshotontarget;
         this.jumlahshotofftarget=jumlahshotofftarget;
+        this.setBabak(babak);
     }
 
 
@@ -76,5 +78,13 @@ public class PertandinganPemain {
 
     public void setJumlahshotofftarget(int jumlahshotofftarget) {
         this.jumlahshotofftarget = jumlahshotofftarget;
+    }
+
+    public int getBabak() {
+        return babak;
+    }
+
+    public void setBabak(int babak) {
+        this.babak = babak;
     }
 }

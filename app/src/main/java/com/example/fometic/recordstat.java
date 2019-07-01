@@ -141,7 +141,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
         if (babak.equals("1sthalf")) {
             babakint = 1;
-<<<<<<< HEAD
             timematchint = 0;
             statusgoal = "";
         }
@@ -156,13 +155,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             statusgoal = "(Ex)";
         }
         else if (babak.equals("Ex2ndhalf")) {
-=======
-        } else if (babak.equals("2ndhalf")) {
-            babakint = 2;
-        } else if (babak.equals("Ex1sthalf")) {
-            babakint = 3;
-        } else if (babak.equals("Ex2ndhalf")) {
->>>>>>> master
             babakint = 4;
             timematchint = Integer.parseInt(timematch);
             statusgoal = "(Ex)";
@@ -185,13 +177,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void start1sthalf(View v) {
-<<<<<<< HEAD
         if(running == 1) {
             chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
-=======
-        if (running == 1) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
->>>>>>> master
+
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -224,7 +212,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
     }
 
-<<<<<<< HEAD
     public int getidpertandingan(){
         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
         int i=1;
@@ -246,26 +233,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 }
                 datapertandingan.moveToNext();
             }
-
-=======
-    public int getidpertandingan() {
-        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-        int i = 1;
-        datapertandingan.moveToFirst();
-        if (!datapertandingan.isAfterLast()) {
-            Log.d("Enter if ", "input goal");
-            if (datapertandingan.getInt(33) == 1 && babakint == 2) {
-                i = datapertandingan.getInt(0);
-            } else if (datapertandingan.getInt(33) == 2 && babakint == 3) {
-                i = datapertandingan.getInt(0);
-            } else if (datapertandingan.getInt(33) == 3 && babakint == 4) {
-                i = datapertandingan.getInt(0);
-            } else {
-                i = datapertandingan.getInt(0) + 1;
-            }
-            datapertandingan.moveToNext();
-        }
->>>>>>> master
         return i;
     }
 
@@ -528,15 +495,15 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         passingstatusteamb = "no";
     }
 
-    public void inputgoal(String nomor, String namateam, int i) {
+    public void inputgoal(String nomor, String namateam, int i, int babak) {
         Log.d("Start ", "input goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babak);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updategoal(i, idpemain);
+            dbpertandinganpemain.updategoal(i, idpemain, babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah goal", Integer.toString(jumlahgoalpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -546,6 +513,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
             tandingpemain.setJumlahgoal(tandingpemain.getJumlahgoal() + 1);
+            tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
             dbpertandinganpemain.addHandler(tandingpemain);
@@ -557,11 +525,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input yellow");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input yellow");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updateyellow(i, idpemain);
+            dbpertandinganpemain.updateyellow(i, idpemain, babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah yellow", Integer.toString(jumlahyellowpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -571,6 +539,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
             tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard() + 1);
+            tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
             dbpertandinganpemain.addHandler(tandingpemain);
@@ -582,11 +551,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input red");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input red");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updatered(i, idpemain);
+            dbpertandinganpemain.updatered(i, idpemain,babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah red", Integer.toString(jumlahredpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -596,6 +565,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
             tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard() + 1);
+            tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
             dbpertandinganpemain.addHandler(tandingpemain);
@@ -607,11 +577,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "on goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input on goal");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updateshotongoal(i, idpemain);
+            dbpertandinganpemain.updateshotongoal(i, idpemain, babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah on goal", Integer.toString(jumlahongoalpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -621,6 +591,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
             tandingpemain.setJumlahshotontarget(tandingpemain.getJumlahshotontarget() + 1);
+            tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
             dbpertandinganpemain.addHandler(tandingpemain);
@@ -632,11 +603,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "off goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input off goal");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updateshotoffgoal(i, idpemain);
+            dbpertandinganpemain.updateshotoffgoal(i, idpemain, babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah off goal", Integer.toString(jumlahoffgoalpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -646,6 +617,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
             tandingpemain.setJumlahshotofftarget(tandingpemain.getJumlahshotofftarget() + 1);
+            tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
             dbpertandinganpemain.addHandler(tandingpemain);
@@ -670,7 +642,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(2);
@@ -683,7 +655,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahongoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(5);
@@ -695,7 +667,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahoffgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(6);
@@ -708,7 +680,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahyellowpemain(int idpertandingan, int idpemain) {
         int yellow;
-        Cursor jumlahyellow = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
+        Cursor jumlahyellow = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
         if (jumlahyellow.moveToFirst()) {
             jumlahyellow.moveToFirst();
             yellow = jumlahyellow.getInt(3);
@@ -720,7 +692,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahredpemain(int idpertandingan, int idpemain) {
         int red;
-        Cursor jumlahred = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
+        Cursor jumlahred = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
         if (jumlahred.moveToFirst()) {
             jumlahred.moveToFirst();
             red = jumlahred.getInt(4);
@@ -795,34 +767,18 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Log.d("Pemain Goal Team A", pemain);
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
                 //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-
-<<<<<<< HEAD
-                int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                List<String> listpemaingoalteama=new ArrayList<String>();
-                Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-                if(datapertandingan.moveToFirst()){
-                    inputgoal(pemain,teamA,getidpertandingan());
-                    inputshotongoal(pemain,teamA,getidpertandingan());
-                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" +statusgoal);
-                }else{
-                    Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemain,teamA, getidpertandingan());
-                    inputshotongoal(pemain,teamA,getidpertandingan());
-                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" + statusgoal);
-=======
                 int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
                 List<String> listpemaingoalteama = new ArrayList<String>();
                 Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                 if (datapertandingan.moveToFirst()) {
-                    inputgoal(pemain, teamA, getidpertandingan());
+                    inputgoal(pemain, teamA, getidpertandingan(), babakint);
                     inputshotongoal(pemain, teamA, getidpertandingan());
-                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty");
+                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
                 } else {
                     Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemain, teamA, getidpertandingan());
+                    inputgoal(pemain, teamA, getidpertandingan(), babakint);
                     inputshotongoal(pemain, teamA, getidpertandingan());
-                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty");
->>>>>>> master
+                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
                 }
                 dialog.dismiss();
             }
@@ -939,25 +895,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                 if (datapertandingan.moveToFirst()) {
                     Log.d("Enter if ", "input goal");
-<<<<<<< HEAD
-                    inputgoal(pemainb,teamB,getidpertandingan());
-                    inputshotongoal(pemainb,teamB,getidpertandingan());
-                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
-                }else{
-                    Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemainb,teamB, getidpertandingan());
-                    inputshotongoal(pemainb,teamB,getidpertandingan());
-                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
-=======
-                    inputgoal(pemainb, teamB, getidpertandingan());
+                    inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                     inputshotongoal(pemainb, teamB, getidpertandingan());
-                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty");
+                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
                 } else {
                     Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemainb, teamB, getidpertandingan());
+                    inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                     inputshotongoal(pemainb, teamB, getidpertandingan());
-                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty");
->>>>>>> master
+                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
                 }
 
 
@@ -1220,25 +1165,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                         if (datapertandingan.moveToFirst()) {
                             Log.d("Enter if ", "input goal");
-<<<<<<< HEAD
-                            inputgoal(pemain,teamA,getidpertandingan());
-                            inputshotongoal(pemain,teamA,getidpertandingan());
-                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
-                        }else{
-                            Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemain,teamA, getidpertandingan());
-                            inputshotongoal(pemain,teamA,getidpertandingan());
-                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
-=======
-                            inputgoal(pemain, teamA, getidpertandingan());
+                            inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
                             inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemain, teamA, getidpertandingan());
+                            inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
                             inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
->>>>>>> master
                         }
                     }
 
@@ -1417,25 +1351,14 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
                         if (datapertandingan.moveToFirst()) {
                             Log.d("Enter if ", "input goal");
-<<<<<<< HEAD
-                            inputgoal(pemainb,teamB,getidpertandingan());
-                            inputshotongoal(pemainb,teamB,getidpertandingan());
-                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
-                        }else{
-                            Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemainb,teamB, getidpertandingan());
-                            inputshotongoal(pemainb,teamB,getidpertandingan());
-                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
-=======
-                            inputgoal(pemainb, teamB, getidpertandingan());
+                            inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
                             inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemainb, teamB, getidpertandingan());
+                            inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
                             inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
->>>>>>> master
                         }
 
                         dialog.dismiss();

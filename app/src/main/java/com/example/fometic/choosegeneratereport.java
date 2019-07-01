@@ -14,6 +14,8 @@ public class choosegeneratereport extends AppCompatActivity {
     String teamB;
     ArrayList<String > cetakgoalteama = new ArrayList<>();
     ArrayList<String > cetakgoalteamb = new ArrayList<>();
+    ArrayList<String > pertandinganpemainteama = new ArrayList<>();
+    ArrayList<String > pertandinganpemainteamb = new ArrayList<>();
     String formationteama;
     String formationteamb;
     String venue;
@@ -95,6 +97,8 @@ public class choosegeneratereport extends AppCompatActivity {
         redcardteamb= getIntent().getIntExtra("redcardteamb",redcardteamb);
         cetakgoalteama= getIntent().getExtras().getStringArrayList("cetakgoalteama");
         cetakgoalteamb= getIntent().getExtras().getStringArrayList("cetakgoalteamb");
+        pertandinganpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
+        pertandinganpemainteamb= getIntent().getExtras().getStringArrayList("datapertandinganpemainteamb");
 
         buttonmatch = findViewById(R.id.buttonmatch);
         buttonmatch.setOnClickListener(new View.OnClickListener() {
@@ -149,45 +153,8 @@ public class choosegeneratereport extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(choosegeneratereport.this, generatereportteam.class);
-                intent.putExtra("teama", teamA);
-                intent.putExtra("teamb", teamB);
-                intent.putExtra("formationteamb", formationteamb);
-                intent.putExtra("formationteama", formationteama);
-                intent.putExtra("formationteamb", formationteamb);
-                intent.putExtra("venue", venue);
-                intent.putExtra("event", event);
-                intent.putExtra("passingteama", passingteama);
-                intent.putExtra("passingteamb", passingteamb);
-                intent.putExtra("tacklingteama", tacklingteama);
-                intent.putExtra("tacklingteamb", tacklingteamb);
-                intent.putExtra("interceptteama", interceptteama);
-                intent.putExtra("interceptteamb", interceptteamb);
-                intent.putExtra("savesteama", savesteama);
-                intent.putExtra("savesteamb", savesteamb);
-                intent.putExtra("throwinteama", throwinteama);
-                intent.putExtra("throwinteamb", throwinteamb);
-                intent.putExtra("cornerkickteama", cornerkickteama);
-                intent.putExtra("cornerkickteamb", cornerkickteamb);
-                intent.putExtra("ballpossesionteama", ballpossesionteama);
-                intent.putExtra("ballpossesionteamb", ballpossesionteamb);
-                intent.putExtra("foulteama", foulteama);
-                intent.putExtra("foulteamb", foulteamb);
-                intent.putExtra("offsideteama", offsideteama);
-                intent.putExtra("offsideteamb", offsideteamb);
-                intent.putExtra("goalteama", goalteama);
-                intent.putExtra("goalteamb", goalteamb);
-                intent.putExtra("shootontargetteama", shootontargetteama);
-                intent.putExtra("shootontargetteamb", shootontargetteamb);
-                intent.putExtra("shootofftargetteama", shootofftargetteama);
-                intent.putExtra("shootofftargetteamb", shootofftargetteamb);
-                intent.putExtra("yellowcardteama", yellowcardteama);
-                intent.putExtra("yellowcardteamb", yellowcardteamb);
-                intent.putExtra("redcardteama", redcardteama);
-                intent.putExtra("redcardteamb", redcardteamb);
-                intent.putExtra("ballpossesionteama", ballpossesionteama);
-                intent.putExtra("ballpossesionteamb", ballpossesionteamb);
-                intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
-                intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
+                intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
+                intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 startActivity(intent);
             }
         });

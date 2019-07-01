@@ -59,6 +59,8 @@ public class gerenatereportMenu extends AppCompatActivity {
     String venue;
     String event;
     ArrayList<String> cetakgoalteama = new ArrayList<>();
+    ArrayList<String> pertandinganpemainteama = new ArrayList<>();
+    ArrayList<String> pertandinganpemainteamb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteama;
     ArrayList<String> cetakgoalteamb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteamb;
@@ -81,7 +83,6 @@ public class gerenatereportMenu extends AppCompatActivity {
                 namateama = teamA.getSelectedItem().toString();
                 namateamb = teamB.getSelectedItem().toString();
                 getdatapertandingan(namateama, namateamb);
-
             }
         });
     }
@@ -104,7 +105,45 @@ public class gerenatereportMenu extends AppCompatActivity {
         teamB.setAdapter(arrayAdapter);
     }
 
-    public void getdatapertandingan(String teama, String teamb) {
+    public void getdatapemainteama(String teama, int idpertandingan, int babak){
+        Cursor datateama=dbpemain.loaddatateam(teama);
+        String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
+        pertandinganpemainteama.add(b);
+        datateama.moveToFirst();
+        if (!datateama.isAfterLast()){
+            int idpemain=datateama.getInt(0);
+            String nama=datateama.getString(1);
+            String nomorpunggung=datateama.getString(3);
+            Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
+            datapertandinganpemain.moveToFirst();
+            if(!datapertandinganpemain.isAfterLast()){
+                String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                pertandinganpemainteama.add(a);
+                datapertandinganpemain.moveToNext();
+            }
+        }
+    }
+
+    public void getdatapemainteamb(String teamb, int idpertandingan, int babak){
+        Cursor datateamb=dbpemain.loaddatateam(teamb);
+        String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
+        pertandinganpemainteamb.add(b);
+        datateamb.moveToFirst();
+        if (!datateamb.isAfterLast()){
+            int idpemain=datateamb.getInt(0);
+            String nama=datateamb.getString(1);
+            String nomorpunggung=datateamb.getString(3);
+            Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
+            datapertandinganpemain.moveToFirst();
+            if(!datapertandinganpemain.isAfterLast()){
+                String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                pertandinganpemainteamb.add(a);
+                datapertandinganpemain.moveToNext();
+            }
+        }
+    }
+
+    public void getdatapertandingan(final String teama, final String teamb) {
         ArrayList<HashMap<String, String>> data = dbpertandingan.loaddatapertandinganreport(teama, teamb);
         final ListView lv = (ListView) findViewById(R.id.listpertandingan);
         ListAdapter adapter = new SimpleAdapter(gerenatereportMenu.this, data, R.layout.list_row, new String[]{"idpertandingan", "timtandingskor", "babak", "tanggal"}, new int[]{R.id.babakid, R.id.timtandingskor, R.id.babak, R.id.tanggal});
@@ -123,6 +162,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 Log.d("idpertandingan",Integer.toString(idpertandingan));
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
                 datapertandingan.moveToFirst();
+                getdatapemainteama(teama, idpertandingan, babak);
+                getdatapemainteamb(teamb, idpertandingan, babak);
                 formationteama = datapertandingan.getString(2);
                 formationteamb = datapertandingan.getString(18);
                 venue = datapertandingan.getString(40);
@@ -173,6 +214,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                     }
                 } else{
                     Toast.makeText(gerenatereportMenu.this, "Babak tidak terdaftar", Toast.LENGTH_SHORT).show();
+                }
                     /**Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
                     goalpemainteama.moveToFirst();
                     while (!goalpemainteama.isAfterLast()) {
@@ -180,7 +222,6 @@ public class gerenatereportMenu extends AppCompatActivity {
                         cetakgoalteama.add(a);
                         goalpemainteama.moveToNext();
                     }**/
-                }
 
                 //Cursor datapertandinganpemain = dbpertandinganpemain.loadHandler(idpertandingan, babak);
                 //datapertandingan.moveToFirst();
@@ -225,7 +266,11 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putExtra("ballpossesionteamb", ballpossesionteamb);
                 intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
                 intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
+                intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
+                intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 startActivity(intent);
+                pertandinganpemainteama.clear();
+                pertandinganpemainteamb.clear();
                 cetakgoalteama.clear();
                 cetakgoalteamb.clear();
 
