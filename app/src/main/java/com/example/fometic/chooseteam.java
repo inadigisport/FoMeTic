@@ -24,6 +24,8 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     Spinner formationteama;
     Spinner formationteamb;
     Spinner babak;
+    Spinner event;
+    Spinner venue;
     EditText editTextvenue;
     EditText editTextevent;
     EditText editTexttimematch;
@@ -42,8 +44,8 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
         formationteama = findViewById(R.id.spinnerformationteama);
         formationteamb = findViewById(R.id.spinnerformationteamb);
         babak = findViewById(R.id.spinnerbabak);
-        editTextvenue = findViewById(R.id.editTextvenue);
-        editTextevent = findViewById(R.id.editTextevent);
+        venue = findViewById(R.id.spinnerVenue);
+        event = findViewById(R.id.spinnerEvent);
         editTexttimematch = findViewById(R.id.editTexttimematch);
 
 
@@ -113,10 +115,10 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
                 Log.d("formation team A", formationteama.getSelectedItem().toString());
                 intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
                 Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", editTextvenue.getText().toString());
-                Log.d("venue ", editTextvenue.getText().toString());
-                intent.putExtra("event", editTextevent.getText().toString());
-                Log.d("venue ", editTextevent.getText().toString());
+                intent.putExtra("venue", venue.getSelectedItem().toString());
+                Log.d("venue ", venue.getSelectedItem().toString());
+                intent.putExtra("event", event.getSelectedItem().toString());
+                Log.d("event ", event.getSelectedItem().toString());
                 intent.putExtra("timematch", editTexttimematch.getText().toString());
                 Log.d("timematch ", editTexttimematch.getText().toString());
                 intent.putExtra("babak", babak.getSelectedItem().toString());
@@ -135,10 +137,10 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
                 Log.d("formation team A", formationteama.getSelectedItem().toString());
                 intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
                 Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", editTextvenue.getText().toString());
-                Log.d("venue ", editTextvenue.getText().toString());
-                intent.putExtra("event", editTextevent.getText().toString());
-                Log.d("venue ", editTextevent.getText().toString());
+                intent.putExtra("venue", venue.getSelectedItem().toString());
+                Log.d("venue ", venue.getSelectedItem().toString());
+                intent.putExtra("event", event.getSelectedItem().toString());
+                Log.d("event ", event.getSelectedItem().toString());
                 intent.putExtra("timematch", editTexttimematch.getText().toString());
                 Log.d("timematch ", editTexttimematch.getText().toString());
                 intent.putExtra("babak", babak.getSelectedItem().toString());
@@ -156,10 +158,10 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
                 Log.d("formation team A", formationteama.getSelectedItem().toString());
                 intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
                 Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", editTextvenue.getText().toString());
-                Log.d("venue ", editTextvenue.getText().toString());
-                intent.putExtra("event", editTextevent.getText().toString());
-                Log.d("venue ", editTextevent.getText().toString());
+                intent.putExtra("venue", venue.getSelectedItem().toString());
+                Log.d("venue ", venue.getSelectedItem().toString());
+                intent.putExtra("event", event.getSelectedItem().toString());
+                Log.d("event ", event.getSelectedItem().toString());
                 intent.putExtra("timematch", editTexttimematch.getText().toString());
                 Log.d("timematch ", editTexttimematch.getText().toString());
                 intent.putExtra("babak", babak.getSelectedItem().toString());
@@ -181,10 +183,10 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
                 Log.d("formation team A", formationteama.getSelectedItem().toString());
                 intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
                 Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", editTextvenue.getText().toString());
-                Log.d("venue ", editTextvenue.getText().toString());
-                intent.putExtra("event", editTextevent.getText().toString());
-                Log.d("venue ", editTextevent.getText().toString());
+                intent.putExtra("venue", venue.getSelectedItem().toString());
+                Log.d("venue ", venue.getSelectedItem().toString());
+                intent.putExtra("event", event.getSelectedItem().toString());
+                Log.d("event ", event.getSelectedItem().toString());
                 intent.putExtra("timematch", editTexttimematch.getText().toString());
                 Log.d("timematch ", editTexttimematch.getText().toString());
                 intent.putExtra("babak", babak.getSelectedItem().toString());

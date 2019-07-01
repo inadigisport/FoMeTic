@@ -114,10 +114,13 @@ public class gerenatereportMenu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
-                String userId = UserInfo.substring(UserInfo.indexOf("=") + 1, UserInfo.indexOf(","));
+                String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
+                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
                 Log.d("User ID", userId);
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
+                Log.d("babak",Integer.toString(babak));
+                Log.d("idpertandingan",Integer.toString(idpertandingan));
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
                 datapertandingan.moveToFirst();
                 formationteama = datapertandingan.getString(2);
@@ -156,7 +159,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                     Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))), babak);
                     goalpemainteama.moveToFirst();
                     while (!goalpemainteama.isAfterLast()) {
-                        String a = dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " (" + goalpemainteama.getString(3) + ") " + goalpemainteama.getString(4);
+                        String a = dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3)+ " " +goalpemainteama.getString(4);
                         cetakgoalteama.add(a);
                         goalpemainteama.moveToNext();
                     }
@@ -164,7 +167,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                     Cursor goalpemainteamb = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))), babak);
                     goalpemainteamb.moveToFirst();
                     while (!goalpemainteamb.isAfterLast()) {
-                        String a = dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " (" + goalpemainteamb.getString(3) + ") " + goalpemainteamb.getString(4);
+                        String a = dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + " " +goalpemainteamb.getString(4);
                         cetakgoalteamb.add(a);
                         goalpemainteamb.moveToNext();
                     }

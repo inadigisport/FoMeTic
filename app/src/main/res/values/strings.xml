@@ -38,4 +38,16 @@
         <item>Ex2ndhalf</item>
     </string-array>
 
+    <string-array name="event">
+        <item>Liga Galakarya</item>
+        <item>Friendly</item>
+    </string-array>
+
+    <string-array name="venue">
+        <item>Lap Telkom</item>
+        <item>Lap Kodam</item>
+    </string-array>
+
+
+
 </resources>

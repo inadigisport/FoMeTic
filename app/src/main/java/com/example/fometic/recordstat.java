@@ -57,6 +57,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     String formationteama;
     String formationteamb;
     String babak;
+    String statusgoal;
 
 
     ArrayList<String > cetakgoalteama = new ArrayList<>();
@@ -98,6 +99,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     int shootofftargetteamb;
     int running;
     int babakint;
+    int timematchint;
     String venue;
     String event;
     String timematch;
@@ -141,15 +143,23 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
         if (babak.equals("1sthalf")) {
             babakint = 1;
+            timematchint = 0;
+            statusgoal = "";
         }
         else if (babak.equals("2ndhalf")) {
             babakint = 2;
+            timematchint = Integer.parseInt(timematch);
+            statusgoal = "";
         }
         else if (babak.equals("Ex1sthalf")) {
             babakint = 3;
+            timematchint = 0;
+            statusgoal = "(Ex)";
         }
         else if (babak.equals("Ex2ndhalf")) {
             babakint = 4;
+            timematchint = Integer.parseInt(timematch);
+            statusgoal = "(Ex)";
         }
         tanding.setBabak(babakint);
 
@@ -172,7 +182,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void start1sthalf(View v) {
         if(running == 1) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -214,21 +224,25 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     public int getidpertandingan(){
         Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
         int i=1;
-        if(datapertandingan.moveToFirst()) {
-            Log.d("Enter if ", "input goal");
-            while (datapertandingan.moveToNext()) {
-                Log.d("Enter while ", "input goal");
+        datapertandingan.moveToFirst();
+            //Log.d("Enter if ", "input goal");
+
+            while (!datapertandingan.isAfterLast()) {
+
+                //Log.d("Enter while ", "input goal");
+
                 if (datapertandingan.getInt(33)==1 && babakint==2){
                     i=datapertandingan.getInt(0);
                 }else if (datapertandingan.getInt(33)==2 && babakint==3){
                     i=datapertandingan.getInt(0);
                 }else if (datapertandingan.getInt(33)==3 && babakint==4){
                     i=datapertandingan.getInt(0);
-                }else{
-                    i=i+1;
+                }else {
+                    i = datapertandingan.getInt(0) + 1;
                 }
+                datapertandingan.moveToNext();
             }
-        }
+
         return i;
     }
 
@@ -786,12 +800,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 if(datapertandingan.moveToFirst()){
                     inputgoal(pemain,teamA,getidpertandingan());
                     inputshotongoal(pemain,teamA,getidpertandingan());
-                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty");
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" +statusgoal);
                 }else{
                     Log.d("belum ada ", "data pertadingan");
                     inputgoal(pemain,teamA, getidpertandingan());
                     inputshotongoal(pemain,teamA,getidpertandingan());
-                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty");
+                    inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"Pinalty" + statusgoal);
                 }
                 dialog.dismiss();
             }
@@ -914,12 +928,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Enter if ", "input goal");
                     inputgoal(pemainb,teamB,getidpertandingan());
                     inputshotongoal(pemainb,teamB,getidpertandingan());
-                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty");
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
                 }else{
                     Log.d("belum ada ", "data pertadingan");
                     inputgoal(pemainb,teamB, getidpertandingan());
                     inputshotongoal(pemainb,teamB,getidpertandingan());
-                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty");
+                    inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"Pinalty" +statusgoal);
                 }
 
 
@@ -1192,12 +1206,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemain,teamA,getidpertandingan());
                             inputshotongoal(pemain,teamA,getidpertandingan());
-                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"On Play");
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
                         }else{
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemain,teamA, getidpertandingan());
                             inputshotongoal(pemain,teamA,getidpertandingan());
-                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],"On Play");
+                            inputdatagoal(pemain,teamA,getidpertandingan(),array[0],statusgoal);
                         }
                     }
 
@@ -1381,12 +1395,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemainb,teamB,getidpertandingan());
                             inputshotongoal(pemainb,teamB,getidpertandingan());
-                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"On Play");
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
                         }else{
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemainb,teamB, getidpertandingan());
                             inputshotongoal(pemainb,teamB,getidpertandingan());
-                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],"On Play");
+                            inputdatagoal(pemainb,teamB,getidpertandingan(),array[0],statusgoal);
                         }
 
                         dialog.dismiss();
