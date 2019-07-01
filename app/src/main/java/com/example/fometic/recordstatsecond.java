@@ -584,7 +584,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Start ", "input goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -609,7 +609,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Start ", "input yellow");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input yellow");
         if (pertandinganpemain.moveToFirst()) {
@@ -634,7 +634,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Start ", "input red");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input red");
         if (pertandinganpemain.moveToFirst()) {
@@ -659,7 +659,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Start ", "on goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input on goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -684,7 +684,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
         Log.d("Start ", "off goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatagoal(idpemain, i);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input off goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -722,7 +722,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     public int jumlahgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatagoal(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(2);
@@ -735,7 +735,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     public int jumlahongoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatagoal(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(5);
@@ -747,7 +747,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     public int jumlahoffgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatagoal(idpemain, idpertandingan);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(6);
@@ -760,7 +760,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     public int jumlahyellowpemain(int idpertandingan, int idpemain) {
         int yellow;
-        Cursor jumlahyellow = dbpertandinganpemain.loaddatagoal(idpemain, idpertandingan);
+        Cursor jumlahyellow = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
         if (jumlahyellow.moveToFirst()) {
             jumlahyellow.moveToFirst();
             yellow = jumlahyellow.getInt(3);
@@ -772,7 +772,7 @@ public class recordstatsecond extends AppCompatActivity implements PopupMenu.OnM
 
     public int jumlahredpemain(int idpertandingan, int idpemain) {
         int red;
-        Cursor jumlahred = dbpertandinganpemain.loaddatagoal(idpemain, idpertandingan);
+        Cursor jumlahred = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan);
         if (jumlahred.moveToFirst()) {
             jumlahred.moveToFirst();
             red = jumlahred.getInt(4);
