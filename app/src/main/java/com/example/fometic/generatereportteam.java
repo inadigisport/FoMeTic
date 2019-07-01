@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class generatereportteam extends AppCompatActivity {
 
-
+    ArrayList<String> statistikpemain = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

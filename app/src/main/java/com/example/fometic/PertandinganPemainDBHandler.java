@@ -63,7 +63,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor loaddatagoal(int idpemain, int idpertandingan){
+    public Cursor loaddatapertandinganpemain(int idpemain, int idpertandingan){
         String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN+ " WHERE "+ID_PEMAIN+" = "+idpemain+" AND "+ID_PERTANDINGAN+"="+idpertandingan;
         return loadHandler(query);
     }
@@ -72,7 +72,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     public int jumlahgoal(int ID, int IDPemain){
         Log.d("Enter Jumlah Goal",IDPemain+" "+ID);
         int i=0;
-        Cursor goal=loaddatagoal(IDPemain, ID);
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID);
         goal.moveToFirst();
         i = goal.getInt(2) + 1;
         Log.d("Jumlah Goal tambah",Integer.toString(i));
@@ -82,7 +82,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     public int jumlahyellow(int ID, int IDPemain){
         Log.d("Enter Jumlah Yellow",IDPemain+" "+ID);
         int i=0;
-        Cursor goal=loaddatagoal(IDPemain, ID);
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID);
         goal.moveToFirst();
         Log.d("Jumlah Yellow before",Integer.toString(goal.getInt(3)));
         i = goal.getInt(3) + 1;
@@ -94,7 +94,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     public int jumlahred(int ID, int IDPemain){
         Log.d("Enter Jumlah Red",IDPemain+" "+ID);
         int i=0;
-        Cursor goal=loaddatagoal(IDPemain, ID);
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID);
         goal.moveToFirst();
         i = goal.getInt(4) + 1;
         return i;
@@ -104,7 +104,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     public int jumlahshotongoal(int ID, int IDPemain){
         Log.d("Enter Jumlah Red",IDPemain+" "+ID);
         int i=0;
-        Cursor goal=loaddatagoal(IDPemain, ID);
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID);
         goal.moveToFirst();
         i = goal.getInt(5) + 1;
         return i;
@@ -114,7 +114,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     public int jumlahshotoffgoal(int ID, int IDPemain){
         Log.d("Enter Jumlah Red",IDPemain+" "+ID);
         int i=0;
-        Cursor goal=loaddatagoal(IDPemain, ID);
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID);
         goal.moveToFirst();
         i = goal.getInt(6) + 1;
         return i;
