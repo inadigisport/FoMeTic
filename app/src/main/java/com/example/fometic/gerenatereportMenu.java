@@ -110,17 +110,19 @@ public class gerenatereportMenu extends AppCompatActivity {
         String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
         pertandinganpemainteama.add(b);
         datateama.moveToFirst();
-        if (!datateama.isAfterLast()){
+        while (!datateama.isAfterLast()){
             int idpemain=datateama.getInt(0);
             String nama=datateama.getString(1);
             String nomorpunggung=datateama.getString(3);
             Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
             datapertandinganpemain.moveToFirst();
-            if(!datapertandinganpemain.isAfterLast()){
+            while(!datapertandinganpemain.isAfterLast()){
                 String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                Log.d("data team a",a);
                 pertandinganpemainteama.add(a);
                 datapertandinganpemain.moveToNext();
             }
+            datateama.moveToNext();
         }
     }
 
@@ -129,17 +131,19 @@ public class gerenatereportMenu extends AppCompatActivity {
         String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
         pertandinganpemainteamb.add(b);
         datateamb.moveToFirst();
-        if (!datateamb.isAfterLast()){
+        while (!datateamb.isAfterLast()){
             int idpemain=datateamb.getInt(0);
             String nama=datateamb.getString(1);
             String nomorpunggung=datateamb.getString(3);
             Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
             datapertandinganpemain.moveToFirst();
-            if(!datapertandinganpemain.isAfterLast()){
+            while(!datapertandinganpemain.isAfterLast()){
                 String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                Log.d("data team b", a);
                 pertandinganpemainteamb.add(a);
                 datapertandinganpemain.moveToNext();
             }
+            datateamb.moveToNext();
         }
     }
 
