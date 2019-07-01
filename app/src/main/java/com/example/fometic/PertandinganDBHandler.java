@@ -81,7 +81,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     public ArrayList<HashMap<String, String>> loaddatapertandinganreport(String teama, String teamb) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> Listpertandingan = new ArrayList<>();
-        String query = "Select * FROM " + TABLE_PERTANDINGAN + " WHERE " + COLUMN_NAMA_TEAM_A + "='" + teama + "' AND  " + COLUMN_NAMA_TEAM_B + "='" + teamb + "'";
+        String query = "Select * FROM " + TABLE_PERTANDINGAN + " WHERE (" + COLUMN_NAMA_TEAM_A + "='" + teama + "' AND  " + COLUMN_NAMA_TEAM_B + "='" + teamb + "') OR (" + COLUMN_NAMA_TEAM_A + "='" + teamb + "' AND  " + COLUMN_NAMA_TEAM_B + "='" + teama + "')";
         Cursor datateam = loadHandler(query);
         if (datateam.moveToFirst()) {
             while (!datateam.isAfterLast()) {

@@ -52,7 +52,8 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor.moveToFirst()) {
+        cursor.moveToFirst();
+        if (!cursor.isAfterLast()) {
             int id_pertandingan = cursor.getInt(0);
             int id_pemain = cursor.getInt(1);
             int jumlah_goal = cursor.getInt(2);
@@ -62,6 +63,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
             int jumlah_shotofftarget = cursor.getInt(6);
             int babak=cursor.getInt(7);
             //Log.d("Jumlah goal", Integer.toString(jumlah_goal));
+            cursor.moveToNext();
         }
         return cursor;
     }
