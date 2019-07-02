@@ -16,6 +16,22 @@ public class choosegeneratereport extends AppCompatActivity {
     ArrayList<String > cetakgoalteamb = new ArrayList<>();
     ArrayList<String > pertandinganpemainteama = new ArrayList<>();
     ArrayList<String > pertandinganpemainteamb = new ArrayList<>();
+    ArrayList<String> namapemain = new ArrayList<>();
+    ArrayList<String> nomorpunggungpemain = new ArrayList<>();
+    ArrayList<String> posisipemain = new ArrayList<>();
+    ArrayList<String> goalpemain = new ArrayList<>();
+    ArrayList<String> shootontargetpemain = new ArrayList<>();
+    ArrayList<String> shootofftargetpemain = new ArrayList<>();
+    ArrayList<String> yellowcardpemain = new ArrayList<>();
+    ArrayList<String> redcardpemain = new ArrayList<>();
+    ArrayList<String> namapemainb = new ArrayList<>();
+    ArrayList<String> nomorpunggungpemainb = new ArrayList<>();
+    ArrayList<String> posisipemainb = new ArrayList<>();
+    ArrayList<String> goalpemainb = new ArrayList<>();
+    ArrayList<String> shootontargetpemainb = new ArrayList<>();
+    ArrayList<String> shootofftargetpemainb = new ArrayList<>();
+    ArrayList<String> yellowcardpemainb = new ArrayList<>();
+    ArrayList<String> redcardpemainb = new ArrayList<>();
     String formationteama;
     String formationteamb;
     String venue;
@@ -99,6 +115,23 @@ public class choosegeneratereport extends AppCompatActivity {
         cetakgoalteamb= getIntent().getExtras().getStringArrayList("cetakgoalteamb");
         pertandinganpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
         pertandinganpemainteamb= getIntent().getExtras().getStringArrayList("datapertandinganpemainteamb");
+        namapemain= getIntent().getExtras().getStringArrayList("namapemain");
+        posisipemain= getIntent().getExtras().getStringArrayList("posisipemain");
+        nomorpunggungpemain= getIntent().getExtras().getStringArrayList("nomorpunggungpemain");
+        goalpemain= getIntent().getExtras().getStringArrayList("goalpemain");
+        shootontargetpemain= getIntent().getExtras().getStringArrayList("shootontargetpemain");
+        shootofftargetpemain= getIntent().getExtras().getStringArrayList("shootofftargetpemain");
+        yellowcardpemain= getIntent().getExtras().getStringArrayList("yellowcardpemain");
+        redcardpemain= getIntent().getExtras().getStringArrayList("redcardpemain");
+        namapemainb= getIntent().getExtras().getStringArrayList("namapemainb");
+        posisipemainb= getIntent().getExtras().getStringArrayList("posisipemainb");
+        nomorpunggungpemainb= getIntent().getExtras().getStringArrayList("nomorpunggungpemainb");
+        goalpemainb= getIntent().getExtras().getStringArrayList("goalpemainb");
+        shootontargetpemainb= getIntent().getExtras().getStringArrayList("shootontargetpemainb");
+        shootofftargetpemainb= getIntent().getExtras().getStringArrayList("shootofftargetpemainb");
+        yellowcardpemainb= getIntent().getExtras().getStringArrayList("yellowcardpemainb");
+        redcardpemainb= getIntent().getExtras().getStringArrayList("redcardpemainb");
+
 
         buttonmatch = findViewById(R.id.buttonmatch);
         buttonmatch.setOnClickListener(new View.OnClickListener() {
@@ -153,8 +186,26 @@ public class choosegeneratereport extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(choosegeneratereport.this, generatereportteam.class);
+                intent.putExtra("teama", teamA);
+                intent.putExtra("teamb", teamB);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
                 intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
+                intent.putStringArrayListExtra("namapemain", namapemain);
+                intent.putStringArrayListExtra("posisipemain", posisipemain);
+                intent.putStringArrayListExtra("nomorpunggungpemain", nomorpunggungpemain);
+                intent.putStringArrayListExtra("goalpemain", goalpemain);
+                intent.putStringArrayListExtra("shootontargetpemain", shootontargetpemain);
+                intent.putStringArrayListExtra("shootofftargetpemain", shootofftargetpemain);
+                intent.putStringArrayListExtra("yellowcardpemain", yellowcardpemain);
+                intent.putStringArrayListExtra("redcardpemain", redcardpemain);
+                intent.putStringArrayListExtra("namapemainb", namapemainb);
+                intent.putStringArrayListExtra("posisipemainb", posisipemainb);
+                intent.putStringArrayListExtra("nomorpunggungpemainb", nomorpunggungpemainb);
+                intent.putStringArrayListExtra("goalpemainb", goalpemainb);
+                intent.putStringArrayListExtra("shootontargetpemainb", shootontargetpemainb);
+                intent.putStringArrayListExtra("shootofftargetpemainb", shootofftargetpemainb);
+                intent.putStringArrayListExtra("yellowcardpemainb", yellowcardpemainb);
+                intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
                 startActivity(intent);
             }
         });

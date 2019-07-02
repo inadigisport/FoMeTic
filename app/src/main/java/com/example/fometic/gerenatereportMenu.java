@@ -61,6 +61,22 @@ public class gerenatereportMenu extends AppCompatActivity {
     ArrayList<String> cetakgoalteama = new ArrayList<>();
     ArrayList<String> pertandinganpemainteama = new ArrayList<>();
     ArrayList<String> pertandinganpemainteamb = new ArrayList<>();
+    ArrayList<String> namapemain = new ArrayList<>();
+    ArrayList<String> nomorpunggungpemain = new ArrayList<>();
+    ArrayList<String> posisipemain = new ArrayList<>();
+    ArrayList<String> goalpemain = new ArrayList<>();
+    ArrayList<String> shootontargetpemain = new ArrayList<>();
+    ArrayList<String> shootofftargetpemain = new ArrayList<>();
+    ArrayList<String> yellowcardpemain = new ArrayList<>();
+    ArrayList<String> redcardpemain = new ArrayList<>();
+    ArrayList<String> namapemainb = new ArrayList<>();
+    ArrayList<String> nomorpunggungpemainb = new ArrayList<>();
+    ArrayList<String> posisipemainb = new ArrayList<>();
+    ArrayList<String> goalpemainb = new ArrayList<>();
+    ArrayList<String> shootontargetpemainb = new ArrayList<>();
+    ArrayList<String> shootofftargetpemainb = new ArrayList<>();
+    ArrayList<String> yellowcardpemainb = new ArrayList<>();
+    ArrayList<String> redcardpemainb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteama;
     ArrayList<String> cetakgoalteamb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteamb;
@@ -107,19 +123,29 @@ public class gerenatereportMenu extends AppCompatActivity {
 
     public void getdatapemainteama(String teama, int idpertandingan, int babak){
         Cursor datateama=dbpemain.loaddatateam(teama);
-        String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
-        pertandinganpemainteama.add(b);
+        //String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
+        //pertandinganpemainteama.add(b);
         datateama.moveToFirst();
         while (!datateama.isAfterLast()){
             int idpemain=datateama.getInt(0);
             String nama=datateama.getString(1);
+            Log.d("posisi pemain", nama);
+            String posisi=datateama.getString(4);
+            Log.d("posisi pemain", posisi);
             String nomorpunggung=datateama.getString(3);
             Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
             datapertandinganpemain.moveToFirst();
             while(!datapertandinganpemain.isAfterLast()){
-                String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
-                Log.d("data team a",a);
-                pertandinganpemainteama.add(a);
+                //String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                //Log.d("data team a",a);
+                namapemain.add(nama);
+                posisipemain.add(posisi);
+                nomorpunggungpemain.add(nomorpunggung);
+                goalpemain.add(Integer.toString(datapertandinganpemain.getInt(2)));
+                shootontargetpemain.add(Integer.toString(datapertandinganpemain.getInt(5)));
+                shootofftargetpemain.add(Integer.toString(datapertandinganpemain.getInt(6)));
+                yellowcardpemain.add(Integer.toString(datapertandinganpemain.getInt(3)));
+                redcardpemain.add(Integer.toString(datapertandinganpemain.getInt(4)));
                 datapertandinganpemain.moveToNext();
             }
             datateama.moveToNext();
@@ -128,19 +154,28 @@ public class gerenatereportMenu extends AppCompatActivity {
 
     public void getdatapemainteamb(String teamb, int idpertandingan, int babak){
         Cursor datateamb=dbpemain.loaddatateam(teamb);
-        String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
-        pertandinganpemainteamb.add(b);
+        //String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red Card, Jumlah Shot on Target, Jumlah Shot off Target";
+        //pertandinganpemainteamb.add(b);
         datateamb.moveToFirst();
         while (!datateamb.isAfterLast()){
             int idpemain=datateamb.getInt(0);
             String nama=datateamb.getString(1);
             String nomorpunggung=datateamb.getString(3);
+            String posisi=datateamb.getString(4);
             Cursor datapertandinganpemain= dbpertandinganpemain.loaddatawithstat(idpemain, idpertandingan, babak);
             datapertandinganpemain.moveToFirst();
             while(!datapertandinganpemain.isAfterLast()){
-                String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
-                Log.d("data team b", a);
-                pertandinganpemainteamb.add(a);
+                //String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+", "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+", "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                //Log.d("data team b", a);
+                //pertandinganpemainteamb.add(a);
+                namapemainb.add(nama);
+                posisipemainb.add(posisi);
+                nomorpunggungpemainb.add(nomorpunggung);
+                goalpemainb.add(Integer.toString(datapertandinganpemain.getInt(2)));
+                shootontargetpemainb.add(Integer.toString(datapertandinganpemain.getInt(5)));
+                shootofftargetpemainb.add(Integer.toString(datapertandinganpemain.getInt(6)));
+                yellowcardpemainb.add(Integer.toString(datapertandinganpemain.getInt(3)));
+                redcardpemainb.add(Integer.toString(datapertandinganpemain.getInt(4)));
                 datapertandinganpemain.moveToNext();
             }
             datateamb.moveToNext();
@@ -272,7 +307,39 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
                 intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
+                intent.putStringArrayListExtra("namapemain", namapemain);
+                intent.putStringArrayListExtra("posisipemain", posisipemain);
+                intent.putStringArrayListExtra("nomorpunggungpemain", nomorpunggungpemain);
+                intent.putStringArrayListExtra("goalpemain", goalpemain);
+                intent.putStringArrayListExtra("shootontargetpemain", shootontargetpemain);
+                intent.putStringArrayListExtra("shootofftargetpemain", shootofftargetpemain);
+                intent.putStringArrayListExtra("yellowcardpemain", yellowcardpemain);
+                intent.putStringArrayListExtra("redcardpemain", redcardpemain);
+                intent.putStringArrayListExtra("namapemainb", namapemainb);
+                intent.putStringArrayListExtra("posisipemainb", posisipemainb);
+                intent.putStringArrayListExtra("nomorpunggungpemainb", nomorpunggungpemainb);
+                intent.putStringArrayListExtra("goalpemainb", goalpemainb);
+                intent.putStringArrayListExtra("shootontargetpemainb", shootontargetpemainb);
+                intent.putStringArrayListExtra("shootofftargetpemainb", shootofftargetpemainb);
+                intent.putStringArrayListExtra("yellowcardpemainb", yellowcardpemainb);
+                intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
                 startActivity(intent);
+                namapemain.clear();
+                posisipemain.clear();
+                nomorpunggungpemain.clear();
+                goalpemain.clear();
+                shootontargetpemain.clear();
+                shootofftargetpemain.clear();
+                yellowcardpemain.clear();
+                redcardpemain.clear();
+                namapemainb.clear();
+                posisipemainb.clear();
+                nomorpunggungpemainb.clear();
+                goalpemainb.clear();
+                shootontargetpemainb.clear();
+                shootofftargetpemainb.clear();
+                yellowcardpemainb.clear();
+                redcardpemainb.clear();
                 pertandinganpemainteama.clear();
                 pertandinganpemainteamb.clear();
                 cetakgoalteama.clear();
