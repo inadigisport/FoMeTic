@@ -36,6 +36,7 @@ public class choosegeneratereport extends AppCompatActivity {
     String formationteamb;
     String venue;
     String event;
+    String tanggal;
     int ballpossesionteama;
     int ballpossesionteamb;
     int passingteama;
@@ -83,6 +84,7 @@ public class choosegeneratereport extends AppCompatActivity {
         formationteamb= getIntent().getStringExtra("formationteamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
+        tanggal= getIntent().getStringExtra("tanggal");
         ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
         ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
         passingteama= getIntent().getIntExtra("passingteama",passingteama);
@@ -145,6 +147,7 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("venue", venue);
                 intent.putExtra("event", event);
+                intent.putExtra("tanggal", tanggal);
                 intent.putExtra("passingteama", passingteama);
                 intent.putExtra("passingteamb", passingteamb);
                 intent.putExtra("tacklingteama", tacklingteama);
@@ -190,6 +193,7 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putExtra("teamb", teamB);
                 intent.putExtra("venue", venue);
                 intent.putExtra("event", event);
+                intent.putExtra("tanggal", tanggal);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
                 intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 intent.putStringArrayListExtra("namapemain", namapemain);

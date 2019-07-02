@@ -68,6 +68,7 @@ public class generatereport extends AppCompatActivity {
     String formationteamb;
     String venue;
     String event;
+    String tanggal;
 
     int ballpossesionteama;
     int ballpossesionteamb;
@@ -115,6 +116,7 @@ public class generatereport extends AppCompatActivity {
         formationteamb= getIntent().getStringExtra("formationteamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
+        tanggal= getIntent().getStringExtra("tanggal");
         Log.d("venue", venue);
         textviewteama=findViewById(R.id.textViewteama);
         textviewteama.setText(teamA);
@@ -130,11 +132,8 @@ public class generatereport extends AppCompatActivity {
         textviewformationa.setText(formationteama);
         textviewformationb.setText(formationteamb);
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-        Date todayDate = new Date();
-        String thisDate = currentDate.format(todayDate);
         textViewtanggal = findViewById(R.id.textViewtanggal);
-        textViewtanggal.setText(thisDate);
+        textViewtanggal.setText(tanggal);
 
 
 
