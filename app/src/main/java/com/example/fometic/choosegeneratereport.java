@@ -188,6 +188,8 @@ public class choosegeneratereport extends AppCompatActivity {
                 Intent intent = new Intent(choosegeneratereport.this, generatereportteam.class);
                 intent.putExtra("teama", teamA);
                 intent.putExtra("teamb", teamB);
+                intent.putExtra("venue", venue);
+                intent.putExtra("event", event);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
                 intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 intent.putStringArrayListExtra("namapemain", namapemain);

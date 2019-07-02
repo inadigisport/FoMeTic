@@ -194,15 +194,20 @@ public class gerenatereportMenu extends AppCompatActivity {
                 Log.d("User Info", UserInfo);
                 String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
                 String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
-                Log.d("User ID", userId);
+                String teamlv = UserInfo.substring(UserInfo.indexOf("timtandingskor="));
+                String teamalv = teamlv.substring(teamlv.indexOf("=") +1, teamlv.indexOf("-") - 3);
+                String teamblv = teamlv.substring(teamlv.indexOf("-") +4, teamlv.indexOf(","));
+                Log.d("teamlva", teamalv);
+                Log.d("teamlvb", teamblv);
+
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
                 Log.d("babak",Integer.toString(babak));
                 Log.d("idpertandingan",Integer.toString(idpertandingan));
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
                 datapertandingan.moveToFirst();
-                getdatapemainteama(teama, idpertandingan, babak);
-                getdatapemainteamb(teamb, idpertandingan, babak);
+                getdatapemainteama(teamalv, idpertandingan, babak);
+                getdatapemainteamb(teamblv, idpertandingan, babak);
                 formationteama = datapertandingan.getString(2);
                 formationteamb = datapertandingan.getString(18);
                 venue = datapertandingan.getString(40);
@@ -236,7 +241,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 redcardteama = datapertandingan.getInt(15);
                 redcardteamb = datapertandingan.getInt(31);
                 if (babak == 1 || babak == 2 || babak == 3 || babak == 4) {
-                    Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))), babak);
+                    Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(teamalv)), babak);
                     goalpemainteama.moveToFirst();
                     while (!goalpemainteama.isAfterLast()) {
                         String a = dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3)+ " " +goalpemainteama.getString(4);
@@ -244,7 +249,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                         goalpemainteama.moveToNext();
                     }
 
-                    Cursor goalpemainteamb = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))), babak);
+                    Cursor goalpemainteamb = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(teamblv)), babak);
                     goalpemainteamb.moveToFirst();
                     while (!goalpemainteamb.isAfterLast()) {
                         String a = dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + " " +goalpemainteamb.getString(4);
@@ -266,8 +271,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 //datapertandingan.moveToFirst();
 
                 Intent intent = new Intent(gerenatereportMenu.this, choosegeneratereport.class);
-                intent.putExtra("teama", namateama);
-                intent.putExtra("teamb", namateamb);
+                intent.putExtra("teama", teamalv);
+                intent.putExtra("teamb", teamblv);
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("formationteama", formationteama);
                 intent.putExtra("formationteamb", formationteamb);

@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class generatereportteam extends AppCompatActivity {
 
@@ -48,8 +50,13 @@ public class generatereportteam extends AppCompatActivity {
     TextView textViewlistdatapertandinganpemainteamb;
     TextView namateamA;
     TextView namateamB;
+    TextView textViewevent;
+    TextView textViewvenue;
+    TextView textViewtanggal;
     String teamA;
     String teamB;
+    String venue;
+    String event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,8 @@ public class generatereportteam extends AppCompatActivity {
 
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
+        venue= getIntent().getStringExtra("venue");
+        event= getIntent().getStringExtra("event");
         statistikpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
         statistikpemainteamb= getIntent().getExtras().getStringArrayList("datapertandinganpemainteamb");
         namapemain= getIntent().getExtras().getStringArrayList("namapemain");
@@ -84,6 +93,19 @@ public class generatereportteam extends AppCompatActivity {
         namateamB=findViewById(R.id.textViewteamb);
         namateamA.setText(teamA);
         namateamB.setText(teamB);
+        textViewevent=findViewById(R.id.textViewevent);
+        textViewvenue=findViewById(R.id.textViewvenue);
+        textViewevent.setText(event);
+        textViewvenue.setText(venue);
+
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        textViewtanggal = findViewById(R.id.textViewtanggal);
+        textViewtanggal.setText(thisDate);
+
+
         //textViewlistdatapertandinganpemainteama =findViewById(R.id.datapertandinganpemainteama);
         //textViewlistdatapertandinganpemainteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textViewnamapemain = findViewById(R.id.textViewnamapemain);
