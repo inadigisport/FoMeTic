@@ -58,6 +58,7 @@ public class generatereport extends AppCompatActivity {
     TextView textViewvenue;
     TextView textViewevent;
     TextView textViewtanggal;
+    TextView textViewbabak;
     ArrayList<String > cetakgoalteama = new ArrayList<>();
     ArrayList<String > cetakgoalteamb = new ArrayList<>();
 
@@ -69,6 +70,7 @@ public class generatereport extends AppCompatActivity {
     String venue;
     String event;
     String tanggal;
+    String babakstring;
 
     int ballpossesionteama;
     int ballpossesionteamb;
@@ -116,6 +118,7 @@ public class generatereport extends AppCompatActivity {
         formationteamb= getIntent().getStringExtra("formationteamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
+        babakstring= getIntent().getStringExtra("babak");
         tanggal= getIntent().getStringExtra("tanggal");
         Log.d("venue", venue);
         textviewteama=findViewById(R.id.textViewteama);
@@ -134,6 +137,8 @@ public class generatereport extends AppCompatActivity {
 
         textViewtanggal = findViewById(R.id.textViewtanggal);
         textViewtanggal.setText(tanggal);
+        textViewbabak = findViewById(R.id.textViewbabak);
+        textViewbabak.setText(babakstring);
 
 
 

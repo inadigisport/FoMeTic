@@ -53,11 +53,13 @@ public class generatereportteam extends AppCompatActivity {
     TextView textViewevent;
     TextView textViewvenue;
     TextView textViewtanggal;
+    TextView textViewbabak;
     String teamA;
     String teamB;
     String venue;
     String event;
     String tanggal;
+    String babakstring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class generatereportteam extends AppCompatActivity {
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
         tanggal= getIntent().getStringExtra("tanggal");
+        babakstring= getIntent().getStringExtra("babak");
         statistikpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
         statistikpemainteamb= getIntent().getExtras().getStringArrayList("datapertandinganpemainteamb");
         namapemain= getIntent().getExtras().getStringArrayList("namapemain");
@@ -104,6 +107,8 @@ public class generatereportteam extends AppCompatActivity {
 
         textViewtanggal = findViewById(R.id.textViewtanggal);
         textViewtanggal.setText(tanggal);
+        textViewbabak = findViewById(R.id.textViewbabak);
+        textViewbabak.setText(babakstring);
 
 
         //textViewlistdatapertandinganpemainteama =findViewById(R.id.datapertandinganpemainteama);

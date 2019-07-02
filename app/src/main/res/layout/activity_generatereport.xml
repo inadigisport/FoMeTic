@@ -580,8 +580,6 @@
         app:layout_constraintTop_toTopOf="@+id/textViewvenue" />
 
 
-
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="300dp"
@@ -589,9 +587,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
 
+        <TextView
+            android:id="@+id/textViewbabak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:background="#F5020202"
+            android:text="BABAK"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#FFD600"
+            android:textColorHighlight="#F3F0F0"
+            android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewteama"
@@ -599,14 +612,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="104dp"
-            android:layout_marginTop="192dp"
+            android:layout_marginTop="60dp"
             android:text="TEAM A"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#DD2C00"
             android:textSize="36sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
         <TextView
@@ -638,11 +650,11 @@
             android:id="@+id/textViewlistpemaingoalteama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="142dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#DD2C00"
             android:textSize="20sp"
-            android:layout_centerHorizontal="true"
             app:layout_constraintEnd_toEndOf="@+id/textViewformationA"
             app:layout_constraintStart_toStartOf="@+id/textViewformationA"
             app:layout_constraintTop_toBottomOf="@+id/textViewformationA" />

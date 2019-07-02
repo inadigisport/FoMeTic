@@ -58,6 +58,7 @@ public class gerenatereportMenu extends AppCompatActivity {
     int shootofftargetteamb;
     String venue;
     String event;
+    String babakstring;
     ArrayList<String> cetakgoalteama = new ArrayList<>();
     ArrayList<String> pertandinganpemainteama = new ArrayList<>();
     ArrayList<String> pertandinganpemainteamb = new ArrayList<>();
@@ -248,6 +249,22 @@ public class gerenatereportMenu extends AppCompatActivity {
                 yellowcardteamb = datapertandingan.getInt(32);
                 redcardteama = datapertandingan.getInt(15);
                 redcardteamb = datapertandingan.getInt(31);
+                if (babak == 1) {
+                    babakstring = "1sthalf";
+                }
+                else if (babak == 2) {
+                    babakstring = "2ndhalf";
+                }
+                else if (babak == 3) {
+                    babakstring = "Ex1sthalf";
+                }
+                else if (babak == 4) {
+                    babakstring = "Ex2ndhalf";
+                }
+
+
+
+
                 if (babak == 1 || babak == 2 || babak == 3 || babak == 4) {
                     Cursor goalpemainteama = dbgoal.loaddatagoal(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(teamalv)), babak);
                     goalpemainteama.moveToFirst();
@@ -282,6 +299,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putExtra("teama", teamalv);
                 intent.putExtra("teamb", teamblv);
                 intent.putExtra("tanggal", tanggal);
+                intent.putExtra("babak", babakstring );
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("formationteama", formationteama);
                 intent.putExtra("formationteamb", formationteamb);
