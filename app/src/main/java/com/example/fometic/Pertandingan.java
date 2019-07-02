@@ -49,11 +49,12 @@ public class Pertandingan {
     private int offsideTeamB;
     private int foulTeamA;
     private int foulTeamB;
+    private int timematch;
 
     public Pertandingan() {
     }
 
-    public Pertandingan(int idPertandingan, int idTeamA, String namaTeamA, String formasiTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, int posessionTeamA, int posessionTeamB, Time waktupertandingan, String venue, String event, int offsideTeamA, int offsideTeamB, int foulTeamA, int foulTeamB) {
+    public Pertandingan(int idPertandingan, int idTeamA, String namaTeamA, String formasiTeamA, int passingTeamA, int tacklingTeamA, int goalTeamA, int shootOnTargetTeamA, int shootOffTargetTeamA, int interceptTeamA, int savesTeamA, int throwinTeamA, int freekickTeamA, int pinaltyTeamA, int goalkickTeamA, int cornerkickTeamA, int yellowcardTeamA, int redcardTeamA, int idTeamB, String namaTeamB, String formasiTeamB, int passingTeamB, int tacklingTeamB, int goalTeamB, int shootOnTargetTeamB, int shootOffTargetTeamB, int interceptTeamB, int savesTeamB, int throwinTeamB, int freekickTeamB, int pinaltyTeamB, int goalkickTeamB, int cornerkickTeamB, int yellowcardTeamB, int redcardTeamB, int posessionTeamA, int posessionTeamB, Time waktupertandingan, String venue, String event, int offsideTeamA, int offsideTeamB, int foulTeamA, int foulTeamB, int timematch) {
         this.setIdPertandingan(idPertandingan);
         this.setIdTeamA(idTeamA);
         this.setNamaTeamA(namaTeamA);
@@ -98,6 +99,7 @@ public class Pertandingan {
         this.setFoulTeamB(foulTeamB);
         this.setOffsideTeamA(offsideTeamA);
         this.setOffsideTeamB(offsideTeamB);
+        this.setTimematch(timematch);
     }
 
     public int getIdTeamA() {
@@ -459,5 +461,13 @@ public class Pertandingan {
 
     public void setFoulTeamB(int foulTeamB) {
         this.foulTeamB = foulTeamB;
+    }
+
+    public int getTimematch() {
+        return timematch;
+    }
+
+    public void setTimematch(int timematch) {
+        this.timematch = timematch;
     }
 }

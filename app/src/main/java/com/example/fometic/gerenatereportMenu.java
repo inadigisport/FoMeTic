@@ -190,22 +190,25 @@ public class gerenatereportMenu extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String teamalv="";
+                String teamblv="";
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
                 String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
                 String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
                 String teamlv = UserInfo.substring(UserInfo.indexOf("timtandingskor="));
-                String teamalv = teamlv.substring(teamlv.indexOf("=") +1, teamlv.indexOf("-") - 3);
-                String teamblv = teamlv.substring(teamlv.indexOf("-") +4, teamlv.indexOf(","));
-                Log.d("teamlva", teamalv);
-                Log.d("teamlvb", teamblv);
-
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
                 Log.d("babak",Integer.toString(babak));
                 Log.d("idpertandingan",Integer.toString(idpertandingan));
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
                 datapertandingan.moveToFirst();
+                Cursor datateam=dbpertandingan.loaddatapertandinganshow(idpertandingan,babak);
+                datateam.moveToFirst();
+                while (!datateam.isAfterLast()){
+                    teamalv=datateam.getString(1);
+                    teamblv=datateam.getString(17);
+                }
                 getdatapemainteama(teamalv, idpertandingan, babak);
                 getdatapemainteamb(teamblv, idpertandingan, babak);
                 formationteama = datapertandingan.getString(2);
@@ -308,6 +311,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putExtra("redcardteamb", redcardteamb);
                 intent.putExtra("ballpossesionteama", ballpossesionteama);
                 intent.putExtra("ballpossesionteamb", ballpossesionteamb);
+                intent.putExtra("babak",babak);
                 intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
                 intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
@@ -353,6 +357,11 @@ public class gerenatereportMenu extends AppCompatActivity {
                 //Toast.makeText(getBaseContext(), lv.getItemAtPosition(position).toString()+userId+","+babak+","+idpertandingan, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    public void getdatafullmatch(String teama, String teamb, int babak){
+        dbpertandingan.loaddatapertandinganreport(teama,teamb);
     }
 
 

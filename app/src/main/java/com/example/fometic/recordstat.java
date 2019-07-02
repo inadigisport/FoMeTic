@@ -127,6 +127,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         event = bundle.getString("event");
         timematch = bundle.getString("timematch");
         babak = bundle.getString("babak");
+        tanding.setTimematch(Integer.valueOf(timematch));
         tanding.setWaktupertandingan(Calendar.getInstance().getTime());
 
 

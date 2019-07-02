@@ -1,11 +1,15 @@
 package com.example.fometic;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,19 +68,20 @@ public class choosegeneratereport extends AppCompatActivity {
     int yellowcardteamb;
     int redcardteama;
     int redcardteamb;
+    int babak;
+    ConstraintLayout layout;
 
     Button buttonteam;
     Button buttonmatch;
 
-
-
-
+    PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosegeneratereport);
-
+        Button b = null;
+        final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
         formationteama= getIntent().getStringExtra("formationteama");
@@ -131,6 +136,21 @@ public class choosegeneratereport extends AppCompatActivity {
         shootofftargetpemainb= getIntent().getExtras().getStringArrayList("shootofftargetpemainb");
         yellowcardpemainb= getIntent().getExtras().getStringArrayList("yellowcardpemainb");
         redcardpemainb= getIntent().getExtras().getStringArrayList("redcardpemainb");
+        babak=getIntent().getIntExtra("babak",babak);
+        if (babak==2 || babak ==4){
+            View v = inflater.inflate(R.layout.activity_choosegeneratereport, null);
+            b = v.findViewById(R.id.buttonfullmatch);
+            b.setTag("Fullmatch");
+
+            layout=(ConstraintLayout) findViewById(R.id.layoutchoose);
+            layout.addView(b);
+
+            b.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                }
+            });
+        }
 
 
         buttonmatch = findViewById(R.id.buttonmatch);

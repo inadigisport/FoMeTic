@@ -63,6 +63,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     public static final String OFFSIDE_TEAM_B = "offsideteamB";
     public static final String FOUL_TEAM_A = "foulteamA";
     public static final String FOUL_TEAM_B = "foulteamB";
+    public static final String TIME_MATCH = "timematch";
 
     public PertandinganDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -70,7 +71,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam = "CREATE TABLE " + TABLE_PERTANDINGAN + " (" + ID_PERTANDINGAN + " INTEGER, " + COLUMN_NAMA_TEAM_A + " STRING, " + COLUMN_FORMASI_TEAM_A + " STRING, " + JUMLAH_PASSING_TEAM_A + " INT, " + JUMLAH_TACKLING_TEAM_A + " INT, " + JUMLAH_SHOOT_GOAL_TEAM_A + " INT, " + JUMLAH_SHOOT_ON_TARGET_TEAM_A + " INT, " + JUMLAH_SHOOT_OFF_TARGET_TEAM_A + " INT, " + JUMLAH_INTERCEPT_TEAM_A + " INT, " + JUMLAH_SAVES_TEAM_A + " INT," + JUMLAH_THROWIN_TEAM_A + " INT, " + JUMLAH_FREEKICK_TEAM_A + " INT, " + JUMLAH_PINALTY_TEAM_A + " INT, " + JUMLAH_GOALKICK_TEAM_A + " INT, " + JUMLAH_CORNERKICK_TEAM_A + " INT, " + JUMLAH_RED_CARD_TEAM_A + " INT, " + JUMLAH_YELLOW_CARD_TEAM_A + " INT, " + COLUMN_NAMA_TEAM_B + " STRING, " + COLUMN_FORMASI_TEAM_B + " STRING, " + JUMLAH_PASSING_TEAM_B + " INT, " + JUMLAH_TACKLING_TEAM_B + " INT, " + JUMLAH_SHOOT_GOAL_TEAM_B + " INT, " + JUMLAH_SHOOT_ON_TARGET_TEAM_B + " INT, " + JUMLAH_SHOOT_OFF_TARGET_TEAM_B + " INT, " + JUMLAH_INTERCEPT_TEAM_B + " INT, " + JUMLAH_SAVES_TEAM_B + " INT," + JUMLAH_THROWIN_TEAM_B + " INT, " + JUMLAH_FREEKICK_TEAM_B + " INT, " + JUMLAH_PINALTY_TEAM_B + " INT, " + JUMLAH_GOALKICK_TEAM_B + " INT, " + JUMLAH_CORNERKICK_TEAM_B + " INT, " + JUMLAH_RED_CARD_TEAM_B + " INT, " + JUMLAH_YELLOW_CARD_TEAM_B + " INT, " + BABAK + " INT, " + ID_TEAMA + " INT, " + ID_TEAMB + " INT, " + POSESSION_TEAMA + " INT, " + POSESSION_TEAMB + " INT, " + TANGGAL_PERTANDINGAN + " STRING, " + EVENT + " STRING, " + VENUE + " STRING, " + OFFSIDE_TEAM_A + " INT, " + OFFSIDE_TEAM_B + " INT, " + FOUL_TEAM_A + " INT, " + FOUL_TEAM_B + " INT)";
+        String createTableTeam = "CREATE TABLE " + TABLE_PERTANDINGAN + " (" + ID_PERTANDINGAN + " INTEGER, " + COLUMN_NAMA_TEAM_A + " STRING, " + COLUMN_FORMASI_TEAM_A + " STRING, " + JUMLAH_PASSING_TEAM_A + " INT, " + JUMLAH_TACKLING_TEAM_A + " INT, " + JUMLAH_SHOOT_GOAL_TEAM_A + " INT, " + JUMLAH_SHOOT_ON_TARGET_TEAM_A + " INT, " + JUMLAH_SHOOT_OFF_TARGET_TEAM_A + " INT, " + JUMLAH_INTERCEPT_TEAM_A + " INT, " + JUMLAH_SAVES_TEAM_A + " INT," + JUMLAH_THROWIN_TEAM_A + " INT, " + JUMLAH_FREEKICK_TEAM_A + " INT, " + JUMLAH_PINALTY_TEAM_A + " INT, " + JUMLAH_GOALKICK_TEAM_A + " INT, " + JUMLAH_CORNERKICK_TEAM_A + " INT, " + JUMLAH_RED_CARD_TEAM_A + " INT, " + JUMLAH_YELLOW_CARD_TEAM_A + " INT, " + COLUMN_NAMA_TEAM_B + " STRING, " + COLUMN_FORMASI_TEAM_B + " STRING, " + JUMLAH_PASSING_TEAM_B + " INT, " + JUMLAH_TACKLING_TEAM_B + " INT, " + JUMLAH_SHOOT_GOAL_TEAM_B + " INT, " + JUMLAH_SHOOT_ON_TARGET_TEAM_B + " INT, " + JUMLAH_SHOOT_OFF_TARGET_TEAM_B + " INT, " + JUMLAH_INTERCEPT_TEAM_B + " INT, " + JUMLAH_SAVES_TEAM_B + " INT," + JUMLAH_THROWIN_TEAM_B + " INT, " + JUMLAH_FREEKICK_TEAM_B + " INT, " + JUMLAH_PINALTY_TEAM_B + " INT, " + JUMLAH_GOALKICK_TEAM_B + " INT, " + JUMLAH_CORNERKICK_TEAM_B + " INT, " + JUMLAH_RED_CARD_TEAM_B + " INT, " + JUMLAH_YELLOW_CARD_TEAM_B + " INT, " + BABAK + " INT, " + ID_TEAMA + " INT, " + ID_TEAMB + " INT, " + POSESSION_TEAMA + " INT, " + POSESSION_TEAMB + " INT, " + TANGGAL_PERTANDINGAN + " STRING, " + EVENT + " STRING, " + VENUE + " STRING, " + OFFSIDE_TEAM_A + " INT, " + OFFSIDE_TEAM_B + " INT, " + FOUL_TEAM_A + " INT, " + FOUL_TEAM_B + " INT, "+TIME_MATCH+" INT)";
         db.execSQL(createTableTeam);
     }
 
@@ -110,6 +111,90 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         return loadHandler(query);
     }
 
+    public  ArrayList<HashMap<String, String>> loaddatafullmatch(int id, int babak){
+        ArrayList<HashMap<String, String>> Listpertandingan = new ArrayList<>();
+        HashMap<String, String> user = new HashMap<>();
+        if (babak==2){
+            Cursor datababak2=loaddatapertandinganshow(id,babak);
+            datababak2.moveToFirst();
+            Cursor datababak1=loaddatapertandinganshow(id, babak-1);
+            datababak1.moveToFirst();
+            user.put("namateama",datababak2.getString(1));
+            user.put("namateamb",datababak2.getString(17));
+            user.put("venue",datababak2.getString(40));
+            user.put("event",datababak2.getString(39));
+            user.put("goalteama",String.valueOf(datababak2.getInt(5)+datababak1.getInt(5)));
+            user.put("goalteamb",String.valueOf(datababak2.getInt(21)+datababak1.getInt(21)));
+            user.put("passingteama",String.valueOf(datababak2.getInt(3)+datababak1.getInt(3)));
+            user.put("passingteamb",String.valueOf(datababak2.getInt(19)+datababak1.getInt(19)));
+            user.put("tacklingteama",String.valueOf(datababak2.getInt(4)+datababak1.getInt(4)));
+            user.put("tacklingteamb",String.valueOf(datababak2.getInt(20)+datababak1.getInt(20)));
+            user.put("interceptteama",String.valueOf(datababak2.getInt(8)+datababak1.getInt(8)));
+            user.put("interceptteamb",String.valueOf(datababak2.getInt(24)+datababak1.getInt(24)));
+            user.put("savesteama",String.valueOf(datababak2.getInt(9)+datababak1.getInt(9)));
+            user.put("savesteamb",String.valueOf(datababak2.getInt(25)+datababak1.getInt(25)));
+            user.put("throwinteama",String.valueOf(datababak2.getInt(10)+datababak1.getInt(10)));
+            user.put("throwinteamb",String.valueOf(datababak2.getInt(26)+datababak1.getInt(26)));
+            user.put("cornerkickteama",String.valueOf(datababak2.getInt(14)+datababak1.getInt(14)));
+            user.put("cornerkickteamb",String.valueOf(datababak2.getInt(30)+datababak1.getInt(30)));
+            user.put("ballposessionteama",String.valueOf(((datababak2.getInt(36)*datababak2.getInt(45))+(datababak1.getInt(36)*datababak1.getInt(45))/(datababak2.getInt(45)+datababak1.getInt(45)))));
+            user.put("ballposessionteamb",String.valueOf(((datababak2.getInt(37)*datababak2.getInt(45))+(datababak1.getInt(37)*datababak1.getInt(45))/(datababak2.getInt(45)+datababak1.getInt(45)))));
+            user.put("foulteama",String.valueOf(datababak2.getInt(43)+datababak1.getInt(43)));
+            user.put("foulteamb",String.valueOf(datababak2.getInt(44)+datababak1.getInt(44)));
+            user.put("offsideteama",String.valueOf(datababak2.getInt(41)+datababak1.getInt(41)));
+            user.put("offsideteamb",String.valueOf(datababak2.getInt(42)+datababak1.getInt(42)));
+            user.put("shotontargetteama",String.valueOf(datababak2.getInt(6)+datababak1.getInt(6)));
+            user.put("shotontargetteamb",String.valueOf(datababak2.getInt(22)+datababak1.getInt(22)));
+            user.put("shotofftargetteama",String.valueOf(datababak2.getInt(7)+datababak1.getInt(7)));
+            user.put("shotofftargetteamb",String.valueOf(datababak2.getInt(23)+datababak1.getInt(23)));
+            user.put("yellowcardteama",String.valueOf(datababak2.getInt(16)+datababak1.getInt(16)));
+            user.put("yellowcardteamb",String.valueOf(datababak2.getInt(32)+datababak1.getInt(32)));
+            user.put("redcardteama",String.valueOf(datababak2.getInt(17)+datababak1.getInt(17)));
+            user.put("redcardteamb",String.valueOf(datababak2.getInt(33)+datababak1.getInt(33)));
+            Listpertandingan.add(user);
+        }else if(babak==4){
+            Cursor datababak2=loaddatapertandinganshow(id,babak);
+            datababak2.moveToFirst();
+            Cursor datababak1=loaddatapertandinganshow(id, babak-1);
+            datababak1.moveToFirst();
+            Cursor datababak3=loaddatapertandinganshow(id,babak-2);
+            datababak3.moveToFirst();
+            Cursor datababak4=loaddatapertandinganshow(id, babak-3);
+            user.put("namateama",datababak2.getString(1));
+            user.put("namateamb",datababak2.getString(17));
+            user.put("venue",datababak2.getString(40));
+            user.put("event",datababak2.getString(39));
+            user.put("goalteama",String.valueOf(datababak2.getInt(5)+datababak1.getInt(5)+datababak3.getInt(5)+datababak4.getInt(5)));
+            user.put("goalteamb",String.valueOf(datababak2.getInt(21)+datababak1.getInt(21)+datababak3.getInt(21)+datababak4.getInt(21)));
+            user.put("passingteama",String.valueOf(datababak2.getInt(3)+datababak1.getInt(3)+datababak3.getInt(3)+datababak4.getInt(3)));
+            user.put("passingteamb",String.valueOf(datababak2.getInt(19)+datababak1.getInt(19)+datababak3.getInt(19)+datababak4.getInt(19)));
+            user.put("tacklingteama",String.valueOf(datababak2.getInt(4)+datababak1.getInt(4)+datababak3.getInt(4)+datababak4.getInt(4)));
+            user.put("tacklingteamb",String.valueOf(datababak2.getInt(20)+datababak1.getInt(20)+datababak3.getInt(20)+datababak4.getInt(20)));
+            user.put("interceptteama",String.valueOf(datababak2.getInt(8)+datababak1.getInt(8)+datababak3.getInt(8)+datababak4.getInt(8)));
+            user.put("interceptteamb",String.valueOf(datababak2.getInt(24)+datababak1.getInt(24)+datababak3.getInt(24)+datababak4.getInt(24)));
+            user.put("savesteama",String.valueOf(datababak2.getInt(9)+datababak1.getInt(9)+datababak3.getInt(9)+datababak4.getInt(9)));
+            user.put("savesteamb",String.valueOf(datababak2.getInt(25)+datababak1.getInt(25)+datababak3.getInt(25)+datababak4.getInt(25)));
+            user.put("throwinteama",String.valueOf(datababak2.getInt(10)+datababak1.getInt(10)+datababak3.getInt(10)+datababak4.getInt(10)));
+            user.put("throwinteamb",String.valueOf(datababak2.getInt(26)+datababak1.getInt(26)+datababak3.getInt(26)+datababak4.getInt(26)));
+            user.put("cornerkickteama",String.valueOf(datababak2.getInt(14)+datababak1.getInt(14)+datababak3.getInt(14)+datababak4.getInt(14)));
+            user.put("cornerkickteamb",String.valueOf(datababak2.getInt(30)+datababak1.getInt(30)+datababak3.getInt(30)+datababak4.getInt(30)));
+            user.put("ballposessionteama",String.valueOf(((datababak2.getInt(36)*datababak2.getInt(45))+(datababak1.getInt(36)*datababak1.getInt(45))+(datababak3.getInt(36)*datababak3.getInt(45))+(datababak4.getInt(36)*datababak4.getInt(45))/(datababak2.getInt(45)+datababak1.getInt(45)+datababak3.getInt(45)+datababak4.getInt(45)))));
+            user.put("ballposessionteamb",String.valueOf(((datababak2.getInt(37)*datababak2.getInt(45))+(datababak1.getInt(37)*datababak1.getInt(45))+(datababak3.getInt(37)*datababak3.getInt(45))+(datababak4.getInt(37)*datababak4.getInt(45))/(datababak2.getInt(45)+datababak1.getInt(45)+datababak3.getInt(45)+datababak4.getInt(45)))));
+            user.put("foulteama",String.valueOf(datababak2.getInt(43)+datababak1.getInt(43)+datababak3.getInt(43)+datababak4.getInt(43)));
+            user.put("foulteamb",String.valueOf(datababak2.getInt(44)+datababak1.getInt(44)+datababak3.getInt(44)+datababak4.getInt(44)));
+            user.put("offsideteama",String.valueOf(datababak2.getInt(41)+datababak1.getInt(41)+datababak3.getInt(41)+datababak4.getInt(41)));
+            user.put("offsideteamb",String.valueOf(datababak2.getInt(42)+datababak1.getInt(42)+datababak3.getInt(42)+datababak4.getInt(42)));
+            user.put("shotontargetteama",String.valueOf(datababak2.getInt(6)+datababak1.getInt(6)+datababak3.getInt(6)+datababak4.getInt(6)));
+            user.put("shotontargetteamb",String.valueOf(datababak2.getInt(22)+datababak1.getInt(22)+datababak3.getInt(22)+datababak4.getInt(22)));
+            user.put("shotofftargetteama",String.valueOf(datababak2.getInt(7)+datababak1.getInt(7)+datababak3.getInt(7)+datababak4.getInt(7)));
+            user.put("shotofftargetteamb",String.valueOf(datababak2.getInt(23)+datababak1.getInt(23)+datababak3.getInt(23)+datababak4.getInt(23)));
+            user.put("yellowcardteama",String.valueOf(datababak2.getInt(16)+datababak1.getInt(16)+datababak3.getInt(16)+datababak4.getInt(16)));
+            user.put("yellowcardteamb",String.valueOf(datababak2.getInt(32)+datababak1.getInt(32)+datababak3.getInt(32)+datababak4.getInt(32)));
+            user.put("redcardteama",String.valueOf(datababak2.getInt(17)+datababak1.getInt(17)+datababak3.getInt(17)+datababak4.getInt(17)));
+            user.put("redcardteamb",String.valueOf(datababak2.getInt(33)+datababak1.getInt(33)+datababak3.getInt(33)+datababak4.getInt(33)));
+        }
+        return Listpertandingan;
+    }
 
     public Cursor loadHandler(String query) {
 
@@ -211,6 +296,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
 
             int foulteamb = cursor.getInt(44);
 
+            int timematch=cursor.getInt(45);
+
             result += String.valueOf(id_pertandingan) + " " + nama_team_a + " " + goal_team_a + " - " + goal_team_b + " " + nama_team_b +
 
                     System.getProperty("line.separator");
@@ -271,10 +358,13 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         values.put(OFFSIDE_TEAM_B, pertandingan.getOffsideTeamB());
         values.put(FOUL_TEAM_A, pertandingan.getFoulTeamA());
         values.put(FOUL_TEAM_B, pertandingan.getFoulTeamB());
+        values.put(TIME_MATCH, pertandingan.getTimematch());
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_PERTANDINGAN, null, values);
         Log.d("Data nama team :", pertandingan.getNamaTeamA());
         db.close();
     }
+
+
 }
