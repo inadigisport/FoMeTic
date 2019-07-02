@@ -57,6 +57,7 @@ public class generatereportteam extends AppCompatActivity {
     String teamB;
     String venue;
     String event;
+    String tanggal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class generatereportteam extends AppCompatActivity {
         teamB= getIntent().getStringExtra("teamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
+        tanggal= getIntent().getStringExtra("tanggal");
         statistikpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
         statistikpemainteamb= getIntent().getExtras().getStringArrayList("datapertandinganpemainteamb");
         namapemain= getIntent().getExtras().getStringArrayList("namapemain");
@@ -99,11 +101,9 @@ public class generatereportteam extends AppCompatActivity {
         textViewvenue.setText(venue);
 
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-        Date todayDate = new Date();
-        String thisDate = currentDate.format(todayDate);
+
         textViewtanggal = findViewById(R.id.textViewtanggal);
-        textViewtanggal.setText(thisDate);
+        textViewtanggal.setText(tanggal);
 
 
         //textViewlistdatapertandinganpemainteama =findViewById(R.id.datapertandinganpemainteama);

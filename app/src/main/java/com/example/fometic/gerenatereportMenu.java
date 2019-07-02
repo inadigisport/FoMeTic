@@ -194,13 +194,30 @@ public class gerenatereportMenu extends AppCompatActivity {
                 String teamblv="";
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
+                String teamalv="";
+                String teamblv="";
                 String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
                 String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
+<<<<<<< HEAD
                 String teamlv = UserInfo.substring(UserInfo.indexOf("timtandingskor="));
+=======
+                String UserInfo3 = UserInfo.substring(UserInfo.indexOf("tanggal="));
+                String tanggal1 = UserInfo3.substring(UserInfo3.indexOf("=") + 5, UserInfo3.indexOf("G"));
+                String tanggal2 = UserInfo3.substring(UserInfo3.indexOf("+") + 7, UserInfo3.indexOf(","));
+                String tanggal = tanggal1 + tanggal2;
+>>>>>>> master
                 int babak = Integer.parseInt(userId.substring(0, 1));
                 int idpertandingan = Integer.valueOf(userId.substring(1, userId.length()));
                 Log.d("babak",Integer.toString(babak));
                 Log.d("idpertandingan",Integer.toString(idpertandingan));
+                Cursor datateam=dbpertandingan.loaddatapertandinganshow(idpertandingan,babak);
+                datateam.moveToFirst();
+                while (!datateam.isAfterLast()){
+                    teamalv=datateam.getString(1);
+                    teamblv=datateam.getString(17);
+                    datateam.moveToNext();
+                }
+
                 Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(idpertandingan, babak);
                 datapertandingan.moveToFirst();
                 Cursor datateam=dbpertandingan.loaddatapertandinganshow(idpertandingan,babak);
@@ -276,6 +293,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 Intent intent = new Intent(gerenatereportMenu.this, choosegeneratereport.class);
                 intent.putExtra("teama", teamalv);
                 intent.putExtra("teamb", teamblv);
+                intent.putExtra("tanggal", tanggal);
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("formationteama", formationteama);
                 intent.putExtra("formationteamb", formationteamb);
