@@ -19,6 +19,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textViewbabak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F8030303"
+            android:text="BABAK"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#FFD600"
+            android:textColorHighlight="#F3F0F0"
+            android:textSize="36sp"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="3dp" />
+
+        <TextView
             android:id="@+id/textViewteama23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
