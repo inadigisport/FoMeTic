@@ -111,7 +111,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
         return loadHandler(query);
     }
 
-    public  ArrayList<HashMap<String, String>> loaddatafullmatch(int id, int babak){
+    public  HashMap<String, String> loaddatafullmatch(int id, int babak){
         ArrayList<HashMap<String, String>> Listpertandingan = new ArrayList<>();
         HashMap<String, String> user = new HashMap<>();
         if (babak==2){
@@ -123,6 +123,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
             user.put("namateamb",datababak2.getString(17));
             user.put("venue",datababak2.getString(40));
             user.put("event",datababak2.getString(39));
+            user.put("formasiteama",datababak2.getString(2));
+            user.put("formasiteamb",datababak2.getString(18));
+            user.put("tanggal",datababak2.getString(38));
             user.put("goalteama",String.valueOf(datababak2.getInt(5)+datababak1.getInt(5)));
             user.put("goalteamb",String.valueOf(datababak2.getInt(21)+datababak1.getInt(21)));
             user.put("passingteama",String.valueOf(datababak2.getInt(3)+datababak1.getInt(3)));
@@ -164,6 +167,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
             user.put("namateamb",datababak2.getString(17));
             user.put("venue",datababak2.getString(40));
             user.put("event",datababak2.getString(39));
+            user.put("formasiteama",datababak2.getString(2));
+            user.put("formasiteamb",datababak2.getString(18));
+            user.put("tanggal",datababak2.getString(38));
             user.put("goalteama",String.valueOf(datababak2.getInt(5)+datababak1.getInt(5)+datababak3.getInt(5)+datababak4.getInt(5)));
             user.put("goalteamb",String.valueOf(datababak2.getInt(21)+datababak1.getInt(21)+datababak3.getInt(21)+datababak4.getInt(21)));
             user.put("passingteama",String.valueOf(datababak2.getInt(3)+datababak1.getInt(3)+datababak3.getInt(3)+datababak4.getInt(3)));
@@ -193,7 +199,7 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
             user.put("redcardteama",String.valueOf(datababak2.getInt(17)+datababak1.getInt(17)+datababak3.getInt(17)+datababak4.getInt(17)));
             user.put("redcardteamb",String.valueOf(datababak2.getInt(33)+datababak1.getInt(33)+datababak3.getInt(33)+datababak4.getInt(33)));
         }
-        return Listpertandingan;
+        return user;
     }
 
     public Cursor loadHandler(String query) {

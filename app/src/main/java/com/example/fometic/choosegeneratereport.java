@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -71,6 +72,7 @@ public class choosegeneratereport extends AppCompatActivity {
     int redcardteama;
     int redcardteamb;
     int babak;
+    int idpertandingan;
     ConstraintLayout layout;
 
     Button buttonteam;
@@ -84,6 +86,7 @@ public class choosegeneratereport extends AppCompatActivity {
         setContentView(R.layout.activity_choosegeneratereport);
         Button b = null;
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        idpertandingan=getIntent().getIntExtra("idpertandingan",idpertandingan);
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
         formationteama= getIntent().getStringExtra("formationteama");
@@ -145,13 +148,18 @@ public class choosegeneratereport extends AppCompatActivity {
             View v = inflater.inflate(R.layout.activity_choosegeneratereport, null);
             b = v.findViewById(R.id.buttonfullmatch);
             b.setTag("Fullmatch");
-
+            if(b.getParent()!=null){
+                ((ViewGroup)b.getParent()).removeView(b);
+            }
             layout=(ConstraintLayout) findViewById(R.id.layoutchoose);
             layout.addView(b);
 
             b.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(choosegeneratereport.this, generatereportfullmatch.class);
+                    intent.putExtra("idpertandingan",idpertandingan);
+                    intent.putExtra("babak",babak);
+                    startActivity(intent);
                 }
             });
         }

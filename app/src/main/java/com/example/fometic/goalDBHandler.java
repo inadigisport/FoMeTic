@@ -54,8 +54,16 @@ public class goalDBHandler extends SQLiteOpenHelper {
     }
 
     public Cursor loaddatagoalbabakdua(String idpertandingan, String idteam){
+        //String result="";
         String query="SELECT * FROM "+TABLE_GOAL+" WHERE "+ID_PERTANDINGAN+"='"+idpertandingan+"' AND "+ID_TEAM+" = '"+idteam+"'";
-        return (loadHandler(query));
+        //Cursor datagoal=loadHandler(query);
+        //datagoal.moveToFirst();
+        //while (!datagoal.isAfterLast()){
+
+        //result += String.valueOf(id_pertandingan) + " " + nama_team_a + " " + goal_team_a + " - " + goal_team_b + " " + nama_team_b +
+
+          //      System.getProperty("line.separator");
+        return loadHandler(query);
     }
 
     public Cursor loadHandler(String query){
