@@ -8,11 +8,14 @@ public class PertandinganPemain {
     private int jumlahredcard;
     private int jumlahshotontarget;
     private int jumlahshotofftarget;
+    private int jumlahtackling;
+    private int jumlahintercept;
+    private int jumlahsaves;
     private int babak;
 
     public PertandinganPemain(){}
 
-    public PertandinganPemain(int idpemain, int idpertandingan, int jumlahgoal, int jumlahyellowcard, int jumlahredcard, int jumlahshotontarget, int jumlahshotofftarget, int babak){
+    public PertandinganPemain(int idpemain, int idpertandingan, int jumlahgoal, int jumlahyellowcard, int jumlahredcard, int jumlahshotontarget, int jumlahshotofftarget, int jumlahtackling, int jumlahintercept, int jumlahsaves, int babak){
         this.idpemain=idpemain;
         this.idpertandingan=idpertandingan;
         this.jumlahgoal=jumlahgoal;
@@ -21,6 +24,9 @@ public class PertandinganPemain {
         this.jumlahshotontarget=jumlahshotontarget;
         this.jumlahshotofftarget=jumlahshotofftarget;
         this.setBabak(babak);
+        this.setJumlahtackling(jumlahtackling);
+        this.setJumlahintercept(jumlahintercept);
+        this.setJumlahsaves(jumlahsaves);
     }
 
 
@@ -86,5 +92,29 @@ public class PertandinganPemain {
 
     public void setBabak(int babak) {
         this.babak = babak;
+    }
+
+    public int getJumlahtackling() {
+        return jumlahtackling;
+    }
+
+    public void setJumlahtackling(int jumlahtackling) {
+        this.jumlahtackling = jumlahtackling;
+    }
+
+    public int getJumlahintercept() {
+        return jumlahintercept;
+    }
+
+    public void setJumlahintercept(int jumlahintercept) {
+        this.jumlahintercept = jumlahintercept;
+    }
+
+    public int getJumlahsaves() {
+        return jumlahsaves;
+    }
+
+    public void setJumlahsaves(int jumlahsaves) {
+        this.jumlahsaves = jumlahsaves;
     }
 }

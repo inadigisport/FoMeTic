@@ -18,6 +18,9 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     private static final String JUMLAH_REDCARD="jumlahredcard";
     private static final String JUMLAH_SHOTONTARGET="jumlahshotontarget";
     private static final String JUMLAH_SHOTOFFTARGET="jumlahshotofftarget";
+    private static final String JUMLAH_TACKLING="jumlahtackling";
+    private static final String JUMLAH_INTERCEPT="jumlahintercept";
+    private static final String JUMLAH_SAVES="jumlahsaves";
     private static final String BABAK="babak";
 
     public PertandinganPemainDBHandler(Context context){
@@ -26,7 +29,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN_PEMAIN+" ("+ID_PERTANDINGAN+" INT, "+ID_PEMAIN+" INT,"+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+JUMLAH_SHOTONTARGET+" INT, "+JUMLAH_SHOTOFFTARGET+" INT, "+BABAK+" INT)";
+        String createTableTeam="CREATE TABLE "+TABLE_PERTANDINGAN_PEMAIN+" ("+ID_PERTANDINGAN+" INT, "+ID_PEMAIN+" INT,"+JUMLAH_GOAL+" INT, "+JUMLAH_YELLOWCARD+" INT, "+JUMLAH_REDCARD+" INT, "+JUMLAH_SHOTONTARGET+" INT, "+JUMLAH_SHOTOFFTARGET+" INT, "+BABAK+" INT, "+JUMLAH_TACKLING+" INT, "+JUMLAH_INTERCEPT+" INT, "+JUMLAH_SAVES+" INT)";
         db.execSQL(createTableTeam);
     }
 
@@ -62,6 +65,9 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
             int jumlah_shotontarget = cursor.getInt(5);
             int jumlah_shotofftarget = cursor.getInt(6);
             int babak=cursor.getInt(7);
+            int jumlah_tackling = cursor.getInt(8);
+            int jumlah_intercept = cursor.getInt(9);
+            int jumlah_saves = cursor.getInt(10);
             //Log.d("Jumlah goal", Integer.toString(jumlah_goal));
             cursor.moveToNext();
         }
@@ -107,6 +113,34 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
         Cursor goal=loaddatapertandinganpemain(IDPemain, ID, babak);
         goal.moveToFirst();
         i = goal.getInt(4) + 1;
+        return i;
+    }
+
+    public int jumlahintercept(int ID, int IDPemain, int babak){
+        Log.d("Enter Jumlah Red",IDPemain+" "+ID);
+        int i=0;
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID, babak);
+        goal.moveToFirst();
+        i = goal.getInt(9) + 1;
+        return i;
+    }
+
+
+    public int jumlahtackling(int ID, int IDPemain, int babak){
+        Log.d("Enter Jumlah Red",IDPemain+" "+ID);
+        int i=0;
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID, babak);
+        goal.moveToFirst();
+        i = goal.getInt(8) + 1;
+        return i;
+    }
+
+    public int jumlahsaves(int ID, int IDPemain, int babak){
+        Log.d("Enter Jumlah Red",IDPemain+" "+ID);
+        int i=0;
+        Cursor goal=loaddatapertandinganpemain(IDPemain, ID, babak);
+        goal.moveToFirst();
+        i = goal.getInt(10) + 1;
         return i;
     }
 
@@ -213,6 +247,38 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
 
         return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +" AND "+ID_PEMAIN+"="+IDPemain+ " AND "+BABAK+"="+babak, null) > 0;
 
+    }
 
+    public boolean updateintercept(int ID, int IDPemain, int babak) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues update = new ContentValues();
+
+        update.put(JUMLAH_INTERCEPT, jumlahintercept(ID, IDPemain, babak));
+
+
+        return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +" AND "+ID_PEMAIN+"="+IDPemain+ " AND "+BABAK+"="+babak, null) > 0;
+    }
+
+    public boolean updatesaves(int ID, int IDPemain, int babak) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues update = new ContentValues();
+
+        update.put(JUMLAH_SAVES, jumlahsaves(ID, IDPemain, babak));
+
+
+        return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +" AND "+ID_PEMAIN+"="+IDPemain+ " AND "+BABAK+"="+babak, null) > 0;
+    }
+
+    public boolean updatetackling(int ID, int IDPemain, int babak) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues update = new ContentValues();
+
+        update.put(JUMLAH_TACKLING, jumlahtackling(ID, IDPemain, babak));
+
+
+        return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +" AND "+ID_PEMAIN+"="+IDPemain+ " AND "+BABAK+"="+babak, null) > 0;
     }
 }
