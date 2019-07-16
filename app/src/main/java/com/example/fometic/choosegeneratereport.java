@@ -94,7 +94,7 @@ public class choosegeneratereport extends AppCompatActivity {
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
         tanggal= getIntent().getStringExtra("tanggal");
-        babakstring= getIntent().getStringExtra("babak");
+        babakstring= getIntent().getStringExtra("babakstring");
         ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
         ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
         passingteama= getIntent().getIntExtra("passingteama",passingteama);
@@ -159,6 +159,10 @@ public class choosegeneratereport extends AppCompatActivity {
                     Intent intent = new Intent(choosegeneratereport.this, generatereportfullmatch.class);
                     intent.putExtra("idpertandingan",idpertandingan);
                     intent.putExtra("babak",babak);
+                    String babakstringfull = "FullTime";
+                    intent.putExtra("babakstring",babakstringfull);
+                    intent.putExtra("tanggal", tanggal);
+
                     startActivity(intent);
                 }
             });
@@ -177,7 +181,7 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("venue", venue);
                 intent.putExtra("event", event);
-                intent.putExtra("babak", babakstring);
+                intent.putExtra("babakstring", babakstring);
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("passingteama", passingteama);
                 intent.putExtra("passingteamb", passingteamb);

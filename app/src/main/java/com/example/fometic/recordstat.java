@@ -149,17 +149,34 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
         else if (babak.equals("2ndhalf")) {
             babakint = 2;
-            timematchint = Integer.parseInt(timematch);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            timematchint = datapertandingan.getInt(45);
             statusgoal = "";
         }
         else if (babak.equals("Ex1sthalf")) {
             babakint = 3;
-            timematchint = 0;
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            Integer timematchintbabak1 = datapertandingan.getInt(45);
+            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            datapertandingan2.moveToFirst();
+            Integer timematchintbabak2 = datapertandingan2.getInt(45);
+            timematchint = timematchintbabak1 + timematchintbabak2;
             statusgoal = "(Ex)";
         }
         else if (babak.equals("Ex2ndhalf")) {
             babakint = 4;
-            timematchint = Integer.parseInt(timematch);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            Integer timematchintbabak1 = datapertandingan.getInt(45);
+            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            datapertandingan2.moveToFirst();
+            Integer timematchintbabak2 = datapertandingan2.getInt(45);
+            Cursor datapertandingan3 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 3);
+            datapertandingan3.moveToFirst();
+            Integer timematchintbabak3 = datapertandingan3.getInt(45);
+            timematchint = timematchintbabak1 + timematchintbabak2 + timematchintbabak3;
             statusgoal = "(Ex)";
         }
         tanding.setBabak(babakint);
@@ -181,7 +198,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void start1sthalf(View v) {
         if(running == 1) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -871,7 +888,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("jumlah red", Integer.toString(jumlahredpemain(i, idpemain)));
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
-            tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard() + 1);
+            tandingpemain.setJumlahredcard(tandingpemain.getJumlahredcard() + 1);
             tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
@@ -1092,8 +1109,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
+                Log.d("time goal edited", array[0]);
 
-                Log.d("time goal", array[0]);
+
 
                 if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
                     pemain = mSpinner.getSelectedItem().toString();
@@ -1141,6 +1161,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
 
                 Log.d("time goal", array[0]);
                 if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
@@ -1222,7 +1244,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
-
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
                 Log.d("time goal", array[0]);
                 if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
 
@@ -1267,7 +1290,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
-
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
                 Log.d("time goal", array[0]);
 
                 if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
@@ -1489,7 +1513,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         String chronotext = chronometer.getText().toString();
 
                         String array[] = chronotext.split(":");
-
+                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                        array[0] = String.valueOf(arrayint);
 
                         Log.d("time goal", array[0]);
                         if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
@@ -1514,12 +1539,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
                         }
                     }
 
@@ -1679,7 +1704,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                         String chronotext = chronometer.getText().toString();
                         String array[] = chronotext.split(":");
-
+                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                        array[0] = String.valueOf(arrayint);
                         Log.d("time goal", array[0]);
                         if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
 
@@ -1702,12 +1728,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
                         }
 
                         dialog.dismiss();

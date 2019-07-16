@@ -196,7 +196,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
                 String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
-                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
+                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf("}"));
                 String UserInfo3 = UserInfo.substring(UserInfo.indexOf("tanggal="));
                 String tanggal1 = UserInfo3.substring(UserInfo3.indexOf("=") + 5, UserInfo3.indexOf("G"));
                 String tanggal2 = UserInfo3.substring(UserInfo3.indexOf("+") + 7, UserInfo3.indexOf(","));
@@ -300,7 +300,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putExtra("teama", teamalv);
                 intent.putExtra("teamb", teamblv);
                 intent.putExtra("tanggal", tanggal);
-                intent.putExtra("babak", babakstring );
+                intent.putExtra("babakstring", babakstring );
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("formationteama", formationteama);
                 intent.putExtra("formationteamb", formationteamb);

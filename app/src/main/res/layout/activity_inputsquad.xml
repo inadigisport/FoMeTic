@@ -124,11 +124,11 @@
 
     <ListView
         android:id="@+id/listViewPlayer"
-        android:layout_width="272dp"
-        android:layout_height="341dp"
+        android:layout_width="283dp"
+        android:layout_height="408dp"
         android:layout_marginStart="97dp"
         android:layout_marginLeft="97dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toEndOf="@+id/spinnerposisi"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
