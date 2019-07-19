@@ -70,6 +70,8 @@ public class gerenatereportMenu extends AppCompatActivity {
     ArrayList<String> shootofftargetpemain = new ArrayList<>();
     ArrayList<String> yellowcardpemain = new ArrayList<>();
     ArrayList<String> redcardpemain = new ArrayList<>();
+    ArrayList<String> tacklingpemain = new ArrayList<>();
+    ArrayList<String> interceptpemain = new ArrayList<>();
     ArrayList<String> namapemainb = new ArrayList<>();
     ArrayList<String> nomorpunggungpemainb = new ArrayList<>();
     ArrayList<String> posisipemainb = new ArrayList<>();
@@ -80,6 +82,8 @@ public class gerenatereportMenu extends AppCompatActivity {
     ArrayList<String> redcardpemainb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteama;
     ArrayList<String> cetakgoalteamb = new ArrayList<>();
+    ArrayList<String> tacklingpemainb = new ArrayList<>();
+    ArrayList<String> interceptpemainb = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteamb;
 
     PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
@@ -147,6 +151,9 @@ public class gerenatereportMenu extends AppCompatActivity {
                 shootofftargetpemain.add(Integer.toString(datapertandinganpemain.getInt(6)));
                 yellowcardpemain.add(Integer.toString(datapertandinganpemain.getInt(3)));
                 redcardpemain.add(Integer.toString(datapertandinganpemain.getInt(4)));
+                tacklingpemain.add(Integer.toString(datapertandinganpemain.getInt(7)));
+                interceptpemain.add(Integer.toString(datapertandinganpemain.getInt(8)));
+
                 datapertandinganpemain.moveToNext();
             }
             datateama.moveToNext();
@@ -177,6 +184,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 shootofftargetpemainb.add(Integer.toString(datapertandinganpemain.getInt(6)));
                 yellowcardpemainb.add(Integer.toString(datapertandinganpemain.getInt(3)));
                 redcardpemainb.add(Integer.toString(datapertandinganpemain.getInt(4)));
+                tacklingpemainb.add(Integer.toString(datapertandinganpemain.getInt(7)));
+                interceptpemainb.add(Integer.toString(datapertandinganpemain.getInt(8)));
                 datapertandinganpemain.moveToNext();
             }
             datateamb.moveToNext();
@@ -196,7 +205,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 String UserInfo = lv.getItemAtPosition(position).toString();
                 Log.d("User Info", UserInfo);
                 String UserInfo2 = UserInfo.substring(UserInfo.indexOf("idpertandingan="));
-                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf(","));
+                String userId = UserInfo2.substring(UserInfo2.indexOf("=") + 1, UserInfo2.indexOf("}"));
                 String UserInfo3 = UserInfo.substring(UserInfo.indexOf("tanggal="));
                 String tanggal1 = UserInfo3.substring(UserInfo3.indexOf("=") + 5, UserInfo3.indexOf("G"));
                 String tanggal2 = UserInfo3.substring(UserInfo3.indexOf("+") + 7, UserInfo3.indexOf(","));
@@ -300,7 +309,7 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putExtra("teama", teamalv);
                 intent.putExtra("teamb", teamblv);
                 intent.putExtra("tanggal", tanggal);
-                intent.putExtra("babak", babakstring );
+                intent.putExtra("babakstring", babakstring );
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("formationteama", formationteama);
                 intent.putExtra("formationteamb", formationteamb);
@@ -349,6 +358,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putStringArrayListExtra("shootofftargetpemain", shootofftargetpemain);
                 intent.putStringArrayListExtra("yellowcardpemain", yellowcardpemain);
                 intent.putStringArrayListExtra("redcardpemain", redcardpemain);
+                intent.putStringArrayListExtra("tacklingpemain", tacklingpemain);
+                intent.putStringArrayListExtra("interceptpemain", interceptpemain);
                 intent.putStringArrayListExtra("namapemainb", namapemainb);
                 intent.putStringArrayListExtra("posisipemainb", posisipemainb);
                 intent.putStringArrayListExtra("nomorpunggungpemainb", nomorpunggungpemainb);
@@ -357,6 +368,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putStringArrayListExtra("shootofftargetpemainb", shootofftargetpemainb);
                 intent.putStringArrayListExtra("yellowcardpemainb", yellowcardpemainb);
                 intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
+                intent.putStringArrayListExtra("tacklingpemainb", tacklingpemainb);
+                intent.putStringArrayListExtra("interceptpemainb", interceptpemainb);
                 startActivity(intent);
                 namapemain.clear();
                 posisipemain.clear();
@@ -378,6 +391,10 @@ public class gerenatereportMenu extends AppCompatActivity {
                 pertandinganpemainteamb.clear();
                 cetakgoalteama.clear();
                 cetakgoalteamb.clear();
+                tacklingpemain.clear();
+                tacklingpemainb.clear();
+                interceptpemain.clear();
+                interceptpemainb.clear();
 
                 //Toast.makeText(getBaseContext(), lv.getItemAtPosition(position).toString()+userId+","+babak+","+idpertandingan, Toast.LENGTH_LONG).show();
             }

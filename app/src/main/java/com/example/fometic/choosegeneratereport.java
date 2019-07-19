@@ -29,6 +29,8 @@ public class choosegeneratereport extends AppCompatActivity {
     ArrayList<String> shootofftargetpemain = new ArrayList<>();
     ArrayList<String> yellowcardpemain = new ArrayList<>();
     ArrayList<String> redcardpemain = new ArrayList<>();
+    ArrayList<String> tacklingpemain = new ArrayList<>();
+    ArrayList<String> interceptpemain = new ArrayList<>();
     ArrayList<String> namapemainb = new ArrayList<>();
     ArrayList<String> nomorpunggungpemainb = new ArrayList<>();
     ArrayList<String> posisipemainb = new ArrayList<>();
@@ -37,6 +39,8 @@ public class choosegeneratereport extends AppCompatActivity {
     ArrayList<String> shootofftargetpemainb = new ArrayList<>();
     ArrayList<String> yellowcardpemainb = new ArrayList<>();
     ArrayList<String> redcardpemainb = new ArrayList<>();
+    ArrayList<String> tacklingpemainb = new ArrayList<>();
+    ArrayList<String> interceptpemainb = new ArrayList<>();
     String formationteama;
     String formationteamb;
     String venue;
@@ -94,7 +98,7 @@ public class choosegeneratereport extends AppCompatActivity {
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
         tanggal= getIntent().getStringExtra("tanggal");
-        babakstring= getIntent().getStringExtra("babak");
+        babakstring= getIntent().getStringExtra("babakstring");
         ballpossesionteama= getIntent().getIntExtra("ballpossesionteama",ballpossesionteama);
         ballpossesionteamb= getIntent().getIntExtra("ballpossesionteamb",ballpossesionteamb);
         passingteama= getIntent().getIntExtra("passingteama",passingteama);
@@ -135,6 +139,8 @@ public class choosegeneratereport extends AppCompatActivity {
         shootofftargetpemain= getIntent().getExtras().getStringArrayList("shootofftargetpemain");
         yellowcardpemain= getIntent().getExtras().getStringArrayList("yellowcardpemain");
         redcardpemain= getIntent().getExtras().getStringArrayList("redcardpemain");
+        tacklingpemain= getIntent().getExtras().getStringArrayList("tacklingpemain");
+        interceptpemain= getIntent().getExtras().getStringArrayList("interceptpemain");
         namapemainb= getIntent().getExtras().getStringArrayList("namapemainb");
         posisipemainb= getIntent().getExtras().getStringArrayList("posisipemainb");
         nomorpunggungpemainb= getIntent().getExtras().getStringArrayList("nomorpunggungpemainb");
@@ -143,6 +149,8 @@ public class choosegeneratereport extends AppCompatActivity {
         shootofftargetpemainb= getIntent().getExtras().getStringArrayList("shootofftargetpemainb");
         yellowcardpemainb= getIntent().getExtras().getStringArrayList("yellowcardpemainb");
         redcardpemainb= getIntent().getExtras().getStringArrayList("redcardpemainb");
+        tacklingpemainb= getIntent().getExtras().getStringArrayList("tacklingpemainb");
+        interceptpemainb= getIntent().getExtras().getStringArrayList("interceptpemainb");
         babak=getIntent().getIntExtra("babak",babak);
         if (babak==2 || babak ==4){
             View v = inflater.inflate(R.layout.activity_choosegeneratereport, null);
@@ -159,6 +167,10 @@ public class choosegeneratereport extends AppCompatActivity {
                     Intent intent = new Intent(choosegeneratereport.this, generatereportfullmatch.class);
                     intent.putExtra("idpertandingan",idpertandingan);
                     intent.putExtra("babak",babak);
+                    String babakstringfull = "FullTime";
+                    intent.putExtra("babakstring",babakstringfull);
+                    intent.putExtra("tanggal", tanggal);
+
                     startActivity(intent);
                 }
             });
@@ -177,7 +189,7 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putExtra("formationteamb", formationteamb);
                 intent.putExtra("venue", venue);
                 intent.putExtra("event", event);
-                intent.putExtra("babak", babakstring);
+                intent.putExtra("babakstring", babakstring);
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("passingteama", passingteama);
                 intent.putExtra("passingteamb", passingteamb);
@@ -236,6 +248,8 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putStringArrayListExtra("shootofftargetpemain", shootofftargetpemain);
                 intent.putStringArrayListExtra("yellowcardpemain", yellowcardpemain);
                 intent.putStringArrayListExtra("redcardpemain", redcardpemain);
+                intent.putStringArrayListExtra("tacklingpemain", tacklingpemain);
+                intent.putStringArrayListExtra("interceptpemain", interceptpemain);
                 intent.putStringArrayListExtra("namapemainb", namapemainb);
                 intent.putStringArrayListExtra("posisipemainb", posisipemainb);
                 intent.putStringArrayListExtra("nomorpunggungpemainb", nomorpunggungpemainb);
@@ -244,6 +258,8 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putStringArrayListExtra("shootofftargetpemainb", shootofftargetpemainb);
                 intent.putStringArrayListExtra("yellowcardpemainb", yellowcardpemainb);
                 intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
+                intent.putStringArrayListExtra("tacklingpemainb", tacklingpemainb);
+                intent.putStringArrayListExtra("interceptpemainb", interceptpemainb);
                 startActivity(intent);
             }
         });

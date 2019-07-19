@@ -80,7 +80,7 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     }
 
     public Cursor loaddatawithstat (int idpemain, int idpertandingan, int babak){
-        String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN+ " WHERE "+ID_PEMAIN+"="+idpemain+" AND "+ID_PERTANDINGAN+"="+idpertandingan+" AND "+BABAK+"="+babak+" AND ("+JUMLAH_GOAL+" IS NOT NULL AND "+JUMLAH_YELLOWCARD+" IS NOT NULL AND "+JUMLAH_REDCARD+" IS NOT NULL AND "+JUMLAH_SHOTONTARGET+" IS NOT NULL AND "+JUMLAH_SHOTOFFTARGET+" IS NOT NULL)" ;
+        String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN+ " WHERE "+ID_PEMAIN+"="+idpemain+" AND "+ID_PERTANDINGAN+"="+idpertandingan+" AND "+BABAK+"="+babak+" AND ("+JUMLAH_GOAL+" IS NOT NULL AND "+JUMLAH_YELLOWCARD+" IS NOT NULL AND "+JUMLAH_REDCARD+" IS NOT NULL AND "+JUMLAH_SHOTONTARGET+" IS NOT NULL AND "+JUMLAH_SHOTOFFTARGET+" IS NOT NULL AND "+JUMLAH_TACKLING+" IS NOT NULL AND "+JUMLAH_INTERCEPT+" IS NOT NULL)" ;
         return loadHandler(query);
     }
 

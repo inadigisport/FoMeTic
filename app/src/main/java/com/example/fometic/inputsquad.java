@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
     String posision;
     int nomorpunggung;
     int teamid;
+    ListView listViewPlayer;
+    ArrayAdapter<String > arrayAdapterpemain;
     PemainBola datapemain= new PemainBola();
     PemainDBHandler dbpemain=new PemainDBHandler(this);
     TeamDBHandler dbteam = new TeamDBHandler(this);
@@ -45,7 +48,13 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         spinnerposisi=findViewById(R.id.spinnerposisi);
         textnomorpunggung=findViewById(R.id.TextNomorPunggung);
         team=findViewById(R.id.spinnerTeam);
+        listViewPlayer = findViewById(R.id.listViewPlayer);
+
+
+
+
         getTeamData();
+
 
 
         //Intent intent = getIntent();
@@ -59,6 +68,21 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         spinnerposisi.setAdapter(adapter2);
         spinnerposisi.setOnItemSelectedListener(this);
 
+        team.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getPlayerData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        //getPlayerData();
+
         buttonadd=findViewById(R.id.buttonAdd);
         buttonadd.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -68,6 +92,7 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
                 textnomorpunggung.setText("");
                 spinnerposisi.setSelection(0);
                 Toast.makeText(inputsquad.this, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
+                getPlayerData();
             }
         });
 
@@ -107,6 +132,18 @@ public class inputsquad extends AppCompatActivity implements AdapterView.OnItemS
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray);
         team= findViewById(R.id.spinnerTeam);
         team.setAdapter(arrayAdapter);
+    }
+
+    public void getPlayerData(){
+        Cursor datapemain = dbpemain.loaddatateam(team.getSelectedItem().toString());
+        List<String> listpemain = new ArrayList<String>();
+        datapemain.moveToFirst();
+        while (!datapemain.isAfterLast()) {
+            listpemain.add(datapemain.getString(1)+", "+datapemain.getString(4)+" : "+datapemain.getString(3) );
+            datapemain.moveToNext();
+        }
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, listpemain);
+        listViewPlayer.setAdapter(arrayAdapter);
     }
 
 

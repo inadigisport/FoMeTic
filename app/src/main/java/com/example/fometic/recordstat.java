@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,21 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     String formationteamb;
     String babak;
     String statusgoal;
+    MediaPlayer cornerkick;
+    MediaPlayer freekick;
+    MediaPlayer goalkick;
+    MediaPlayer intercept;
+    MediaPlayer keepingball;
+    MediaPlayer passing;
+    MediaPlayer pinalty;
+    MediaPlayer red;
+    MediaPlayer yellow;
+    MediaPlayer shooting;
+    MediaPlayer tackling;
+    MediaPlayer throwin;
+
+
+
 
 
     ArrayList<String> cetakgoalteama = new ArrayList<>();
@@ -132,6 +148,22 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         tanding.setTimematch(Integer.valueOf(timematch));
         tanding.setWaktupertandingan(Calendar.getInstance().getTime());
 
+        cornerkick = MediaPlayer.create(this, R.raw.cornerkick);
+        freekick = MediaPlayer.create(this, R.raw.freekick);
+        goalkick = MediaPlayer.create(this, R.raw.goalkick);
+        intercept = MediaPlayer.create(this, R.raw.intercept);
+        keepingball = MediaPlayer.create(this, R.raw.keepingball);
+        passing = MediaPlayer.create(this, R.raw.passing);
+        pinalty = MediaPlayer.create(this, R.raw.pinalty);
+        red = MediaPlayer.create(this, R.raw.red);
+        shooting = MediaPlayer.create(this, R.raw.shooting);
+        tackling = MediaPlayer.create(this, R.raw.tackling);
+        throwin = MediaPlayer.create(this, R.raw.throwin);
+        yellow = MediaPlayer.create(this, R.raw.yellow);
+
+
+
+
 
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
@@ -142,6 +174,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         textviewbabak = findViewById(R.id.textViewbabak);
         textviewbabak.setText(babak);
 
+
         if (babak.equals("1sthalf")) {
             babakint = 1;
             timematchint = 0;
@@ -149,17 +182,34 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
         else if (babak.equals("2ndhalf")) {
             babakint = 2;
-            timematchint = Integer.parseInt(timematch);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            timematchint = datapertandingan.getInt(45);
             statusgoal = "";
         }
         else if (babak.equals("Ex1sthalf")) {
             babakint = 3;
-            timematchint = 0;
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            Integer timematchintbabak1 = datapertandingan.getInt(45);
+            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            datapertandingan2.moveToFirst();
+            Integer timematchintbabak2 = datapertandingan2.getInt(45);
+            timematchint = timematchintbabak1 + timematchintbabak2;
             statusgoal = "(Ex)";
         }
         else if (babak.equals("Ex2ndhalf")) {
             babakint = 4;
-            timematchint = Integer.parseInt(timematch);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            datapertandingan.moveToFirst();
+            Integer timematchintbabak1 = datapertandingan.getInt(45);
+            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            datapertandingan2.moveToFirst();
+            Integer timematchintbabak2 = datapertandingan2.getInt(45);
+            Cursor datapertandingan3 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 3);
+            datapertandingan3.moveToFirst();
+            Integer timematchintbabak3 = datapertandingan3.getInt(45);
+            timematchint = timematchintbabak1 + timematchintbabak2 + timematchintbabak3;
             statusgoal = "(Ex)";
         }
         tanding.setBabak(babakint);
@@ -181,7 +231,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void start1sthalf(View v) {
         if(running == 1) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - (timematchint * 60000) - pauseOffset);
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
             chronometerteam.start();
@@ -284,6 +334,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void passingteama(View v) {
+        passing.start();
 
         if (passingstatusteama == "yes") {
             passingteama = passingteama + 1;
@@ -320,7 +371,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void keepingballteama(View v) {
-
+        keepingball.start();
         if (passingstatusteama == "yes") {
 
             elapsedchronometerteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
@@ -352,6 +403,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     public void passingteamb(View v) {
+        passing.start();
         if (passingstatusteamb == "yes") {
             //passingteamb = passingteamb + 1;
             Log.d("passing team b", Integer.toString((passingteamb)));
@@ -384,6 +436,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void keepingballteamb(View v) {
+        keepingball.start();
         if (passingstatusteamb == "yes") {
             elapsedchronometerteamb = SystemClock.elapsedRealtime() - chronometerteam.getBase();
             Log.d("mili chronometer b", Long.toString(elapsedchronometerteamb));
@@ -413,9 +466,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void tacklingteama(View v) {
+        tackling.start();
         Log.d("tackling team a", Integer.toString((tacklingteama)));
-
-
         Cursor datagoalteama = dbpemain.loaddatateam(teamA);
         List<String> listpemaingoalteama = new ArrayList<String>();
         datagoalteama.moveToFirst();
@@ -481,6 +533,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void tacklingteamb(View v) {
+        tackling.start();
         Log.d("tackling team b", Integer.toString((tacklingteamb)));
         Cursor datagoalteamb = dbpemain.loaddatateam(teamB);
         List<String> listpemaingoalteamb = new ArrayList<String>();
@@ -547,6 +600,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void interceptteama(View v) {
+        intercept.start();
         Log.d("intercept team a", Integer.toString((interceptteama)));
 
         Cursor datagoalteama = dbpemain.loaddatateam(teamA);
@@ -614,6 +668,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void interceptteamb(View v) {
+        intercept.start();
         Log.d("intercept team b", Integer.toString((interceptteamb)));
 
         Cursor datagoalteamb = dbpemain.loaddatateam(teamB);
@@ -682,6 +737,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     public void throwinteama(View v) {
+        throwin.start();
         throwinteama = throwinteama + 1;
         Log.d("throw in team a", Integer.toString((throwinteama)));
 
@@ -694,6 +750,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void throwinteamb(View v) {
+        throwin.start();
         throwinteamb = throwinteamb + 1;
         Log.d("throw in team b", Integer.toString((throwinteamb)));
 
@@ -705,6 +762,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void cornerkickteama(View v) {
+        cornerkick.start();
         cornerkickteama = cornerkickteama + 1;
         Log.d("corner kick team a", Integer.toString((cornerkickteama)));
 
@@ -871,7 +929,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("jumlah red", Integer.toString(jumlahredpemain(i, idpemain)));
             tandingpemain.setIdpemain(idpemain);
             tandingpemain.setIdpertandingan(i);
-            tandingpemain.setJumlahyellowcard(tandingpemain.getJumlahyellowcard() + 1);
+            tandingpemain.setJumlahredcard(tandingpemain.getJumlahredcard() + 1);
             tandingpemain.setBabak(babakint);
             //Log.d("id pemain", Integer.toString(listpemainint));
             //Log.d("id pertangingan",Integer.toString(i));
@@ -1048,6 +1106,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     public void cornerkickteamb(View v) {
+        cornerkick.start();
         cornerkickteamb = cornerkickteamb + 1;
         Log.d("corner kick team b", Integer.toString((cornerkickteamb)));
 
@@ -1059,6 +1118,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void pinaltyteama(View v) {
+        pinalty.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
 
@@ -1092,8 +1152,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
+                Log.d("time goal edited", array[0]);
 
-                Log.d("time goal", array[0]);
+
 
                 if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
                     pemain = mSpinner.getSelectedItem().toString();
@@ -1141,6 +1204,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
 
                 Log.d("time goal", array[0]);
                 if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
@@ -1182,6 +1247,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void pinaltyteamb(View v) {
+        pinalty.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
 
@@ -1222,7 +1288,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
-
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
                 Log.d("time goal", array[0]);
                 if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
 
@@ -1267,7 +1334,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
                 String chronotext = chronometer.getText().toString();
                 String array[] = chronotext.split(":");
-
+                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                array[0] = String.valueOf(arrayint);
                 Log.d("time goal", array[0]);
 
                 if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
@@ -1307,6 +1375,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void freekickteama(View v) {
+        freekick.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         passingstatusteama = "no";
@@ -1320,6 +1389,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void freekickteamb(View v) {
+        freekick.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         passingstatusteama = "no";
@@ -1332,6 +1402,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void goalkickteama(View v) {
+        goalkick.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         passingstatusteama = "no";
@@ -1340,6 +1411,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void goalkickteamb(View v) {
+        goalkick.start();
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
         passingstatusteama = "no";
@@ -1349,6 +1421,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     public void showpopupshootinga(View v) {
+        shooting.start();
         if (passingstatusteama == "yes") {
             elapsedchronometerteam = SystemClock.elapsedRealtime() - chronometerteam.getBase();
             Log.d("mili chronometer a", Long.toString(elapsedchronometerteam));
@@ -1384,6 +1457,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void showpopupshootingb(View v) {
+        shooting.start();
         if (passingstatusteamb == "yes") {
             elapsedchronometerteamb = SystemClock.elapsedRealtime() - chronometerteam.getBase();
             Log.d("mili chronometer b", Long.toString(elapsedchronometerteamb));
@@ -1420,6 +1494,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void yellowcard(View v) {
+        yellow.start();
 
 
         PopupMenu popup = new PopupMenu(this, v);
@@ -1433,6 +1508,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void redcard(View v) {
+        red.start();
 
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -1489,7 +1565,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                         String chronotext = chronometer.getText().toString();
 
                         String array[] = chronotext.split(":");
-
+                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                        array[0] = String.valueOf(arrayint);
 
                         Log.d("time goal", array[0]);
                         if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
@@ -1514,12 +1591,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemain, teamA, getidpertandingan(), babakint);
                             inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
                         }
                     }
 
@@ -1679,7 +1756,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                         String chronotext = chronometer.getText().toString();
                         String array[] = chronotext.split(":");
-
+                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                        array[0] = String.valueOf(arrayint);
                         Log.d("time goal", array[0]);
                         if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
 
@@ -1702,12 +1780,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             Log.d("Enter if ", "input goal");
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
                         } else {
                             Log.d("belum ada ", "data pertadingan");
                             inputgoal(pemainb, teamB, getidpertandingan(), babakint);
                             inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "On Play");
+                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
                         }
 
                         dialog.dismiss();

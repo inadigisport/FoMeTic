@@ -22,6 +22,8 @@ public class generatereportteam extends AppCompatActivity {
     ArrayList<String> shootofftargetpemain = new ArrayList<>();
     ArrayList<String> yellowcardpemain = new ArrayList<>();
     ArrayList<String> redcardpemain = new ArrayList<>();
+    ArrayList<String> tacklingpemain = new ArrayList<>();
+    ArrayList<String> interceptpemain = new ArrayList<>();
     ArrayList<String> namapemainb = new ArrayList<>();
     ArrayList<String> nomorpunggungpemainb = new ArrayList<>();
     ArrayList<String> posisipemainb = new ArrayList<>();
@@ -30,6 +32,8 @@ public class generatereportteam extends AppCompatActivity {
     ArrayList<String> shootofftargetpemainb = new ArrayList<>();
     ArrayList<String> yellowcardpemainb = new ArrayList<>();
     ArrayList<String> redcardpemainb = new ArrayList<>();
+    ArrayList<String> tacklingpemainb = new ArrayList<>();
+    ArrayList<String> interceptpemainb = new ArrayList<>();
     TextView textViewnamapemain;
     TextView textViewposisipemain;
     TextView textViewnomorpunggungpemain;
@@ -54,6 +58,10 @@ public class generatereportteam extends AppCompatActivity {
     TextView textViewvenue;
     TextView textViewtanggal;
     TextView textViewbabak;
+    TextView textViewtacklingpemain;
+    TextView textViewtacklingpemainb;
+    TextView textViewinterceptpemain;
+    TextView textViewinterceptpemainb;
     String teamA;
     String teamB;
     String venue;
@@ -85,6 +93,8 @@ public class generatereportteam extends AppCompatActivity {
         shootofftargetpemain= getIntent().getExtras().getStringArrayList("shootofftargetpemain");
         yellowcardpemain= getIntent().getExtras().getStringArrayList("yellowcardpemain");
         redcardpemain= getIntent().getExtras().getStringArrayList("redcardpemain");
+        tacklingpemain= getIntent().getExtras().getStringArrayList("tacklingpemain");
+        interceptpemain= getIntent().getExtras().getStringArrayList("interceptpemain");
         namapemainb= getIntent().getExtras().getStringArrayList("namapemainb");
         posisipemainb= getIntent().getExtras().getStringArrayList("posisipemainb");
         nomorpunggungpemainb= getIntent().getExtras().getStringArrayList("nomorpunggungpemainb");
@@ -93,6 +103,8 @@ public class generatereportteam extends AppCompatActivity {
         shootofftargetpemainb= getIntent().getExtras().getStringArrayList("shootofftargetpemainb");
         yellowcardpemainb= getIntent().getExtras().getStringArrayList("yellowcardpemainb");
         redcardpemainb= getIntent().getExtras().getStringArrayList("redcardpemainb");
+        tacklingpemainb= getIntent().getExtras().getStringArrayList("tacklingpemainb");
+        interceptpemainb= getIntent().getExtras().getStringArrayList("interceptpemainb");
 
         namateamA=findViewById(R.id.textViewteama);
         namateamB=findViewById(R.id.textViewteamb);
@@ -262,6 +274,48 @@ public class generatereportteam extends AppCompatActivity {
 
         }
         textViewredcardpemainb.setText(builderredcardpemainb.toString());
+
+
+        textViewtacklingpemain = findViewById(R.id.textViewtacklingpemain);
+        textViewtacklingpemain.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder buildertacklingpemain=new StringBuilder();
+        for (String detail  : tacklingpemain){
+            buildertacklingpemain.append(detail + "\n" );
+
+        }
+        textViewtacklingpemain.setText(buildertacklingpemain.toString());
+
+        textViewtacklingpemainb = findViewById(R.id.textViewtacklingpemainb);
+        textViewtacklingpemainb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder buildertacklingpemainb=new StringBuilder();
+        for (String detail  : tacklingpemainb){
+            buildertacklingpemainb.append(detail + "\n" );
+
+        }
+        textViewtacklingpemainb.setText(buildertacklingpemainb.toString());
+
+
+        textViewinterceptpemain = findViewById(R.id.textViewinterceptpemain);
+        textViewinterceptpemain.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder builderinterceptpemain=new StringBuilder();
+        for (String detail  : interceptpemain){
+            builderinterceptpemain.append(detail + "\n" );
+
+        }
+        textViewinterceptpemain.setText(builderinterceptpemain.toString());
+
+
+        textViewinterceptpemainb = findViewById(R.id.textViewinterceptpemainb);
+        textViewinterceptpemainb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        StringBuilder builderinterceptpemainb=new StringBuilder();
+        for (String detail  : interceptpemainb){
+            builderinterceptpemainb.append(detail + "\n" );
+
+        }
+        textViewinterceptpemainb.setText(builderinterceptpemainb.toString());
+
+
+
 
     }
 

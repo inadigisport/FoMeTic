@@ -104,6 +104,8 @@ public class generatereportfullmatch extends AppCompatActivity {
         setContentView(R.layout.activity_generatereport);
         idpertandingan = getIntent().getIntExtra("idpertandingan", idpertandingan);
         babakint = getIntent().getIntExtra("babak", babakint);
+        babakstring= getIntent().getStringExtra("babakstring");
+        tanggal= getIntent().getStringExtra("tanggal");
         HashMap<String, String> data = dbpertandingan.loaddatafullmatch(idpertandingan, babakint);
         namateama = data.get("namateama");
         namateamb = data.get("namateamb");
@@ -111,7 +113,7 @@ public class generatereportfullmatch extends AppCompatActivity {
         formationteamb = data.get("formasiteamb");
         venue = data.get("venue");
         event = data.get("event");
-        tanggal = data.get("tanggal");
+        //tanggal = data.get("tanggal");
         formationteama = data.get("formasiteama");
         formationteamb = data.get("formasiteamb");
         ballpossesionteama = data.get("ballposessionteama");
@@ -145,14 +147,14 @@ public class generatereportfullmatch extends AppCompatActivity {
         Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
         goalpemainteama.moveToFirst();
         while (!goalpemainteama.isAfterLast()) {
-            listgoalpemainteama += dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " (" + goalpemainteama.getString(3) + ") " + goalpemainteama.getString(4) + System.getProperty("line.separator");
+            listgoalpemainteama += dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3) + goalpemainteama.getString(4) + System.getProperty("line.separator");
             goalpemainteama.moveToNext();
         }
 
         Cursor goalpemainteamb = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))));
         goalpemainteamb.moveToFirst();
         while (!goalpemainteamb.isAfterLast()) {
-            listgoalpemainteamb += dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " (" + goalpemainteamb.getString(3) + ") " + goalpemainteamb.getString(4) + System.getProperty("line.separator");
+            listgoalpemainteamb += dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + goalpemainteamb.getString(4) + System.getProperty("line.separator");
             goalpemainteamb.moveToNext();
         }
         textViewballpossesionteama=findViewById(R.id.textViewballpossesionteama);
@@ -211,5 +213,22 @@ public class generatereportfullmatch extends AppCompatActivity {
         textViewlistpemaingoalteama.setText(listgoalpemainteama);
         textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
         textViewlistpemaingoalteamb.setText(listgoalpemainteamb);
+        textViewtanggal = findViewById(R.id.textViewtanggal);
+        textViewtanggal.setText(tanggal);
+        textViewbabak = findViewById(R.id.textViewbabak);
+        textViewbabak.setText(babakstring);
+        textViewvenue=findViewById(R.id.textViewvenue);
+        textViewvenue.setText(venue);
+        textViewevent=findViewById(R.id.textViewevent);
+        textViewevent.setText(event);
+        textviewformationa=findViewById(R.id.textViewformationA);
+        textviewformationb=findViewById(R.id.textViewformationB);
+        textviewformationa.setText(formationteama);
+        textviewformationb.setText(formationteamb);
+        textviewteama=findViewById(R.id.textViewteama);
+        textviewteama.setText(namateama);
+        textviewteamb=findViewById(R.id.textViewteamb);
+        textviewteamb.setText(namateamb);
+
     }
 }

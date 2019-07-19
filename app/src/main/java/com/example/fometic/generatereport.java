@@ -118,7 +118,7 @@ public class generatereport extends AppCompatActivity {
         formationteamb= getIntent().getStringExtra("formationteamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
-        babakstring= getIntent().getStringExtra("babak");
+        babakstring= getIntent().getStringExtra("babakstring");
         tanggal= getIntent().getStringExtra("tanggal");
         Log.d("venue", venue);
         textviewteama=findViewById(R.id.textViewteama);
