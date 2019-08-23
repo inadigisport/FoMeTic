@@ -3,20 +3,28 @@ package com.example.fometic;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity{
 
     private Button button;
     private Button button2;
     private Button button3;
     private Button button4;
     private Button button5;
+    private Button button6;
     public static final String kata_kunci = "inadigisport";
-
+    PemainDBHandler dbpemain=new PemainDBHandler(this);
+    TeamDBHandler dbteam=new TeamDBHandler(this);
+    PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
+    PertandinganPemainDBHandler dbpertandinganpemain= new PertandinganPemainDBHandler(this);
+    goalDBHandler dbgoal=new goalDBHandler(this);
 
 
 
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
         button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.export);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +72,21 @@ public class MainActivity extends AppCompatActivity {
                 opengeneratereport();
             }
         });
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    dbpemain.export();
+                    dbteam.export();
+                    dbpertandingan.export();
+                    dbpertandinganpemain.export();
+                    dbgoal.export();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
+            }
+        });
     }
 
     public void openinputteam() {

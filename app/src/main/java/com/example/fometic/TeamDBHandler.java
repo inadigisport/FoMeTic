@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.IOException;
+
 public class TeamDBHandler extends SQLiteOpenHelper {
     //information of database
 
@@ -177,5 +179,11 @@ public class TeamDBHandler extends SQLiteOpenHelper {
         update.put(COLUMN_NAMA_TEAM, name);
 
         return db.update(TABLE_TEAM, update, COLUMN_ID_TEAM + "=" + ID, null) > 0;
+    }
+
+    public void export() throws IOException {
+        SQLiteDatabase db= this.getReadableDatabase();
+        SqliteExporter dbexport=new SqliteExporter();
+        dbexport.export(db);
     }
 }

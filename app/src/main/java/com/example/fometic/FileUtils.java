@@ -9,6 +9,9 @@ import java.io.File;
 
 public class FileUtils {
 
+    public static String getAppDir(){
+        return Environment.getExternalStorageDirectory() + "/" + R.string.app_name;
+    }
 
     public static File createDirIfNotExist(String path){
         File dir = new File(path);

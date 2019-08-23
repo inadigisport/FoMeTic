@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.IOException;
+
 public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "pertandinganpemaindb";
@@ -283,5 +285,11 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
 
 
         return db.update(TABLE_PERTANDINGAN_PEMAIN, update, ID_PERTANDINGAN + "=" + ID +" AND "+ID_PEMAIN+"="+IDPemain+ " AND "+BABAK+"="+babak, null) > 0;
+    }
+
+    public void export() throws IOException {
+        SQLiteDatabase db= this.getReadableDatabase();
+        SqliteExporter dbexport=new SqliteExporter();
+        dbexport.export(db);
     }
 }

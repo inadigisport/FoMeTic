@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -455,4 +456,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
     }
 
 
+    public void export() throws IOException {
+        SQLiteDatabase db= this.getReadableDatabase();
+        SqliteExporter dbexport=new SqliteExporter();
+        dbexport.export(db);
+    }
 }
