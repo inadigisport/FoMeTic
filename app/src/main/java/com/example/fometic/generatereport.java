@@ -1,21 +1,12 @@
 package com.example.fometic;
 
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class generatereport extends AppCompatActivity {
 
@@ -130,10 +121,10 @@ public class generatereport extends AppCompatActivity {
         textViewevent=findViewById(R.id.textViewevent);
         textViewevent.setText(event);
         //getFormationData();
-        textviewformationa=findViewById(R.id.textViewformationA);
-        textviewformationb=findViewById(R.id.textViewformationB);
-        textviewformationa.setText(formationteama);
-        textviewformationb.setText(formationteamb);
+       // textviewformationa=findViewById(R.id.textViewformationA);
+        //textviewformationb=findViewById(R.id.textViewformationB);
+      //  textviewformationa.setText(formationteama);
+      //  textviewformationb.setText(formationteamb);
 
         textViewtanggal = findViewById(R.id.textViewtanggal);
         textViewtanggal.setText(tanggal);
@@ -233,7 +224,7 @@ public class generatereport extends AppCompatActivity {
         textViewoffsideteamb=findViewById(R.id.textViewoffsideteamb);
         textViewoffsideteama.setText(Integer.toString(offsideteama));
         textViewoffsideteamb.setText(Integer.toString(offsideteamb));
-        textViewgoalteama=findViewById(R.id.textViewgoalteama);
+        textViewgoalteama=findViewById(R.id.textViewgoalteama2);
         textViewgoalteamb=findViewById(R.id.textViewgoalteamb);
         textViewgoalteama.setText(Integer.toString(goalteama));
         textViewgoalteamb.setText(Integer.toString(goalteamb));
@@ -254,25 +245,25 @@ public class generatereport extends AppCompatActivity {
         textViewredcardteama.setText(Integer.toString(redcardteama));
         textViewredcardteamb.setText(Integer.toString(redcardteamb));
 
-        textViewlistpemaingoalteama=findViewById(R.id.textViewlistpemaingoalteama);
-        textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+       // textViewlistpemaingoalteama=findViewById(R.id.textViewlistpemaingoalteama);
+        //textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         StringBuilder builder=new StringBuilder();
         for (String detail  : cetakgoalteama){
             builder.append(detail + "\n" );
 
         }
-        textViewlistpemaingoalteama.setText(builder.toString());
+        //textViewlistpemaingoalteama.setText(builder.toString());
 
         cetakgoalteama.clear();
 
-        textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
-        textViewlistpemaingoalteama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        //textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
+       // textViewlistpemaingoalteamb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         StringBuilder builderteamb=new StringBuilder();
         for (String detail  : cetakgoalteamb){
             builderteamb.append(detail + "\n" );
 
         }
-        textViewlistpemaingoalteamb.setText(builderteamb.toString());
+        //textViewlistpemaingoalteamb.setText(builderteamb.toString());
 
         cetakgoalteamb.clear();
 

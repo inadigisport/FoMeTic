@@ -15,16 +15,20 @@
         android:layout_marginStart="252dp"
         android:layout_marginLeft="252dp"
         android:layout_marginTop="300dp"
-        android:text="MATCH"
+        android:text="MATCH STATISTIK"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/buttonfullmatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
-        android:layout_marginLeft="208dp"
-        />
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="FULLTIME STATISTIK"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonmatch"
+        app:layout_constraintEnd_toStartOf="@+id/buttonmatch"
+        app:layout_constraintTop_toTopOf="@+id/buttonmatch" />
 
     <Button
         android:id="@+id/buttonteam"
@@ -32,8 +36,40 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="208dp"
         android:layout_marginLeft="208dp"
-        android:text="Team"
+        android:text="Team A Statistik"
         app:layout_constraintBottom_toBottomOf="@+id/buttonmatch"
         app:layout_constraintStart_toEndOf="@+id/buttonmatch"
         app:layout_constraintTop_toTopOf="@+id/buttonmatch" />
+
+    <Button
+        android:id="@+id/buttonmatchresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="MATCH RESULT"
+        app:layout_constraintEnd_toEndOf="@+id/buttonmatch"
+        app:layout_constraintTop_toBottomOf="@+id/buttonmatch" />
+
+    <Button
+        android:id="@+id/buttonfullresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="71dp"
+        android:layout_marginRight="71dp"
+        android:text="FULLTIME RESULT"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonmatchresult"
+        app:layout_constraintEnd_toStartOf="@+id/buttonmatchresult"
+        app:layout_constraintTop_toTopOf="@+id/buttonmatchresult" />
+
+    <Button
+        android:id="@+id/buttonteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="TEAM B STATISTIK"
+        app:layout_constraintEnd_toEndOf="@+id/buttonteam"
+        app:layout_constraintStart_toStartOf="@+id/buttonteam"
+        app:layout_constraintTop_toBottomOf="@+id/buttonteam" />
 </android.support.constraint.ConstraintLayout>

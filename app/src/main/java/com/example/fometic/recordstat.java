@@ -75,9 +75,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     MediaPlayer throwin;
 
 
-
-
-
     ArrayList<String> cetakgoalteama = new ArrayList<>();
     ArrayAdapter<String> arrayAdaptercetakgoalteama;
     ArrayList<String> cetakgoalteamb = new ArrayList<>();
@@ -122,6 +119,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     String event;
     String timematch;
 
+    PemainBola datapemain = new PemainBola();
     Pertandingan tanding = new Pertandingan();
     PemainDBHandler dbpemain = new PemainDBHandler(this);
     PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
@@ -162,9 +160,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         yellow = MediaPlayer.create(this, R.raw.yellow);
 
 
-
-
-
         chronometer = findViewById(R.id.chronometer);
         chronometerteam = findViewById(R.id.chronometerteam);
         textviewteama = findViewById(R.id.textViewteama);
@@ -179,34 +174,37 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             babakint = 1;
             timematchint = 0;
             statusgoal = "";
-        }
-        else if (babak.equals("2ndhalf")) {
+        } else if (babak.equals("2ndhalf")) {
             babakint = 2;
-            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan()
+                    , 1);
             datapertandingan.moveToFirst();
             timematchint = datapertandingan.getInt(45);
             statusgoal = "";
-        }
-        else if (babak.equals("Ex1sthalf")) {
+        } else if (babak.equals("Ex1sthalf")) {
             babakint = 3;
-            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan()
+                    , 1);
             datapertandingan.moveToFirst();
             Integer timematchintbabak1 = datapertandingan.getInt(45);
-            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            Cursor datapertandingan2 =
+                    dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
             datapertandingan2.moveToFirst();
             Integer timematchintbabak2 = datapertandingan2.getInt(45);
             timematchint = timematchintbabak1 + timematchintbabak2;
             statusgoal = "(Ex)";
-        }
-        else if (babak.equals("Ex2ndhalf")) {
+        } else if (babak.equals("Ex2ndhalf")) {
             babakint = 4;
-            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 1);
+            Cursor datapertandingan = dbpertandingan.loaddatapertandinganshow(getidpertandingan()
+                    , 1);
             datapertandingan.moveToFirst();
             Integer timematchintbabak1 = datapertandingan.getInt(45);
-            Cursor datapertandingan2 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
+            Cursor datapertandingan2 =
+                    dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 2);
             datapertandingan2.moveToFirst();
             Integer timematchintbabak2 = datapertandingan2.getInt(45);
-            Cursor datapertandingan3 = dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 3);
+            Cursor datapertandingan3 =
+                    dbpertandingan.loaddatapertandinganshow(getidpertandingan(), 3);
             datapertandingan3.moveToFirst();
             Integer timematchintbabak3 = datapertandingan3.getInt(45);
             timematchint = timematchintbabak1 + timematchintbabak2 + timematchintbabak3;
@@ -230,7 +228,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
     }
 
     public void start1sthalf(View v) {
-        if(running == 1) {
+        if (running == 1) {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             chronometerteam.setBase(SystemClock.elapsedRealtime() - pauseOffsetteam);
@@ -264,27 +262,37 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         }
     }
 
-    public int getidpertandingan(){
-        Cursor datapertandingan=dbpertandingan.loaddatapertandingan();
-        int i=1;
+    public void setDataPemain(String namatim, String namapemain, String posisipemain,
+                              Integer nomorpunggungpemain) {
+        datapemain.setNamaPemain(namapemain);
+        datapemain.setPosisi(posisipemain);
+        datapemain.setNomorPunggung(nomorpunggungpemain);
+        datapemain.setTeam(namatim);
+        dbteam.loaddatateam();
+        dbpemain.addHandler(datapemain, dbteam.loaddataidteam(namatim));
+    }
+
+    public int getidpertandingan() {
+        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+        int i = 1;
         datapertandingan.moveToFirst();
-            //Log.d("Enter if ", "input goal");
+        //Log.d("Enter if ", "input goal");
 
-            while (!datapertandingan.isAfterLast()) {
+        while (!datapertandingan.isAfterLast()) {
 
-                //Log.d("Enter while ", "input goal");
+            //Log.d("Enter while ", "input goal");
 
-                if (datapertandingan.getInt(33)==1 && babakint==2){
-                    i=datapertandingan.getInt(0);
-                }else if (datapertandingan.getInt(33)==2 && babakint==3){
-                    i=datapertandingan.getInt(0);
-                }else if (datapertandingan.getInt(33)==3 && babakint==4){
-                    i=datapertandingan.getInt(0);
-                }else {
-                    i = datapertandingan.getInt(0) + 1;
-                }
-                datapertandingan.moveToNext();
+            if (datapertandingan.getInt(33) == 1 && babakint == 2) {
+                i = datapertandingan.getInt(0);
+            } else if (datapertandingan.getInt(33) == 2 && babakint == 3) {
+                i = datapertandingan.getInt(0);
+            } else if (datapertandingan.getInt(33) == 3 && babakint == 4) {
+                i = datapertandingan.getInt(0);
+            } else {
+                i = datapertandingan.getInt(0) + 1;
             }
+            datapertandingan.moveToNext();
+        }
         return i;
     }
 
@@ -481,52 +489,96 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
         mSpinner.setAdapter(arrayAdapter);
 
 
         builder.setTitle("Pick Player");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(recordstat.this, "Tackling Team A", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                String pemain = mSpinner.getSelectedItem().toString();
-                //List<String> cetakgoalteama = new ArrayList<>();
-                //cetakgoalteama.add(pemain);
-                tacklingteama = tacklingteama + 1;
-                tanding.setTacklingTeamA(tanding.getTacklingTeamA() + 1);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
 
-
-                Log.d("Pemain Tackling Team A", pemain);
-                chronometerteam.setBase(SystemClock.elapsedRealtime());
-                chronometerteam.start();
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    Log.d("Enter if ", "input tackling");
-                    inputtackling(pemain, teamA, getidpertandingan(), babakint);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputtackling(pemain, teamA, getidpertandingan(), babakint);
-                }
-            }
-
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("CANCEL", null);
         builder.setView(mView);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Tackling Team A", Toast.LENGTH_SHORT).show();
+                    String pemain = mSpinner.getSelectedItem().toString();
+                    //List<String> cetakgoalteama = new ArrayList<>();
+                    //cetakgoalteama.add(pemain);
+                    tacklingteama = tacklingteama + 1;
+                    tanding.setTacklingTeamA(tanding.getTacklingTeamA() + 1);
+                    arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this,
+                            R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    Log.d("Pemain Tackling Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputtackling(pemain, teamA, getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputtackling(pemain, teamA, getidpertandingan(), babakint);
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+
+                    tacklingteama = tacklingteama + 1;
+                    tanding.setTacklingTeamA(tanding.getTacklingTeamA() + 1);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    //Log.d("Pemain Tackling Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputtackling(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputtackling(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                    }
+
+                    dialog.dismiss();
+
+                }
+
+            }
+        });
+
+
         passingstatusteama = "yes";
         passingstatusteamb = "no";
 
@@ -548,52 +600,92 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
         mSpinner.setAdapter(arrayAdapter);
 
 
         builder.setTitle("Pick Player");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(recordstat.this, "Tackling Team B", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                String pemain = mSpinner.getSelectedItem().toString();
-                //List<String> cetakgoalteama = new ArrayList<>();
-                //cetakgoalteama.add(pemain);
-                tacklingteamb = tacklingteamb + 1;
-                tanding.setTacklingTeamB(tanding.getTacklingTeamB() + 1);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
 
-
-                Log.d("Pemain Tackling Team B", pemain);
-                chronometerteam.setBase(SystemClock.elapsedRealtime());
-                chronometerteam.start();
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    Log.d("Enter if ", "input tackling");
-                    inputtackling(pemain, teamB, getidpertandingan(), babakint);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputtackling(pemain, teamB, getidpertandingan(), babakint);
-                }
-            }
-
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("CANCEL", null);
         builder.setView(mView);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    String pemain = mSpinner.getSelectedItem().toString();
+
+                    tacklingteamb = tacklingteamb + 1;
+                    tanding.setTacklingTeamB(tanding.getTacklingTeamB() + 1);
+                    arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this,
+                            R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
+
+
+                    Log.d("Pemain Tackling Team B", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputtackling(pemain, teamB, getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputtackling(pemain, teamB, getidpertandingan(), babakint);
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+
+                    tacklingteamb = tacklingteamb + 1;
+                    tanding.setTacklingTeamB(tanding.getTacklingTeamB() + 1);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    //Log.d("Pemain Tackling Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputtackling(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputtackling(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                    }
+
+                    dialog.dismiss();
+
+                }
+
+            }
+
+        });
+
+
         passingstatusteama = "no";
         passingstatusteamb = "yes";
 
@@ -616,52 +708,93 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
         mSpinner.setAdapter(arrayAdapter);
 
 
         builder.setTitle("Pick Player");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(recordstat.this, "Intercept Team A", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                String pemain = mSpinner.getSelectedItem().toString();
-                //List<String> cetakgoalteama = new ArrayList<>();
-                //cetakgoalteama.add(pemain);
-                interceptteama=interceptteama+1;
-                tanding.setInterceptTeamA(tanding.getInterceptTeamA() + 1);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
 
-
-                Log.d("Intercept Team A", pemain);
-                chronometerteam.setBase(SystemClock.elapsedRealtime());
-                chronometerteam.start();
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    Log.d("Enter if ", "input tackling");
-                    inputintercept(pemain, teamA, getidpertandingan(), babakint);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputintercept(pemain, teamA, getidpertandingan(), babakint);
-                }
-            }
-
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("CANCEL", null);
         builder.setView(mView);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+
+
+                    Toast.makeText(recordstat.this, "Intercept Team A", Toast.LENGTH_SHORT).show();
+                    String pemain = mSpinner.getSelectedItem().toString();
+                    //interceptteama = interceptteama + 1;
+                    tanding.setInterceptTeamA(tanding.getInterceptTeamA() + 1);
+
+
+                    Log.d("Intercept Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputintercept(pemain, teamA, getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputintercept(pemain, teamA, getidpertandingan(), babakint);
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+
+                    //tacklingteama = tacklingteama + 1;
+                    tanding.setInterceptTeamA(tanding.getInterceptTeamA() + 1);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    //Log.d("Pemain Tackling Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputintercept(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputintercept(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                    }
+
+                    dialog.dismiss();
+
+                }
+
+
+            }
+
+        });
+
+
         passingstatusteama = "yes";
         passingstatusteamb = "no";
 
@@ -684,52 +817,91 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
         mSpinner.setAdapter(arrayAdapter);
 
 
         builder.setTitle("Pick Player");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(recordstat.this, "Intercept Team B", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                String pemain = mSpinner.getSelectedItem().toString();
-                //List<String> cetakgoalteama = new ArrayList<>();
-                //cetakgoalteama.add(pemain);
-                interceptteamb = interceptteamb + 1;
-                tanding.setInterceptTeamB(tanding.getInterceptTeamB() + 1);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
 
-
-                Log.d("Pemain Intercept Team B", pemain);
-                chronometerteam.setBase(SystemClock.elapsedRealtime());
-                chronometerteam.start();
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    Log.d("Enter if ", "input tackling");
-                    inputtackling(pemain, teamB, getidpertandingan(), babakint);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputtackling(pemain, teamB, getidpertandingan(), babakint);
-                }
-            }
-
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("CANCEL", null);
         builder.setView(mView);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+
+
+                    Toast.makeText(recordstat.this, "Intercept Team A", Toast.LENGTH_SHORT).show();
+                    String pemain = mSpinner.getSelectedItem().toString();
+                    //interceptteama = interceptteama + 1;
+                    tanding.setInterceptTeamB(tanding.getInterceptTeamB() + 1);
+
+
+                    Log.d("Intercept Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputintercept(pemain, teamB, getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputintercept(pemain, teamB, getidpertandingan(), babakint);
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+
+                    //tacklingteama = tacklingteama + 1;
+                    tanding.setInterceptTeamB(tanding.getInterceptTeamB() + 1);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    //Log.d("Pemain Tackling Team A", pemain);
+                    chronometerteam.setBase(SystemClock.elapsedRealtime());
+                    chronometerteam.start();
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        Log.d("Enter if ", "input tackling");
+                        inputintercept(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputintercept(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                    }
+
+                    dialog.dismiss();
+
+                }
+
+
+            }
+
+        });
 
         passingstatusteama = "no";
         passingstatusteamb = "yes";
@@ -778,7 +950,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babak);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babak);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -804,7 +977,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babak);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babak);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -828,17 +1002,18 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public void inputsaves(String namateam, int i, int babak) {
         Log.d("Start ", "input goal");
-        String nomor="";
-        PemainDBHandler dbteam=new PemainDBHandler(this);
-        Cursor kiper=dbteam.loaddataposisi("Goalkeeper",namateam);
+        String nomor = "";
+        PemainDBHandler dbteam = new PemainDBHandler(this);
+        Cursor kiper = dbteam.loaddataposisi("Goalkeeper", namateam);
         kiper.moveToFirst();
-        if (!kiper.isAfterLast()){
-            nomor=kiper.getString(3);
+        if (!kiper.isAfterLast()) {
+            nomor = kiper.getString(3);
             kiper.moveToNext();
         }
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babak);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babak);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -864,7 +1039,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babak);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babak);
         pertandinganpemain.moveToFirst();
         Log.d("End of ", "input goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -890,7 +1066,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input yellow");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input yellow");
         if (pertandinganpemain.moveToFirst()) {
@@ -916,11 +1093,12 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "input red");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input red");
         if (pertandinganpemain.moveToFirst()) {
-            dbpertandinganpemain.updatered(i, idpemain,babakint);
+            dbpertandinganpemain.updatered(i, idpemain, babakint);
             Log.d("id pertangingan exist", Integer.toString(i));
             Log.d("jumlah red", Integer.toString(jumlahredpemain(i, idpemain)));
             //dbpertandinganpemain.loaddatapemain();
@@ -942,7 +1120,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "on goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input on goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -968,7 +1147,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         Log.d("Start ", "off goal");
         PertandinganPemain tandingpemain = new PertandinganPemain();
         int idpemain = dbpemain.loaddataidpemain(nomor, namateam);
-        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i, babakint);
+        Cursor pertandinganpemain = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, i,
+                babakint);
         pertandinganpemain.moveToFirst();
         //Log.d("End of ", "input off goal");
         if (pertandinganpemain.moveToFirst()) {
@@ -1007,7 +1187,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(2);
@@ -1019,7 +1200,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahinterceptpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(9);
@@ -1032,7 +1214,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahtacklingpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(8);
@@ -1044,7 +1227,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahsavespemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(10);
@@ -1057,7 +1241,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahongoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(5);
@@ -1069,7 +1254,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahoffgoalpemain(int idpertandingan, int idpemain) {
         int goal;
-        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahgoal = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahgoal.moveToFirst()) {
             jumlahgoal.moveToFirst();
             goal = jumlahgoal.getInt(6);
@@ -1082,7 +1268,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahyellowpemain(int idpertandingan, int idpemain) {
         int yellow;
-        Cursor jumlahyellow = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahyellow = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahyellow.moveToFirst()) {
             jumlahyellow.moveToFirst();
             yellow = jumlahyellow.getInt(3);
@@ -1094,7 +1281,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
     public int jumlahredpemain(int idpertandingan, int idpemain) {
         int red;
-        Cursor jumlahred = dbpertandinganpemain.loaddatapertandinganpemain(idpemain, idpertandingan, babakint);
+        Cursor jumlahred = dbpertandinganpemain.loaddatapertandinganpemain(idpemain,
+                idpertandingan, babakint);
         if (jumlahred.moveToFirst()) {
             jumlahred.moveToFirst();
             red = jumlahred.getInt(4);
@@ -1135,113 +1323,211 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
         mSpinner.setAdapter(arrayAdapter);
 
-
         builder.setTitle("Pick Player");
-        builder.setPositiveButton("GOAL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                goalteama = goalteama + 1;
-                shootontargetteama = shootontargetteama + 1;
-                tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
-                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
-                tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
-                String chronotext = chronometer.getText().toString();
-                String array[] = chronotext.split(":");
-                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                array[0] = String.valueOf(arrayint);
-                Log.d("time goal edited", array[0]);
-
-
-
-                if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
-                    pemain = mSpinner.getSelectedItem().toString();
-                } else {
-                    pemain = editTextinputplayer.getText().toString();
-
-                }
-
-                goalnotea = pemain + " (P)'" + array[0];
-
-                cetakgoalteama.add(goalnotea);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
-
-
-                Log.d("Pemain Goal Team A", pemain);
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
-                List<String> listpemaingoalteama = new ArrayList<String>();
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    inputgoal(pemain, teamA, getidpertandingan(), babakint);
-                    inputshotongoal(pemain, teamA, getidpertandingan());
-                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemain, teamA, getidpertandingan(), babakint);
-                    inputshotongoal(pemain, teamA, getidpertandingan());
-                    inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
-
-                }
-                dialog.dismiss();
-            }
-
-        });
-        builder.setNegativeButton("MISSED", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                shootontargetteama = shootontargetteama + 1;
-                savesteamb = savesteamb + 1;
-                inputsaves(teamB, getidpertandingan(), babakint);
-                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
-                tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
-                tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
-                String chronotext = chronometer.getText().toString();
-                String array[] = chronotext.split(":");
-                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                array[0] = String.valueOf(arrayint);
-
-                Log.d("time goal", array[0]);
-                if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
-
-                    pemain = mSpinner.getSelectedItem().toString();
-                } else {
-                    pemain = editTextinputplayer.getText().toString();
-
-                }
-
-                goalnotea = pemain + " (Missed)'" + array[0];
-
-                cetakgoalteama.add(goalnotea);
-                arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
-
-
-                Log.d("Pemain Missed Team A", pemain);
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-
-                int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
-
-                dialog.dismiss();
-            }
-        });
-        builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-
-            }
-        });
+        builder.setPositiveButton("GOAL", null);
+        builder.setNegativeButton("MISSED", null);
+        builder.setNeutralButton("CANCEL", null);
         builder.setView(mView);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+
+                    tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                    tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                    tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
+                    tanding.setFoulTeamB(tanding.getFoulTeamB() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+
+                    //if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+                    pemain = mSpinner.getSelectedItem().toString();
+                    //} else {
+                    //  pemain = editTextinputplayer.getText().toString();
+
+                    //}
+
+                    //goalnotea = pemain + " (P)'" + array[0];
+
+                    //cetakgoalteama.add(goalnotea);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    Log.d("Pemain Goal Team A", pemain);
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
+                    //List<String> listpemaingoalteama = new ArrayList<String>();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputgoal(pemain, teamA, getidpertandingan(), babakint);
+                        inputshotongoal(pemain, teamA, getidpertandingan());
+                        inputdatagoal(pemain, teamA, getidpertandingan(), array[0],
+                                "Pinalty" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputgoal(pemain, teamA, getidpertandingan(), babakint);
+                        inputshotongoal(pemain, teamA, getidpertandingan());
+                        inputdatagoal(pemain, teamA, getidpertandingan(), array[0],
+                                "Pinalty" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+                    tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                    tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                    tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
+                    tanding.setFoulTeamB(tanding.getFoulTeamB() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputgoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), array[0], "Pinalty" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputgoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), babakint);
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), array[0], "Pinalty" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                }
+
+            }
+
+
+        });
+
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+
+
+                    tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                    tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
+                    tanding.setFoulTeamB(tanding.getFoulTeamB() + 1);
+                    tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+
+                    //if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+                    pemain = mSpinner.getSelectedItem().toString();
+                    //} else {
+                    //  pemain = editTextinputplayer.getText().toString();
+
+                    //}
+
+                    //goalnotea = pemain + " (P)'" + array[0];
+
+                    //cetakgoalteama.add(goalnotea);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    Log.d("Pemain Goal Team A", pemain);
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
+                    //List<String> listpemaingoalteama = new ArrayList<String>();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputshotongoal(pemain, teamA, getidpertandingan());
+                        inputdatagoal(pemain, teamA, getidpertandingan(), array[0],
+                                "MISSED" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputshotongoal(pemain, teamA, getidpertandingan());
+                        inputdatagoal(pemain, teamA, getidpertandingan(), array[0],
+                                "MISSED" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
+
+
+                    tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                    tanding.setPinaltyTeamA(tanding.getPinaltyTeamA() + 1);
+                    tanding.setFoulTeamB(tanding.getFoulTeamB() + 1);
+                    tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), array[0], "MISSED" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                getidpertandingan(), array[0], "MISSED" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                }
+            }
+        });
         passingstatusteama = "no";
         passingstatusteamb = "no";
     }
@@ -1251,15 +1537,6 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
         chronometerteam.setBase(SystemClock.elapsedRealtime());
         chronometerteam.stop();
 
-        TeamDBHandler dbgoalb = new TeamDBHandler(this);
-        Cursor loadDataTeamgoalb = dbpemain.loaddatateam(teamB);
-        List<String> spinnerArraygoalb = new ArrayList<String>();
-        loadDataTeamgoalb.moveToFirst();
-        while (!loadDataTeamgoalb.isAfterLast()) {
-            spinnerArraygoalb.add(loadDataTeamgoalb.getString(3));
-            Log.d("Data spinner ", loadDataTeamgoalb.getString(3));
-            loadDataTeamgoalb.moveToNext();
-        }
         Cursor datagoalteamb = dbpemain.loaddatateam(teamB);
         List<String> listpemaingoalteamb = new ArrayList<String>();
         datagoalteamb.moveToFirst();
@@ -1268,108 +1545,200 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             Log.d("Data spinner ", datagoalteamb.getString(3));
             datagoalteamb.moveToNext();
         }
-        AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
-        View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-        final Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
-        final EditText editTextinputplayerb = (EditText) mViewgoalb.findViewById(R.id.editTextinputplayer);
-        ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
-        mSpinnergoalb.setAdapter(arrayAdaptergoalb);
+        AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+        final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
+        final EditText editTextinputplayer =
+                (EditText) mView.findViewById(R.id.editTextinputplayer);
+        final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+        final EditText editTextinputnomorpunggung =
+                (EditText) mView.findViewById(R.id.textNomorPunggung2);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this,
+                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
+        mSpinner.setAdapter(arrayAdapter);
 
+        builder.setTitle("Pick Player");
 
-        buildergoalb.setTitle("Pick Player");
-        buildergoalb.setPositiveButton("GOAL", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("GOAL", null);
+        builder.setNegativeButton("MISSED", null);
+        builder.setNeutralButton("CANCEL", null);
+        builder.setView(mView);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
-                goalteamb = goalteamb + 1;
-                shootontargetteamb = shootontargetteamb + 1;
-                tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
-                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
-                tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
-                String chronotext = chronometer.getText().toString();
-                String array[] = chronotext.split(":");
-                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                array[0] = String.valueOf(arrayint);
-                Log.d("time goal", array[0]);
-                if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
 
-                    pemainb = mSpinnergoalb.getSelectedItem().toString();
+                    tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                    tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                    tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
+                    tanding.setFoulTeamA(tanding.getFoulTeamA() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+
+                    pemain = mSpinner.getSelectedItem().toString();
+
+
+                    Log.d("Pemain Goal Team A", pemain);
+
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputgoal(pemain, teamB, getidpertandingan(), babakint);
+                        inputshotongoal(pemain, teamB, getidpertandingan());
+                        inputdatagoal(pemain, teamB, getidpertandingan(), array[0],
+                                "Pinalty" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputgoal(pemain, teamB, getidpertandingan(), babakint);
+                        inputshotongoal(pemain, teamB, getidpertandingan());
+                        inputdatagoal(pemain, teamB, getidpertandingan(), array[0],
+                                "Pinalty" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
                 } else {
-                    pemainb = editTextinputplayerb.getText().toString();
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
 
+                    tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                    tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                    tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
+                    tanding.setFoulTeamA(tanding.getFoulTeamA() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputgoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), array[0], "Pinalty" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputgoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), babakint);
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), array[0], "Pinalty" + statusgoal);
+
+                    }
+                    dialog.dismiss();
                 }
-                goalnoteb = pemainb + " (P)'" + array[0];
 
-                Log.d("pemain team b", goalnoteb);
-
-
-                cetakgoalteamb.add(goalnoteb);
-                arrayAdaptercetakgoalteamb = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
-                Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                if (datapertandingan.moveToFirst()) {
-                    Log.d("Enter if ", "input goal");
-                    inputgoal(pemainb, teamB, getidpertandingan(), babakint);
-                    inputshotongoal(pemainb, teamB, getidpertandingan());
-                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
-                } else {
-                    Log.d("belum ada ", "data pertadingan");
-                    inputgoal(pemainb, teamB, getidpertandingan(), babakint);
-                    inputshotongoal(pemainb, teamB, getidpertandingan());
-                    inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "Pinalty"+ statusgoal);
-                }
-
-
-                dialog.dismiss();
             }
 
+
         });
-        buildergoalb.setNegativeButton("MISSED", new DialogInterface.OnClickListener() {
+
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                shootontargetteamb = shootontargetteamb + 1;
-                savesteama = savesteama + 1;
-                inputsaves(teamA, getidpertandingan(), babakint);
-                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
-                tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
-                tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
-                String chronotext = chronometer.getText().toString();
-                String array[] = chronotext.split(":");
-                Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                array[0] = String.valueOf(arrayint);
-                Log.d("time goal", array[0]);
+            public void onClick(View v) {
+                if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
 
-                if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
 
-                    pemainb = mSpinnergoalb.getSelectedItem().toString();
+                    tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                    tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
+                    tanding.setFoulTeamA(tanding.getFoulTeamA() + 1);
+                    tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+
+                    //if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
+                    pemain = mSpinner.getSelectedItem().toString();
+                    //} else {
+                    //  pemain = editTextinputplayer.getText().toString();
+
+                    //}
+
+                    //goalnotea = pemain + " (P)'" + array[0];
+
+                    //cetakgoalteama.add(goalnotea);
+                    //arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout
+                    // .support_simple_spinner_dropdown_item, cetakgoalteama);
+
+
+                    Log.d("Pemain Goal Team A", pemain);
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
+                    //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
+                    //int datagoalteama = dbpemain.loaddataidpemain(pemain, teamA);
+                    //List<String> listpemaingoalteama = new ArrayList<String>();
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputshotongoal(pemain, teamB, getidpertandingan());
+                        inputdatagoal(pemain, teamB, getidpertandingan(), array[0],
+                                "MISSED" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputshotongoal(pemain, teamB, getidpertandingan());
+                        inputdatagoal(pemain, teamB, getidpertandingan(), array[0],
+                                "MISSED" + statusgoal);
+
+                    }
+                    dialog.dismiss();
+                } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                    Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak Boleh " +
+                            "Kosong", Toast.LENGTH_SHORT).show();
                 } else {
-                    pemainb = editTextinputplayerb.getText().toString();
+                    String namapemain = editTextinputplayer.getText().toString();
+                    String posisipemain = posisispinner.getSelectedItem().toString();
+                    int nomorpunggungpemain =
+                            Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                    setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                    Toast.makeText(recordstat.this, "Input Data Pemain", Toast.LENGTH_SHORT).show();
 
+
+                    tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                    tanding.setPinaltyTeamB(tanding.getPinaltyTeamB() + 1);
+                    tanding.setFoulTeamA(tanding.getFoulTeamA() + 1);
+                    tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
+                    String chronotext = chronometer.getText().toString();
+                    String array[] = chronotext.split(":");
+                    Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                    array[0] = String.valueOf(arrayint);
+                    Log.d("time goal edited", array[0]);
+
+                    Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                    if (datapertandingan.moveToFirst()) {
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), array[0], "MISSED" + statusgoal);
+                    } else {
+                        Log.d("belum ada ", "data pertadingan");
+                        inputshotongoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan());
+                        inputdatagoal(editTextinputnomorpunggung.getText().toString(), teamB,
+                                getidpertandingan(), array[0], "MISSED" + statusgoal);
+
+                    }
+                    dialog.dismiss();
                 }
-
-                goalnoteb = pemainb + " (Missed)'" + array[0];
-
-                Log.d("pemain missed team b", goalnoteb);
-
-
-                cetakgoalteamb.add(goalnoteb);
-                arrayAdaptercetakgoalteamb = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
-
-
-                dialog.dismiss();
             }
         });
-
-        buildergoalb.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-
-        buildergoalb.setView(mViewgoalb);
-        AlertDialog dialoggoalb = buildergoalb.create();
-        dialoggoalb.show();
         passingstatusteama = "no";
         passingstatusteamb = "no";
     }
@@ -1544,80 +1913,104 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 AlertDialog.Builder builder = new AlertDialog.Builder(recordstat.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinnerplayer);
-                final EditText editTextinputplayer = (EditText) mView.findViewById(R.id.editTextinputplayer);
-                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
+                final EditText editTextinputplayer =
+                        (EditText) mView.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinner = (Spinner) mView.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggung =
+                        (EditText) mView.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdapter =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteama);
                 mSpinner.setAdapter(arrayAdapter);
 
 
                 builder.setTitle("Pick Player");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team A", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        String pemain = mSpinner.getSelectedItem().toString();
-                        //List<String> cetakgoalteama = new ArrayList<>();
-                        //cetakgoalteama.add(pemain);
-                        goalteama = goalteama + 1;
-                        shootontargetteama = shootontargetteama + 1;
-                        tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
-                        tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
-                        String chronotext = chronometer.getText().toString();
 
-                        String array[] = chronotext.split(":");
-                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                        array[0] = String.valueOf(arrayint);
-
-                        Log.d("time goal", array[0]);
-                        if (TextUtils.isEmpty(editTextinputplayer.getText().toString())) {
-                            pemain = mSpinner.getSelectedItem().toString();
-
-                        } else {
-                            pemain = editTextinputplayer.getText().toString();
-                        }
-
-                        goalnotea = pemain + " " + array[0] + "'";
-
-                        cetakgoalteama.add(goalnotea);
-                        arrayAdaptercetakgoalteama = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteama);
-
-
-                        Log.d("Pemain Goal Team A", pemain);
-                        //Log.d("Pemain Goal Team A", cetakgoalteama.get(1));
-                        //Log.d("Pemain Goal Team A", cetakgoalteama.get(0));
-                        //int datagoalteama=dbpemain.loaddataidpemain(pemain, teamA);
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputgoal(pemain, teamA, getidpertandingan(), babakint);
-                            inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemain, teamA, getidpertandingan(), babakint);
-                            inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
-                        }
-                    }
-
-                });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
+                builder.setPositiveButton("OK", null);
+                builder.setNegativeButton("CANCEL", null);
                 builder.setView(mView);
-                AlertDialog dialog = builder.create();
+                final AlertDialog dialog = builder.create();
                 dialog.show();
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayer.getText().toString().isEmpty() && editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                            tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                            tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                            pemain = mSpinner.getSelectedItem().toString();
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputgoal(pemain, teamA, getidpertandingan(), babakint);
+                                inputshotongoal(pemain, teamA, getidpertandingan());
+                                inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputgoal(pemain, teamA, getidpertandingan(), babakint);
+                                inputshotongoal(pemain, teamA, getidpertandingan());
+                                inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "");
+                            }
+                            dialog.dismiss();
+                        } else if (editTextinputplayer.getText().toString().isEmpty() || editTextinputnomorpunggung.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain = editTextinputplayer.getText().toString();
+                            String posisipemain = posisispinner.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggung.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+
+                            tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                            tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputgoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                        getidpertandingan(), babakint);
+                                inputshotongoal(editTextinputnomorpunggung.getText().toString(),
+                                        teamA, getidpertandingan());
+                                inputdatagoal(editTextinputnomorpunggung.getText().toString(),
+                                        teamA, getidpertandingan(), array[0], "");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputgoal(editTextinputnomorpunggung.getText().toString(), teamA,
+                                        getidpertandingan(), babakint);
+                                inputshotongoal(editTextinputnomorpunggung.getText().toString(),
+                                        teamA, getidpertandingan());
+                                inputdatagoal(editTextinputnomorpunggung.getText().toString(),
+                                        teamA, getidpertandingan(), array[0], "");
+                            }
+                            dialog.dismiss();
+
+                        }
+
+                    }
+                });
+
 
                 return true;
             case R.id.shootontarget:
-                shootontargetteama = shootontargetteama + 1;
-                savesteamb = savesteamb + 1;
-                tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
-                tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
+
                 //Toast.makeText(this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
                 Cursor datashootontargeta = dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootontargeta = new ArrayList<String>();
@@ -1627,50 +2020,88 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ", datashootontargeta.getString(3));
                     datashootontargeta.moveToNext();
                 }
-                AlertDialog.Builder buildershootontargeta = new AlertDialog.Builder(recordstat.this);
-                View mViewshootontargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnershootontargeta = (Spinner) mViewshootontargeta.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptershootontargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargeta);
+                AlertDialog.Builder buildershootontargeta =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewshootontargeta = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
+                final Spinner mSpinnershootontargeta =
+                        (Spinner) mViewshootontargeta.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayershootontargeta =
+                        (EditText) mViewshootontargeta.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnershootontargeta =
+                        (Spinner) mViewshootontargeta.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungshootontargeta =
+                        (EditText) mViewshootontargeta.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdaptershootontargeta =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainshootontargeta);
                 mSpinnershootontargeta.setAdapter(arrayAdaptershootontargeta);
 
 
                 buildershootontargeta.setTitle("Pick Player");
-                buildershootontargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot On Target Team A", Toast.LENGTH_SHORT).show();
-                        pemain = mSpinnershootontargeta.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputsaves(teamA, getidpertandingan(), babakint);
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputshotongoal(pemain, teamA, getidpertandingan());
-                            inputsaves(teamA, getidpertandingan(), babakint);
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                buildershootontargeta.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
+                buildershootontargeta.setPositiveButton("OK", null);
+                buildershootontargeta.setNegativeButton("CANCEL", null);
                 buildershootontargeta.setView(mViewshootontargeta);
-                AlertDialog dialogshootontargeta = buildershootontargeta.create();
+                final AlertDialog dialogshootontargeta = buildershootontargeta.create();
                 dialogshootontargeta.show();
+                Button positiveButtonshootontargeta =
+                        dialogshootontargeta.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonshootontargeta.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayershootontargeta.getText().toString().isEmpty() && editTextinputnomorpunggungshootontargeta.getText().toString().isEmpty()) {
+                            tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                            tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
+                            Toast.makeText(recordstat.this, "Shoot On Target Team A",
+                                    Toast.LENGTH_SHORT).show();
+                            pemain = mSpinnershootontargeta.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotongoal(pemain, teamA, getidpertandingan());
+                                inputsaves(teamA, getidpertandingan(), babakint);
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotongoal(pemain, teamA, getidpertandingan());
+                                inputsaves(teamA, getidpertandingan(), babakint);
+                            }
+                            dialogshootontargeta.dismiss();
 
+                        } else if (editTextinputplayershootontargeta.getText().toString().isEmpty() || editTextinputnomorpunggungshootontargeta.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayershootontargeta.getText().toString();
+                            String posisipemain =
+                                    posisispinnershootontargeta.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungshootontargeta.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setShootOnTargetTeamA(tanding.getShootOnTargetTeamA() + 1);
+                            tanding.setSavesTeamB(tanding.getSavesTeamB() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotongoal(editTextinputnomorpunggungshootontargeta.getText().toString(), teamA, getidpertandingan());
+                                inputsaves(teamA, getidpertandingan(), babakint);
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotongoal(editTextinputnomorpunggungshootontargeta.getText().toString(), teamA, getidpertandingan());
+                                inputsaves(teamA, getidpertandingan(), babakint);
+                            }
+                            dialogshootontargeta.dismiss();
+                        }
+                    }
+
+
+                });
 
                 return true;
             case R.id.shootofftarget:
-                shootofftargetteama = shootofftargetteama + 1;
-                tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA() + 1);
-                //Toast.makeText(this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
                 Cursor datashootofftargeta = dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootofftargeta = new ArrayList<String>();
                 datashootofftargeta.moveToFirst();
@@ -1679,139 +2110,192 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ", datashootofftargeta.getString(3));
                     datashootofftargeta.moveToNext();
                 }
-                AlertDialog.Builder buildershootofftargeta = new AlertDialog.Builder(recordstat.this);
-                View mViewshootofftargeta = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnershootofftargeta = (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptershootofftargeta = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargeta);
+                AlertDialog.Builder buildershootofftargeta =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewshootofftargeta = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
+                final Spinner mSpinnershootofftargeta =
+                        (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayershootofftargeta =
+                        (EditText) mViewshootofftargeta.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnershootofftargeta =
+                        (Spinner) mViewshootofftargeta.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungshootofftargeta =
+                        (EditText) mViewshootofftargeta.findViewById(R.id.textNomorPunggung2);
+                ArrayAdapter<String> arrayAdaptershootofftargeta =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargeta);
                 mSpinnershootofftargeta.setAdapter(arrayAdaptershootofftargeta);
 
 
-                buildershootofftargeta.setTitle("Pick Player");
-                buildershootofftargeta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot Off Target Team A", Toast.LENGTH_SHORT).show();
-                        pemain = mSpinnershootofftargeta.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputshotoffgoal(pemain, teamA, getidpertandingan());
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputshotoffgoal(pemain, teamA, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
-
-                });
-                buildershootofftargeta.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
+                buildershootofftargeta.setPositiveButton("OK", null);
+                buildershootofftargeta.setNegativeButton("CANCEL", null);
                 buildershootofftargeta.setView(mViewshootofftargeta);
-                AlertDialog dialogshootofftargeta = buildershootofftargeta.create();
+                final AlertDialog dialogshootofftargeta = buildershootofftargeta.create();
                 dialogshootofftargeta.show();
+                Button positiveButtonshootofftargeta =
+                        dialogshootofftargeta.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonshootofftargeta.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayershootofftargeta.getText().toString().isEmpty() && editTextinputnomorpunggungshootofftargeta.getText().toString().isEmpty()) {
+                            tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA() + 1);
+                            Toast.makeText(recordstat.this, "Shoot Off Target Team A",
+                                    Toast.LENGTH_SHORT).show();
+                            pemain = mSpinnershootofftargeta.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotoffgoal(pemain, teamA, getidpertandingan());
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotoffgoal(pemain, teamA, getidpertandingan());
+                            }
+                            dialogshootofftargeta.dismiss();
+                        } else if (editTextinputplayershootofftargeta.getText().toString().isEmpty() || editTextinputnomorpunggungshootofftargeta.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayershootofftargeta.getText().toString();
+                            String posisipemain =
+                                    posisispinnershootofftargeta.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungshootofftargeta.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setShootOffTargetTeamA(tanding.getShootOffTargetTeamA() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotoffgoal(editTextinputnomorpunggungshootofftargeta.getText().toString(), teamA, getidpertandingan());
 
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotoffgoal(editTextinputnomorpunggungshootofftargeta.getText().toString(), teamA, getidpertandingan());
+
+                            }
+                            dialogshootofftargeta.dismiss();
+                        }
+                    }
+
+
+                });
 
                 return true;
             case R.id.goalb:
 
-                TeamDBHandler dbgoalb = new TeamDBHandler(this);
-                Cursor loadDataTeamgoalb = dbgoalb.loaddatateam();
-                List<String> spinnerArraygoalb = new ArrayList<String>();
-                loadDataTeamgoalb.moveToFirst();
-                while (!loadDataTeamgoalb.isAfterLast()) {
-                    spinnerArraygoalb.add(loadDataTeamgoalb.getString(1));
-                    Log.d("Data spinner ", loadDataTeamgoalb.getString(1));
-                    loadDataTeamgoalb.moveToNext();
-                }
                 Cursor datagoalteamb = dbpemain.loaddatateam(teamB);
                 List<String> listpemaingoalteamb = new ArrayList<String>();
                 datagoalteamb.moveToFirst();
                 while (!datagoalteamb.isAfterLast()) {
                     listpemaingoalteamb.add(datagoalteamb.getString(3));
-                    Log.d("Data spinner ", datagoalteamb.getString(3));
+                    Log.d("list pemain goal team a", datagoalteamb.getString(3));
                     datagoalteamb.moveToNext();
                 }
-                AlertDialog.Builder buildergoalb = new AlertDialog.Builder(recordstat.this);
-                View mViewgoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnergoalb = (Spinner) mViewgoalb.findViewById(R.id.spinnerplayer);
-                final EditText editTextinputplayerb = (EditText) mViewgoalb.findViewById(R.id.editTextinputplayer);
-                ArrayAdapter<String> arrayAdaptergoalb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
-                mSpinnergoalb.setAdapter(arrayAdaptergoalb);
 
 
-                buildergoalb.setTitle("Pick Player");
-                buildergoalb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builderb = new AlertDialog.Builder(recordstat.this);
+                View mViewb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                final Spinner mSpinnerb = (Spinner) mViewb.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerb =
+                        (EditText) mViewb.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnerb = (Spinner) mViewb.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungb =
+                        (EditText) mViewb.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdapterb =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemaingoalteamb);
+                mSpinnerb.setAdapter(arrayAdapterb);
+
+
+                builderb.setTitle("Pick Player");
+
+                builderb.setPositiveButton("OK", null);
+                builderb.setNegativeButton("CANCEL", null);
+                builderb.setView(mViewb);
+                final AlertDialog dialogb = builderb.create();
+                dialogb.show();
+                Button positiveButtonb = dialogb.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonb.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Goal Team B", Toast.LENGTH_SHORT).show();
-                        goalteamb = goalteamb + 1;
-                        shootontargetteamb = shootontargetteamb + 1;
-                        tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
-                        tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                    public void onClick(View v) {
+                        if (editTextinputplayerb.getText().toString().isEmpty() && editTextinputnomorpunggungb.getText().toString().isEmpty()) {
+                            tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                            tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                            pemain = mSpinnerb.getSelectedItem().toString();
+                            String chronotext = chronometer.getText().toString();
 
-                        String chronotext = chronometer.getText().toString();
-                        String array[] = chronotext.split(":");
-                        Integer arrayint = Integer.parseInt(array[0]) + timematchint;
-                        array[0] = String.valueOf(arrayint);
-                        Log.d("time goal", array[0]);
-                        if (TextUtils.isEmpty(editTextinputplayerb.getText().toString())) {
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
 
-                            pemainb = mSpinnergoalb.getSelectedItem().toString();
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputgoal(pemain, teamB, getidpertandingan(), babakint);
+                                inputshotongoal(pemain, teamB, getidpertandingan());
+                                inputdatagoal(pemain, teamB, getidpertandingan(), array[0], "");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputgoal(pemain, teamB, getidpertandingan(), babakint);
+                                inputshotongoal(pemain, teamB, getidpertandingan());
+                                inputdatagoal(pemain, teamB, getidpertandingan(), array[0], "");
+                            }
+                            dialogb.dismiss();
+                        } else if (editTextinputplayerb.getText().toString().isEmpty() || editTextinputnomorpunggungb.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
                         } else {
-                            pemainb = editTextinputplayerb.getText().toString();
+                            String namapemain = editTextinputplayerb.getText().toString();
+                            String posisipemain = posisispinnerb.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungb.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+
+                            tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                            tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputgoal(editTextinputnomorpunggungb.getText().toString(), teamB
+                                        , getidpertandingan(), babakint);
+                                inputshotongoal(editTextinputnomorpunggungb.getText().toString(),
+                                        teamB, getidpertandingan());
+                                inputdatagoal(editTextinputnomorpunggungb.getText().toString(),
+                                        teamB, getidpertandingan(), array[0], "");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputgoal(editTextinputnomorpunggungb.getText().toString(), teamB
+                                        , getidpertandingan(), babakint);
+                                inputshotongoal(editTextinputnomorpunggungb.getText().toString(),
+                                        teamB, getidpertandingan());
+                                inputdatagoal(editTextinputnomorpunggungb.getText().toString(),
+                                        teamB, getidpertandingan(), array[0], "");
+                            }
+                            dialogb.dismiss();
 
                         }
 
-                        goalnoteb = pemainb + " '" + array[0];
-
-                        Log.d("pemain team b", goalnoteb);
-
-
-                        cetakgoalteamb.add(goalnoteb);
-                        arrayAdaptercetakgoalteamb = new ArrayAdapter<>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, cetakgoalteamb);
-
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputgoal(pemainb, teamB, getidpertandingan(), babakint);
-                            inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputgoal(pemainb, teamB, getidpertandingan(), babakint);
-                            inputshotongoal(pemainb, teamB, getidpertandingan());
-                            inputdatagoal(pemainb, teamB, getidpertandingan(), array[0], "");
-                        }
-
-                        dialog.dismiss();
-                    }
-
-                });
-                buildergoalb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                     }
                 });
 
-
-                buildergoalb.setView(mViewgoalb);
-                AlertDialog dialoggoalb = buildergoalb.create();
-                dialoggoalb.show();
-                //Toast.makeText(this, "Goal Team B", Toast.LENGTH_SHORT).show();
 
                 return true;
             case R.id.shootontargetb:
-                shootontargetteamb = shootontargetteamb + 1;
-                savesteama = savesteama + 1;
-                tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
-                tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
-                //Toast.makeText(this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
                 Cursor datashootontargetb = dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootontargetb = new ArrayList<String>();
                 datashootontargetb.moveToFirst();
@@ -1820,52 +2304,89 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ", datashootontargetb.getString(3));
                     datashootontargetb.moveToNext();
                 }
-                AlertDialog.Builder buildershootontargetb = new AlertDialog.Builder(recordstat.this);
-                View mViewshootontargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnershootontargetb = (Spinner) mViewshootontargetb.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptershootontargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootontargetb);
+                AlertDialog.Builder buildershootontargetb =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewshootontargetb = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
+                final Spinner mSpinnershootontargetb =
+                        (Spinner) mViewshootontargetb.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayershootontargetb =
+                        (EditText) mViewshootontargetb.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnershootontargetb =
+                        (Spinner) mViewshootontargetb.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungshootontargetb =
+                        (EditText) mViewshootontargetb.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdaptershootontargetb =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainshootontargetb);
                 mSpinnershootontargetb.setAdapter(arrayAdaptershootontargetb);
 
 
                 buildershootontargetb.setTitle("Pick Player");
-                buildershootontargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot On Target Team B", Toast.LENGTH_SHORT).show();
-                        pemain = mSpinnershootontargetb.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputshotongoal(pemain, teamB, getidpertandingan());
-                            inputsaves(teamB, getidpertandingan(), babakint);
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputshotongoal(pemain, teamB, getidpertandingan());
-                            inputsaves(teamB, getidpertandingan(), babakint);
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                buildershootontargetb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
+                buildershootontargetb.setPositiveButton("OK", null);
+                buildershootontargetb.setNegativeButton("CANCEL", null);
                 buildershootontargetb.setView(mViewshootontargetb);
-                AlertDialog dialogshootontargetb = buildershootontargetb.create();
+                final AlertDialog dialogshootontargetb = buildershootontargetb.create();
                 dialogshootontargetb.show();
+                Button positiveButtonshootontargetb =
+                        dialogshootontargetb.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonshootontargetb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayershootontargetb.getText().toString().isEmpty() && editTextinputnomorpunggungshootontargetb.getText().toString().isEmpty()) {
+                            tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                            tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
+                            Toast.makeText(recordstat.this, "Shoot On Target Team B",
+                                    Toast.LENGTH_SHORT).show();
+                            pemain = mSpinnershootontargetb.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotongoal(pemain, teamB, getidpertandingan());
+                                inputsaves(teamB, getidpertandingan(), babakint);
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotongoal(pemain, teamB, getidpertandingan());
+                                inputsaves(teamB, getidpertandingan(), babakint);
+                            }
+                            dialogshootontargetb.dismiss();
 
-                chronometerteam.start();
+                        } else if (editTextinputplayershootontargetb.getText().toString().isEmpty() || editTextinputnomorpunggungshootontargetb.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayershootontargetb.getText().toString();
+                            String posisipemain =
+                                    posisispinnershootontargetb.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungshootontargetb.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setShootOnTargetTeamB(tanding.getShootOnTargetTeamB() + 1);
+                            tanding.setSavesTeamA(tanding.getSavesTeamA() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotongoal(editTextinputnomorpunggungshootontargetb.getText().toString(), teamB, getidpertandingan());
+                                inputsaves(teamB, getidpertandingan(), babakint);
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotongoal(editTextinputnomorpunggungshootontargetb.getText().toString(), teamB, getidpertandingan());
+                                inputsaves(teamB, getidpertandingan(), babakint);
+                            }
+                            dialogshootontargetb.dismiss();
+                        }
+                    }
+
+
+                });
 
                 return true;
             case R.id.shootofftargetb:
-                shootofftargetteamb = shootofftargetteamb + 1;
-                tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB() + 1);
-                //Toast.makeText(this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
-                Cursor datashootofftargetb = dbpemain.loaddatateam(teamB);
+                Cursor datashootofftargetb = dbpemain.loaddatateam(teamA);
                 List<String> listpemainshootofftargetb = new ArrayList<String>();
                 datashootofftargetb.moveToFirst();
                 while (!datashootofftargetb.isAfterLast()) {
@@ -1873,48 +2394,78 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     Log.d("Data spinner ", datashootofftargetb.getString(3));
                     datashootofftargetb.moveToNext();
                 }
-                AlertDialog.Builder buildershootofftargetb = new AlertDialog.Builder(recordstat.this);
-                View mViewshootofftargetb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnershootofftargetb = (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdaptershootofftargetb = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargetb);
+                AlertDialog.Builder buildershootofftargetb =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewshootofftargetb = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
+                final Spinner mSpinnershootofftargetb =
+                        (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayershootofftargetb =
+                        (EditText) mViewshootofftargetb.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnershootofftargetb =
+                        (Spinner) mViewshootofftargetb.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungshootofftargetb =
+                        (EditText) mViewshootofftargetb.findViewById(R.id.textNomorPunggung2);
+                ArrayAdapter<String> arrayAdaptershootofftargetb =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainshootofftargetb);
                 mSpinnershootofftargetb.setAdapter(arrayAdaptershootofftargetb);
 
 
-                buildershootofftargetb.setTitle("Pick Player");
-                buildershootofftargetb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Shoot Off Target Team B", Toast.LENGTH_SHORT).show();
-                        pemain = mSpinnershootofftargetb.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input goal");
-                            inputshotoffgoal(pemain, teamB, getidpertandingan());
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputshotoffgoal(pemain, teamB, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
-
-                });
-                buildershootofftargetb.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                buildershootofftargetb.setNeutralButton("INPUT NAME", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputname();
-
-                    }
-                });
+                buildershootofftargetb.setPositiveButton("OK", null);
+                buildershootofftargetb.setNegativeButton("CANCEL", null);
                 buildershootofftargetb.setView(mViewshootofftargetb);
-                AlertDialog dialogshootofftargetb = buildershootofftargetb.create();
+                final AlertDialog dialogshootofftargetb = buildershootofftargetb.create();
                 dialogshootofftargetb.show();
+                Button positiveButtonshootofftargetb =
+                        dialogshootofftargetb.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonshootofftargetb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayershootofftargetb.getText().toString().isEmpty() && editTextinputnomorpunggungshootofftargetb.getText().toString().isEmpty()) {
+                            tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB() + 1);
+                            Toast.makeText(recordstat.this, "Shoot Off Target Team B",
+                                    Toast.LENGTH_SHORT).show();
+                            pemain = mSpinnershootofftargetb.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotoffgoal(pemain, teamB, getidpertandingan());
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotoffgoal(pemain, teamB, getidpertandingan());
+                            }
+                            dialogshootofftargetb.dismiss();
+                        } else if (editTextinputplayershootofftargetb.getText().toString().isEmpty() || editTextinputnomorpunggungshootofftargetb.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayershootofftargetb.getText().toString();
+                            String posisipemain =
+                                    posisispinnershootofftargetb.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungshootofftargetb.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setShootOffTargetTeamB(tanding.getShootOffTargetTeamB() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputshotoffgoal(editTextinputnomorpunggungshootofftargetb.getText().toString(), teamB, getidpertandingan());
 
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputshotoffgoal(editTextinputnomorpunggungshootofftargetb.getText().toString(), teamB, getidpertandingan());
+
+                            }
+                            dialogshootofftargetb.dismiss();
+                        }
+                    }
+
+
+                });
 
                 return true;
 
@@ -1932,8 +2483,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 AlertDialog.Builder builderyellowhome = new AlertDialog.Builder(recordstat.this);
                 View mViewyellowhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinneryellowhome = (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapteryellowhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowhome);
+                final Spinner mSpinneryellowhome =
+                        (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapteryellowhome =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainyellowhome);
                 mSpinneryellowhome.setAdapter(arrayAdapteryellowhome);
 
                 builderyellowhome.setTitle("Pick Player");
@@ -1957,7 +2511,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     }
 
                 });
-                builderyellowhome.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                builderyellowhome.setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -1984,8 +2539,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 AlertDialog.Builder builderyellowaway = new AlertDialog.Builder(recordstat.this);
                 View mViewyellowaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinneryellowaway = (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapteryellowaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainyellowaway);
+                final Spinner mSpinneryellowaway =
+                        (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapteryellowaway =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainyellowaway);
                 mSpinneryellowaway.setAdapter(arrayAdapteryellowaway);
 
                 builderyellowaway.setTitle("Pick Player");
@@ -2009,7 +2567,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     }
 
                 });
-                builderyellowaway.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                builderyellowaway.setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -2036,8 +2595,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 AlertDialog.Builder builderredhome = new AlertDialog.Builder(recordstat.this);
                 View mViewredhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnerredhome = (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapterredhome = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredhome);
+                final Spinner mSpinnerredhome =
+                        (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapterredhome =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainredhome);
                 mSpinnerredhome.setAdapter(arrayAdapterredhome);
 
                 builderredhome.setTitle("Pick Player");
@@ -2088,8 +2650,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 AlertDialog.Builder builderredaway = new AlertDialog.Builder(recordstat.this);
                 View mViewredaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                final Spinner mSpinnerredaway = (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
-                ArrayAdapter<String> arrayAdapterredaway = new ArrayAdapter<String>(recordstat.this, R.layout.support_simple_spinner_dropdown_item, listpemainredaway);
+                final Spinner mSpinnerredaway =
+                        (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
+                ArrayAdapter<String> arrayAdapterredaway =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainredaway);
                 mSpinnerredaway.setAdapter(arrayAdapterredaway);
 
                 builderredaway.setTitle("Pick Player");
@@ -2151,6 +2716,205 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 tanding.setOffsideTeamB(tanding.getOffsideTeamB() + 1);
                 Log.d("hitung offside team b", Integer.toString(offsideteamb));
                 Toast.makeText(recordstat.this, "Offside Team A", Toast.LENGTH_SHORT).show();
+                return true;
+
+
+            case R.id.owngoal:
+
+
+                Cursor dataowngoalteam = dbpemain.loaddatateam(teamA);
+                List<String> listpemainowngoalteam = new ArrayList<String>();
+                dataowngoalteam.moveToFirst();
+                while (!dataowngoalteam.isAfterLast()) {
+                    listpemainowngoalteam.add(dataowngoalteam.getString(3));
+                    Log.d("list pemain goal team a", dataowngoalteam.getString(3));
+                    dataowngoalteam.moveToNext();
+                }
+
+
+                AlertDialog.Builder builderowngoal = new AlertDialog.Builder(recordstat.this);
+                View mViewowngoal = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                final Spinner mSpinnerowngoal = (Spinner) mViewowngoal.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerowngoal =
+                        (EditText) mViewowngoal.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnerowngoal = (Spinner) mViewowngoal.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungowngoal =
+                        (EditText) mViewowngoal.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdapterowngoal =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainowngoalteam);
+                mSpinnerowngoal.setAdapter(arrayAdapterowngoal);
+
+
+                builderowngoal.setTitle("Pick Player");
+
+                builderowngoal.setPositiveButton("OK", null);
+                builderowngoal.setNegativeButton("CANCEL", null);
+                builderowngoal.setView(mViewowngoal);
+                final AlertDialog dialogowngoal = builderowngoal.create();
+                dialogowngoal.show();
+                Button positiveButtonowngoal = dialogowngoal.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonowngoal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayerowngoal.getText().toString().isEmpty() && editTextinputnomorpunggungowngoal.getText().toString().isEmpty()) {
+                            tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                            pemain = mSpinnerowngoal.getSelectedItem().toString();
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "(OG)");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputdatagoal(pemain, teamA, getidpertandingan(), array[0], "(OG)");
+                            }
+                            dialogowngoal.dismiss();
+                        } else if (editTextinputplayerowngoal.getText().toString().isEmpty() || editTextinputnomorpunggungowngoal.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain = editTextinputplayerowngoal.getText().toString();
+                            String posisipemain = posisispinnerowngoal.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungowngoal.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+
+                            tanding.setGoalTeamB(tanding.getGoalTeamB() + 1);
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputdatagoal(editTextinputnomorpunggungowngoal.getText().toString(),
+                                        teamA, getidpertandingan(), array[0], "(OG)");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputdatagoal(editTextinputnomorpunggungowngoal.getText().toString(),
+                                        teamA, getidpertandingan(), array[0], "");
+                            }
+                            dialogowngoal.dismiss();
+
+                        }
+
+                    }
+                });
+
+
+                return true;
+
+            case R.id.owngoalb:
+
+
+                Cursor dataowngoalteamb = dbpemain.loaddatateam(teamB);
+                List<String> listpemainowngoalteamb = new ArrayList<String>();
+                dataowngoalteamb.moveToFirst();
+                while (!dataowngoalteamb.isAfterLast()) {
+                    listpemainowngoalteamb.add(dataowngoalteamb.getString(3));
+                    Log.d("list pemain goal team a", dataowngoalteamb.getString(3));
+                    dataowngoalteamb.moveToNext();
+                }
+
+
+                AlertDialog.Builder builderowngoalb = new AlertDialog.Builder(recordstat.this);
+                View mViewowngoalb = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                final Spinner mSpinnerowngoalb = (Spinner) mViewowngoalb.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerowngoalb =
+                        (EditText) mViewowngoalb.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnerowngoalb = (Spinner) mViewowngoalb.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungowngoalb =
+                        (EditText) mViewowngoalb.findViewById(R.id.textNomorPunggung2);
+                final ArrayAdapter<String> arrayAdapterowngoalb =
+                        new ArrayAdapter<String>(recordstat.this,
+                                R.layout.support_simple_spinner_dropdown_item, listpemainowngoalteamb);
+                mSpinnerowngoalb.setAdapter(arrayAdapterowngoalb);
+
+
+                builderowngoalb.setTitle("Pick Player");
+
+                builderowngoalb.setPositiveButton("OK", null);
+                builderowngoalb.setNegativeButton("CANCEL", null);
+                builderowngoalb.setView(mViewowngoalb);
+                final AlertDialog dialogowngoalb = builderowngoalb.create();
+                dialogowngoalb.show();
+                Button positiveButtonowngoalb = dialogowngoalb.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonowngoalb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayerowngoalb.getText().toString().isEmpty() && editTextinputnomorpunggungowngoalb.getText().toString().isEmpty()) {
+                            tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                            pemain = mSpinnerowngoalb.getSelectedItem().toString();
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputdatagoal(pemain, teamB, getidpertandingan(), array[0], "(OG)");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputdatagoal(pemain, teamB, getidpertandingan(), array[0], "(OG)");
+                            }
+                            dialogowngoalb.dismiss();
+                        } else if (editTextinputplayerowngoalb.getText().toString().isEmpty() || editTextinputnomorpunggungowngoalb.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain = editTextinputplayerowngoalb.getText().toString();
+                            String posisipemain = posisispinnerowngoalb.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungowngoalb.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+
+                            tanding.setGoalTeamA(tanding.getGoalTeamA() + 1);
+                            String chronotext = chronometer.getText().toString();
+
+                            String array[] = chronotext.split(":");
+                            Integer arrayint = Integer.parseInt(array[0]) + timematchint;
+                            array[0] = String.valueOf(arrayint);
+
+                            Log.d("time goal", array[0]);
+
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputdatagoal(editTextinputnomorpunggungowngoalb.getText().toString(),
+                                        teamB, getidpertandingan(), array[0], "(OG)");
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputdatagoal(editTextinputnomorpunggungowngoalb.getText().toString(),
+                                        teamB, getidpertandingan(), array[0], "");
+                            }
+                            dialogowngoalb.dismiss();
+
+                        }
+
+                    }
+                });
+
+
                 return true;
 
             default:

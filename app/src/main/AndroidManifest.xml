@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".choosegeneratereport"></activity>
-        <activity android:name=".generatereportteam"></activity>
+        <activity android:name=".generatereportfullresult"></activity>
+        <activity android:name=".MatchResult" />
+        <activity android:name=".choosegeneratereport" />
+        <activity android:name=".generatereportteam" />
+        <activity android:name=".generatereportteamb" />
         <activity android:name=".gerenatereportMenu" />
         <activity android:name=".InputName" />
         <activity android:name=".shootingpopup" />

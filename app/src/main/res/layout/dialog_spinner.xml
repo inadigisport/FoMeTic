@@ -8,6 +8,30 @@
     android:padding="20dp">
 
 
+    <EditText
+        android:id="@+id/textNomorPunggung2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:ems="10"
+        android:hint="Number"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerposisi3"
+        app:layout_constraintStart_toEndOf="@+id/spinnerposisi3"
+        app:layout_constraintTop_toTopOf="@+id/spinnerposisi3" />
+
+    <Spinner
+        android:id="@+id/spinnerposisi3"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:entries="@array/position"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextinputplayer"
+        app:layout_constraintStart_toEndOf="@+id/editTextinputplayer"
+        app:layout_constraintTop_toTopOf="@+id/editTextinputplayer" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"

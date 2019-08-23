@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/match_result"
+    android:layout_height="match_parent"
+    tools:context=".MatchResult">
+
+    <TextView
+        android:id="@+id/textViewlistpemaingoalteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="listplayer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewgoalteamb"
+        app:layout_constraintStart_toStartOf="@+id/textViewgoalteamb"
+        app:layout_constraintTop_toBottomOf="@+id/textViewgoalteamb" />
+
+    <TextView
+        android:id="@+id/textViewlistpemaingoalteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="listplayer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewgoalteama2"
+        app:layout_constraintStart_toStartOf="@+id/textViewgoalteama2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewgoalteama2" />
+
+    <TextView
+        android:id="@+id/textViewteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="260dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="120dp"
+        android:capitalize="none"
+        android:text="TEAM A"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewgoalteama2"
+        android:layout_width="68dp"
+        android:layout_height="154dp"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#FFFFFF"
+        android:textSize="120sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama" />
+
+    <TextView
+        android:id="@+id/textViewVS2"
+        android:layout_width="102dp"
+        android:layout_height="102dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="VS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="80sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewgoalteamb"
+        app:layout_constraintStart_toEndOf="@+id/textViewgoalteama2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteamb" />
+
+    <TextView
+        android:id="@+id/textViewgoalteamb"
+        android:layout_width="68dp"
+        android:layout_height="154dp"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#FFFFFF"
+        android:textSize="120sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteamb"
+        app:layout_constraintStart_toStartOf="@+id/textViewteamb"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteamb" />
+
+    <TextView
+        android:id="@+id/textViewteamb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:text="TEAM B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama" />
+
+    <TextView
+        android:id="@+id/textViewbabak2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="BABAK"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D32F2F"
+        android:textColorHighlight="#F3F0F0"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewevent2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="event"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewbabak2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewbabak2" />
+
+    <TextView
+        android:id="@+id/textViewvenue2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="venue"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewevent2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewevent2" />
+
+    <TextView
+        android:id="@+id/textViewtanggal2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="Tanggal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="168dp"
+        android:layout_height="35dp"
+
+        android:layout_marginTop="355dp"
+        android:src="@drawable/fometic_text"
+        app:layout_constraintStart_toStartOf="@+id/textViewvenue2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewvenue2" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="#F5020202"
+        android:src="@drawable/instagram_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="29dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/twitter_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/facebook_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+</android.support.constraint.ConstraintLayout>

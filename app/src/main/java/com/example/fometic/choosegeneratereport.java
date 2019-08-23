@@ -80,7 +80,9 @@ public class choosegeneratereport extends AppCompatActivity {
     ConstraintLayout layout;
 
     Button buttonteam;
+    Button buttonteamb;
     Button buttonmatch;
+    Button buttonmatchresult;
 
     PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
 
@@ -89,7 +91,9 @@ public class choosegeneratereport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosegeneratereport);
         Button b = null;
+        Button buttonfullresult = null;
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterfullresult = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         idpertandingan=getIntent().getIntExtra("idpertandingan",idpertandingan);
         teamA= getIntent().getStringExtra("teama");
         teamB= getIntent().getStringExtra("teamb");
@@ -162,6 +166,15 @@ public class choosegeneratereport extends AppCompatActivity {
             layout=(ConstraintLayout) findViewById(R.id.layoutchoose);
             layout.addView(b);
 
+            View viewfullresult = inflaterfullresult.inflate(R.layout.activity_choosegeneratereport, null);
+            buttonfullresult = viewfullresult.findViewById(R.id.buttonfullresult);
+            buttonfullresult.setTag("Fullmatch");
+            if(buttonfullresult.getParent()!=null){
+                ((ViewGroup)buttonfullresult.getParent()).removeView(buttonfullresult);
+            }
+            layout=(ConstraintLayout) findViewById(R.id.layoutchoose);
+            layout.addView(buttonfullresult);
+
             b.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(choosegeneratereport.this, generatereportfullmatch.class);
@@ -174,6 +187,22 @@ public class choosegeneratereport extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+            buttonfullresult.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(choosegeneratereport.this, generatereportfullresult.class);
+                    intent.putExtra("idpertandingan",idpertandingan);
+                    intent.putExtra("babak",babak);
+                    String babakstringfull = "FullTime";
+                    intent.putExtra("babakstring",babakstringfull);
+                    intent.putExtra("tanggal", tanggal);
+
+                    startActivity(intent);
+
+                }
+            });
+
         }
 
 
@@ -227,19 +256,38 @@ public class choosegeneratereport extends AppCompatActivity {
             }
         });
 
+        buttonmatchresult = findViewById(R.id.buttonmatchresult);
+        buttonmatchresult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(choosegeneratereport.this, MatchResult.class);
+                intent.putExtra("teama", teamA);
+                intent.putExtra("teamb", teamB);
+                intent.putExtra("formationteamb", formationteamb);
+                intent.putExtra("formationteama", formationteama);
+                intent.putExtra("venue", venue);
+                intent.putExtra("event", event);
+                intent.putExtra("babakstring", babakstring);
+                intent.putExtra("tanggal", tanggal);
+                intent.putExtra("goalteama", goalteama);
+                intent.putExtra("goalteamb", goalteamb);
+                intent.putStringArrayListExtra("cetakgoalteama", cetakgoalteama);
+                intent.putStringArrayListExtra("cetakgoalteamb", cetakgoalteamb);
+                startActivity(intent);
+            }
+        });
+
         buttonteam = findViewById(R.id.buttonteam);
         buttonteam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(choosegeneratereport.this, generatereportteam.class);
                 intent.putExtra("teama", teamA);
-                intent.putExtra("teamb", teamB);
                 intent.putExtra("venue", venue);
                 intent.putExtra("event", event);
                 intent.putExtra("babak", babakstring);
                 intent.putExtra("tanggal", tanggal);
                 intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
-                intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 intent.putStringArrayListExtra("namapemain", namapemain);
                 intent.putStringArrayListExtra("posisipemain", posisipemain);
                 intent.putStringArrayListExtra("nomorpunggungpemain", nomorpunggungpemain);
@@ -250,6 +298,22 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putStringArrayListExtra("redcardpemain", redcardpemain);
                 intent.putStringArrayListExtra("tacklingpemain", tacklingpemain);
                 intent.putStringArrayListExtra("interceptpemain", interceptpemain);
+
+                startActivity(intent);
+            }
+        });
+
+        buttonteamb = findViewById(R.id.buttonteamb);
+        buttonteamb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(choosegeneratereport.this, generatereportteamb.class);
+                intent.putExtra("teamb", teamB);
+                intent.putExtra("venue", venue);
+                intent.putExtra("event", event);
+                intent.putExtra("babak", babakstring);
+                intent.putExtra("tanggal", tanggal);
+                intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
                 intent.putStringArrayListExtra("namapemainb", namapemainb);
                 intent.putStringArrayListExtra("posisipemainb", posisipemainb);
                 intent.putStringArrayListExtra("nomorpunggungpemainb", nomorpunggungpemainb);
@@ -263,6 +327,7 @@ public class choosegeneratereport extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
 
     }

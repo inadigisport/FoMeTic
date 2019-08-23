@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class generatereportfullmatch extends AppCompatActivity {
@@ -144,19 +143,41 @@ public class generatereportfullmatch extends AppCompatActivity {
         yellowcardteamb = data.get("yellowcardteamb");
         redcardteama = data.get("redcardteama");
         redcardteamb = data.get("redcardteamb");
-        Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
-        goalpemainteama.moveToFirst();
-        while (!goalpemainteama.isAfterLast()) {
-            listgoalpemainteama += dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3) + goalpemainteama.getString(4) + System.getProperty("line.separator");
-            goalpemainteama.moveToNext();
-        }
+        //Cursor goalpemainteama = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateama))));
+        //goalpemainteama.moveToFirst();
+        //while (!goalpemainteama.isAfterLast()) {
+          //  if (!goalpemainteama.getString(4).equals("(OG)")) {
+            //    listgoalpemainteama += dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3) + goalpemainteama.getString(4) + System.getProperty("line.separator");
+           // }
+            //goalpemainteama.moveToNext();
+        //}
 
-        Cursor goalpemainteamb = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))));
-        goalpemainteamb.moveToFirst();
-        while (!goalpemainteamb.isAfterLast()) {
-            listgoalpemainteamb += dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + goalpemainteamb.getString(4) + System.getProperty("line.separator");
-            goalpemainteamb.moveToNext();
-        }
+          //  Cursor goalpemainteamb = dbgoal.loaddatagoalbabakdua(String.valueOf(idpertandingan), String.valueOf(dbteam.loaddataidteam(String.valueOf(namateamb))));
+        //goalpemainteamb.moveToFirst();
+        //while (!goalpemainteamb.isAfterLast()) {
+          //  if (!goalpemainteamb.getString(4).equals("(OG)")) {
+            //    listgoalpemainteamb += dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + goalpemainteamb.getString(4) + System.getProperty("line.separator");
+            //}
+            //goalpemainteamb.moveToNext();
+        //}
+
+        //goalpemainteamb.moveToFirst();
+        //while (!goalpemainteamb.isAfterLast()) {
+        //    if (goalpemainteamb.getString(4).equals("(OG)")) {
+        //        listgoalpemainteama += dbpemain.loadnamapemain(goalpemainteamb.getInt(2)) + " '" + goalpemainteamb.getString(3) + goalpemainteamb.getString(4) + System.getProperty("line.separator");
+        //    }
+        //    goalpemainteamb.moveToNext();
+        //}
+
+        //goalpemainteama.moveToFirst();
+        //while (!goalpemainteama.isAfterLast()) {
+          //  if (goalpemainteama.getString(4).equals("(OG)")) {
+            //    listgoalpemainteamb += dbpemain.loadnamapemain(goalpemainteama.getInt(2)) + " '" + goalpemainteama.getString(3) + goalpemainteama.getString(4) + System.getProperty("line.separator");
+            //}
+            //goalpemainteama.moveToNext();
+        //}
+
+
         textViewballpossesionteama=findViewById(R.id.textViewballpossesionteama);
         textViewballpossesionteamb=findViewById(R.id.textViewballpossesionteamb);
         textViewballpossesionteama.setText(ballpossesionteama);
@@ -189,7 +210,7 @@ public class generatereportfullmatch extends AppCompatActivity {
         textViewoffsideteamb=findViewById(R.id.textViewoffsideteamb);
         textViewoffsideteama.setText(offsideteama);
         textViewoffsideteamb.setText(offsideteamb);
-        textViewgoalteama=findViewById(R.id.textViewgoalteama);
+        textViewgoalteama=findViewById(R.id.textViewgoalteama2);
         textViewgoalteamb=findViewById(R.id.textViewgoalteamb);
         textViewgoalteama.setText(goalteama);
         textViewgoalteamb.setText(goalteamb);
@@ -209,10 +230,10 @@ public class generatereportfullmatch extends AppCompatActivity {
         textViewredcardteamb=findViewById(R.id.textViewredcardteamb);
         textViewredcardteama.setText(redcardteama);
         textViewredcardteamb.setText(redcardteamb);
-        textViewlistpemaingoalteama=findViewById(R.id.textViewlistpemaingoalteama);
-        textViewlistpemaingoalteama.setText(listgoalpemainteama);
-        textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
-        textViewlistpemaingoalteamb.setText(listgoalpemainteamb);
+        //textViewlistpemaingoalteama=findViewById(R.id.textViewlistpemaingoalteama);
+        //textViewlistpemaingoalteama.setText(listgoalpemainteama);
+        //textViewlistpemaingoalteamb=findViewById(R.id.textViewlistpemaingoalteamb);
+        //textViewlistpemaingoalteamb.setText(listgoalpemainteamb);
         textViewtanggal = findViewById(R.id.textViewtanggal);
         textViewtanggal.setText(tanggal);
         textViewbabak = findViewById(R.id.textViewbabak);
@@ -221,10 +242,10 @@ public class generatereportfullmatch extends AppCompatActivity {
         textViewvenue.setText(venue);
         textViewevent=findViewById(R.id.textViewevent);
         textViewevent.setText(event);
-        textviewformationa=findViewById(R.id.textViewformationA);
-        textviewformationb=findViewById(R.id.textViewformationB);
-        textviewformationa.setText(formationteama);
-        textviewformationb.setText(formationteamb);
+       // textviewformationa=findViewById(R.id.textViewformationA);
+       // textviewformationb=findViewById(R.id.textViewformationB);
+       // textviewformationa.setText(formationteama);
+        //textviewformationb.setText(formationteamb);
         textviewteama=findViewById(R.id.textViewteama);
         textviewteama.setText(namateama);
         textviewteamb=findViewById(R.id.textViewteamb);

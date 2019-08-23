@@ -8,4 +8,8 @@
 
     <item android:id="@+id/shootofftarget"
         android:title="Shoot Off Target"/>
+
+    <item android:id="@+id/owngoal"
+        android:title="Own Goal"/>
+
 </menu>

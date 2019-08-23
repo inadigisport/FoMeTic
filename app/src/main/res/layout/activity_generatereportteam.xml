@@ -4,778 +4,416 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/football_field_background_v2"
+    android:background="@drawable/team_statistik"
     android:visibility="visible"
     tools:context=".GenerateReport">
 
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="962dp"
-        android:layout_height="444dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+    <TextView
+        android:id="@+id/textViewbabak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="BABAK"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D32F2F"
+        android:textColorHighlight="#F3F0F0"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewinterceptpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Int"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama24"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama24"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama24" />
+    <TextView
+        android:id="@+id/textViewevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="event"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewbabak"
+        app:layout_constraintTop_toBottomOf="@+id/textViewbabak" />
 
-        <TextView
-            android:id="@+id/textViewteama24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Int"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama20"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama20"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama20" />
+    <TextView
+        android:id="@+id/textViewvenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="venue"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewevent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewevent" />
 
-        <TextView
-            android:id="@+id/textViewteama20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Tkl"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama13"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama13"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama13" />
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="168dp"
+        android:layout_height="35dp"
 
-        <TextView
-            android:id="@+id/textViewtacklingpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Tkl"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama20"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama20"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama20" />
+        android:layout_marginTop="355dp"
+        android:src="@drawable/fometic_text"
+        app:layout_constraintStart_toStartOf="@+id/textViewvenue"
+        app:layout_constraintTop_toBottomOf="@+id/textViewvenue" />
 
-        <TextView
-            android:id="@+id/textViewteama19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Tkl"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama5"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama5"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama5" />
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="#F5020202"
+        android:src="@drawable/instagram_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
-        <TextView
-            android:id="@+id/textViewinterceptpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Int"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama17"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama17"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama17" />
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="29dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/twitter_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
 
-        <TextView
-            android:id="@+id/textViewteama17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Int"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama19"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama19"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama19" />
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/facebook_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
-        <TextView
-            android:id="@+id/textViewtacklingpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Tkl"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama19"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama19"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama19" />
-
-        <TextView
-            android:id="@+id/textViewbabak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#F8030303"
-            android:text="BABAK"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="#FFD600"
-            android:textColorHighlight="#F3F0F0"
-            android:textSize="36sp"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="3dp" />
-
-        <TextView
-            android:id="@+id/textViewteama23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Posisi"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama10"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama10"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama10" />
-
-        <TextView
-            android:id="@+id/textViewposisipemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Posisi"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama23"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama23"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama23" />
-
-        <TextView
-            android:id="@+id/textViewteama21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Posisi"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama8"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama8"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama8" />
-
-        <TextView
-            android:id="@+id/textViewposisipemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Posisi"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama21"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama21"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama21" />
-
-        <TextView
-            android:id="@+id/textViewredcardpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="RC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama16"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama16"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama16" />
-
-        <TextView
-            android:id="@+id/textViewshootontargetpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="On"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama12"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama12"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama12" />
-
-        <TextView
-            android:id="@+id/textViewshootofftargetpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Off"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama13"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama13"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama13" />
-
-        <TextView
-            android:id="@+id/textViewyellowcardpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="YC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama14"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama14"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama14" />
-
-        <TextView
-            android:id="@+id/textViewgoalpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Gol"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama11"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama11"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama11" />
-
-        <TextView
-            android:id="@+id/textViewnamapemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Nama"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama9"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama9"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama9" />
-
-        <TextView
-            android:id="@+id/textViewnomorpunggungpemainb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama10"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama10"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama10" />
-
-        <TextView
-            android:id="@+id/textViewshootontargetpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="On"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama4"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama4"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama4" />
-
-        <TextView
-            android:id="@+id/textViewyellowcardpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Y"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama7"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama7"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama7" />
-
-        <TextView
-            android:id="@+id/textViewredcardpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="R"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama15"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama15"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama15" />
-
-        <TextView
-            android:id="@+id/textViewshootofftargetpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Off"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama5"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama5"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama5" />
-
-        <TextView
-            android:id="@+id/textViewgoalpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Gol"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama2"
-            app:layout_constraintHorizontal_bias="0.529"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama2"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama2" />
-
-        <TextView
-            android:id="@+id/textViewnomorpunggungpemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama8"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama8"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama8" />
-
-        <TextView
-            android:id="@+id/textViewnamapemain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Nama"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewteama3"
-            app:layout_constraintStart_toStartOf="@+id/textViewteama3"
-            app:layout_constraintTop_toBottomOf="@+id/textViewteama3" />
-
-        <TextView
-            android:id="@+id/textViewteama16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="RC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama14"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama14"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama14" />
-
-        <TextView
-            android:id="@+id/textViewteama9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:background="#F8030303"
-            android:text="Nama"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama15"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama15"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama15" />
-
-        <TextView
-            android:id="@+id/textViewteama10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:background="#F8030303"
-            android:text="No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama9"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama9"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama9" />
-
-        <TextView
-            android:id="@+id/textViewteama11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Gol"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama23"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama23"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama23" />
-
-        <TextView
-            android:id="@+id/textViewteama12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="On"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama11"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama11"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama11" />
-
-        <TextView
-            android:id="@+id/textViewteama13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Off"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama12"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama12"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama12" />
-
-        <TextView
-            android:id="@+id/textViewteama14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="YC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama24"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama24"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama24" />
-
-        <TextView
-            android:id="@+id/textViewteama15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="RC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama7"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama7"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama7" />
-
-        <TextView
-            android:id="@+id/textViewteama8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:background="#F8030303"
-            android:text="No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama3"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama3"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama3" />
-
-        <TextView
-            android:id="@+id/textViewteama7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="YC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama17"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama17"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama17" />
-
-        <TextView
-            android:id="@+id/textViewteama5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Off"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama4"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama4"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama4" />
-
-        <TextView
-            android:id="@+id/textViewteama4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="On"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama2"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama2"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama2" />
-
-        <TextView
-            android:id="@+id/textViewteama3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="97dp"
-            android:background="#F8030303"
-            android:text="Nama"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewteama2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:background="#F8030303"
-            android:text="Gol"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama21"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama21"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama21" />
-
-        <TextView
-            android:id="@+id/textViewteamb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="372dp"
-            android:layout_marginLeft="372dp"
-            android:background="#F8030303"
-            android:text="TEAM B"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#0000FE"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewteama"
-            app:layout_constraintStart_toEndOf="@+id/textViewteama"
-            app:layout_constraintTop_toTopOf="@+id/textViewteama" />
-
-        <TextView
-            android:id="@+id/textViewteama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="180dp"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="40dp"
-            android:background="#F8030303"
-            android:text="TEAM A"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#DD2C00"
-            android:textSize="36sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="944dp"
-        android:layout_height="149dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textViewtanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:background="#FFFFFF"
+        android:text="Tanggal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#D32F2F"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewteama19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Tkl"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama5"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama5"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama5" />
+
+    <TextView
+        android:id="@+id/textViewinterceptpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Int"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama17"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama17"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama17" />
+
+    <TextView
+        android:id="@+id/textViewteama17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Int"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama19"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama19"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama19" />
+
+    <TextView
+        android:id="@+id/textViewtacklingpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Tkl"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama19"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama19"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama19" />
+
+    <TextView
+        android:id="@+id/textViewteama21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Posisi"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama8"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama8"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama8" />
+
+    <TextView
+        android:id="@+id/textViewposisipemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Posisi"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama21"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama21"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama21" />
+
+    <TextView
+        android:id="@+id/textViewshootontargetpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="On"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama4"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama4" />
+
+    <TextView
+        android:id="@+id/textViewyellowcardpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Y"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama7"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama7"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama7" />
+
+    <TextView
+        android:id="@+id/textViewredcardpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="R"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama15"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama15"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama15" />
+
+    <TextView
+        android:id="@+id/textViewshootofftargetpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Off"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama5"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama5"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama5" />
+
+    <TextView
+        android:id="@+id/textViewgoalpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Gol"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama2"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama2" />
+
+    <TextView
+        android:id="@+id/textViewnomorpunggungpemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="No"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama8"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama8"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama8" />
+
+    <TextView
+        android:id="@+id/textViewnamapemain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Nama"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewteama3"
+        app:layout_constraintStart_toStartOf="@+id/textViewteama3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewteama3" />
+
+    <TextView
+        android:id="@+id/textViewteama15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="RC"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama7"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama7"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama7" />
+
+    <TextView
+        android:id="@+id/textViewteama8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="No"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama3"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama3"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama3" />
+
+    <TextView
+        android:id="@+id/textViewteama7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="YC"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama17"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama17"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama17" />
+
+    <TextView
+        android:id="@+id/textViewteama5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Off"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama4"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama4"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama4" />
+
+    <TextView
+        android:id="@+id/textViewteama4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="On"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama2"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama2"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama2" />
+
+    <TextView
+        android:id="@+id/textViewteama3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="248dp"
+        android:layout_marginLeft="248dp"
+        android:layout_marginTop="200dp"
+        android:text="Nama"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="181dp"
-            android:layout_height="84dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/new_logo_fometic_transparant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textViewteama2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Gol"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewteama21"
+        app:layout_constraintStart_toEndOf="@+id/textViewteama21"
+        app:layout_constraintTop_toTopOf="@+id/textViewteama21" />
 
-        <TextView
-            android:id="@+id/textViewvenue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:text="venue"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#FF6D00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
-            app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-        <TextView
-            android:id="@+id/textViewevent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:text="event"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#FF6D00"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
-            app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-        <TextView
-            android:id="@+id/textViewtanggal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:text="Tanggal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewvenue"
-            app:layout_constraintStart_toEndOf="@+id/textViewvenue"
-            app:layout_constraintTop_toTopOf="@+id/textViewvenue" />
-
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="32dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/instagram_logo"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="168dp"
-            android:layout_height="35dp"
-            android:src="@drawable/fometic_text"
-            app:layout_constraintEnd_toEndOf="@+id/imageView8"
-            app:layout_constraintStart_toStartOf="@+id/imageView8"
-            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="31dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/facebook_logo"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="29dp"
-            android:layout_height="33dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/twitter_logo"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-            app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewteama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="336dp"
+        android:layout_marginLeft="336dp"
+        android:layout_marginTop="124dp"
+        android:text="TEAM A"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
