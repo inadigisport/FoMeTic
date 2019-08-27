@@ -2386,7 +2386,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
                 return true;
             case R.id.shootofftargetb:
-                Cursor datashootofftargetb = dbpemain.loaddatateam(teamA);
+                Cursor datashootofftargetb = dbpemain.loaddatateam(teamB);
                 List<String> listpemainshootofftargetb = new ArrayList<String>();
                 datashootofftargetb.moveToFirst();
                 while (!datashootofftargetb.isAfterLast()) {

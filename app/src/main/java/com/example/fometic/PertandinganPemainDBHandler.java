@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -83,6 +85,8 @@ public class PertandinganPemainDBHandler extends SQLiteOpenHelper {
         String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN+ " WHERE "+ID_PEMAIN+" = "+idpemain+" AND "+ID_PERTANDINGAN+"="+idpertandingan+ " AND "+BABAK+"="+babak;
         return loadHandler(query);
     }
+
+
 
     public Cursor loaddatawithstat (int idpemain, int idpertandingan, int babak){
         String query = "Select * FROM " + TABLE_PERTANDINGAN_PEMAIN+ " WHERE "+ID_PEMAIN+"="+idpemain+" AND "+ID_PERTANDINGAN+"="+idpertandingan+" AND "+BABAK+"="+babak;
