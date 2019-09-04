@@ -129,6 +129,9 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -360,8 +363,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             chronometerteam.start();
             tanding.setPassingTeamA(tanding.getPassingTeamA() + 1);
 
-            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
-            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) Math.round((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) Math.round((possesionteamb / (possesionteama + possesionteamb)) * 100);
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
             Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
@@ -392,8 +395,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             chronometerteam.start();
             //tanding.setPassingTeamA(tanding.getPassingTeamA() + 1);
 
-            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
-            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) Math.round((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) Math.round((possesionteamb / (possesionteama + possesionteamb)) * 100);
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
             textViewpossesionteamb.setText(Integer.toString(ballpossesionteamb));
             Log.d("ballpossesion team a", Integer.toString(ballpossesionteama));
@@ -426,8 +429,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             tanding.setPassingTeamB(tanding.getPassingTeamB() + 1);
 
 
-            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
-            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) Math.round((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) Math.round((possesionteama / (possesionteama + possesionteamb)) * 100);
 
             Log.d("Cek possesion", Double.toString(ballpossesionteamb));
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
@@ -456,8 +459,8 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
             //tanding.setPassingTeamB(tanding.getPassingTeamB() + 1);
 
 
-            ballpossesionteamb = (int) ((possesionteamb / (possesionteama + possesionteamb)) * 100);
-            ballpossesionteama = (int) ((possesionteama / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteamb = (int) Math.round((possesionteamb / (possesionteama + possesionteamb)) * 100);
+            ballpossesionteama = (int) Math.round((possesionteama / (possesionteama + possesionteamb)) * 100);
 
             Log.d("Cek possesion", Double.toString(ballpossesionteamb));
             textViewpossesionteama.setText(Integer.toString(ballpossesionteama));
@@ -2060,11 +2063,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             if (datapertandingan.moveToFirst()) {
                                 Log.d("Enter if ", "input goal");
                                 inputshotongoal(pemain, teamA, getidpertandingan());
-                                inputsaves(teamA, getidpertandingan(), babakint);
+                                //inputsaves(teamA, getidpertandingan(), babakint);
                             } else {
                                 Log.d("belum ada ", "data pertadingan");
                                 inputshotongoal(pemain, teamA, getidpertandingan());
-                                inputsaves(teamA, getidpertandingan(), babakint);
+                                //inputsaves(teamA, getidpertandingan(), babakint);
                             }
                             dialogshootontargeta.dismiss();
 
@@ -2087,11 +2090,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             if (datapertandingan.moveToFirst()) {
                                 Log.d("Enter if ", "input goal");
                                 inputshotongoal(editTextinputnomorpunggungshootontargeta.getText().toString(), teamA, getidpertandingan());
-                                inputsaves(teamA, getidpertandingan(), babakint);
+                                //inputsaves(teamA, getidpertandingan(), babakint);
                             } else {
                                 Log.d("belum ada ", "data pertadingan");
                                 inputshotongoal(editTextinputnomorpunggungshootontargeta.getText().toString(), teamA, getidpertandingan());
-                                inputsaves(teamA, getidpertandingan(), babakint);
+                                //inputsaves(teamA, getidpertandingan(), babakint);
                             }
                             dialogshootontargeta.dismiss();
                         }
@@ -2344,11 +2347,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             if (datapertandingan.moveToFirst()) {
                                 Log.d("Enter if ", "input goal");
                                 inputshotongoal(pemain, teamB, getidpertandingan());
-                                inputsaves(teamB, getidpertandingan(), babakint);
+                                //inputsaves(teamB, getidpertandingan(), babakint);
                             } else {
                                 Log.d("belum ada ", "data pertadingan");
                                 inputshotongoal(pemain, teamB, getidpertandingan());
-                                inputsaves(teamB, getidpertandingan(), babakint);
+                                //inputsaves(teamB, getidpertandingan(), babakint);
                             }
                             dialogshootontargetb.dismiss();
 
@@ -2371,11 +2374,11 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                             if (datapertandingan.moveToFirst()) {
                                 Log.d("Enter if ", "input goal");
                                 inputshotongoal(editTextinputnomorpunggungshootontargetb.getText().toString(), teamB, getidpertandingan());
-                                inputsaves(teamB, getidpertandingan(), babakint);
+                                //inputsaves(teamB, getidpertandingan(), babakint);
                             } else {
                                 Log.d("belum ada ", "data pertadingan");
                                 inputshotongoal(editTextinputnomorpunggungshootontargetb.getText().toString(), teamB, getidpertandingan());
-                                inputsaves(teamB, getidpertandingan(), babakint);
+                                //inputsaves(teamB, getidpertandingan(), babakint);
                             }
                             dialogshootontargetb.dismiss();
                         }
@@ -2481,49 +2484,81 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     datayellowhome.moveToNext();
                 }
 
-                AlertDialog.Builder builderyellowhome = new AlertDialog.Builder(recordstat.this);
-                View mViewyellowhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                AlertDialog.Builder builderyellowhome =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewyellowhome = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
                 final Spinner mSpinneryellowhome =
                         (Spinner) mViewyellowhome.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayeryellowhome =
+                        (EditText) mViewyellowhome.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinneryellowhome =
+                        (Spinner) mViewyellowhome.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungyellowhome =
+                        (EditText) mViewyellowhome.findViewById(R.id.textNomorPunggung2);
                 ArrayAdapter<String> arrayAdapteryellowhome =
                         new ArrayAdapter<String>(recordstat.this,
                                 R.layout.support_simple_spinner_dropdown_item, listpemainyellowhome);
                 mSpinneryellowhome.setAdapter(arrayAdapteryellowhome);
 
-                builderyellowhome.setTitle("Pick Player");
-                builderyellowhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        yellowcardteama = yellowcardteama + 1;
-                        tanding.setYellowcardTeamA(tanding.getYellowcardTeamA() + 1);
-                        Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
-                        String pemain = mSpinneryellowhome.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input yellow");
-                            inputyellow(pemain, teamA, getidpertandingan());
-                            ;
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputyellow(pemain, teamA, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                builderyellowhome.setNegativeButton("CANCEL",
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-
+                builderyellowhome.setPositiveButton("OK", null);
+                builderyellowhome.setNegativeButton("CANCEL", null);
                 builderyellowhome.setView(mViewyellowhome);
-                AlertDialog dialogyellowhome = builderyellowhome.create();
+                final AlertDialog dialogyellowhome = builderyellowhome.create();
                 dialogyellowhome.show();
+                Button positiveButtonyellowhome =
+                        dialogyellowhome.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonyellowhome.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayeryellowhome.getText().toString().isEmpty() && editTextinputnomorpunggungyellowhome.getText().toString().isEmpty()) {
+                            tanding.setYellowcardTeamA(tanding.getYellowcardTeamA() + 1);
+                            Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
+                            String pemain = mSpinneryellowhome.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input yellow");
+                                inputyellow(pemain, teamA, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputyellow(pemain, teamA, getidpertandingan());
+                            }
+                        dialogyellowhome.dismiss();
+                        } else if (editTextinputplayeryellowhome.getText().toString().isEmpty() || editTextinputnomorpunggungyellowhome.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayeryellowhome.getText().toString();
+                            String posisipemain =
+                                    posisispinneryellowhome.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungyellowhome.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setYellowcardTeamA(tanding.getYellowcardTeamA() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputyellow(editTextinputnomorpunggungyellowhome.getText().toString(), teamA, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputyellow(editTextinputnomorpunggungyellowhome.getText().toString(), teamA, getidpertandingan());
+
+                            }
+                            dialogyellowhome.dismiss();
+                        }
+                    }
+
+
+                });
+
                 return true;
+
 
             case R.id.yellowaway:
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
@@ -2537,48 +2572,79 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     datayellowaway.moveToNext();
                 }
 
-                AlertDialog.Builder builderyellowaway = new AlertDialog.Builder(recordstat.this);
-                View mViewyellowaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                AlertDialog.Builder builderyellowaway =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewyellowaway = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
                 final Spinner mSpinneryellowaway =
                         (Spinner) mViewyellowaway.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayeryellowaway =
+                        (EditText) mViewyellowaway.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinneryellowaway =
+                        (Spinner) mViewyellowaway.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungyellowaway =
+                        (EditText) mViewyellowaway.findViewById(R.id.textNomorPunggung2);
                 ArrayAdapter<String> arrayAdapteryellowaway =
                         new ArrayAdapter<String>(recordstat.this,
                                 R.layout.support_simple_spinner_dropdown_item, listpemainyellowaway);
                 mSpinneryellowaway.setAdapter(arrayAdapteryellowaway);
 
-                builderyellowaway.setTitle("Pick Player");
-                builderyellowaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "Yellow Team B", Toast.LENGTH_SHORT).show();
-                        yellowcardteamb = yellowcardteamb + 1;
-                        tanding.setYellowcardTeamB(tanding.getYellowcardTeamB() + 1);
-                        String pemain = mSpinneryellowaway.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input yellow");
-                            inputyellow(pemain, teamB, getidpertandingan());
-                            ;
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputyellow(pemain, teamB, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                builderyellowaway.setNegativeButton("CANCEL",
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-
+                builderyellowaway.setPositiveButton("OK", null);
+                builderyellowaway.setNegativeButton("CANCEL", null);
                 builderyellowaway.setView(mViewyellowaway);
-                AlertDialog dialogyellowaway = builderyellowaway.create();
+                final AlertDialog dialogyellowaway = builderyellowaway.create();
                 dialogyellowaway.show();
+                Button positiveButtonyellowaway =
+                        dialogyellowaway.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonyellowaway.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayeryellowaway.getText().toString().isEmpty() && editTextinputnomorpunggungyellowaway.getText().toString().isEmpty()) {
+                            tanding.setYellowcardTeamB(tanding.getYellowcardTeamB() + 1);
+                            Toast.makeText(recordstat.this, "Yellow Team B", Toast.LENGTH_SHORT).show();
+                            String pemain = mSpinneryellowaway.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input yellow");
+                                inputyellow(pemain, teamB, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputyellow(pemain, teamB, getidpertandingan());
+                            }
+                            dialogyellowaway.dismiss();
+                        } else if (editTextinputplayeryellowaway.getText().toString().isEmpty() || editTextinputnomorpunggungyellowaway.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayeryellowaway.getText().toString();
+                            String posisipemain =
+                                    posisispinneryellowaway.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungyellowaway.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setYellowcardTeamB(tanding.getYellowcardTeamB() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputyellow(editTextinputnomorpunggungyellowaway.getText().toString(), teamB, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputyellow(editTextinputnomorpunggungyellowaway.getText().toString(), teamB, getidpertandingan());
+
+                            }
+                            dialogyellowaway.dismiss();
+                        }
+                    }
+
+
+                });
+
                 return true;
 
             case R.id.redhome:
@@ -2593,49 +2659,80 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     dataredhome.moveToNext();
                 }
 
-                AlertDialog.Builder builderredhome = new AlertDialog.Builder(recordstat.this);
-                View mViewredhome = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                AlertDialog.Builder builderredhome =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewredhome = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
                 final Spinner mSpinnerredhome =
                         (Spinner) mViewredhome.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerredhome =
+                        (EditText) mViewredhome.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnerredhome =
+                        (Spinner) mViewredhome.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungredhome =
+                        (EditText) mViewredhome.findViewById(R.id.textNomorPunggung2);
                 ArrayAdapter<String> arrayAdapterredhome =
                         new ArrayAdapter<String>(recordstat.this,
                                 R.layout.support_simple_spinner_dropdown_item, listpemainredhome);
                 mSpinnerredhome.setAdapter(arrayAdapterredhome);
 
-                builderredhome.setTitle("Pick Player");
-                builderredhome.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "RED CARD Team A", Toast.LENGTH_SHORT).show();
-                        redcardteama = redcardteama + 1;
-                        tanding.setRedcardTeamA(tanding.getRedcardTeamA() + 1);
-                        String pemain = mSpinnerredhome.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input yellow");
-                            inputred(pemain, teamA, getidpertandingan());
-                            ;
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputred(pemain, teamA, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                builderredhome.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-
+                builderredhome.setPositiveButton("OK", null);
+                builderredhome.setNegativeButton("CANCEL", null);
                 builderredhome.setView(mViewredhome);
-                AlertDialog dialogredhome = builderredhome.create();
+                final AlertDialog dialogredhome = builderredhome.create();
                 dialogredhome.show();
-                return true;
+                Button positiveButtonredhome =
+                        dialogredhome.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonredhome.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayerredhome.getText().toString().isEmpty() && editTextinputnomorpunggungredhome.getText().toString().isEmpty()) {
+                            tanding.setRedcardTeamA(tanding.getRedcardTeamA() + 1);
+                            Toast.makeText(recordstat.this, "Yellow Team A", Toast.LENGTH_SHORT).show();
+                            String pemain = mSpinnerredhome.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input yellow");
+                                inputred(pemain, teamA, getidpertandingan());
 
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputred(pemain, teamA, getidpertandingan());
+                            }
+                            dialogredhome.dismiss();
+                        } else if (editTextinputplayerredhome.getText().toString().isEmpty() || editTextinputnomorpunggungredhome.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayerredhome.getText().toString();
+                            String posisipemain =
+                                    posisispinnerredhome.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungredhome.getText().toString());
+                            setDataPemain(teamA, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setRedcardTeamA(tanding.getRedcardTeamA() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputred(editTextinputnomorpunggungredhome.getText().toString(), teamA, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputred(editTextinputnomorpunggungredhome.getText().toString(), teamA, getidpertandingan());
+
+                            }
+                            dialogredhome.dismiss();
+                        }
+                    }
+
+
+                });
+
+                return true;
             case R.id.redaway:
                 chronometerteam.setBase(SystemClock.elapsedRealtime());
                 chronometerteam.stop();
@@ -2648,47 +2745,79 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                     dataredaway.moveToNext();
                 }
 
-                AlertDialog.Builder builderredaway = new AlertDialog.Builder(recordstat.this);
-                View mViewredaway = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                AlertDialog.Builder builderredaway =
+                        new AlertDialog.Builder(recordstat.this);
+                View mViewredaway = getLayoutInflater().inflate(R.layout.dialog_spinner,
+                        null);
                 final Spinner mSpinnerredaway =
                         (Spinner) mViewredaway.findViewById(R.id.spinnerplayer);
+                final EditText editTextinputplayerredaway =
+                        (EditText) mViewredaway.findViewById(R.id.editTextinputplayer);
+                final Spinner posisispinnerredaway   =
+                        (Spinner) mViewredaway.findViewById(R.id.spinnerposisi3);
+                final EditText editTextinputnomorpunggungredaway =
+                        (EditText) mViewredaway.findViewById(R.id.textNomorPunggung2);
                 ArrayAdapter<String> arrayAdapterredaway =
                         new ArrayAdapter<String>(recordstat.this,
                                 R.layout.support_simple_spinner_dropdown_item, listpemainredaway);
                 mSpinnerredaway.setAdapter(arrayAdapterredaway);
 
-                builderredaway.setTitle("Pick Player");
-                builderredaway.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(recordstat.this, "RED CARD Team B", Toast.LENGTH_SHORT).show();
-                        redcardteamb = redcardteamb + 1;
-                        tanding.setRedcardTeamB(tanding.getRedcardTeamB() + 1);
-                        String pemain = mSpinnerredaway.getSelectedItem().toString();
-                        Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
-                        if (datapertandingan.moveToFirst()) {
-                            Log.d("Enter if ", "input yellow");
-                            inputred(pemain, teamB, getidpertandingan());
-                            ;
-                        } else {
-                            Log.d("belum ada ", "data pertadingan");
-                            inputred(pemain, teamB, getidpertandingan());
-                        }
-                        dialog.dismiss();
-                    }
 
-                });
-                builderredaway.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-
+                builderredaway.setPositiveButton("OK", null);
+                builderredaway.setNegativeButton("CANCEL", null);
                 builderredaway.setView(mViewredaway);
-                AlertDialog dialogredaway = builderredaway.create();
+                final AlertDialog dialogredaway = builderredaway.create();
                 dialogredaway.show();
+                Button positiveButtonredaway =
+                        dialogredaway.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButtonredaway.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editTextinputplayerredaway.getText().toString().isEmpty() && editTextinputnomorpunggungredaway.getText().toString().isEmpty()) {
+                            tanding.setRedcardTeamB(tanding.getRedcardTeamB() + 1);
+                            Toast.makeText(recordstat.this, "Yellow Team B", Toast.LENGTH_SHORT).show();
+                            String pemain = mSpinnerredaway.getSelectedItem().toString();
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input yellow");
+                                inputred(pemain, teamB, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputred(pemain, teamB, getidpertandingan());
+                            }
+                            dialogredaway.dismiss();
+                        } else if (editTextinputplayerredaway.getText().toString().isEmpty() || editTextinputnomorpunggungredaway.getText().toString().isEmpty()) {
+                            Toast.makeText(recordstat.this, "Nama Pemain & Nomor Punggung Tidak " +
+                                    "Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String namapemain =
+                                    editTextinputplayerredaway.getText().toString();
+                            String posisipemain =
+                                    posisispinnerredaway.getSelectedItem().toString();
+                            int nomorpunggungpemain =
+                                    Integer.parseInt(editTextinputnomorpunggungredaway.getText().toString());
+                            setDataPemain(teamB, namapemain, posisipemain, nomorpunggungpemain);
+                            Toast.makeText(recordstat.this, "Input Data Pemain",
+                                    Toast.LENGTH_SHORT).show();
+                            tanding.setRedcardTeamB(tanding.getRedcardTeamB() + 1);
+                            Cursor datapertandingan = dbpertandingan.loaddatapertandingan();
+                            if (datapertandingan.moveToFirst()) {
+                                Log.d("Enter if ", "input goal");
+                                inputred(editTextinputnomorpunggungredaway.getText().toString(), teamB, getidpertandingan());
+
+                            } else {
+                                Log.d("belum ada ", "data pertadingan");
+                                inputred(editTextinputnomorpunggungredaway.getText().toString(), teamB, getidpertandingan());
+
+                            }
+                            dialogredaway.dismiss();
+                        }
+                    }
+
+
+                });
+
                 return true;
 
             case R.id.foulhome:
@@ -2715,7 +2844,7 @@ public class recordstat extends AppCompatActivity implements PopupMenu.OnMenuIte
                 offsideteamb = offsideteamb + 1;
                 tanding.setOffsideTeamB(tanding.getOffsideTeamB() + 1);
                 Log.d("hitung offside team b", Integer.toString(offsideteamb));
-                Toast.makeText(recordstat.this, "Offside Team A", Toast.LENGTH_SHORT).show();
+                Toast.makeText(recordstat.this, "Offside Team B", Toast.LENGTH_SHORT).show();
                 return true;
 
 

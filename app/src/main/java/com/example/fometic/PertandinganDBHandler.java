@@ -141,9 +141,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
                 user.put("throwinteamb", String.valueOf(datababak2.getInt(26) + datababak1.getInt(26)));
                 user.put("cornerkickteama", String.valueOf(datababak2.getInt(14) + datababak1.getInt(14)));
                 user.put("cornerkickteamb", String.valueOf(datababak2.getInt(30) + datababak1.getInt(30)));
-                user.put("ballposessionteama", String.valueOf(((datababak2.getInt(36) * datababak2.getInt(45)) + (datababak1.getInt(36) * datababak1.getInt(45)))/  (datababak2.getInt(45) + datababak1.getInt(45))*100));
+                user.put("ballposessionteama", String.valueOf(Math.round(Math.round(datababak2.getInt(36) * datababak2.getInt(45)) + Math.round(datababak1.getInt(36) * datababak1.getInt(45)))/  (datababak2.getInt(45) + datababak1.getInt(45))*100));
                 Log.d("ballposessionteama",String.valueOf(datababak2.getInt(36) * datababak2.getInt(45))+"+"+(datababak1.getInt(36) * datababak1.getInt(45))+"/"+(datababak2.getInt(45) + datababak1.getInt(45))*100);
-                user.put("ballposessionteamb", String.valueOf(((datababak2.getInt(37) * datababak2.getInt(45)) + (datababak1.getInt(37) * datababak1.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45))*100));
+                user.put("ballposessionteamb", String.valueOf(Math.round(Math.round(datababak2.getInt(37) * datababak2.getInt(45)) + Math.round(datababak1.getInt(37) * datababak1.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45))*100));
                 Log.d("ballposessionteamb",String.valueOf(datababak2.getInt(37) * datababak2.getInt(45))+"+"+(datababak1.getInt(37) * datababak1.getInt(45))+"/"+(datababak2.getInt(45) + datababak1.getInt(45))*100);
                 user.put("foulteama", String.valueOf(datababak2.getInt(43) + datababak1.getInt(43)));
                 user.put("foulteamb", String.valueOf(datababak2.getInt(44) + datababak1.getInt(44)));
@@ -180,9 +180,9 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
                 user.put("throwinteamb", String.valueOf(datababak2.getInt(26) + datababak1.getInt(10)));
                 user.put("cornerkickteama", String.valueOf(datababak2.getInt(14) + datababak1.getInt(30)));
                 user.put("cornerkickteamb", String.valueOf(datababak2.getInt(30) + datababak1.getInt(14)));
-                user.put("ballposessionteama", String.valueOf((Double)((datababak2.getDouble(36) * datababak2.getDouble(45)) + (datababak1.getDouble(37) * datababak1.getDouble(45)))/(datababak2.getDouble(45) + datababak1.getDouble(45))));
+                user.put("ballposessionteama", String.valueOf((int) Math.round(Math.round(datababak2.getInt(36) * datababak2.getInt(45)) + Math.round(datababak1.getInt(37) * datababak1.getInt(45)))/(datababak2.getInt(45) + datababak1.getInt(45))));
                 //Log.d("ballposessionteama",String.valueOf(datababak2.getInt(36) * datababak2.getInt(45))+"+"+(datababak1.getInt(37) * datababak1.getInt(45))+"/"+(datababak2.getInt(45) + datababak1.getInt(45))*100);
-                user.put("ballposessionteamb", String.valueOf((Double)((datababak2.getDouble(37) * datababak2.getDouble(45)) + (datababak1.getDouble(36)* datababak1.getDouble(45)))/(datababak2.getDouble(45) + datababak1.getDouble(45))));
+                user.put("ballposessionteamb", String.valueOf((int) Math.round(Math.round(datababak2.getInt(37) * datababak2.getInt(45)) + Math.round(datababak1.getInt(36)* datababak1.getInt(45)))/(datababak2.getInt(45) + datababak1.getInt(45))));
                 //Log.d("ballposessionteamb",String.valueOf(datababak2.getDouble(37) * datababak2.getInt(45))+"+"+(datababak1.getInt(36) * datababak1.getInt(45))+"/"+(datababak2.getInt(45) + datababak1.getInt(45))*100);
                 Log.d("tes divide",String.valueOf((Double)2525.0/7000*100));
                 user.put("foulteama", String.valueOf(datababak2.getInt(43) + datababak1.getInt(44)));
@@ -229,8 +229,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
                 user.put("throwinteamb", String.valueOf(datababak2.getInt(26) + datababak1.getInt(26) + datababak3.getInt(26) + datababak4.getInt(26)));
                 user.put("cornerkickteama", String.valueOf(datababak2.getInt(14) + datababak1.getInt(14) + datababak3.getInt(14) + datababak4.getInt(14)));
                 user.put("cornerkickteamb", String.valueOf(datababak2.getInt(30) + datababak1.getInt(30) + datababak3.getInt(30) + datababak4.getInt(30)));
-                user.put("ballposessionteama", String.valueOf(((datababak2.getInt(36) * datababak2.getInt(45)) + (datababak1.getInt(36) * datababak1.getInt(45)) + (datababak3.getInt(36) * datababak3.getInt(45)) + (datababak4.getInt(36) * datababak4.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
-                user.put("ballposessionteamb", String.valueOf(((datababak2.getInt(37) * datababak2.getInt(45)) + (datababak1.getInt(37) * datababak1.getInt(45)) + (datababak3.getInt(37) * datababak3.getInt(45)) + (datababak4.getInt(37) * datababak4.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
+                user.put("ballposessionteama", String.valueOf(Math.round(Math.round(datababak2.getInt(36) * datababak2.getInt(45)) + Math.round(datababak1.getInt(36) * datababak1.getInt(45)) + (datababak3.getInt(36) * datababak3.getInt(45)) + (datababak4.getInt(36) * datababak4.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
+                user.put("ballposessionteamb", String.valueOf(Math.round(Math.round(datababak2.getInt(37) * datababak2.getInt(45)) + Math.round(datababak1.getInt(37) * datababak1.getInt(45)) + (datababak3.getInt(37) * datababak3.getInt(45)) + (datababak4.getInt(37) * datababak4.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
                 user.put("foulteama", String.valueOf(datababak2.getInt(43) + datababak1.getInt(43) + datababak3.getInt(43) + datababak4.getInt(43)));
                 user.put("foulteamb", String.valueOf(datababak2.getInt(44) + datababak1.getInt(44) + datababak3.getInt(44) + datababak4.getInt(44)));
                 user.put("offsideteama", String.valueOf(datababak2.getInt(41) + datababak1.getInt(41) + datababak3.getInt(41) + datababak4.getInt(41)));
@@ -265,8 +265,8 @@ public class PertandinganDBHandler extends SQLiteOpenHelper {
                 user.put("throwinteamb", String.valueOf(datababak2.getInt(26) + datababak1.getInt(10) + datababak3.getInt(10) + datababak4.getInt(26)));
                 user.put("cornerkickteama", String.valueOf(datababak2.getInt(14) + datababak1.getInt(30) + datababak3.getInt(30) + datababak4.getInt(14)));
                 user.put("cornerkickteamb", String.valueOf(datababak2.getInt(30) + datababak1.getInt(14) + datababak3.getInt(14) + datababak4.getInt(30)));
-                user.put("ballposessionteama", String.valueOf((Double)((datababak2.getDouble(36) * datababak2.getInt(45)) + (datababak1.getDouble(37) * datababak1.getInt(45)) + (datababak3.getDouble(37) * datababak3.getInt(45)) + (datababak4.getDouble(36) * datababak4.getInt(45))) / (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
-                user.put("ballposessionteamb", String.valueOf((Double)((datababak2.getDouble(37) * datababak2.getInt(45)) + (datababak1.getDouble(36) * datababak1.getInt(45)) + (datababak3.getDouble(36) * datababak3.getInt(45)) + (datababak4.getDouble(37) * datababak4.getInt(45)))/ (datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
+                user.put("ballposessionteama", String.valueOf((int) Math.round(Math.round(datababak2.getInt(36) * datababak2.getInt(45)) + Math.round(datababak1.getInt(37) * datababak1.getInt(45)) + Math.round(datababak3.getInt(37) * datababak3.getInt(45)) + Math.round(datababak4.getInt(36) * datababak4.getInt(45))) / Math.round(datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
+                user.put("ballposessionteamb", String.valueOf((int) Math.round(Math.round(datababak2.getInt(37) * datababak2.getInt(45)) + Math.round(datababak1.getInt(36) * datababak1.getInt(45)) + Math.round(datababak3.getInt(36) * datababak3.getInt(45)) + Math.round(datababak4.getInt(37) * datababak4.getInt(45)))/ Math.round(datababak2.getInt(45) + datababak1.getInt(45) + datababak3.getInt(45) + datababak4.getInt(45))));
                 user.put("foulteama", String.valueOf(datababak2.getInt(43) + datababak1.getInt(44) + datababak3.getInt(44) + datababak4.getInt(43)));
                 user.put("foulteamb", String.valueOf(datababak2.getInt(44) + datababak1.getInt(43) + datababak3.getInt(43) + datababak4.getInt(44)));
                 user.put("offsideteama", String.valueOf(datababak2.getInt(41) + datababak1.getInt(42) + datababak3.getInt(42) + datababak4.getInt(41)));
