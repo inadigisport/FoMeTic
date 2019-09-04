@@ -5,7 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+
+import static android.os.Environment.*;
 
 public class goalDBHandler extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION=1;
@@ -82,5 +92,12 @@ public class goalDBHandler extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         return cursor;
+    }
+
+
+    public void export() throws IOException {
+        SQLiteDatabase db= this.getReadableDatabase();
+        SqliteExporter dbexport=new SqliteExporter();
+        dbexport.export(db);
     }
 }

@@ -30,7 +30,7 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     EditText editTextevent;
     EditText editTexttimematch;
 
-    PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
+    PertandinganDBHandler dbpertandingan = new PertandinganDBHandler(this);
 
 
     @Override
@@ -78,127 +78,130 @@ public class chooseteam extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     public void openrecordstat() {
-        String namateama="";
-        String namateamb="";
-        int babakpertandingan=0;
-        int babakdata=0;
-        Cursor datapertandigan=dbpertandingan.loaddatapertandingan();
+        String namateama = "";
+        String namateamb = "";
+        int babakpertandingan = 0;
+        int babakdata = 0;
+        Cursor datapertandigan = dbpertandingan.loaddatapertandingan();
         if (babak.getSelectedItem().toString().equals("1sthalf")) {
             babakpertandingan = 1;
-        }
-        else if (babak.getSelectedItem().toString().equals("2ndhalf")) {
+        } else if (babak.getSelectedItem().toString().equals("2ndhalf")) {
             babakpertandingan = 2;
-        }
-        else if (babak.getSelectedItem().toString().equals("Ex1sthalf")) {
+        } else if (babak.getSelectedItem().toString().equals("Ex1sthalf")) {
             babakpertandingan = 3;
-        }
-        else if (babak.getSelectedItem().toString().equals("Ex2ndhalf")) {
+        } else if (babak.getSelectedItem().toString().equals("Ex2ndhalf")) {
             babakpertandingan = 4;
         }
-        if (datapertandigan.moveToFirst()){
-            datapertandigan.moveToFirst();
-            while (!datapertandigan.isAfterLast()){
-                namateama=datapertandigan.getString(1);
-                namateamb=datapertandigan.getString(17);
-                babakdata=datapertandigan.getInt(33);
-                datapertandigan.moveToNext();
-            }
-            Log.d("babak data=",Integer.toString(babakdata));
-            Log.d("babak selected=",Integer.toString(babakpertandingan));
-            if (babakpertandingan==1){
-                Intent intent = new Intent(this, recordstat.class);
-                intent.putExtra("teama", teamA.getSelectedItem().toString());
-                Log.d("team A choosen", teamA.getSelectedItem().toString());
-                intent.putExtra("teamb", teamB.getSelectedItem().toString());
-                Log.d("team B choosen", teamB.getSelectedItem().toString());
-                intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
-                Log.d("formation team A", formationteama.getSelectedItem().toString());
-                intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
-                Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", venue.getSelectedItem().toString());
-                Log.d("venue ", venue.getSelectedItem().toString());
-                intent.putExtra("event", event.getSelectedItem().toString());
-                Log.d("event ", event.getSelectedItem().toString());
-                intent.putExtra("timematch", editTexttimematch.getText().toString());
-                Log.d("timematch ", editTexttimematch.getText().toString());
-                intent.putExtra("babak", babak.getSelectedItem().toString());
-                Log.d("babak ", babak.getSelectedItem().toString());
+        if (editTexttimematch.getText().toString().equals("")) {
+            Toast.makeText(chooseteam.this, "Timematch Harus Diisi", Toast.LENGTH_SHORT).show();
+        } else {
+            if (teamA.getSelectedItem().toString().equals(teamB.getSelectedItem().toString())) {
+                Toast.makeText(chooseteam.this, "Tim Tidak Boleh Sama", Toast.LENGTH_SHORT).show();
+            } else {
+                if (datapertandigan.moveToFirst()) {
+                    datapertandigan.moveToFirst();
+                    while (!datapertandigan.isAfterLast()) {
+                        namateama = datapertandigan.getString(1);
+                        namateamb = datapertandigan.getString(17);
+                        babakdata = datapertandigan.getInt(33);
+                        datapertandigan.moveToNext();
+                    }
+                    Log.d("babak data=", Integer.toString(babakdata));
+                    Log.d("babak selected=", Integer.toString(babakpertandingan));
+                    if (babakpertandingan == 1) {
+                        Intent intent = new Intent(this, recordstat.class);
+                        intent.putExtra("teama", teamA.getSelectedItem().toString());
+                        Log.d("team A choosen", teamA.getSelectedItem().toString());
+                        intent.putExtra("teamb", teamB.getSelectedItem().toString());
+                        Log.d("team B choosen", teamB.getSelectedItem().toString());
+                        intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
+                        Log.d("formation team A", formationteama.getSelectedItem().toString());
+                        intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
+                        Log.d("formation team B", formationteamb.getSelectedItem().toString());
+                        intent.putExtra("venue", venue.getSelectedItem().toString());
+                        Log.d("venue ", venue.getSelectedItem().toString());
+                        intent.putExtra("event", event.getSelectedItem().toString());
+                        Log.d("event ", event.getSelectedItem().toString());
+                        intent.putExtra("timematch", editTexttimematch.getText().toString());
+                        Log.d("timematch ", editTexttimematch.getText().toString());
+                        intent.putExtra("babak", babak.getSelectedItem().toString());
+                        Log.d("babak ", babak.getSelectedItem().toString());
 
 
-                startActivity(intent);
-            }
-            else if (namateama.equals(teamA.getSelectedItem().toString()) && namateamb.equals(teamB.getSelectedItem().toString()) && babakpertandingan-1==babakdata){
-                Intent intent = new Intent(this, recordstat.class);
-                intent.putExtra("teama", teamA.getSelectedItem().toString());
-                Log.d("team A choosen", teamA.getSelectedItem().toString());
-                intent.putExtra("teamb", teamB.getSelectedItem().toString());
-                Log.d("team B choosen", teamB.getSelectedItem().toString());
-                intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
-                Log.d("formation team A", formationteama.getSelectedItem().toString());
-                intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
-                Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", venue.getSelectedItem().toString());
-                Log.d("venue ", venue.getSelectedItem().toString());
-                intent.putExtra("event", event.getSelectedItem().toString());
-                Log.d("event ", event.getSelectedItem().toString());
-                intent.putExtra("timematch", editTexttimematch.getText().toString());
-                Log.d("timematch ", editTexttimematch.getText().toString());
-                intent.putExtra("babak", babak.getSelectedItem().toString());
-                Log.d("babak ", babak.getSelectedItem().toString());
+                        startActivity(intent);
+                    } else if (namateama.equals(teamA.getSelectedItem().toString()) && namateamb.equals(teamB.getSelectedItem().toString()) && babakpertandingan - 1 == babakdata) {
+                        Intent intent = new Intent(this, recordstat.class);
+                        intent.putExtra("teama", teamA.getSelectedItem().toString());
+                        Log.d("team A choosen", teamA.getSelectedItem().toString());
+                        intent.putExtra("teamb", teamB.getSelectedItem().toString());
+                        Log.d("team B choosen", teamB.getSelectedItem().toString());
+                        intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
+                        Log.d("formation team A", formationteama.getSelectedItem().toString());
+                        intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
+                        Log.d("formation team B", formationteamb.getSelectedItem().toString());
+                        intent.putExtra("venue", venue.getSelectedItem().toString());
+                        Log.d("venue ", venue.getSelectedItem().toString());
+                        intent.putExtra("event", event.getSelectedItem().toString());
+                        Log.d("event ", event.getSelectedItem().toString());
+                        intent.putExtra("timematch", editTexttimematch.getText().toString());
+                        Log.d("timematch ", editTexttimematch.getText().toString());
+                        intent.putExtra("babak", babak.getSelectedItem().toString());
+                        Log.d("babak ", babak.getSelectedItem().toString());
 
 
-                startActivity(intent);
-            } else if (namateamb.equals(teamA.getSelectedItem().toString()) && namateama.equals(teamB.getSelectedItem().toString()) && babakpertandingan-1==babakdata){
-                Intent intent = new Intent(this, recordstat.class);
-                intent.putExtra("teama", teamA.getSelectedItem().toString());
-                Log.d("team A choosen", teamA.getSelectedItem().toString());
-                intent.putExtra("teamb", teamB.getSelectedItem().toString());
-                Log.d("team B choosen", teamB.getSelectedItem().toString());
-                intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
-                Log.d("formation team A", formationteama.getSelectedItem().toString());
-                intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
-                Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", venue.getSelectedItem().toString());
-                Log.d("venue ", venue.getSelectedItem().toString());
-                intent.putExtra("event", event.getSelectedItem().toString());
-                Log.d("event ", event.getSelectedItem().toString());
-                intent.putExtra("timematch", editTexttimematch.getText().toString());
-                Log.d("timematch ", editTexttimematch.getText().toString());
-                intent.putExtra("babak", babak.getSelectedItem().toString());
-                Log.d("babak ", babak.getSelectedItem().toString());
+                        startActivity(intent);
+                    } else if (namateamb.equals(teamA.getSelectedItem().toString()) && namateama.equals(teamB.getSelectedItem().toString()) && babakpertandingan - 1 == babakdata) {
+                        Intent intent = new Intent(this, recordstat.class);
+                        intent.putExtra("teama", teamA.getSelectedItem().toString());
+                        Log.d("team A choosen", teamA.getSelectedItem().toString());
+                        intent.putExtra("teamb", teamB.getSelectedItem().toString());
+                        Log.d("team B choosen", teamB.getSelectedItem().toString());
+                        intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
+                        Log.d("formation team A", formationteama.getSelectedItem().toString());
+                        intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
+                        Log.d("formation team B", formationteamb.getSelectedItem().toString());
+                        intent.putExtra("venue", venue.getSelectedItem().toString());
+                        Log.d("venue ", venue.getSelectedItem().toString());
+                        intent.putExtra("event", event.getSelectedItem().toString());
+                        Log.d("event ", event.getSelectedItem().toString());
+                        intent.putExtra("timematch", editTexttimematch.getText().toString());
+                        Log.d("timematch ", editTexttimematch.getText().toString());
+                        intent.putExtra("babak", babak.getSelectedItem().toString());
+                        Log.d("babak ", babak.getSelectedItem().toString());
 
 
-                startActivity(intent);
-            }else {
-                Toast.makeText(chooseteam.this, "Belum ada data babak-"+Integer.valueOf(babakpertandingan-1), Toast.LENGTH_SHORT).show();
-            }
-        }else{
-            if (babakpertandingan==1) {
-                Intent intent = new Intent(this, recordstat.class);
-                intent.putExtra("teama", teamA.getSelectedItem().toString());
-                Log.d("team A choosen", teamA.getSelectedItem().toString());
-                intent.putExtra("teamb", teamB.getSelectedItem().toString());
-                Log.d("team B choosen", teamB.getSelectedItem().toString());
-                intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
-                Log.d("formation team A", formationteama.getSelectedItem().toString());
-                intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
-                Log.d("formation team B", formationteamb.getSelectedItem().toString());
-                intent.putExtra("venue", venue.getSelectedItem().toString());
-                Log.d("venue ", venue.getSelectedItem().toString());
-                intent.putExtra("event", event.getSelectedItem().toString());
-                Log.d("event ", event.getSelectedItem().toString());
-                intent.putExtra("timematch", editTexttimematch.getText().toString());
-                Log.d("timematch ", editTexttimematch.getText().toString());
-                intent.putExtra("babak", babak.getSelectedItem().toString());
-                Log.d("babak ", babak.getSelectedItem().toString());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(chooseteam.this, "Belum ada data babak-" + Integer.valueOf(babakpertandingan - 1), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    if (babakpertandingan == 1) {
+                        Intent intent = new Intent(this, recordstat.class);
+                        intent.putExtra("teama", teamA.getSelectedItem().toString());
+                        Log.d("team A choosen", teamA.getSelectedItem().toString());
+                        intent.putExtra("teamb", teamB.getSelectedItem().toString());
+                        Log.d("team B choosen", teamB.getSelectedItem().toString());
+                        intent.putExtra("formationteama", formationteama.getSelectedItem().toString());
+                        Log.d("formation team A", formationteama.getSelectedItem().toString());
+                        intent.putExtra("formationteamb", formationteamb.getSelectedItem().toString());
+                        Log.d("formation team B", formationteamb.getSelectedItem().toString());
+                        intent.putExtra("venue", venue.getSelectedItem().toString());
+                        Log.d("venue ", venue.getSelectedItem().toString());
+                        intent.putExtra("event", event.getSelectedItem().toString());
+                        Log.d("event ", event.getSelectedItem().toString());
+                        intent.putExtra("timematch", editTexttimematch.getText().toString());
+                        Log.d("timematch ", editTexttimematch.getText().toString());
+                        intent.putExtra("babak", babak.getSelectedItem().toString());
+                        Log.d("babak ", babak.getSelectedItem().toString());
 
 
-                startActivity(intent);
-            }else{
-                Toast.makeText(chooseteam.this, "Belum ada data babak-1", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(chooseteam.this, "Belum ada data babak-1", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         }
-
 
     }
 

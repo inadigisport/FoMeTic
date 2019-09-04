@@ -1,5 +1,10 @@
 package com.example.fometic;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +31,7 @@ import java.util.List;
  * and some other SO threads as well.
  *
  */
-public class SqliteExporter extends AppCompatActivity {
+public class SqliteExporter{
     private static final String TAG = SqliteExporter.class.getSimpleName();
 
     public static final String DB_BACKUP_DB_VERSION_KEY = "dbVersion";
@@ -36,7 +41,7 @@ public class SqliteExporter extends AppCompatActivity {
         if (!FileUtils.isExternalStorageWritable()) {
             throw new IOException("Cannot write to external storage");
         }
-        File backupDir = FileUtils.createDirIfNotExist(getApplicationInfo().dataDir + "/backup");
+        File backupDir = FileUtils.createDirIfNotExist(  FileUtils.getAppDir() + "/backup");
         String fileName = createBackupFileName();
         File backupFile = new File(backupDir, fileName);
         boolean success = backupFile.createNewFile();

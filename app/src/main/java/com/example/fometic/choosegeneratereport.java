@@ -41,6 +41,26 @@ public class choosegeneratereport extends AppCompatActivity {
     ArrayList<String> redcardpemainb = new ArrayList<>();
     ArrayList<String> tacklingpemainb = new ArrayList<>();
     ArrayList<String> interceptpemainb = new ArrayList<>();
+    ArrayList<String> fullnamapemain = new ArrayList<>();
+    ArrayList<String> fullnomorpunggungpemain = new ArrayList<>();
+    ArrayList<String> fullposisipemain = new ArrayList<>();
+    ArrayList<String> fullgoalpemain = new ArrayList<>();
+    ArrayList<String> fullshootontargetpemain = new ArrayList<>();
+    ArrayList<String> fullshootofftargetpemain = new ArrayList<>();
+    ArrayList<String> fullyellowcardpemain = new ArrayList<>();
+    ArrayList<String> fullredcardpemain = new ArrayList<>();
+    ArrayList<String> fulltacklingpemain = new ArrayList<>();
+    ArrayList<String> fullinterceptpemain = new ArrayList<>();
+    ArrayList<String> fullnamapemainb = new ArrayList<>();
+    ArrayList<String> fullnomorpunggungpemainb = new ArrayList<>();
+    ArrayList<String> fullposisipemainb = new ArrayList<>();
+    ArrayList<String> fullgoalpemainb = new ArrayList<>();
+    ArrayList<String> fullshootontargetpemainb = new ArrayList<>();
+    ArrayList<String> fullshootofftargetpemainb = new ArrayList<>();
+    ArrayList<String> fullyellowcardpemainb = new ArrayList<>();
+    ArrayList<String> fullredcardpemainb = new ArrayList<>();
+    ArrayList<String> fulltacklingpemainb = new ArrayList<>();
+    ArrayList<String> fullinterceptpemainb = new ArrayList<>();
     String formationteama;
     String formationteamb;
     String venue;
@@ -83,6 +103,8 @@ public class choosegeneratereport extends AppCompatActivity {
     Button buttonteamb;
     Button buttonmatch;
     Button buttonmatchresult;
+    Button buttonfullmatchteama;
+    Button buttonfullmatchteamb;
 
     PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
 
@@ -324,6 +346,56 @@ public class choosegeneratereport extends AppCompatActivity {
                 intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
                 intent.putStringArrayListExtra("tacklingpemainb", tacklingpemainb);
                 intent.putStringArrayListExtra("interceptpemainb", interceptpemainb);
+                startActivity(intent);
+            }
+        });
+
+        buttonfullmatchteama = findViewById(R.id.buttonfullmatchteam);
+        buttonfullmatchteama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(choosegeneratereport.this, generatereportteamfullmatch.class);
+                intent.putExtra("teama", teamA);
+                intent.putExtra("venue", venue);
+                intent.putExtra("event", event);
+                intent.putExtra("babak", babakstring);
+                intent.putExtra("tanggal", tanggal);
+                intent.putStringArrayListExtra("datapertandinganpemainteama", pertandinganpemainteama);
+                intent.putStringArrayListExtra("namapemaina", fullnamapemain);
+                intent.putStringArrayListExtra("posisipemaina", fullposisipemain);
+                intent.putStringArrayListExtra("nomorpunggungpemaina", fullnomorpunggungpemain);
+                intent.putStringArrayListExtra("goalpemaina", fullgoalpemain);
+                intent.putStringArrayListExtra("shootontargetpemaina", fullshootontargetpemain);
+                intent.putStringArrayListExtra("shootofftargetpemaina", fullshootofftargetpemain);
+                intent.putStringArrayListExtra("yellowcardpemaina", fullyellowcardpemain);
+                intent.putStringArrayListExtra("redcardpemaina", fullredcardpemain);
+                intent.putStringArrayListExtra("tacklingpemaina", fulltacklingpemain);
+                intent.putStringArrayListExtra("interceptpemaina", fullinterceptpemain);
+                startActivity(intent);
+            }
+        });
+
+        buttonfullmatchteamb = findViewById(R.id.buttonfullmatchteamb);
+        buttonfullmatchteamb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(choosegeneratereport.this, generatereportteamfullmatch.class);
+                intent.putExtra("teamb", teamB);
+                intent.putExtra("venue", venue);
+                intent.putExtra("event", event);
+                intent.putExtra("babak", babakstring);
+                intent.putExtra("tanggal", tanggal);
+                intent.putStringArrayListExtra("datapertandinganpemainteamb", pertandinganpemainteamb);
+                intent.putStringArrayListExtra("namapemainb", fullnamapemainb);
+                intent.putStringArrayListExtra("posisipemainb", fullposisipemainb);
+                intent.putStringArrayListExtra("nomorpunggungpemainb", fullnomorpunggungpemainb);
+                intent.putStringArrayListExtra("goalpemainb", fullgoalpemainb);
+                intent.putStringArrayListExtra("shootontargetpemainb", fullshootontargetpemainb);
+                intent.putStringArrayListExtra("shootofftargetpemainb", fullshootofftargetpemainb);
+                intent.putStringArrayListExtra("yellowcardpemainb", fullyellowcardpemainb);
+                intent.putStringArrayListExtra("redcardpemainb", fullredcardpemainb);
+                intent.putStringArrayListExtra("tacklingpemainb", fulltacklingpemainb);
+                intent.putStringArrayListExtra("interceptpemainb", fullinterceptpemainb);
                 startActivity(intent);
             }
         });

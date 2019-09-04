@@ -3,12 +3,15 @@ package com.example.fometic;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity{
 
     private Button button;
     private Button button2;
@@ -17,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private Button button5;
     private Button button6;
     public static final String kata_kunci = "inadigisport";
-
+    PemainDBHandler dbpemain=new PemainDBHandler(this);
+    TeamDBHandler dbteam=new TeamDBHandler(this);
+    PertandinganDBHandler dbpertandingan=new PertandinganDBHandler(this);
+    PertandinganPemainDBHandler dbpertandinganpemain= new PertandinganPemainDBHandler(this);
+    goalDBHandler dbgoal=new goalDBHandler(this);
 
 
 
@@ -65,13 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 opengeneratereport();
             }
         });
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openreportplayermenu();
+
             }
         });
-
     }
 
     public void openinputteam() {

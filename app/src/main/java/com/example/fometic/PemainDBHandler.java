@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.IOException;
+
 public class PemainDBHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="dbpemain";
     public static final int DATABASE_VERSION=1;
@@ -98,6 +100,12 @@ public class PemainDBHandler extends SQLiteOpenHelper {
         }
         Log.d("Isi Database pemain", result);
         return cursor;
+    }
+
+    public void export() throws IOException {
+        SQLiteDatabase db= this.getReadableDatabase();
+        SqliteExporter dbexport=new SqliteExporter();
+        dbexport.export(db);
     }
 
 }
