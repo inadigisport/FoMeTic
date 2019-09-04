@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
         button5 = (Button) findViewById(R.id.button5);
-        button6 = (Button) findViewById(R.id.export);
+        button6 = (Button) findViewById(R.id.buttongeneratereportplayer);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,18 +72,6 @@ public class MainActivity extends AppCompatActivity{
                 opengeneratereport();
             }
         });
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    dbpemain.export();
-                    dbteam.export();
-                    dbpertandingan.export();
-                    dbpertandinganpemain.export();
-                    dbgoal.export();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
             }
         });
@@ -121,6 +109,12 @@ public class MainActivity extends AppCompatActivity{
 
     public void openchooseteam() {
         Intent intent = new Intent(this, chooseteam.class);
+        startActivity(intent);
+
+    }
+
+    public void openreportplayermenu() {
+        Intent intent = new Intent(this, reportplayermenu.class);
         startActivity(intent);
 
     }
