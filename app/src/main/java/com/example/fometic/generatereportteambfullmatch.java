@@ -1,5 +1,6 @@
 package com.example.fometic;
 
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class generatereportteamfullmatch extends AppCompatActivity {
+public class generatereportteambfullmatch extends AppCompatActivity {
     ArrayList<String> statistikpemainteama = new ArrayList<>();
     ArrayList<String> namapemain = new ArrayList<>();
     ArrayList<String> nomorpunggungpemain = new ArrayList<>();
@@ -49,22 +50,22 @@ public class generatereportteamfullmatch extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_generatereportteam);
 
-        teamA= getIntent().getStringExtra("teama");
+        teamA= getIntent().getStringExtra("teamb");
         venue= getIntent().getStringExtra("venue");
         event= getIntent().getStringExtra("event");
         tanggal= getIntent().getStringExtra("tanggal");
         babakstring= getIntent().getStringExtra("babak");
-        statistikpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
-        namapemain= getIntent().getExtras().getStringArrayList("fullnamapemaina");
-        posisipemain= getIntent().getExtras().getStringArrayList("fullposisipemaina");
-        nomorpunggungpemain= getIntent().getExtras().getStringArrayList("fullnomorpunggungpemaina");
-        goalpemain= getIntent().getExtras().getStringArrayList("fullgoalpemaina");
-        shootontargetpemain= getIntent().getExtras().getStringArrayList("fullshootontargetpemaina");
-        shootofftargetpemain= getIntent().getExtras().getStringArrayList("fullshootofftargetpemaina");
-        yellowcardpemain= getIntent().getExtras().getStringArrayList("fullyellowcardpemaina");
-        redcardpemain= getIntent().getExtras().getStringArrayList("fullredcardpemaina");
-        tacklingpemain= getIntent().getExtras().getStringArrayList("fulltacklingpemaina");
-        interceptpemain= getIntent().getExtras().getStringArrayList("fullinterceptpemaina");
+        //statistikpemainteama= getIntent().getExtras().getStringArrayList("datapertandinganpemainteama");
+        namapemain= getIntent().getExtras().getStringArrayList("fullnamapemainb");
+        posisipemain= getIntent().getExtras().getStringArrayList("fullposisipemainb");
+        nomorpunggungpemain= getIntent().getExtras().getStringArrayList("fullnomorpunggungpemainb");
+        goalpemain= getIntent().getExtras().getStringArrayList("fullgoalpemainb");
+        shootontargetpemain= getIntent().getExtras().getStringArrayList("fullshootontargetpemainb");
+        shootofftargetpemain= getIntent().getExtras().getStringArrayList("fullshootofftargetpemainb");
+        yellowcardpemain= getIntent().getExtras().getStringArrayList("fullyellowcardpemainb");
+        redcardpemain= getIntent().getExtras().getStringArrayList("fullredcardpemainb");
+        tacklingpemain= getIntent().getExtras().getStringArrayList("fulltacklingpemainb");
+        interceptpemain= getIntent().getExtras().getStringArrayList("fullinterceptpemainb");
 
         namateamA=findViewById(R.id.textViewteama);
         namateamA.setText(teamA);
@@ -192,3 +193,4 @@ public class generatereportteamfullmatch extends AppCompatActivity {
         this.finish();
     }
 }
+

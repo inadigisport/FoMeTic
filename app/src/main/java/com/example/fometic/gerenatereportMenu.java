@@ -372,6 +372,149 @@ public class gerenatereportMenu extends AppCompatActivity {
         }
     }
 
+    public void getdatapemainteambfullmatch(String teamb, int idpertandingan, int babak) {
+        Cursor datateamb = dbpemain.loaddatateam(teamb);
+        //String b="Nama Pemain, Nomor Punggung, Jumlah Goal, Jumlah Yellow Card, Jumlah Red
+        // Card, Jumlah Shot on Target, Jumlah Shot off Target";
+        //pertandinganpemainteamb.add(b);
+        datateamb.moveToFirst();
+        while (!datateamb.isAfterLast()) {
+            int idpemain = datateamb.getInt(0);
+            String nama = datateamb.getString(1);
+            Log.d("posisi pemain", nama);
+            String posisi = datateamb.getString(4);
+            Log.d("posisi pemain", posisi);
+            String nomorpunggung = datateamb.getString(3);
+            if (babak == 2) {
+                Cursor datapertandinganpemainbabak1 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak - 1);
+                Cursor datapertandinganpemainbabak2 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak);
+
+                datapertandinganpemainbabak1.moveToFirst();
+                datapertandinganpemainbabak2.moveToFirst();
+                while (!datapertandinganpemainbabak1.isAfterLast()) {
+                    //String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+",
+                    // "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+",
+                    // "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                    //Log.d("data team a",a);
+                    fullnamapemainb.add(nama);
+                    fullposisipemainb.add(posisi);
+                    fullnomorpunggungpemainb.add(nomorpunggung);
+                    if (!datapertandinganpemainbabak2.isAfterLast()) {
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak2.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak2.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak2.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak2.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak2.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak2.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak2.getInt(9)));
+                    } else {
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9)));
+                    }
+                    datapertandinganpemainbabak1.moveToNext();
+                }
+                datateamb.moveToNext();
+            }else if(babak==4){
+                Cursor datapertandinganpemainbabak1 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak - 3);
+                Cursor datapertandinganpemainbabak2 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak-2);
+                Cursor datapertandinganpemainbabak3 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak - 1);
+                Cursor datapertandinganpemainbabak4 = dbpertandinganpemain.loaddatawithstat(idpemain,
+                        idpertandingan, babak);
+
+                datapertandinganpemainbabak1.moveToFirst();
+                datapertandinganpemainbabak2.moveToFirst();
+                datapertandinganpemainbabak3.moveToFirst();
+                datapertandinganpemainbabak4.moveToFirst();
+                while (!datapertandinganpemainbabak1.isAfterLast()) {
+                    //String a= nama+", "+nomorpunggung+", "+datapertandinganpemain.getInt(2)+",
+                    // "+datapertandinganpemain.getInt(3)+", "+datapertandinganpemain.getInt(4)+",
+                    // "+datapertandinganpemain.getInt(5)+", "+datapertandinganpemain.getInt(6);
+                    //Log.d("data team a",a);
+                    fullnamapemainb.add(nama);
+                    fullposisipemainb.add(posisi);
+                    fullnomorpunggungpemainb.add(nomorpunggung);
+                    if (!datapertandinganpemainbabak2.isAfterLast()&&datapertandinganpemainbabak3.isAfterLast()&&datapertandinganpemainbabak4.isAfterLast()) {
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak2.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak2.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak2.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak2.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak2.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak2.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak2.getInt(9)));
+                    }else if(datapertandinganpemainbabak2.isAfterLast()&&!datapertandinganpemainbabak3.isAfterLast()&&datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak3.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak3.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak3.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak3.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak3.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak3.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak3.getInt(9)));
+                    } else if(datapertandinganpemainbabak2.isAfterLast()&&datapertandinganpemainbabak3.isAfterLast()&&!datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak4.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak4.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak4.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak4.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak4.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak4.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak4.getInt(9)));
+                    }else if(!datapertandinganpemainbabak2.isAfterLast()&&!datapertandinganpemainbabak3.isAfterLast()&&datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak2.getInt(2)+datapertandinganpemainbabak3.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak2.getInt(5)+ datapertandinganpemainbabak3.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak2.getInt(6)+datapertandinganpemainbabak3.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak2.getInt(3)+ datapertandinganpemainbabak3.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak2.getInt(4)+ datapertandinganpemainbabak3.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak2.getInt(8)+ datapertandinganpemainbabak3.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak2.getInt(9)+ datapertandinganpemainbabak3.getInt(9)));
+                    }else if(datapertandinganpemainbabak2.isAfterLast()&&!datapertandinganpemainbabak3.isAfterLast()&&!datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak4.getInt(2)+datapertandinganpemainbabak3.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak4.getInt(5)+ datapertandinganpemainbabak3.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak4.getInt(6)+datapertandinganpemainbabak3.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak4.getInt(3)+ datapertandinganpemainbabak3.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak4.getInt(4)+ datapertandinganpemainbabak3.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak4.getInt(8)+ datapertandinganpemainbabak3.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak4.getInt(9)+ datapertandinganpemainbabak3.getInt(9)));
+                    }else if(!datapertandinganpemainbabak2.isAfterLast()&&datapertandinganpemainbabak3.isAfterLast()&&!datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak4.getInt(2)+datapertandinganpemainbabak2.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak4.getInt(5)+ datapertandinganpemainbabak2.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak4.getInt(6)+datapertandinganpemainbabak2.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak4.getInt(3)+ datapertandinganpemainbabak2.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak4.getInt(4)+ datapertandinganpemainbabak2.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak4.getInt(8)+ datapertandinganpemainbabak2.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak4.getInt(9)+ datapertandinganpemainbabak2.getInt(9)));
+                    }else if(!datapertandinganpemainbabak2.isAfterLast()&&!datapertandinganpemainbabak3.isAfterLast()&&!datapertandinganpemainbabak4.isAfterLast()){
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2) + datapertandinganpemainbabak4.getInt(2)+datapertandinganpemainbabak2.getInt(2)+datapertandinganpemainbabak3.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5) + datapertandinganpemainbabak4.getInt(5)+ datapertandinganpemainbabak2.getInt(5)+ datapertandinganpemainbabak3.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6) + datapertandinganpemainbabak4.getInt(6)+datapertandinganpemainbabak2.getInt(6)+datapertandinganpemainbabak3.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3) + datapertandinganpemainbabak4.getInt(3)+ datapertandinganpemainbabak2.getInt(3)+ datapertandinganpemainbabak3.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4) + datapertandinganpemainbabak4.getInt(4)+ datapertandinganpemainbabak2.getInt(4)+ datapertandinganpemainbabak3.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8) + datapertandinganpemainbabak4.getInt(8)+ datapertandinganpemainbabak2.getInt(8)+ datapertandinganpemainbabak3.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9) + datapertandinganpemainbabak4.getInt(9)+ datapertandinganpemainbabak2.getInt(9)+ datapertandinganpemainbabak3.getInt(9)));
+                    }else {
+                        fullgoalpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(2)));
+                        fullshootontargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(5)));
+                        fullshootofftargetpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(6)));
+                        fullyellowcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(3)));
+                        fullredcardpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(4)));
+                        fulltacklingpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(8)));
+                        fullinterceptpemainb.add(Integer.toString(datapertandinganpemainbabak1.getInt(9)));
+                    }
+                    datapertandinganpemainbabak1.moveToNext();
+                }
+                datateamb.moveToNext();
+            }
+        }
+    }
+
     public void getdatapertandingan(final String teama, final String teamb) {
         ArrayList<HashMap<String, String>> data = dbpertandingan.loaddatapertandinganreport(teama
                 , teamb);
@@ -412,6 +555,8 @@ public class gerenatereportMenu extends AppCompatActivity {
                 datapertandingan.moveToFirst();
                 getdatapemainteama(teamalv, idpertandingan, babak);
                 getdatapemainteamb(teamblv, idpertandingan, babak);
+                getdatapemainteamafullmatch(teamalv,idpertandingan,babak);
+                getdatapemainteambfullmatch(teamblv, idpertandingan, babak);
                 formationteama = datapertandingan.getString(2);
                 formationteamb = datapertandingan.getString(18);
                 venue = datapertandingan.getString(40);
@@ -593,6 +738,26 @@ public class gerenatereportMenu extends AppCompatActivity {
                 intent.putStringArrayListExtra("redcardpemainb", redcardpemainb);
                 intent.putStringArrayListExtra("tacklingpemainb", tacklingpemainb);
                 intent.putStringArrayListExtra("interceptpemainb", interceptpemainb);
+                intent.putStringArrayListExtra("fullnamapemain", fullnamapemain);
+                intent.putStringArrayListExtra("fullposisipemain", fullposisipemain);
+                intent.putStringArrayListExtra("fullnomorpunggungpemain", fullnomorpunggungpemain);
+                intent.putStringArrayListExtra("fullgoalpemain", fullgoalpemain);
+                intent.putStringArrayListExtra("fullshootontargetpemain", fullshootontargetpemain);
+                intent.putStringArrayListExtra("fullshootofftargetpemain", fullshootofftargetpemain);
+                intent.putStringArrayListExtra("fullyellowcardpemain", fullyellowcardpemain);
+                intent.putStringArrayListExtra("fullredcardpemain", fullredcardpemain);
+                intent.putStringArrayListExtra("fulltacklingpemain", fulltacklingpemain);
+                intent.putStringArrayListExtra("fullinterceptpemain", fullinterceptpemain);
+                intent.putStringArrayListExtra("fullnamapemainb", fullnamapemainb);
+                intent.putStringArrayListExtra("fullposisipemainb", fullposisipemainb);
+                intent.putStringArrayListExtra("fullnomorpunggungpemainb", fullnomorpunggungpemainb);
+                intent.putStringArrayListExtra("fullgoalpemainb", fullgoalpemainb);
+                intent.putStringArrayListExtra("fullshootontargetpemainb", fullshootontargetpemainb);
+                intent.putStringArrayListExtra("fullshootofftargetpemainb", fullshootofftargetpemainb);
+                intent.putStringArrayListExtra("fullyellowcardpemainb", fullyellowcardpemainb);
+                intent.putStringArrayListExtra("fullredcardpemainb", fullredcardpemainb);
+                intent.putStringArrayListExtra("fulltacklingpemainb", fulltacklingpemainb);
+                intent.putStringArrayListExtra("fullinterceptpemainb", fullinterceptpemainb);
                 startActivity(intent);
                 namapemain.clear();
                 posisipemain.clear();
@@ -618,7 +783,26 @@ public class gerenatereportMenu extends AppCompatActivity {
                 tacklingpemainb.clear();
                 interceptpemain.clear();
                 interceptpemainb.clear();
-
+                fullnamapemain.clear();
+                fullposisipemain.clear();
+                fullnomorpunggungpemain.clear();
+                fullgoalpemain.clear();
+                fullshootontargetpemain.clear();
+                fullshootofftargetpemain.clear();
+                fullyellowcardpemain.clear();
+                fullredcardpemain.clear();
+                fulltacklingpemain.clear();
+                fullinterceptpemain.clear();
+                fullnamapemainb.clear();
+                fullposisipemainb.clear();
+                fullnomorpunggungpemainb.clear();
+                fullgoalpemainb.clear();
+                fullshootontargetpemainb.clear();
+                fullshootofftargetpemainb.clear();
+                fullyellowcardpemainb.clear();
+                fullredcardpemainb.clear();
+                fulltacklingpemainb.clear();
+                fullinterceptpemainb.clear();
                 //Toast.makeText(getBaseContext(), lv.getItemAtPosition(position).toString()
                 // +userId+","+babak+","+idpertandingan, Toast.LENGTH_LONG).show();
             }
